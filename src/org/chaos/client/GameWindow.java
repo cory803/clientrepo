@@ -32,34 +32,6 @@ final class GameWindow extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * System.out.println("Checking client version...");
-		 * ClientUpdate.checkVersion(); if(new
-		 * File(Signlink.getCacheDirectory()).exists()) { if(!new
-		 * File(Signlink.getCacheDirectory() +"versions").exists()) { new
-		 * File(Signlink.getCacheDirectory() +"versions").mkdir(); }
-		 * System.out.println("Checking map version...");
-		 * MapUpdate.checkVersion(); System.out.println(
-		 * "Checking sprite version..."); SpriteUpdate.checkVersion();
-		 * System.out.println("Checking model version...");
-		 * ModelsUpdate.checkVersion(); System.out.println(
-		 * "Checking animation version..."); AnimationsUpdate.checkVersion(); }
-		 */
-		images = new Image[2];
-		labels = new Image[7];
-		try {
-			images[0] = ImageIO
-					.read(GameWindow.class.getResourceAsStream("/org/chaos/client/resources/nav_button.png"));
-			images[1] = ImageIO
-					.read(GameWindow.class.getResourceAsStream("/org/chaos/client/resources/nav_hover.png"));
-			for (int tab = 0; tab < 7; tab++) {
-				labels[tab] = ImageIO.read(
-						GameWindow.class.getResourceAsStream("/org/chaos/client/resources/label_" + tab + ".png"));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		icons = new ArrayList<>();
 		try {
 			icons.add(ImageIO.read(GameWindow.class.getResourceAsStream("/org/chaos/client/resources/16x16.png")));
@@ -103,8 +75,6 @@ final class GameWindow extends JFrame {
 		instance = new GameWindow(applet, size.width, size.height, true, false);
 	}
 
-	private static Image[] images;
-	private static Image[] labels;
 	private static java.util.List<Image> icons;
 
 	private int hoverIndex = -1;
@@ -119,18 +89,13 @@ final class GameWindow extends JFrame {
 		this.setBackground(Color.BLACK);
 		this.setLayout(new BorderLayout());
 		this.setIconImages(icons);
-
+/*
 		JPanel panel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
 				int x = (this.getWidth() / 2 - (765 / 2));
 				g.setColor(Color.BLACK);
 				g.fillRect(0, 0, this.getWidth(), 41);
-
-				for (int tab = 0; tab < 7; tab++) {
-					g.drawImage(hoverIndex == tab ? images[1] : images[0], x + (109 * tab), 0, null);
-					g.drawImage(labels[tab], x + (109 * tab), 0, null);
-				}
 			}
 		};
 		NavListener navListener = new NavListener(panel);
@@ -140,7 +105,7 @@ final class GameWindow extends JFrame {
 		panel.setPreferredSize(new Dimension(765, 41));
 		panel.setMinimumSize(new Dimension(765, 41));
 		this.add(panel, BorderLayout.NORTH);
-
+*/
 		this.add(this.applet, BorderLayout.CENTER);
 
 		this.setResizable(resizable);
@@ -151,15 +116,15 @@ final class GameWindow extends JFrame {
 		} else {
 			if (!this.isResizable()) {
 				Insets insets = getInsets();
-				this.setSize(width + insets.left + insets.right, height + insets.top + insets.bottom + 44);
+				this.setSize(width + insets.left + insets.right, height + insets.top + insets.bottom);
 				if (minimumSize == null) {
 					this.setMinimumSize(this.getSize());
 				} else {
 					this.setMinimumSize(new Dimension(minimumSize.width, minimumSize.height));
 				}
 			} else {
-				this.setSize(new Dimension(minimumSize.width + 20, minimumSize.height + 47));
-				this.setMinimumSize(new Dimension(minimumSize.width + 20, minimumSize.height + 47));
+				this.setSize(new Dimension(minimumSize.width + 20, minimumSize.height));
+				this.setMinimumSize(new Dimension(minimumSize.width + 20, minimumSize.height));
 			}
 			setLocationRelativeTo(null);
 		}

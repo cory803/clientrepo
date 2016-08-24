@@ -17199,7 +17199,7 @@ public class Client extends GameRenderer {
 	}
 
 	public void loadModIcons() {
-		modIcons[0] = CacheSpriteLoader.getCacheSprite(-1); // Player
+		modIcons[0] = CacheSpriteLoader.getCacheSprite(828); // Player
 		modIcons[1] = CacheSpriteLoader.getCacheSprite(828); // Moderator
 		modIcons[2] = CacheSpriteLoader.getCacheSprite(829); // Administrator
 		modIcons[3] = CacheSpriteLoader.getCacheSprite2(3); // Owner
