@@ -17199,18 +17199,17 @@ public class Client extends GameRenderer {
 	}
 
 	public void loadModIcons() {
-		modIcons[0] = CacheSpriteLoader.getCacheSprite(828); // Moderator
+		modIcons[0] = CacheSpriteLoader.getCacheSprite(-1); // Player
 		modIcons[1] = CacheSpriteLoader.getCacheSprite(828); // Moderator
 		modIcons[2] = CacheSpriteLoader.getCacheSprite(829); // Administrator
 		modIcons[3] = CacheSpriteLoader.getCacheSprite2(3); // Owner
 		modIcons[4] = CacheSpriteLoader.getCacheSprite(837); // Support
 		modIcons[5] = CacheSpriteLoader.getCacheSprite2(2); // YouTuber
 		modIcons[6] = CacheSpriteLoader.getCacheSprite2(54); // Global Moderator
-		modIcons[7] = CacheSpriteLoader.getCacheSprite2(16); // Regular Donator
-		modIcons[8] = CacheSpriteLoader.getCacheSprite2(15); // Super Donator
+		modIcons[7] = CacheSpriteLoader.getCacheSprite2(16); // Premium Donator
+		modIcons[8] = CacheSpriteLoader.getCacheSprite2(15); // Legendary Donator
 		modIcons[9] = CacheSpriteLoader.getCacheSprite2(14); // Extreme Donator
-		modIcons[10] = CacheSpriteLoader.getCacheSprite2(37); // Legendary
-																// Donator
+		modIcons[10] = CacheSpriteLoader.getCacheSprite2(37); // Platimum Donator
 		modIcons[11] = CacheSpriteLoader.getCacheSprite2(38); // Uber Donator
 		modIcons[12] = CacheSpriteLoader.getCacheSprite(840); // Regular Ironman
 		modIcons[13] = CacheSpriteLoader.getCacheSprite(839); // Hardcore
