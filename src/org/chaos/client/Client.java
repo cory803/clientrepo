@@ -9393,8 +9393,10 @@ public class Client extends GameRenderer {
 		}
 
 		if (!processMenuClick()) {
+			//TODO: Fix client issue where player logs in clicks on minimap and crashes client
 				processMainScreenClick();
 				tabArea.processTabClick(this, GameFrame.getScreenMode());
+
 		}
 
 		if (super.getClickMode2() == 1 || super.clickMode3 == 1) {
