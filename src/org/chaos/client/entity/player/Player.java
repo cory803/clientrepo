@@ -237,7 +237,7 @@ public final class Player extends Entity {
 					k2 = j1;
 				if(k2 >= 256 && k2 < 925 && !IdentityKit.cache[k2 - 256].isBodyModelLoaded())
 					flag = true;
-				if(k2 >= 925 && !ItemDefinition.get(k2 - 925).method195(myGender))
+				if(k2 >= 925 && !ItemDefinition.get(k2 - 512).method195(myGender))
 					flag = true;
 			}
 
@@ -323,7 +323,7 @@ public final class Player extends Entity {
 			if (j >= 256 && j < 925 && !IdentityKit.cache[j - 256].isDialogModelsLoaded()) {
 				flag = true;
 			}
-			if (j >= 925 && !ItemDefinition.get(j - 925).dialogueModelFetched(myGender)) {
+			if (j >= 925 && !ItemDefinition.get(j - 512).dialogueModelFetched(myGender)) {
 				flag = true;
 			}
 		}
@@ -336,14 +336,16 @@ public final class Player extends Entity {
 		for (int l = 0; l < 12; l++) {
 			int i1 = equipment[l];
 			if (i1 >= 256 && i1 < 925) {
+
 				Model model_1 = IdentityKit.cache[i1 - 256].getDialogModel();
 				if (model_1 != null) {
 					models[k++] = model_1;
 				}
 			}
 			if (i1 >= 925) {
-				Model model_2 = ItemDefinition.get(i1 - 925).method194(myGender);
+				Model model_2 = ItemDefinition.get(i1 - 512).method194(myGender);
 				if (model_2 != null) {
+					model_2.scale2(3);
 					models[k++] = model_2;
 				}
 			}
@@ -404,8 +406,8 @@ public final class Player extends Entity {
 				Client.myHeadAndJaw[0] = equipment[partId] - 256;
 			if (partId == 11)
 				Client.myHeadAndJaw[1] = equipment[partId] - 256;
-			if (equipment[partId] >= 925 && equipment[partId] - 925 < ItemDefinition.totalItems) {
-				int l1 = ItemDefinition.get(equipment[partId] - 925).team;
+			if (equipment[partId] >= 925 && equipment[partId] - 512 < ItemDefinition.totalItems) {
+				int l1 = ItemDefinition.get(equipment[partId] - 512).team;
 				if (l1 != 0) {
 					team = l1;
 				}

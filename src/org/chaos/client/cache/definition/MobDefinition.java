@@ -658,22 +658,6 @@ public final class MobDefinition {
             case 8459:
                 definition.drawYellowDotOnMap = true;
                 break;
-            case 961:
-                definition.actions = new String[]{null, null, "Buy Consumables", "Restore Stats", null};
-                definition.name = "Healer";
-                break;
-            case 705:
-                definition.actions = new String[]{null, null, "Buy Armour", "Buy Weapons", "Buy Jewelries"};
-                definition.name = "Warrior";
-                break;
-            case 1861:
-                definition.actions = new String[]{null, null, "Buy Equipment", "Buy Ammunition", null};
-                definition.name = "Archer";
-                break;
-            case 946:
-                definition.actions = new String[]{null, null, "Buy Equipment", "Buy Runes", "Quick-buy"};
-                definition.name = "Mage";
-                break;
             case 6537:
                 definition.actions = new String[]{null, null, "Talk-to", "Sell-Artifacts", null};
                 break;
@@ -705,10 +689,6 @@ public final class MobDefinition {
             case 494:
                 definition.walkAnimation = 819;
                 definition.actions = new String[]{"Talk-to", null, null, null, null};
-                break;
-            case 1685:
-                definition.name = "Pure";
-                definition.actions = new String[]{"Trade", null, null, null, null};
                 break;
             case 8648:
                 definition.name = "Pet Rock Golem";

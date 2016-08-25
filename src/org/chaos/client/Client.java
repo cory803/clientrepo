@@ -9393,8 +9393,8 @@ public class Client extends GameRenderer {
 		}
 
 		if (!processMenuClick()) {
-			processMainScreenClick();
-			tabArea.processTabClick(this, GameFrame.getScreenMode());
+				processMainScreenClick();
+				tabArea.processTabClick(this, GameFrame.getScreenMode());
 		}
 
 		if (super.getClickMode2() == 1 || super.clickMode3 == 1) {

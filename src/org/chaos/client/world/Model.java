@@ -539,7 +539,7 @@ public class Model extends Animable {
 		}
 	}
 
-	private void downscale() {
+	public void downscale() {
 		for (int i = 0; i != anInt1626; ++i) {
 			anIntArray1627[i] = (anIntArray1627[i] + 7) >> 3;
 			anIntArray1628[i] = (anIntArray1628[i] + 7) >> 3;

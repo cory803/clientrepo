@@ -5419,6 +5419,9 @@ public final class ItemDefinition {
 				itemDef.maleWearId = 65289;
 				itemDef.femaleWearId = 65314;
 				break;
+			case 10828:
+				System.out.println("Model real: "+itemDef.maleWearId);
+				break;
 			case 14021:
 				itemDef.modelID = 65261;
 				itemDef.name = "Veteran cape";
@@ -6869,10 +6872,10 @@ public final class ItemDefinition {
 
 		if (modifiedModelColors != null) {
 			for (int i1 = 0; i1 < modifiedModelColors.length; i1++) {
-				model.method476(modifiedModelColors[i1], originalModelColors[i1]);
+				model.method476(modifiedModelColors[i1],
+						originalModelColors[i1]);
 			}
 		}
-
 		return model;
 	}
 

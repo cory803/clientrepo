@@ -99,7 +99,6 @@ public final class IdentityKit {
                 break;
             model.method476(anIntArray659[l], anIntArray660[l]);
         }
-
         return model;
     }
 
