@@ -1186,7 +1186,7 @@ public final class ObjectDefinition {
             definition.actions[0] = "Pass";
         }
         if (id == 10805 || id == 10806 || id == 10807 || id == 28089) {
-            definition.name = "Grand Exchange clerk";
+            definition.name = "Trading post";
             definition.hasActions = true;
             definition.actions = new String[5];
             definition.actions[0] = "Use";
