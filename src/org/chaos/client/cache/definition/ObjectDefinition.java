@@ -383,7 +383,9 @@ public final class ObjectDefinition {
                 definition.modifiedModelColors = new int[]{6241};
                 definition.hasActions = false;
                 break;
-
+            case 28089:
+                definition.name = "Trading post";
+                break;
             case 14674:
                 definition.setDefaults();
                 definition.objectModelIDs = new int[]{1079};

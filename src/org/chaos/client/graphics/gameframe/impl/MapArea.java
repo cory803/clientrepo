@@ -554,8 +554,8 @@ public class MapArea extends GameFrame {
 
 			for (int j5 = 0; j5 < client.anInt1071; j5++) {
 				try {
-					int mapX = client.anIntArray1072[j5] * 4 + 2 - Client.myPlayer.x / 32;
-					int mapY = client.anIntArray1073[j5] * 4 + 2 - Client.myPlayer.y / 32;
+					int mapX = (client.anIntArray1072[j5] * 4) - Client.myPlayer.x / 32;
+					int mapY = (client.anIntArray1073[j5] * 4) - Client.myPlayer.y / 32;
 					client.markMinimap(client.aClass30_Sub2_Sub1_Sub1Array1140[j5], mapX, mapY);
 				} catch (Exception exception) {
 				}

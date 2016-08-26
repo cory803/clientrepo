@@ -187,7 +187,7 @@ public final class MobDefinition {
                 definition.npcSizeInSquares = 5;
                 break;
             case 2127:
-                definition.name = "Player Owned Shop Trader";
+                definition.name = "Trader";
                 definition.actions = new String[]{"Talk-To", null, "Search through stores", "Open your store",
                         "Open someone's store"};
                 break;

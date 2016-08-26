@@ -9500,7 +9500,6 @@ public class Client extends GameRenderer {
 		if (sprite == null) {
 			return;
 		}
-
 		boolean fixed = GameFrame.getScreenMode() == ScreenMode.FIXED;
 		int rotation = viewRotation + minimapRotation & 0x7ff;
 		int xPadding = mapArea.getOffSetX();
@@ -9517,8 +9516,8 @@ public class Client extends GameRenderer {
 		spriteY = spriteY * 256 / (minimapZoom + 256);
 		int drawX = y * spriteX + x * spriteY >> 16;
 		int drawY = y * spriteY - x * spriteX >> 16;
-		int finalX = (fixed ? 104 : 83) + drawX - sprite.maxWidth / 2 + 4;
-		int finalY = (fixed ? 89 : 85) - drawY - sprite.maxHeight / 2 - 4;
+		int finalX = (fixed ? 104 : 83) + drawX - sprite.maxWidth / 2 + 7;
+		int finalY = (fixed ? 89 : 85) - drawY - sprite.maxHeight / 2 - 3;
 
 		try {
 			sprite.drawSprite(finalX + xPadding, finalY + yPadding);
@@ -11775,21 +11774,6 @@ public class Client extends GameRenderer {
 			}
 		}
 	}
-
-	/*public void method45() {
-		aBoolean1031 = true;
-		for (int j = 0; j < 7; j++) {
-			myAppearance[j] = -1;
-			for (int k = 0; k < IdentityKit.getLength(); k++) {
-				if (IdentityKit.cache[k].isaBoolean662()
-						|| IdentityKit.cache[k].getAnInt657() != j + (isMale ? 0 : 7)) {
-					continue;
-				}
-				myAppearance[j] = k;
-				break;
-			}
-		}
-	}*/
 
 	private void updateNpcMovement(int i, ByteBuffer stream) {
 		while (stream.bitPosition + 21 < i * 8) {
@@ -15670,8 +15654,8 @@ public class Client extends GameRenderer {
 			int clickY = super.saveClickY - (GameFrame.getScreenMode() == ScreenMode.FIXED ? 9 : 5);
 
 			if (inCircle(0, 0, clickX, clickY, 76)) {
-				clickX -= 73;
-				clickY -= 75;
+				clickX -= 78;
+				clickY -= 76;
 				int k = viewRotation + minimapRotation & 0x7ff;
 				int i1 = Canvas3D.SINE[k];
 				int j1 = Canvas3D.COSINE[k];
