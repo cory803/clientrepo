@@ -1296,6 +1296,9 @@ public final class MobDefinition {
                 definition.actions = new String[5];
                 definition.actions[0] = "Pick-up";
                 break;
+            case 2538:
+                definition.actions = new String[] {"Talk-to", null, "Trade", null, null};
+                break;
             case 5558:
                 definition.copy(get(1265));
                 definition.originalModelColours = new int[]{10396};
