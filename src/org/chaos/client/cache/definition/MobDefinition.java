@@ -186,10 +186,10 @@ public final class MobDefinition {
                 definition.combatLevel = 464;
                 definition.npcSizeInSquares = 5;
                 break;
-            case 2127:
-                definition.name = "Trader";
-                definition.actions = new String[]{"Talk-To", null, "Search through stores", "Open your store",
-                        "Open someone's store"};
+            case 2593:
+                definition.name = "Merchant trader";
+                definition.actions = new String[]{"Talk-To", null, "Search through stores", "Open your store", "Open someone's store"};
+               definition.standAnimation = 808;
                 break;
             case 2001:
                 definition.npcModels = new int[1];
@@ -444,20 +444,6 @@ public final class MobDefinition {
             case 805:
                 definition.actions = new String[]{"Trade", null, "Tan hide", null, null};
                 break;
-            case 461:
-            case 844:
-            case 650:
-            case 5112:
-            case 3789:
-            case 802:
-            case 520:
-            case 521:
-            case 11226:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                break;
-            case 653:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                break;
             case 8022:
             case 8028:
                 String color = id == 8022 ? "Yellow" : "Green";
@@ -689,6 +675,7 @@ public final class MobDefinition {
             case 494:
                 definition.walkAnimation = 819;
                 definition.actions = new String[]{"Talk-to", null, null, null, null};
+                System.out.println("wa "+definition.standAnimation);
                 break;
             case 8648:
                 definition.name = "Pet Rock Golem";
