@@ -135,7 +135,8 @@ public class ChatArea extends GameFrame {
 				 * if (clickSplitChatSelectionBox(client)) { return; }
 				 */
 				if (client.clickMode3 == 1 && client.clickInRegion(404, Client.clientHeight - 23, 515, Client.clientHeight)) {
-					client.takeScreenShot();
+					//client.takeScreenShot();
+					//TODO: Report option
 				}
 				
 				if (client.mouseInRegion(404, 515, Client.clientHeight - 23, Client.clientHeight)) {

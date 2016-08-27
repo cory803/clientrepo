@@ -25,4 +25,19 @@ public class ResourceLoader {
 		return img;
 	}
 
+	public static Image getIcon(String imageName) {
+		if (loadedImages.containsKey(imageName))
+			return loadedImages.get(imageName);
+		Image img = null;
+		try {
+			img = Toolkit.getDefaultToolkit().getImage(imageName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			img = null;
+		}
+		if (img != null)
+			loadedImages.put(imageName, img);
+		return img;
+	}
+
 }

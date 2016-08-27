@@ -1,17 +1,16 @@
 package org.chaos.client.net;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.*;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import org.chaos.client.GameWindow;
 
 public class HttpDownloadUtility {
 
 	private static final int BUFFER_SIZE = 4096;
 
-	public static boolean downloadFile(String fileURL, String saveDir) {
+	public static boolean downloadFile(String fileURL, String saveDir, boolean directory) {
 		try {
 			URL url = new URL(fileURL);
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
@@ -34,13 +33,21 @@ public class HttpDownloadUtility {
 					fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1, fileURL.length());
 				}
 
+				if(!directory) {
+					fileName = "Chaos_"+fileURL.substring(fileURL.lastIndexOf("/") + 1, fileURL.length());
+				} else {
+					fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1, fileURL.length());
+				}
+
 				// opens input stream from the HTTP connection
 				InputStream inputStream = httpConn.getInputStream();
-				String saveFilePath = saveDir + File.separator + fileName;
-
-				// opens an output stream to save into file
+				String saveFilePath;
+				if(!directory ) {
+					saveFilePath = saveDir + File.separator + fileName;
+				} else {
+					saveFilePath = saveDir;
+				}
 				FileOutputStream outputStream = new FileOutputStream(saveFilePath);
-
 				int bytesRead = -1;
 				byte[] buffer = new byte[BUFFER_SIZE];
 				while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -51,15 +58,21 @@ public class HttpDownloadUtility {
 				inputStream.close();
 
 			} else {
-				System.out.println("DraconiaPs.Com replied HTTP code: " + responseCode + " for file: " + fileURL);
+				System.out.println("imgur.com replied HTTP code: " + responseCode + " for file: " + fileURL);
 				return false;
 			}
 			httpConn.disconnect();
+            GameWindow.text.setBackground(new Color(57,196,66));
+            GameWindow.text.setText("File saved successfully.");
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+            GameWindow.text.setBackground(Color.RED);
+            GameWindow.text.setText("Wrong file directory/name!");
 			return false;
-		}
+		} catch (Exception e) {
+		    e.printStackTrace();
+            return false;
+        }
 	}
 
 	public static void downloadFile(String fileURL, String saveDir, String fileName) throws IOException {

@@ -8936,7 +8936,7 @@ public class Client extends GameRenderer {
 		return super.mainFrame == null;
 	}
 
-	static void launchURL(String url) {
+	public static void launchURL(String url) {
 		TaskManager.submit(new Task() {
 			@Override
 			public void execute() {
@@ -18934,34 +18934,5 @@ public class Client extends GameRenderer {
 	}
 
 	private static final ExecutorService SERVICE = Executors.newSingleThreadExecutor();
-	
-	public void takeScreenShot() {
-		SERVICE.execute(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Window window = KeyboardFocusManager.getCurrentKeyboardFocusManager()
-							.getFocusedWindow();
-					Point point = window.getLocationOnScreen();
-					Robot robot = new Robot(window.getGraphicsConfiguration().getDevice());
-					Rectangle rectangle = new Rectangle((int) point.getX(), (int) point.getY(),
-							window.getWidth(), window.getHeight());
-					BufferedImage img = robot.createScreenCapture(rectangle);
-					Path path = Paths.get(Signlink.getCacheDirectory().toString(), "screenshots");
-					if (!Files.exists(path)) {
-						Files.createDirectories(path);
-					}
-					DateFormat format = new SimpleDateFormat("MM-dd-yyyy hh-mm-ss a");
-					File file = new File(path.toFile(), format.format(new Date()) + ".png");
-					ImageIO.write(img, "png", file);
-					pushMessage("A screenshot has been taken and placed in your data folder.", 0,
-							"");
-				} catch (AWTException | IOException reason) {
-					pushMessage("An error occured whilst capturing your screenshot.", 0, "");
-					throw new RuntimeException("Fatal error whilst capturing screenshot", reason);
-				}
-			}
-		});
-		
-	}
+
 }

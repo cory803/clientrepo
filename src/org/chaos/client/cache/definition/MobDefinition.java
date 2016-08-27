@@ -412,9 +412,6 @@ public final class MobDefinition {
             case 4249:
                 definition.name = "Gambler";
                 break;
-            case 6970:
-                definition.actions = new String[]{"Trade", null, "Exchange Shards", null, null};
-                break;
             case 4657:
                 definition.actions = new String[]{"Talk-to", null, "Claim Items", "Check Total", "Teleport"};
                 break;
@@ -440,9 +437,6 @@ public final class MobDefinition {
             case 318:
                 definition.adjustVertextPointsXOrY = 30;
                 definition.actions = new String[]{"Net", null, "Lure", null, null};
-                break;
-            case 805:
-                definition.actions = new String[]{"Trade", null, "Tan hide", null, null};
                 break;
             case 8022:
             case 8028:
@@ -632,13 +626,6 @@ public final class MobDefinition {
             case 3596: // terrorbird
                 definition.actions = new String[]{"Store", null, null, null, null};
                 break;
-            case 548:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                break;
-            case 3299:
-            case 437:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                break;
             case 1265:
             case 1267:
             case 8459:
@@ -648,23 +635,10 @@ public final class MobDefinition {
                 definition.actions = new String[]{null, null, "Talk-to", "Sell-Artifacts", null};
                 break;
             case 2253:
-                definition.actions = new String[]{null, "Buy Skillcapes", "Buy Skillcapes (t)", "Buy Skillcapes (m)",
-                        "Buy Hoods"};
-                break;
-            case 3147:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                definition.name = "Lazim";
-                break;
-            case 5093:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                definition.name = "Boss Point Store";
+                definition.actions = new String[]{"Talk-to", null, null, null, null};
                 break;
             case 291:
                 definition.actions = new String[]{"Pickpocket", null, null, null, null};
-                break;
-            case 2292:
-                definition.actions = new String[]{"Trade", null, null, null, null};
-                definition.name = "Merchant";
                 break;
             case 2676:
                 definition.actions = new String[]{"Makeover", null, null, null, null};
@@ -675,7 +649,6 @@ public final class MobDefinition {
             case 494:
                 definition.walkAnimation = 819;
                 definition.actions = new String[]{"Talk-to", null, null, null, null};
-                System.out.println("wa "+definition.standAnimation);
                 break;
             case 8648:
                 definition.name = "Pet Rock Golem";
@@ -1283,6 +1256,8 @@ public final class MobDefinition {
                 definition.actions = new String[5];
                 definition.actions[0] = "Pick-up";
                 break;
+            case 548:
+            case 520:
             case 2538:
                 definition.actions = new String[] {"Talk-to", null, "Trade", null, null};
                 break;
