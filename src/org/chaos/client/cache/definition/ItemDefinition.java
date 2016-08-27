@@ -6213,6 +6213,13 @@ public final class ItemDefinition {
 				itemDef.modelOffset1 = 8;
 				itemDef.modelOffsetY = -18;
 				break;
+			case 1052:
+				itemDef.name = "Cape of knights";
+				itemDef.description2 = "The cape worn by members of the Kights game mode.";
+				break;
+			case 1011:
+				itemDef.name = "Wizard robe bottom";
+				break;
 			case 21143:
 				itemDef.setDefaults();
 				itemDef.modelID = 31522;
