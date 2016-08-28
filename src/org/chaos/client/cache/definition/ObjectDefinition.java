@@ -25,7 +25,7 @@ public final class ObjectDefinition {
     private static final int[] showBlack = {3735, 26346, 26347, 26348, 26358, 26359, 26360, 26361, 26362, 26363,
             26364};
 
-    private static final int[] removeObjects = {23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
+    private static final int[] removeObjects = {28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
             24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270};
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
@@ -135,7 +135,7 @@ public final class ObjectDefinition {
             }
             definition.actions = newActions;
         }
-
+/*
         //this was the code to remove all doors and shit
         boolean removeObject = definition.id == 1442 || definition.id == 1433 || definition.id == 1443
                 || definition.id == 1441 || definition.id == 26916 || definition.id == 26917 || definition.id == 5244
@@ -165,6 +165,8 @@ public final class ObjectDefinition {
             definition.isUnwalkable = false;
             return definition;
         }
+ */
+
         for (int ids = 0; ids < removeObjects.length; ids++) {
             if (id == removeObjects[ids]) {
                 definition.objectModelIDs = null;

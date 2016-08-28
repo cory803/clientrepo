@@ -7,6 +7,7 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -119,6 +120,7 @@ import org.chaos.client.world.sound.Class5_Sub2_Sub1;
 import org.chaos.client.world.sound.Class5_Sub2_Sub2;
 import org.chaos.client.world.sound.Sound;
 import org.chaos.client.world.sound.Sounds;
+import org.chaos.map.MapView;
 import org.chaos.task.Task;
 import org.chaos.task.TaskManager;
 
@@ -4608,6 +4610,12 @@ public class Client extends GameRenderer {
 				tabID = 13;
 				tabAreaAltered = true;
 			}
+		}
+
+		if (action == 1005) {
+			//String[] args = {};
+			//org.chaos.map.MapView.main(args);
+			pushMessage("The world map is still under development...");
 		}
 
 		if (action == 1003) {
@@ -10675,7 +10683,7 @@ public class Client extends GameRenderer {
 			return;
 		}
 
-		if (j == 101) {
+		if (j == 101) { //Object deregistering
 			int l2 = stream.method427();
 			int k5 = l2 >> 2;
 			int j8 = l2 & 3;

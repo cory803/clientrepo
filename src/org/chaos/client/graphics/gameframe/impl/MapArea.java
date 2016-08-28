@@ -426,7 +426,11 @@ public class MapArea extends GameFrame {
 			client.menuActionID[2] = 1050;
 			client.menuActionRow = 3;
 		}
-		
+		if(client.mouseX >= 527 && client.mouseX <= 560 && client.mouseY >= 126 && client.mouseY <= 159) {
+			client.menuActionName[1] = "World map";
+			client.menuActionID[1] = 1005;
+			client.menuActionRow = 2;
+		}
 		if (client.mouseX >= Client.clientWidth - CacheSpriteLoader.getCacheSprite(342).myWidth
 				&& client.mouseX < Client.clientWidth && client.mouseY >= 0
 				&& client.mouseY <= CacheSpriteLoader.getCacheSprite(342).myHeight) {

@@ -1,0 +1,4 @@
+Fix object animations on fires and torches, they don't move for some reason some move but freak out.
+Figure out why objects like doors won't remove.
+Fix minimap icons rotating bug.
+Fix npc rotation bug with walking out of the map then back in.

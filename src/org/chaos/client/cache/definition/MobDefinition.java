@@ -650,6 +650,9 @@ public final class MobDefinition {
                 definition.walkAnimation = 819;
                 definition.actions = new String[]{"Talk-to", null, null, null, null};
                 break;
+            case 747:
+                definition.walkAnimation = 819;
+                break;
             case 8648:
                 definition.name = "Pet Rock Golem";
                 definition.actions = new String[]{"Pick-up", null, null, null, null};
