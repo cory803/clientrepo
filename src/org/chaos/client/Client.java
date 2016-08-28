@@ -4615,7 +4615,7 @@ public class Client extends GameRenderer {
 		if (action == 1005) {
 			//String[] args = {};
 			//org.chaos.map.MapView.main(args);
-			pushMessage("The world map is still under development...");
+			pushMessage("The world map is still under development...", 0, "");
 		}
 
 		if (action == 1003) {
