@@ -43,7 +43,7 @@ public final class ObjectDefinition {
                 || id == 39231 || id == 36676 || id == 36692 || id > 11915 && id <= 11929 || id >= 11426 && id <= 11444
                 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715);
 
-        boolean oldschoolObjects = false;
+        boolean oldschoolObjects = id == 22348;
         if (id < 0) {
             id = 0;
         }
@@ -76,14 +76,14 @@ public final class ObjectDefinition {
 
         }
 
-/*
+
         if (!clientInstance.onDemandFetcher.getPriorityHandler().isRunning()) {
             if (!OBJECT_MODELS.contains(id)) {
                 System.out.println("Object Id: " + id);
                 OBJECT_MODELS.add(id);
             }
         }
-*/
+
 /*
         if(id == 1902) {
 			if (!clientInstance.onDemandFetcher.getPriorityHandler().isRunning()) {
@@ -207,6 +207,9 @@ public final class ObjectDefinition {
                 break;
             case 398:
                 definition.name = "Wilderness coffin";
+                break;
+            case 22348:
+                System.out.println("Name: "+definition.name);
                 break;
             case 732:
                 definition.setDefaults();
@@ -1641,6 +1644,10 @@ public final class ObjectDefinition {
         for (int j = 0; j < totalObjectsOsrs; j++) {
             streamIndicesOsrs[j] = i;
             i += streamIdxOsrs.getUnsignedShort();
+            streamOsrs.position = streamIndicesOsrs[j];
+            ObjectDefinition definition = new ObjectDefinition();
+            definition.readValues(streamOsrs);
+            System.out.println("Definition: "+definition.name+", "+j);
         }
         cache = new ObjectDefinition[20];
         for (int k = 0; k < 20; k++)

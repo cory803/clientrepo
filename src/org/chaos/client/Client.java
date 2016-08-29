@@ -4615,6 +4615,8 @@ public class Client extends GameRenderer {
 		if (action == 1005) {
 			//String[] args = {};
 			//org.chaos.map.MapView.main(args);
+			MapView mapview = new MapView();
+			mapview.aab();
 			pushMessage("The world map is still under development...", 0, "");
 		}
 
@@ -6994,7 +6996,7 @@ public class Client extends GameRenderer {
 							|| childInterface.id == 13035 || childInterface.id == 13045 || childInterface.id == 13053
 							|| childInterface.id == 13061 || childInterface.id == 13069 || childInterface.id == 13079
 							|| childInterface.id == 30064 || childInterface.id == 30083 || childInterface.id == 30106
-							|| childInterface.id == 30106 || childInterface.id == 13087 || childInterface.id == 30162
+							|| childInterface.id == 30106 || childInterface.id == 13087
 							|| childInterface.id == 13095) {
 						sprite = childInterface.sprite2;
 					}

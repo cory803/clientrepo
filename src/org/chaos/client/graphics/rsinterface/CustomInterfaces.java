@@ -2496,7 +2496,7 @@ public class CustomInterfaces extends RSInterface {
 				"Teleports players to the Barbarian\\noutpost", TDA, 238, 0, 5);
 		addLunar3RunesSmallBox(30154, 9075, 554, 556, 1, 5, 9, 30003, 30005, 76, "Superglass Make",
 				"Make glass without a furnace", TDA, 239, 16, 2);
-		addLunar3RunesSmallBox(30162, 9075, 563, 555, 1, 1, 3, 30012, 30004, 77, "Quests", "Teleport to start quests.",
+		addLunar3RunesSmallBox(30162, 9075, 563, 555, 1, 1, 3, 30012, 30004, 77, "Invalid teleport", "Teleport does not exist.",
 				TDA, 240, 0, 5);
 		addLunar3RunesSmallBox(30170, 9075, 563, 555, 1, 1, 7, 30012, 30004, 78, "Tele Group Khazard",
 				"Teleports players to Port khazard", TDA, 241, 0, 5);
