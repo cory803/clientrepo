@@ -1645,9 +1645,9 @@ public final class ObjectDefinition {
             streamIndicesOsrs[j] = i;
             i += streamIdxOsrs.getUnsignedShort();
             streamOsrs.position = streamIndicesOsrs[j];
-            ObjectDefinition definition = new ObjectDefinition();
-            definition.readValues(streamOsrs);
-            System.out.println("Definition: "+definition.name+", "+j);
+            //ObjectDefinition definition = new ObjectDefinition();
+            //definition.readValues(streamOsrs);
+            //System.out.println("Definition: "+definition.name+", "+j);
         }
         cache = new ObjectDefinition[20];
         for (int k = 0; k < 20; k++)
