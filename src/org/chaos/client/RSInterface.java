@@ -2158,6 +2158,24 @@ public class RSInterface {
 		tab.child(0, imgInterface, 0, 0);
 	}
 
+	public static void addHoveredImageOpacityWSpriteLoader(int i, int spriteId, int w, int h, int imgInterface) {
+		RSInterface tab = addTabInterface(i);
+		tab.id = i;
+		tab.parentID = i;
+		tab.type = 0;
+		tab.atActionType = 0;
+		tab.contentType = 0;
+		tab.opacity = 30;
+		tab.hoverType = -1;
+		tab.scrollMax = 0;
+		tab.interfaceShown = true;
+		tab.width = w;
+		tab.height = h;
+		addHoverImageWSpriteLoader(imgInterface, spriteId);
+		tab.totalChildren(1);
+		tab.child(0, imgInterface, 0, 0);
+	}
+
 	public static void addSpriteLoaderHoverButton(int childId, int spriteId, String tooltip, int hoverSpriteId) {
 		RSInterface rsi = RSInterface.interfaceCache[childId] = new RSInterface();
 		rsi.id = childId;

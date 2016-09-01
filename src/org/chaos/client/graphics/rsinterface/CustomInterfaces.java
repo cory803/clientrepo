@@ -808,100 +808,69 @@ public class CustomInterfaces extends RSInterface {
 	}
 
 	private static void questTabInterface3() {
+
 		RSInterface tab = addTabInterface(55200);
 		RSInterface scroll = addTabInterface(55201);
 		addText(55202, "Quests", fonts, 2, 16750623, false, true);
 		addSpriteLoader(55203, 650);
 		addSpriteLoader(55204, 651);
 		addSpriteLoader(55205, 650);
-		addButtonWSpriteLoader2(55206, 53, "Go Back", 26, 26);
+		addButtonWSpriteLoader(55206, 1222, "Quests", 18, 18);
 
 		scroll.totalChildren(33);
 		scroll.width = 174;
 		scroll.height = 224;
-		scroll.scrollMax = 710;
+		scroll.scrollMax = 760;
 		tab.totalChildren(6);
 
-		tab.child(0, 55202, 5, 3);
-		tab.child(1, 55203, 0, 22);
-		tab.child(2, 55204, 0, 25);
-		tab.child(3, 55205, 0, 249);
-		tab.child(4, 55206, 164, 0);
+		tab.child(0, 55202, 10, 7);
+		tab.child(1, 55203, 0, 27);
+		tab.child(2, 55204, 0, 30);
+		tab.child(3, 55205, 0, 254);
+		tab.child(4, 55206, 166, 5);
 		tab.child(5, 55201, 0, 25);
 
 		int k = 0;
-		int y = 0;
+		int y = 6;
 		for (int i = 55207; i < 55240; i++) {
 			scroll.child(k, i, 6, y);
 			y += 16;
 			k++;
-			if (i == 55207 || i == 55208 || i == 55209 || i == 55210 || i == 55211 || i == 55212 || i == 55213
-					|| i == 55214 || i == 55215 || i == 55216) {
-				addClickableText(i, "", "View", fonts, 1, 0xff0000, 167, 13);
-			} else {
-				addText(i, "", fonts, 3, 0xff0000, false, true);
-			}
+			addClickableText(i, "Quest #"+i, "", fonts, 1, 0xff0000, false, true, 130);
 		}
 	}
 
 	private static void quest_tab() {
 		RSInterface tab = addTabInterface(55065);
 		RSInterface scroll = addTabInterface(55066);
-		addText(55067, "Chaos " + Configuration.CLIENT_VERSION + "", fonts, 2, 0x588CD5, false, true);
+		addText(55067, "Chaos "+Configuration.CLIENT_VERSION, fonts, 2, 0xf04141, false, true);
 		addSpriteLoader(55068, 650);
 		addSpriteLoader(55069, 651);
 		addSpriteLoader(55070, 650);
-		addButtonWSpriteLoader(55071, 530, "Quests", 21, 22);
-		addButtonWSpriteLoader2(55119, 49, "Kills Tracker", 21, 21);
-		addButtonWSpriteLoader2(55120, 50, "Track Target", 21, 22);
+		addButtonWSpriteLoader(55071, 1221, "Quests", 18, 18);
 
-		scroll.totalChildren(46);
+		scroll.totalChildren(45);
 		scroll.width = 174;
 		scroll.height = 224;
 		scroll.scrollMax = 760;
-		tab.totalChildren(8);
+		tab.totalChildren(6);
 
 		tab.child(0, 55067, 10, 7);
 		tab.child(1, 55068, 0, 27);
 		tab.child(2, 55069, 0, 30);
 		tab.child(3, 55070, 0, 254);
-		tab.child(4, 55071, 166, 4);
+		tab.child(4, 55071, 166, 5);
 		tab.child(5, 55066, 0, 30);
-		tab.child(6, 55119, 143, 4);
-		tab.child(7, 55120, 118, 4);
+
 
 		int k = 0;
-		int y = 0;
+		int y = 3;
 		for (int i = 55072; i < 55117; i++) {
 			scroll.child(k, i, 6, y);
 			y += 16;
 			k++;
-			if (i == 55110) {
-				addClickableText(i, "", "Toggle Yell", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55111) {
-				addClickableText(i, "", "Toggle Music", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55073) {
-				addClickableText(i, "", "View all players", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55112) {
-				addClickableText(i, "", "Toggle Sounds", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55113) {
-				addClickableText(i, "", "Toggle Familiars", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55114) {
-				addClickableText(i, "", "Toggle Experience", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55115) {
-				addClickableText(i, "", "Toggle IP's on login", fonts, 1, 0xff0000, 167, 13);
-			} else if (i == 55116) {
-				addClickableText(i, "", "Toggle home loc on login", fonts, 1, 0xff0000, 167, 13);
-			} else if (i >= 55101 && i <= 55107) {
-				addClickableText(i, "", "Open", fonts, 1, 0xff0000, 167, 13);
-			} else {
-				addText(i, "", fonts, 1, 0xff0000, false, true);
-			}
+			addClickableText(i, "Default text", "", fonts, 1, 0x6d6d6d, false, true, 130);
 		}
-		scroll.child(k, 55121, 6, y);
-		y += 16;
-		k++;
-		addClickableText(55121, "", "Drop Logs", fonts, 1, 0xff0000, 167, 13);
 	}
 
 	private void playersOnline() {
@@ -2868,12 +2837,12 @@ public class CustomInterfaces extends RSInterface {
 	private void achievementsInterface() {
 		RSInterface tab = addTabInterface(37000);
 		RSInterface scroll = addTabInterface(36999);
-		addText(37001, "Achievements", tda, 2, 16750623, false, true);
+		addText(37001, "Achievements", tda, 3, 16750623, true, false);
 		addSpriteLoader(37002, 650);
 		addSpriteLoader(37003, 651);
 		addSpriteLoader(37004, 650);
 		tab.totalChildren(5);
-		tab.child(0, 37001, 5, 3);
+		tab.child(0, 37001, 87, 3);
 		tab.child(1, 37002, 0, 22);
 		tab.child(2, 37003, 0, 25);
 		tab.child(3, 37004, 0, 249);
@@ -2888,20 +2857,23 @@ public class CustomInterfaces extends RSInterface {
 		int k = 0;
 		int y = 25;
 		for (int i = 37005; i < 37116; i++) {
-			scroll.child(k, i, 6, y);
-			y += 16;
+			scroll.child(k, i, 10, y);
+			if(i == 37036 || i == 37069) {
+				y += 5;
+			}
+			y += 13;
 			k++;
 			if (i == 37035 || i == 37068 || i == 37102 || i >= 37112) {
 				addText(i, "", tda, 1, 0xFF8900, false, true);
 			} else {
-				addClickableText(i, "", "Select", tda, 1, 0xFF8900, 130, 13);
+				addClickableText(i, "", "Select", tda, 0, 0xFF8900, false, true, 13);
 			}
 		}
-		addText(30777, "Easy Tasks", tda, 2, 0xFF9900, false, true);
-		scroll.child(k, 30777, 7, 6);
-		addText(37036, "Medium Tasks", tda, 2, 0xFF9900, false, true);
-		addText(37069, "Hard Tasks", tda, 2, 0xFF9900, false, true);
-		addText(37103, "Elite Tasks", tda, 2, 0xFF9900, false, true);
+
+		addText(30777, "Tier 1", tda, 2, 0xFF9900, false, true);
+		scroll.child(k, 30777, 10, 8);
+		addText(37036, "Tier 2", tda, 2, 0xFF9900, false, true);
+		addText(37069, "Tier 3", tda, 2, 0xFF9900, false, true);
 	}
 
 	private void loyaltyShop() {

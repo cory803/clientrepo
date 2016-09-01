@@ -367,6 +367,10 @@ public final class TextDrawingArea extends Canvas2D {
 			return 0x31a4ff;
 		if (s.equals("wke"))
 			return 0xff7f00;
+		if (s.equals("cha"))
+			return 0xf04141;
+		if (s.equals("4e4"))
+			return 0x4e4e4e;
 		if (s.equals("hbd"))
 			return 0x0000AF;
 		if (s.equals("smm"))
