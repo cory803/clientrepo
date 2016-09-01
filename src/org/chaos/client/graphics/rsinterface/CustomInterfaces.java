@@ -836,7 +836,7 @@ public class CustomInterfaces extends RSInterface {
 			scroll.child(k, i, 6, y);
 			y += 16;
 			k++;
-			addClickableText(i, "Quest #"+i, "", fonts, 1, 0xff0000, false, true, 130);
+			addClickableText(i, "Quest #"+i, "", fonts, 1, 0xff0000, false, true, 180);
 		}
 	}
 
@@ -869,7 +869,7 @@ public class CustomInterfaces extends RSInterface {
 			scroll.child(k, i, 6, y);
 			y += 16;
 			k++;
-			addClickableText(i, "Default text", "", fonts, 1, 0x6d6d6d, false, true, 130);
+			addClickableText(i, "Default text", "", fonts, 1, 0x6d6d6d, false, true, 180);
 		}
 	}
 
@@ -2864,9 +2864,9 @@ public class CustomInterfaces extends RSInterface {
 			y += 13;
 			k++;
 			if (i == 37035 || i == 37068 || i == 37102 || i >= 37112) {
-				addText(i, "", tda, 1, 0xFF8900, false, true);
+				addClickableText(i, "", "", tda, 1, 0xFF8900, false, true, 180);
 			} else {
-				addClickableText(i, "", "Select", tda, 0, 0xFF8900, false, true, 13);
+				addClickableText(i, "", "Select", tda, 0, 0xFF8900, false, true, 180);
 			}
 		}
 
