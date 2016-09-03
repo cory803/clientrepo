@@ -24,7 +24,7 @@ public class CustomObjects {
 	}
 
 	public static final int[][] CUSTOM_OBJECTS = {
-
+			{ 6552, 3232, 2887, 0, 0 },
 			// 1 = west
 			// 2 = north
 			// 3 = east
