@@ -5852,6 +5852,7 @@ public class Client extends GameRenderer {
 		} else if (announcementTimer == 0) {
 			normalText.method385(0xffff00, "", GameFrame.isFixed() ? 329 : getScreenHeight() - 168, 4);
 		}
+		drawAchievement();
 	}
 
 	private void drawAnimatedWorldBackground(boolean display) {
@@ -7364,7 +7365,57 @@ public class Client extends GameRenderer {
 		}
 		Canvas2D.setBounds(i1, j1, k1, l1);
 	}
+	private static ArrayList<Achievement> achievements = new ArrayList<Achievement>();
+	public void drawAchievement() {
+		if (achievements.size() <= 0) {
+			// String achievementText =
+			// RSInterface.easyPkingAchievementNames[random(RSInterface.easyPkingAchievementNames.length
+			// - 1)];
+			return;
+		}
 
+		Achievement achievement = achievements.get(0);
+		double clientWidth = getScreenWidth();
+		double clientHeight = getScreenHeight();
+		if (GameFrame.getScreenMode().ordinal() == 0) {
+			clientWidth = 512;
+			clientHeight = 334;
+		}
+
+		achievement.height = (int) (clientHeight / 5.0);
+		TextDrawingArea.drawAlphaFilledPixels(achievement.x, achievement.y, achievement.width, achievement.height, achievement.bannerColour,
+		achievement.transparency);
+
+		fancyText.drawOpacityText(achievement.textColour, "Achievement Unlocked!", (int) ((clientHeight / 334.0) * 25), achievement.width / 2 + achievement.x, achievement.transparency);
+		normalText.drawOpacityText(achievement.textColour, achievement.text, (int) ((clientHeight / 334.0) * 45), achievement.width / 2 + achievement.x, achievement.transparency);
+
+		if (achievement.delay > 0) {
+			achievement.delay--;
+			if (achievement.delay == 0)
+				achievement.delayOver = true;
+			return;
+		}
+		achievement.width += (int) ((clientWidth / 512.0) * 25);
+		if (achievement.width >= clientWidth && !achievement.delayOver) {
+			achievement.delay = 60;
+			return;
+		}
+		if (achievement.width > clientWidth) {
+			achievement.width = (int) clientWidth;
+			achievement.x += (int) ((clientWidth / 512.0) * 25);
+			achievement.transparency -= (int) ((clientWidth / 512.0) * 10);
+			if (achievement.transparency < 0)
+				achievement.transparency = 0;
+			if (achievement.x >= clientWidth) {
+				achievements.remove(0);
+			}
+		} else {
+			achievement.transparency += (int) ((clientWidth / 512.0) * 15);
+			if (achievement.transparency > 192)
+				achievement.transparency = 192;
+		}
+		achievement = null;
+	}
 	public void drawOnBankInterface() {
 		if (openInterfaceID == 5292 && RSInterface.interfaceCache[27000].message.equals("1")) {
 			int i = Integer.parseInt(RSInterface.interfaceCache[27001].message);
@@ -14255,6 +14306,28 @@ public class Client extends GameRenderer {
 					return true;
 				} else if (frame == 1 && text.equals("ZULRAHFADE")) {
 					fadingScreen = new FadingScreen("", (byte) 1, (byte) 4);
+					pktType = -1;
+					return true;
+				} else if (frame == 1 && text.contains("[ACHIEVEMENT]")) {
+					String[] achievementData = text.split("-");
+					String achievementText = achievementData[1];
+					int random = Integer.parseInt(achievementData[2]);
+					int bannerColour = 0xFF0040;
+					int textColour = 0xFFFFFF;
+					if (random == 1) {
+						bannerColour = 0xBD0000;
+						textColour = 0xFFFFFF;
+					} else if (random == 2) {
+						bannerColour = 0xBCB500;
+						textColour = 0x000000;
+					} else if (random == 3) {
+						bannerColour = 0x308300;
+						textColour = 0xFFFF00;
+					} else if (random == 4) {
+						bannerColour = 0x58ACFA;
+						textColour = 0xFFFFFF;
+					}
+					achievements.add(new Achievement(achievementText, bannerColour, textColour));
 					pktType = -1;
 					return true;
 				} else if (text.equals("[CLOSEMENU]") && frame == 0) {
