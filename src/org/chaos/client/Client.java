@@ -7386,7 +7386,7 @@ public class Client extends GameRenderer {
 		TextDrawingArea.drawAlphaFilledPixels(achievement.x, achievement.y, achievement.width, achievement.height, achievement.bannerColour,
 		achievement.transparency);
 
-		fancyText.drawOpacityText(achievement.textColour, "Achievement Unlocked!", (int) ((clientHeight / 334.0) * 25), achievement.width / 2 + achievement.x, achievement.transparency);
+		fancyText.drawOpacityText(achievement.textColour, "Achievement Completed!", (int) ((clientHeight / 334.0) * 25), achievement.width / 2 + achievement.x, achievement.transparency);
 		normalText.drawOpacityText(achievement.textColour, achievement.text, (int) ((clientHeight / 334.0) * 45), achievement.width / 2 + achievement.x, achievement.transparency);
 
 		if (achievement.delay > 0) {
@@ -7527,44 +7527,39 @@ public class Client extends GameRenderer {
 	boolean homeHover, forumHover, profileclose3hover, profileclose2hover, profileclose1hover, ahover, bhover, chover,
 			dhover, profile1hover, profile2hover, profile3hover, profile4hover, worldButtonHover, voteHover, storeHover,
 			hiscoresHover, recoveryHover, loginButtonHover, input1Hover, input2Hover, rememberMeButtonHover,
-			backButtonHover, hoveringWorldSwitcher;
+			backButtonHover, hoveringWorldSwitcher, registerHover;
 
 	boolean inWorldSwitcher = false;
 	boolean loadingWorldSwitcher = false;
 
 	public void setLoadingAndLoginHovers() {
-		homeHover = ahover = bhover = hoveringWorldSwitcher = chover = dhover = profileclose3hover = profileclose2hover = profileclose1hover = profile1hover = profile2hover = profile3hover = profile4hover = forumHover = voteHover = storeHover = worldButtonHover = hiscoresHover = recoveryHover = loginButtonHover = input1Hover = rememberMeButtonHover = backButtonHover = input2Hover = false;
+		homeHover = ahover = bhover = hoveringWorldSwitcher = chover = dhover = profileclose3hover = profileclose2hover = profileclose1hover = profile1hover = profile2hover = profile3hover = profile4hover = forumHover = voteHover = storeHover = worldButtonHover = hiscoresHover = recoveryHover = loginButtonHover = input1Hover = rememberMeButtonHover = backButtonHover = input2Hover = registerHover = false;
 
 		boolean handCursor = false, textCursor = false;
 
-		if(inWorldSwitcher) {
-			hoveringWorldSwitcher = false;
-		} else {
-			if (super.mouseX >= 6 && super.mouseX <= 104 && super.mouseY >= 464 && super.mouseY <= 496) {
-				hoveringWorldSwitcher = true;
-			} else {
-				hoveringWorldSwitcher = false;
-			}
-		}
 		if(!isLoading) {
-			/*
-			if (super.mouseX >= 312 && super.mouseX <= 342 && super.mouseY >= 458 && super.mouseY <= 489) {
+			if (super.mouseX >= 154 && super.mouseX <= 208 && super.mouseY >= 209 && super.mouseY <= 263) {
 				ahover = true;
 			}
-			if (super.mouseX >= 346 && super.mouseX <= 378 && super.mouseY >= 458 && super.mouseY <= 489) {
+			if (super.mouseX >= 155 && super.mouseX <= 206 && super.mouseY >= 284 && super.mouseY <= 329) {
 				bhover = true;
 			}
-			if (super.mouseX >= 380 && super.mouseX <= 413 && super.mouseY >= 458 && super.mouseY <= 489) {
+			if (super.mouseX >= 134 && super.mouseX <= 217 && super.mouseY >= 351 && super.mouseY <= 386) {
 				chover = true;
 			}
-			if (super.mouseX >= 415 && super.mouseX <= 448 && super.mouseY >= 458 && super.mouseY <= 489) {
-				dhover = true;
+			if (super.mouseX >= 274 && super.mouseX <= 290 && super.mouseY >= 285 && super.mouseY <= 302) {
+				rememberMeButtonHover = true;
 			}
-			*/
 		}
 		if (!isLoading && !(loginMessage1.length() > 0)) {
-			if (super.mouseX >= 300 && super.mouseX <= 300 + 167 && super.mouseY >= 328 && super.mouseY <= 328 + 34) {
+			if (super.mouseX >= 272 && super.mouseX <= 377 && super.mouseY >= 383 && super.mouseY <= 409) {
+				registerHover = handCursor = true;
+			}
+			if (super.mouseX >= 281 && super.mouseX <= 483 && super.mouseY >= 319 && super.mouseY <= 369) {
 				loginButtonHover = handCursor = true;
+			}
+			if (super.mouseX >= 388 && super.mouseX <= 493 && super.mouseY >= 385 && super.mouseY <= 411) {
+				worldButtonHover = handCursor = true;
 			}
 			/*
 			 * if(super.mouseX >= 260 && super.mouseX <= 503 && super.mouseY >=
@@ -7578,48 +7573,36 @@ public class Client extends GameRenderer {
 					input2Hover = textCursor = true;
 				}
 			}
-			if (super.mouseX >= 235 && super.mouseX <= 235 + 23 + 100 && super.mouseY >= 295
-					&& super.mouseY <= 295 + 23) {
-				rememberMeButtonHover = handCursor = true;
-			}
 		} else {
 			if (super.mouseX >= 511 + 38 && super.mouseX <= 522 + 38 && super.mouseY >= 123 + 15
 					&& super.mouseY <= 137 + 15) {
 				backButtonHover = handCursor = true;
 			}
 		}
-		if (super.mouseX >= 264 && super.mouseX <= 340 && super.mouseY >= 372 && super.mouseY <= 446) {
+		if (super.mouseX >= 525 && super.mouseX <= 587 && super.mouseY >= 203 && super.mouseY <= 266) {
 			if (!saved_characters_usernames[0].equals("Empty")) {
 				profile1hover = handCursor = true;
 			}
 		}
-		if (super.mouseX >= 325 && super.mouseX <= 338 && super.mouseY >= 374 && super.mouseY <= 389) {
-			profileclose1hover = handCursor = true;
-		}
-		if (super.mouseX >= 343 && super.mouseX <= 418 && super.mouseY >= 372 && super.mouseY <= 446) {
+		//if (super.mouseX >= 325 && super.mouseX <= 338 && super.mouseY >= 374 && super.mouseY <= 389) {
+			//profileclose1hover = handCursor = true;
+		//}
+		if (super.mouseX >= 525 && super.mouseX <= 587 && super.mouseY >= 273 && super.mouseY <= 336) {
 			if (!saved_characters_usernames[1].equals("Empty")) {
 				profile2hover = handCursor = true;
 			}
 		}
-		if (super.mouseX >= 404 && super.mouseX <= 417 && super.mouseY >= 374 && super.mouseY <= 389) {
-			profileclose2hover = handCursor = true;
-		}
-		if (super.mouseX >= 421 && super.mouseX <= 498 && super.mouseY >= 372 && super.mouseY <= 446) {
+		//if (super.mouseX >= 404 && super.mouseX <= 417 && super.mouseY >= 374 && super.mouseY <= 389) {
+			//profileclose2hover = handCursor = true;
+		//}
+		if (super.mouseX >= 525 && super.mouseX <= 587 && super.mouseY >= 343 && super.mouseY <= 406) {
 			if (!saved_characters_usernames[2].equals("Empty")) {
 				profile3hover = handCursor = true;
 			}
 		}
-		if (super.mouseX >= 484 && super.mouseX <= 496 && super.mouseY >= 374 && super.mouseY <= 389) {
-			profileclose3hover = handCursor = true;
-		}
-		/*
-		 * if(handCursor) { getGameComponent().setCursor(new
-		 * Cursor(Cursor.HAND_CURSOR)); } else if(textCursor) {
-		 * getGameComponent().setCursor(new Cursor(Cursor.TEXT_CURSOR)); } else
-		 * { if(Configuration.NEW_CURSORS) { getGameComponent().setCursor(new
-		 * Cursor(Cursor.DEFAULT_CURSOR)); } else {
-		 * getGameComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); } }
-		 */
+		//if (super.mouseX >= 343 && super.mouseX <= 418 && super.mouseY >= 374 && super.mouseY <= 389) {
+			//profileclose3hover = handCursor = true;
+		//}
 	}
 
 	String[] saved_characters_usernames = { "Empty", "Empty", "Empty" };
@@ -7629,212 +7612,159 @@ public class Client extends GameRenderer {
 	boolean rememberMe = true;
 
 	public void drawLoginScreen() {
-
 		resetImageProducers();
-
 		titleScreenIP.initDrawingArea();
 		setLoadingAndLoginHovers();
 		if(inWorldSwitcher) {
-			//CacheSpriteLoader.getCacheSprite(1194).drawAdvancedSprite(0, 0);
+
 		} else {
 
-			if (onDemandFetcher.getPriorityHandler().isRunning()) {
-				CacheSpriteLoader.getCacheSprite2(0).drawAdvancedSprite(0, 0);
-				int y = 217;
-				boldText.drawCenteredText(0xffbb18, 765 / 2, "Welcome to Chaos", y, true);
-				normalText.drawCenteredText(0xefefef, 765 / 2, "Please wait while we download the required", y + 25, true);
-				normalText.drawCenteredText(0xefefef, 765 / 2, "files to play.", y + 40, true);
-				String status = onDemandFetcher.getRemaining() + " files remaining - please wait...";
-				boldText.drawCenteredText(0xefefef, 765 / 2, status, y + 65, true);
-				titleScreenIP.drawGraphics(0, super.graphics, 0);
-				return;
-			}
-			/*
-			if(ahover) {
-				CacheSpriteLoader.getCacheSprite2(28).drawAdvancedSprite(312, 458);
-			}
-
-			if(bhover) {
-				CacheSpriteLoader.getCacheSprite2(29).drawAdvancedSprite(347, 458);
-			}
-
-			if(chover) {
-				CacheSpriteLoader.getCacheSprite2(30).drawAdvancedSprite(382, 458);
-			}
-
-			if(dhover) {
-				CacheSpriteLoader.getCacheSprite2(31).drawAdvancedSprite(417, 458);
-			}
-			*/
 			if (loginMessage1.length() > 0) {
 
-				CacheSpriteLoader.getCacheSprite2(0).drawAdvancedSprite(0, 0);
+				CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
 				// CacheSpriteLoader.getCacheSprite2(20).drawAdvancedSprite(240,
 				// 124);
 
-				Canvas2D.drawAlphaBox(199, 137, 366, 234, 0, 100);
-
+				//Canvas2D.drawAlphaBox(199, 137, 366, 234, 0, 100);
+				/*
 				if (backButtonHover) {
 					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(511 + 38, 125 + 15);
 				} else {
 					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(511 + 38, 125 + 15);
 				}
-
+				*/
 				if (loginMessage1 != null && loginMessage1.length() != 0) {
 					int y_1 = (clientHeight / 2) + 28;
-					boldText.drawCenteredText(0xefefef, 381, loginMessage1, y_1 - 30, true);
+					normalText.drawCenteredText(0xefefef, 381, loginMessage1, y_1 - 30, true);
 				}
 				if (loginMessage2 != null && loginMessage2.length() != 0) {
 					int y_2 = (clientHeight / 2) + (1 * 20) + 28;
-					boldText.drawCenteredText(0xefefef, 381, loginMessage2, y_2 - 30, true);
+					normalText.drawCenteredText(0xefefef, 381, loginMessage2, y_2 - 30, true);
 				}
 			} else {
-				/*
-				 * CacheSpriteLoader.getCacheSprite2(0].drawAdvancedSprite(0, 0);
-				 *
-				 * if(loginButtonHover) {
-				 * CacheSpriteLoader.getCacheSprite2(27].drawAdvancedSprite(259,
-				 * 309); } else {
-				 *
-				 * }
-				 *
-				 * if(worldButtonHover) {
-				 *
-				 * } else {
-				 *
-				 * }
-				 *
-				 * if(input1Hover) {
-				 * CacheSpriteLoader.getCacheSprite2(23].drawAdvancedSprite(259,
-				 * 153); } else {
-				 * CacheSpriteLoader.getCacheSprite2(22].drawAdvancedSprite(259,
-				 * 153); }
-				 *
-				 * if(input2Hover) {
-				 * CacheSpriteLoader.getCacheSprite2(23].drawAdvancedSprite(259,
-				 * 203); } else {
-				 * CacheSpriteLoader.getCacheSprite2(22].drawAdvancedSprite(259,
-				 * 203); }
-				 *
-				 *
-				 *
-				 * if(rememberMeButtonHover) { if(rememberMe) {
-				 * CacheSpriteLoader.getCacheSprite2(35].drawAdvancedSprite(258,
-				 * 234); } else {
-				 * CacheSpriteLoader.getCacheSprite2(34].drawAdvancedSprite(258,
-				 * 234); } } else { if(rememberMe) {
-				 * CacheSpriteLoader.getCacheSprite2(25].drawAdvancedSprite(256,
-				 * 231); } }
-				 *
-				 * if(loginScreenCursorPos == 0 && loopCycle % 45 < 10) {
-				 * boldText.drawRegularText(true, 265, 14335390, myUsername + "|",
-				 * 169); } else { boldText.drawRegularText(true, 265, 14335390,
-				 * myUsername, 169); }
-				 *
-				 * if(loginScreenCursorPos == 1 && loopCycle % 45 < 10) {
-				 * boldText.drawRegularText(true, 265, 14335390,
-				 * getStars(password)+"|", 221); } else {
-				 * boldText.drawRegularText(true, 265, 14335390, getStars(password),
-				 * 221); }
-				 */
 
-				CacheSpriteLoader.getCacheSprite2(0).drawAdvancedSprite(0, 0);
-				boldText.drawCenteredText(0xffbb18, 765 / 2, "Welcome to Chaos", 155, true);
+				CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
 
-				boldText.drawCenteredText(0xefefef, 765 / 2, "Please enter your username and password.", 178, true);
+				boldText.drawRegularText(true, 277, 0xcbc6c4, "Username:", 206);
 
-				int y = 202;
-				boldText.drawText(0, "Username:", y + 1, 268);
-				boldText.drawText(0xffcb18, "Username:", y, 267);
-				CacheSpriteLoader.getCacheSprite2(input1Hover ? 96 : 94).drawCenteredARGBImage(765 / 2, y + 19);
 				if (loginScreenCursorPos == 0 && loopCycle % 45 < 10) {
-					boldText.drawRegularText(true, 243, 0xefefef, myUsername + "|", y + 24);
+					normalText.drawRegularText(true, 277, 0xcf2f38, myUsername + "|", 224);
 				} else {
-					boldText.drawRegularText(true, 243, 0xefefef, myUsername, y + 24);
+					normalText.drawRegularText(true, 277, 0xcf2f38, myUsername, 224);
 				}
 
-				y += 52;
-				boldText.drawText(0, "Password:", y + 1, 268);
-				boldText.drawText(0xffcb18, "Password:", y, 267);
-				CacheSpriteLoader.getCacheSprite2(input2Hover ? 96 : 94).drawCenteredARGBImage(765 / 2, y + 19);
-
+				boldText.drawRegularText(true, 277, 0xcbc6c4, "Password:", 258);
+//				CacheSpriteLoader.getCacheSprite2(input2Hover ? 96 : 94).drawCenteredARGBImage(765 / 2, y + 19);
+//
 				if (loginScreenCursorPos == 1 && loopCycle % 45 < 10) {
-					boldText.drawRegularText(true, 243, 0xefefef, getStars(password) + "|", y + 24);
+					normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password) + "|", 276);
 				} else {
-					boldText.drawRegularText(true, 243, 0xefefef, getStars(password), y + 24);
+					normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password), 276);
 				}
+//
+//				CacheSpriteLoader.getCacheSprite2(rememberMeButtonHover ? (rememberMe ? 102 : 98) : (rememberMe ? 101 : 97))
+//						.drawARGBImage(234, y + 40);
+//				normalText.drawRegularText(true, 261, 0xefefef, "Remember me", y + 56);
 
-				CacheSpriteLoader.getCacheSprite2(rememberMeButtonHover ? (rememberMe ? 102 : 98) : (rememberMe ? 101 : 97))
-						.drawARGBImage(234, y + 40);
-				normalText.drawRegularText(true, 261, 0xefefef, "Remember me", y + 56);
-
-				y += 90;
-				CacheSpriteLoader.getCacheSprite2(loginButtonHover ? 95 : 93).drawCenteredARGBImage(765 / 2, y);
-				boldText.drawCenteredText(0xffbb18, 765 / 2, "Login", y + 5, true);
-
-			}
-
-			//World switcher display login screen
-			CacheSpriteLoader.getCacheSprite(1193).drawAdvancedSprite(6, 463);
-			boldText.drawCenteredText(0xffffff, 56, "World "+world, 480, true);
-			if(world == 1) {
-				smallText.drawCenteredText(0xffffff, 56, Configuration.WORLD_1[0], 493, true);
-			} else if(world == 2) {
-				smallText.drawCenteredText(0xffffff, 56, Configuration.WORLD_2[0], 493, true);
-			}
-			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(264, 373);
-			if (profile1hover) {
-				if (!saved_characters_usernames[0].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(264, 373);
-					if (profileclose1hover) {
-						CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(326, 374);
-					} else {
-						CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(326, 374);
-					}
-				}
-			}
-			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(264 + 22, 373 + 5);
-
-			if (!saved_characters_usernames[0].equals("Empty")) {
-				if (profileclose1hover) {
-					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(326, 374);
+				if(loginButtonHover) {
+					CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 200);
 				} else {
-					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(326, 374);
+					CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 256);
 				}
-			}
-			smallText.drawCenteredText(0xefefef, 301, saved_characters_usernames[0], 442, true);
-
-			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(343, 373);
-			if (profile2hover) {
-				if (!saved_characters_usernames[1].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(343, 373);
-				}
-			}
-			if (!saved_characters_usernames[1].equals("Empty")) {
-				if (profileclose2hover) {
-					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(405, 374);
+				if(registerHover) {
+					CacheSpriteLoader.getCacheSprite2(113).drawSprite3(267, 380, 200);
 				} else {
-					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(405, 374);
+					CacheSpriteLoader.getCacheSprite2(113).drawSprite3(267, 380, 256);
 				}
-			}
-			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(343 + 22, 373 + 5);
-			smallText.drawCenteredText(0xefefef, 380, saved_characters_usernames[1], 442, true);
-
-			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(422, 373);
-			if (profile3hover) {
-				if (!saved_characters_usernames[2].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(422, 373);
-				}
-			}
-			if (!saved_characters_usernames[2].equals("Empty")) {
-				if (profileclose3hover) {
-					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(485, 374);
+				if(worldButtonHover) {
+					CacheSpriteLoader.getCacheSprite2(111).drawSprite3(383, 380, 200);
 				} else {
-					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(485, 374);
+					CacheSpriteLoader.getCacheSprite2(111).drawSprite3(383, 380, 256);
 				}
+				//Socal media icons
+				if(ahover) { //Facebook
+					CacheSpriteLoader.getCacheSprite2(117).drawSprite3(154, 210, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(117).drawSprite3(154, 210, 256);
+				}
+				if(bhover) { //Twitter
+					CacheSpriteLoader.getCacheSprite2(118).drawSprite3(154, 287, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(118).drawSprite3(154, 287, 256);
+				}
+				if(chover) { //YouTube
+					CacheSpriteLoader.getCacheSprite2(119).drawSprite3(135, 352, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(119).drawSprite3(135, 352, 256);
+				}
+				if(rememberMeButtonHover) {
+					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 150);
+				}
+				if(profile1hover) {
+					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 256);
+				}
+				if(profile2hover) {
+					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 256);
+				}
+				if(profile3hover) {
+					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 200);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 256);
+				}
+
+//				CacheSpriteLoader.getCacheSprite2(loginButtonHover ? 95 : 93).drawCenteredARGBImage(765 / 2, y)
+				//;
+//				boldText.drawCenteredText(0xffbb18, 765 / 2, "Login", y + 5, true);
+
 			}
-			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(422 + 22, 373 + 5);
-			smallText.drawCenteredText(0xefefef, 459, saved_characters_usernames[2], 442, true);
+			smallText.drawCenteredText(0xffffff, 382, "World "+world, 427, true);
+
+			boldText.drawCenteredText(0xefefef, 622, saved_characters_usernames[0], 215, true);
+			boldText.drawCenteredText(0xefefef, 622, saved_characters_usernames[1], 286, true);
+			boldText.drawCenteredText(0xefefef, 622, saved_characters_usernames[2], 357, true);
+
+			Model model;
+			Animation animation = Animation.cache[9805];
+			RSInterface childInterface = RSInterface.interfaceCache[969];
+
+
+//			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(343, 373);
+//			if (profile2hover) {
+//				if (!saved_characters_usernames[1].equals("Empty")) {
+//					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(343, 373);
+//				}
+//			}
+//			if (!saved_characters_usernames[1].equals("Empty")) {
+//				if (profileclose2hover) {
+//					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(405, 374);
+//				} else {
+//					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(405, 374);
+//				}
+//			}
+//			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(343 + 22, 373 + 5);
+//			smallText.drawCenteredText(0xefefef, 380, saved_characters_usernames[1], 442, true);
+//
+//			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(422, 373);
+//			if (profile3hover) {
+//				if (!saved_characters_usernames[2].equals("Empty")) {
+//					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(422, 373);
+//				}
+//			}
+//			if (!saved_characters_usernames[2].equals("Empty")) {
+//				if (profileclose3hover) {
+//					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(485, 374);
+//				} else {
+//					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(485, 374);
+//				}
+//			}
+//			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(422 + 22, 373 + 5);
+//			smallText.drawCenteredText(0xefefef, 459, saved_characters_usernames[2], 442, true);
 		}
 		titleScreenIP.drawGraphics(0, super.graphics, 0);
 
@@ -15075,8 +15005,6 @@ public class Client extends GameRenderer {
 					loginScreenCursorPos = 1;
 				} else if (loginButtonHover) {
 					login(password, myUsername, false, this);
-				} else if (hoveringWorldSwitcher) {
-					switchWorld();
 				} else if (worldButtonHover) {
 					// World interface display
 					/*
@@ -15099,7 +15027,7 @@ public class Client extends GameRenderer {
 							myUsername = saved_characters_usernames[0];
 							password = saved_characters_passwords[0];
 						}
-						login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
+						//login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
 					}
 				} else if (profile2hover) {
 					if (profileclose2hover) {
@@ -15111,7 +15039,7 @@ public class Client extends GameRenderer {
 							myUsername = saved_characters_usernames[1];
 							password = saved_characters_passwords[1];
 						}
-						login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
+						//login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
 					}
 				} else if (profile3hover) {
 					if (profileclose3hover) {
@@ -15123,7 +15051,7 @@ public class Client extends GameRenderer {
 							myUsername = saved_characters_usernames[2];
 							password = saved_characters_passwords[2];
 						}
-						login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
+						//login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
 					}
 				} else if (rememberMeButtonHover) {
 					rememberMe = !rememberMe;

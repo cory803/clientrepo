@@ -144,7 +144,7 @@ public final class CacheSpriteLoader {
             if (cachedSpriteIdList.contains(index)) {
                 cachedSpriteData.put(index, data);
             }
-            return new Sprite(data);
+            return new Sprite(data, index, 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,7 +158,7 @@ public final class CacheSpriteLoader {
             dataFile2.seek(dataFile2Offset + pos);
             byte[] data = new byte[size];
             dataFile2.read(data);
-            return new Sprite(data);
+            return new Sprite(data, index, 2);
         } catch (IOException e) {
             e.printStackTrace();
         }

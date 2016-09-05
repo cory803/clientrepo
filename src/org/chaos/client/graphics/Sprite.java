@@ -43,7 +43,7 @@ public class Sprite extends Canvas2D {
 			PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, myWidth, myHeight, myPixels, 0, myWidth);
 			pixelgrabber.grabPixels();
 			image = null;
-			setTransparency(255, 0, 255);
+			//setTransparency(255, 0, 255);
 			if (img.contains("Crowns"))
 				setTransparency(255, 255, 255);
 		} catch (Exception _ex) {
@@ -190,7 +190,7 @@ public class Sprite extends Canvas2D {
 		drawOffsetX = drawOffsetY = 0;
 	}
 
-	public Sprite(byte spriteData[]) {
+	public Sprite(byte spriteData[], int index, int type) {
 		try {
 			Image image = Toolkit.getDefaultToolkit().createImage(spriteData);
 			ImageIcon sprite = new ImageIcon(image);
@@ -205,7 +205,18 @@ public class Sprite extends Canvas2D {
 			pixelgrabber.grabPixels();
 			image = null;
 			setTransparency(255, 0, 255);
-			setTransparency(255, 255, 255);
+
+			//White color transparency
+			if(type == 1) {
+				setTransparency(255, 255, 255);
+			} else if(type == 2) {
+				if(index >= 109 && index <= 119) {
+					//No white transparency needed for these images
+				} else {
+					setTransparency(255, 255, 255);
+				}
+			}
+
 		} catch (Exception _ex) {
 			_ex.printStackTrace();
 		}

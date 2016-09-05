@@ -9,10 +9,10 @@ public class Configuration {
 
 	/** CONNECTION **/
 	public final static boolean LOCAL = true;
-	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "global ip"; // 158.69.125.71
+	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "gameserver.chaosps.com"; // 158.69.125.71
 	public final static int SERVER_PORT = 59018;
 
-	public final static String[] WORLD_1 = {"Economy", LOCAL ? "127.0.0.1" : "global ip"};
+	public final static String[] WORLD_1 = {"Economy", LOCAL ? "127.0.0.1" : "gameserver.chaosps.com"};
 	public final static String[] WORLD_2 = {"Beta", "gameserver.chaosps.com"};
 
 	/** FILE SERVER **/

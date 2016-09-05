@@ -25,7 +25,7 @@ public final class ObjectDefinition {
     private static final int[] showBlack = {3735, 26346, 26347, 26348, 26358, 26359, 26360, 26361, 26362, 26363,
             26364};
 
-    private static final int[] removeObjects = {28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
+    private static final int[] removeObjects = {12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
             24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270};
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
@@ -77,12 +77,12 @@ public final class ObjectDefinition {
         }
 
 
-        if (!clientInstance.onDemandFetcher.getPriorityHandler().isRunning()) {
-            if (!OBJECT_MODELS.contains(id)) {
-                System.out.println("Object Id: " + id);
-                OBJECT_MODELS.add(id);
-            }
-        }
+//        if (!clientInstance.onDemandFetcher.getPriorityHandler().isRunning()) {
+//            if (!OBJECT_MODELS.contains(id)) {
+//                System.out.println("Object Id: " + id);
+//                OBJECT_MODELS.add(id);
+//            }
+//        }
 
 /*
         if(id == 1902) {
@@ -175,6 +175,14 @@ public final class ObjectDefinition {
                 return definition;
             }
         }
+        if(definition.name != null) {
+            if (definition.name.equalsIgnoreCase("gate")) {
+                definition.objectModelIDs = null;
+                definition.hasActions = false;
+                definition.isUnwalkable = false;
+                return definition;
+            }
+        }
 		/*
 		 * if(definition.varbitIndex <= 484 && definition.varbitIndex >= 469) {
 		 * definition.configID = definition.varbitIndex; definition.varbitIndex
@@ -204,9 +212,6 @@ public final class ObjectDefinition {
             case 2987:
             case 2980:
                 definition.description = "A posy of beautiful flowers".getBytes();
-                break;
-            case 398:
-                definition.name = "Wilderness coffin";
                 break;
             case 22348:
                 System.out.println("Name: "+definition.name);
