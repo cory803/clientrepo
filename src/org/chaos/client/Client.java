@@ -858,8 +858,8 @@ public class Client extends GameRenderer {
 		ObjectDefinition.lowDetail = true;
 		Configuration.HIGH_DETAIL = false;
 		Configuration.hdTexturing = false;
-		Configuration.hdMinimap = true;
-		Configuration.hdShading = true;
+		Configuration.hdMinimap = false;
+		Configuration.hdShading = false;
 	}
 
 	static void setHighDetail() {
