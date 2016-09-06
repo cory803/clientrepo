@@ -2858,9 +2858,9 @@ public class CustomInterfaces extends RSInterface {
 		int y = 25;
 		for (int i = 37005; i < 37116; i++) {
 			if(i == 37070) {
-				y -= 11;
+				y -= 13;
 			}
-			if(i == 37096) {
+			if(i == 37097) {
 				y += 6;
 			}
 			scroll.child(k, i, 10, y);
@@ -2871,21 +2871,22 @@ public class CustomInterfaces extends RSInterface {
 				y -= 9;
 			}
 			if(i == 37070) {
-				y += 4;
+				y  -= 9;
 			}
-			if(i == 37096) {
-				y += 3;
+			if(i == 37097) {
+				y -= 10;
 			}
 			y += 13;
 			k++;
-			addClickableText(i, "", "Select", tda, 0, 0xFF8900, false, true, 180);
+			if(i != 37098)
+				addClickableText(i, "", "Select", tda, 0, 0xFF8900, false, true, 180);
 		}
 
 		addText(30777, "Tier 1", tda, 2, 0xFF9900, false, true);
 		scroll.child(k, 30777, 10, 8);
 		addText(37037, "Tier 2", tda, 2, 0xFF9900, false, true);
 		addText(37070, "Tier 3", tda, 2, 0xFF9900, false, true);
-		addText(37096, "Tier 4", tda, 2, 0xFF9900, false, true);
+		addText(37097, "Tier 4", tda, 2, 0xFF9900, false, true);
 	}
 
 	private void loyaltyShop() {
