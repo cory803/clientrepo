@@ -2873,8 +2873,8 @@ public class CustomInterfaces extends RSInterface {
 		addText(30777, "Tier 1", tda, 2, 0xFF9900, false, true);
 		scroll.child(k, 30777, 10, 8);
 		addText(37037, "Tier 2", tda, 2, 0xFF9900, false, true);
-		addText(37069, "Tier 3", tda, 2, 0xFF9900, false, true);
-		addText(37096, "Tier 4", tda, 2, 0xFF9900, false, true);
+		addText(37070, "Tier 3", tda, 2, 0xFF9900, false, true);
+		addText(37098, "Tier 4", tda, 2, 0xFF9900, false, true);
 	}
 
 	private void loyaltyShop() {
