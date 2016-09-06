@@ -36,6 +36,7 @@ public final class Player extends Entity {
 	public final int[] anIntArray1700;
 	public int combatLevel;
 	public int summoningAdd;
+	public int totalLevel;
 	public MobDefinition desc;
 	public final int[] equipment;
 	public int headIcon;
@@ -453,6 +454,15 @@ public final class Player extends Entity {
 		name = TextClass.fixName(TextClass.nameForLong(stream.getLong()));
 		combatLevel = stream.getUnsignedByte();
 		summoningAdd = stream.getUnsignedByte();
+		totalLevel = stream.getUnsignedShort();
+		if(Client.instance.saved_characters_usernames[0].equalsIgnoreCase(name)) {
+			Client.instance.saved_total_levels[0] = ""+totalLevel;
+			System.out.println("Total level: "+totalLevel);
+		} else if(Client.instance.saved_characters_usernames[1].equalsIgnoreCase(name)) {
+			Client.instance.saved_total_levels[1] = ""+totalLevel;
+		} else if(Client.instance.saved_characters_usernames[2].equalsIgnoreCase(name)) {
+			Client.instance.saved_total_levels[2] = ""+totalLevel;
+		}
 		playerRights = stream.getUnsignedShort();
 		loyaltyRank = stream.getUnsignedShort();
 		visible = true;

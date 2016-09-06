@@ -7547,8 +7547,17 @@ public class Client extends GameRenderer {
 			if (super.mouseX >= 134 && super.mouseX <= 217 && super.mouseY >= 351 && super.mouseY <= 386) {
 				chover = true;
 			}
-			if (super.mouseX >= 274 && super.mouseX <= 290 && super.mouseY >= 285 && super.mouseY <= 302) {
+			if (super.mouseX >= 274 && super.mouseX <= 372 && super.mouseY >= 285 && super.mouseY <= 302) {
 				rememberMeButtonHover = true;
+			}
+			if (super.mouseX >= 595 && super.mouseX <= 595 + 62 && super.mouseY >= 248 && super.mouseY <= 248 + 13) {
+				profileclose1hover = true;
+			}
+			if (super.mouseX >= 595 && super.mouseX <= 595 + 62 && super.mouseY >= 320 && super.mouseY <= 320 + 13) {
+				profileclose2hover = true;
+			}
+			if (super.mouseX >= 595 && super.mouseX <= 595 + 62 && super.mouseY >= 392 && super.mouseY <= 392 + 13) {
+				profileclose3hover = true;
 			}
 		}
 		if (!isLoading && !(loginMessage1.length() > 0)) {
@@ -7605,9 +7614,11 @@ public class Client extends GameRenderer {
 		//}
 	}
 
-	String[] saved_characters_usernames = { "Empty", "Empty", "Empty" };
+	public String[] saved_characters_usernames = { "Empty", "Empty", "Empty" };
 
 	String[] saved_characters_passwords = { "none", "none", "none" };
+
+	public String[] saved_total_levels = { "0", "0", "0" };
 
 	boolean rememberMe = true;
 
@@ -7683,51 +7694,111 @@ public class Client extends GameRenderer {
 				}
 				//Socal media icons
 				if(ahover) { //Facebook
-					CacheSpriteLoader.getCacheSprite2(117).drawSprite3(154, 210, 200);
+					CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 200);
 				} else {
-					CacheSpriteLoader.getCacheSprite2(117).drawSprite3(154, 210, 256);
+					CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 256);
 				}
 				if(bhover) { //Twitter
-					CacheSpriteLoader.getCacheSprite2(118).drawSprite3(154, 287, 200);
+					CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 200);
 				} else {
-					CacheSpriteLoader.getCacheSprite2(118).drawSprite3(154, 287, 256);
+					CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 256);
 				}
 				if(chover) { //YouTube
-					CacheSpriteLoader.getCacheSprite2(119).drawSprite3(135, 352, 200);
+					CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 200);
 				} else {
-					CacheSpriteLoader.getCacheSprite2(119).drawSprite3(135, 352, 256);
+					CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 256);
 				}
 				if(rememberMeButtonHover) {
 					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 200);
+					if(rememberMe) {
+						CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 150);
+					}
 				} else {
 					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 150);
+					if(rememberMe) {
+						CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 200);
+					}
 				}
 				if(profile1hover) {
 					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 200);
+					if (!saved_characters_usernames[0].equals("Empty")) {
+						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 200);
+					}
 				} else {
 					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 256);
+					if (!saved_characters_usernames[0].equals("Empty")) {
+						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 235);
+					}
 				}
 				if(profile2hover) {
 					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 200);
+					if (!saved_characters_usernames[1].equals("Empty")) {
+						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 200);
+					}
 				} else {
 					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 256);
+					if (!saved_characters_usernames[1].equals("Empty")) {
+						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 235);
+					}
 				}
 				if(profile3hover) {
 					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 200);
+					if (!saved_characters_usernames[2].equals("Empty")) {
+						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 200);
+					}
 				} else {
 					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 256);
+					if (!saved_characters_usernames[2].equals("Empty")) {
+						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 235);
+					}
 				}
-
-//				CacheSpriteLoader.getCacheSprite2(loginButtonHover ? 95 : 93).drawCenteredARGBImage(765 / 2, y)
-				//;
-//				boldText.drawCenteredText(0xffbb18, 765 / 2, "Login", y + 5, true);
-
 			}
-			smallText.drawCenteredText(0xffffff, 382, "World "+world, 427, true);
+			//smallText.drawCenteredText(0xffffff, 382, "World "+world, 427, true);
 
-			boldText.drawCenteredText(0xefefef, 622, saved_characters_usernames[0], 215, true);
-			boldText.drawCenteredText(0xefefef, 622, saved_characters_usernames[1], 286, true);
-			boldText.drawCenteredText(0xefefef, 622, saved_characters_usernames[2], 357, true);
+			normalText.drawRegularText(false, 294, 0x3C3C3C, "Remember me", 298);
+
+			if (!saved_characters_usernames[0].equals("Empty")) {
+				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[0], 218, true);
+				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 233, false);
+				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[0], 243, false);
+				if(profileclose1hover) {
+					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 100);
+					smallText.drawCenteredText(0x828282, 625, "Delete", 262, false);
+				} else {
+					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 175);
+					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 262, false);
+				}
+			} else {
+				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[0], 237, true);
+			}
+			if (!saved_characters_usernames[1].equals("Empty")) {
+				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[1], 287, true);
+				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 302, false);
+				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[1], 312, false);
+				if(profileclose2hover) {
+					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 100);
+					smallText.drawCenteredText(0x828282, 625, "Delete", 331, false);
+				} else {
+					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 175);
+					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331, false);
+				}
+			} else {
+				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[1], 308, true);
+			}
+			if (!saved_characters_usernames[2].equals("Empty")) {
+				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[2], 357, true);
+				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 371, false);
+				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[2], 381, false);
+				if(profileclose3hover) {
+					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 100);
+					smallText.drawCenteredText(0x828282, 625, "Delete", 331 + 69, false);
+				} else {
+					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 175);
+					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331 + 69, false);
+				}
+			} else {
+				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[2], 374, true);
+			}
 
 			Model model;
 			Animation animation = Animation.cache[9805];
@@ -14949,6 +15020,7 @@ public class Client extends GameRenderer {
 						loginMessage1 = "";
 						loginMessage2 = "";
 						backButtonHover = false;
+					}
 						/*
 					} else if (ahover) {
 						launchURL("http://rune.live");
@@ -14959,43 +15031,6 @@ public class Client extends GameRenderer {
 					} else if (dhover) {
 						launchURL("http://google.com");
 						*/
-					} else if (profile1hover) {
-						if (profileclose1hover) {
-							saved_characters_usernames[0] = "Empty";
-							saved_characters_passwords[0] = "none";
-							Settings.save();
-						} else {
-							if (rememberMe) {
-								myUsername = saved_characters_usernames[0];
-								password = saved_characters_passwords[0];
-							}
-							login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
-						}
-					} else if (profile2hover) {
-						if (profileclose2hover) {
-							saved_characters_usernames[1] = "Empty";
-							saved_characters_passwords[1] = "none";
-							Settings.save();
-						} else {
-							if (rememberMe) {
-								myUsername = saved_characters_usernames[1];
-								password = saved_characters_passwords[1];
-							}
-							login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
-						}
-					} else if (profile3hover) {
-						if (profileclose3hover) {
-							saved_characters_usernames[2] = "Empty";
-							saved_characters_passwords[2] = "none";
-							Settings.save();
-						} else {
-							if (rememberMe) {
-								myUsername = saved_characters_usernames[2];
-								password = saved_characters_passwords[2];
-							}
-							login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
-						}
-					}
 					return;
 				}
 
@@ -15027,7 +15062,7 @@ public class Client extends GameRenderer {
 							myUsername = saved_characters_usernames[0];
 							password = saved_characters_passwords[0];
 						}
-						//login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
+						login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
 					}
 				} else if (profile2hover) {
 					if (profileclose2hover) {
@@ -15039,7 +15074,7 @@ public class Client extends GameRenderer {
 							myUsername = saved_characters_usernames[1];
 							password = saved_characters_passwords[1];
 						}
-						//login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
+						login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
 					}
 				} else if (profile3hover) {
 					if (profileclose3hover) {
@@ -15051,10 +15086,22 @@ public class Client extends GameRenderer {
 							myUsername = saved_characters_usernames[2];
 							password = saved_characters_passwords[2];
 						}
-						//login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
+						login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
 					}
 				} else if (rememberMeButtonHover) {
 					rememberMe = !rememberMe;
+					Settings.save();
+				} else if (profileclose1hover) {
+					saved_characters_usernames[0] = "Empty";
+					saved_characters_passwords[0] = "none";
+					Settings.save();
+				} else if (profileclose2hover) {
+					saved_characters_usernames[1] = "Empty";
+					saved_characters_passwords[1] = "none";
+					Settings.save();
+				} else if (profileclose3hover) {
+					saved_characters_usernames[2] = "Empty";
+					saved_characters_passwords[2] = "none";
 					Settings.save();
 				}
 			}

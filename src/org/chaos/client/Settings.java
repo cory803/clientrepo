@@ -49,6 +49,9 @@ public final class Settings {
 				Client.instance.saved_characters_passwords[0] = stream.readUTF();
 				Client.instance.saved_characters_passwords[1] = stream.readUTF();
 				Client.instance.saved_characters_passwords[2] = stream.readUTF();
+				Client.instance.saved_total_levels[0] = stream.readUTF();
+				Client.instance.saved_total_levels[1] = stream.readUTF();
+				Client.instance.saved_total_levels[2] = stream.readUTF();
 				Client.myUsername = Client.instance.saved_characters_usernames[0];
 				Client.instance.password = Client.instance.saved_characters_passwords[0];
 				Client.instance.splitChatColor = stream.readInt();
@@ -97,6 +100,9 @@ public final class Settings {
 				Client.instance.saved_characters_passwords[0] = "none";
 				Client.instance.saved_characters_passwords[1] = "none";
 				Client.instance.saved_characters_passwords[2] = "none";
+				Client.instance.saved_total_levels[0] = "0";
+				Client.instance.saved_total_levels[1] = "0";
+				Client.instance.saved_total_levels[2] = "0";
 				Client.instance.myUsername = "";
 				Client.instance.password = "";
 				e.printStackTrace();
@@ -154,6 +160,9 @@ public final class Settings {
 				stream.writeUTF(Client.instance.saved_characters_passwords[0]);
 				stream.writeUTF(Client.instance.saved_characters_passwords[1]);
 				stream.writeUTF(Client.instance.saved_characters_passwords[2]);
+				stream.writeUTF(Client.instance.saved_total_levels[0]);
+				stream.writeUTF(Client.instance.saved_total_levels[1]);
+				stream.writeUTF(Client.instance.saved_total_levels[2]);
 				stream.writeInt(Client.instance.splitChatColor);
 				stream.writeByte(Client.instance.variousSettings[502]); // Split
 																		// private
