@@ -2837,7 +2837,7 @@ public class CustomInterfaces extends RSInterface {
 	private void achievementsInterface() {
 		RSInterface tab = addTabInterface(37000);
 		RSInterface scroll = addTabInterface(36999);
-		addText(37001, "Achievements", tda, 3, 16750623, true, false);
+		addText(37001, "Achievements", tda, 3, 16750623, true, true);
 		addSpriteLoader(37002, 650);
 		addSpriteLoader(37003, 651);
 		addSpriteLoader(37004, 650);

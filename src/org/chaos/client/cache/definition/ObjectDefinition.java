@@ -1914,7 +1914,8 @@ public final class ObjectDefinition {
         if (flag2) {
             model_3.method475(offsetX, offsetH, offsetY);
         }
-        model_3.method479(64 + brightness, 768 + contrast, -50, -10, -50, !nonFlatShading);
+        //model_3.method479(64 + brightness, 768 + contrast, -50, -10, -50, !nonFlatShading);
+        model_3.method479(84, 1500, -90, -280, -70, !nonFlatShading);
         if (anInt760 == 1) {
             model_3.anInt1654 = model_3.modelHeight;
         }

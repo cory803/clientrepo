@@ -332,7 +332,6 @@ public final class Canvas3D extends Canvas2D {
 			}
 			return;
 		}
-		
 		int[] ids = { 17, 34, 40 };
 		for (int tex2 : ids) {
 			if (tex == tex2) {
@@ -340,7 +339,6 @@ public final class Canvas3D extends Canvas2D {
 				return;
 			}
 		}
-		
 		int textureArea = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) >> 1;
 		if (textureArea < 0) {
 			textureArea = -textureArea;
@@ -371,10 +369,12 @@ public final class Canvas3D extends Canvas2D {
 			return;
 		}
 		if (!Configuration.hdTexturing || Texture.get(tex) == null) {
-			method374(y1, y2, y3, x1, x2, x3, hsl1, hsl2, hsl3, tz1, tz2 , tz3);
+			method374(y1, y2, y3, x1, x2, x3, hsl1, hsl2, hsl3, z1, z2, z3);
 			return;
 		}
+		
 		setMipmapLevel(y1, y2, y3, x1, x2, x3, tex);
+		
 		int[] ai = Texture.get(tex).mipmaps[mipMapLevel];
 		tx2 = tx1 - tx2;
 		ty2 = ty1 - ty2;
@@ -382,6 +382,7 @@ public final class Canvas3D extends Canvas2D {
 		tx3 -= tx1;
 		ty3 -= ty1;
 		tz3 -= tz1;
+		
 		int l4 = tx3 * ty1 - ty3 * tx1 << (Client.log_view_dist == 9 ? 14 : 15);
 		int i5 = ty3 * tz1 - tz3 * ty1 << 8;
 		int j5 = tz3 * tx1 - tx3 * tz1 << 5;
@@ -934,185 +935,197 @@ public final class Canvas3D extends Canvas2D {
 		}
 	}
 
-	private static void drawMaterializedScanline(int dst[], int src[], int off, int x1, int x2, int hsl1, int hsl2, int l1, int i2, int j2, int k2, int l2, int i3, float depth, float depth_slope) {
-		int i = 0;
-		int j = 0;
-		if (x1 >= x2) {
+	private static final void drawMaterializedScanline(int[] dest, int[] texels, int offset, int x1, int x2, int hsl1, int hsl2, int t1, int t2, int t3, int t4, int t5, int t6, float z1, float z2) {
+		if(x2 <= x1) {
 			return;
 		}
-		int k3;
-		hsl2 = (hsl2 - hsl1) / (x2 - x1);
+		int texPos = 0;
+		int rgb = 0;
 		if (restrict_edges) {
 			if (x2 > Canvas2D.centerX) {
 				x2 = Canvas2D.centerX;
 			}
 			if (x1 < 0) {
-				hsl1 -= x1 * hsl2;
 				x1 = 0;
 			}
-			if (x1 >= x2) {
-				return;
+		}
+		if(x1 < x2) {
+			offset += x1;
+			z1 += z2 * (float) x1;
+			int n = x2 - x1 >> 2;
+			int dhsl = 0;
+			if(n > 0) {
+				dhsl = (hsl2 - hsl1) * anIntArray1468[n] >> 15;
 			}
-			k3 = x2 - x1 >> 3;
-		} else {
-			if (x2 - x1 > 7) {
-				k3 = x2 - x1 >> 3;
+			int dist = x1 - centerX;
+			t1 += (t4 >> 3) * dist;
+			t2 += (t5 >> 3) * dist;
+			t3 += (t6 >> 3) * dist;
+			int i_57_ = t3 >> 14;
+			int i_58_;
+			int i_59_;
+			if(i_57_ != 0) {
+				i_58_ = t1 / i_57_;
+				i_59_ = t2 / i_57_;
 			} else {
-				k3 = 0;
+				i_58_ = 0;
+				i_59_ = 0;
+			}
+			t1 += t4;
+			t2 += t5;
+			t3 += t6;
+			i_57_ = t3 >> 14;
+			int i_60_;
+			int i_61_;
+			if(i_57_ != 0) {
+				i_60_ = t1 / i_57_;
+				i_61_ = t2 / i_57_;
+			} else {
+				i_60_ = 0;
+				i_61_ = 0;
+			}
+			texPos = (i_58_ << 18) + i_59_;
+			int dtexPos = (i_60_ - i_58_ >> 3 << 18) + (i_61_ - i_59_ >> 3);
+			n >>= 1;
+			int light;
+			if(n > 0) {
+				do {
+					hsl1 += dhsl;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					hsl1 += dhsl;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+					i_58_ = i_60_;
+					i_59_ = i_61_;
+					t1 += t4;
+					t2 += t5;
+					t3 += t6;
+					i_57_ = t3 >> 14;
+					if(i_57_ != 0) {
+						i_60_ = t1 / i_57_;
+						i_61_ = t2 / i_57_;
+					} else {
+						i_60_ = 0;
+						i_61_ = 0;
+					}
+					texPos = (i_58_ << 18) + i_59_;
+					dtexPos = (i_60_ - i_58_ >> 3 << 18) + (i_61_ - i_59_ >> 3);
+				} while(--n > 0);
+			}
+			n = x2 - x1 & 7;
+			if(n > 0) {
+				do {
+					if((n & 3) == 0) {
+						hsl1 += dhsl;
+					}
+					rgb = texels[texelPos((texPos & 0x3f80) + (texPos >>> 25))];
+					light = ((hsl1 >> 8 & 0x7f) << 1) * (((rgb >> 16 & 0xff) + (rgb >> 8 & 0xff) + (rgb & 0xff)) / 3) / 384;
+					if (light > 127) {
+						light = 127;
+					}
+					texPos += dtexPos;
+					if (true) {
+						dest[offset] = anIntArray1482[(hsl1 >> 8 & 0xff80) | light];
+						depthBuffer[offset] = z1;
+					}
+					z1 += z2;
+					offset++;
+				} while(--n > 0);
 			}
 		}
-		off += x1;
-		depth += depth_slope * (float) x1;
-		int j4 = 0;
-		int l4 = 0;
-		int l6 = x1 - centerX;
-		l1 += (k2 >> 3) * l6;
-		i2 += (l2 >> 3) * l6;
-		j2 += (i3 >> 3) * l6;
-		int l5 = j2 >> 14;
-		if (l5 != 0) {
-			i = l1 / l5;
-			j = i2 / l5;
-			if (i < 0) {
-				i = 0;
-			} else if (i > 16256) {
-				i = 16256;
-			}
-		}
-		l1 += k2;
-		i2 += l2;
-		j2 += i3;
-		l5 = j2 >> 14;
-		if (l5 != 0) {
-			j4 = l1 / l5;
-			l4 = i2 / l5;
-			if (j4 < 7) {
-				j4 = 7;
-			} else if (j4 > 16256) {
-				j4 = 16256;
-			}
-		}
-		int j7 = j4 - i >> 3;
-		int l7 = l4 - j >> 3;
-		int rgb1, rgb2;
-		while (k3-- > 0) {
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i = j4;
-			j = l4;
-			hsl1 += hsl2;
-			l1 += k2;
-			i2 += l2;
-			j2 += i3;
-			int i6 = j2 >> 14;
-			if (i6 != 0) {
-				j4 = l1 / i6;
-				l4 = i2 / i6;
-				if (j4 < 7) {
-					j4 = 7;
-				} else if (j4 > 16256) {
-					j4 = 16256;
-				}
-			}
-			j7 = j4 - i >> 3;
-			l7 = l4 - j >> 3;
-		}
-		for (k3 = x2 - x1 & 7; k3-- > 0;) {
-			rgb1 = anIntArray1482[hsl1 >> 8];
-			rgb2 = src[texelPos((j & 0x3f80) + (i >> 7))];
-			if (true) {
-				dst[off] = (((rgb1 >> 16 & 0xff) * (rgb2 >> 17 & 0x7f) << 11) / 3 & 0xff0000) + (((rgb1 >> 8 & 0xff) * (rgb2 >> 9 & 0x7f) << 3) / 3 & 0xff00) + (((rgb1 & 0xff) * (rgb2 >> 1 & 0x7f) >> 5) / 3 & 0xff);
-				Canvas2D.depthBuffer[off] = depth;
-			}
-			off++;
-			depth += depth_slope;
-			i += j7;
-			j += l7;
-			hsl1 += hsl2;
-		}		
 	}
 
 	public static void method374(int y1, int y2, int y3, int x1, int x2, int x3, int hsl1, int hsl2, int hsl3, float z1, float z2, float z3) {
@@ -1131,32 +1144,32 @@ public final class Canvas3D extends Canvas2D {
 		int r3 = rgb3 >> 16 & 0xff;
 		int g3 = rgb3 >> 8 & 0xff;
 		int b3 = rgb3 & 0xff;
-		int a_to_b = 0;
+		int dx1 = 0;
 		int dr1 = 0;
 		int dg1 = 0;
 		int db1 = 0;
 		if (y2 != y1) {
-			a_to_b = (x2 - x1 << 16) / (y2 - y1);
+			dx1 = (x2 - x1 << 16) / (y2 - y1);
 			dr1 = (r2 - r1 << 16) / (y2 - y1);
 			dg1 = (g2 - g1 << 16) / (y2 - y1);
 			db1 = (b2 - b1 << 16) / (y2 - y1);
 		}
-		int b_to_c = 0;
+		int dx2 = 0;
 		int dr2 = 0;
 		int dg2 = 0;
 		int db2 = 0;
 		if (y3 != y2) {
-			b_to_c = (x3 - x2 << 16) / (y3 - y2);
+			dx2 = (x3 - x2 << 16) / (y3 - y2);
 			dr2 = (r3 - r2 << 16) / (y3 - y2);
 			dg2 = (g3 - g2 << 16) / (y3 - y2);
 			db2 = (b3 - b2 << 16) / (y3 - y2);
 		}
-		int c_to_a = 0;
+		int dx3 = 0;
 		int dr3 = 0;
 		int dg3 = 0;
 		int db3 = 0;
 		if (y3 != y1) {
-			c_to_a = (x1 - x3 << 16) / (y1 - y3);
+			dx3 = (x1 - x3 << 16) / (y1 - y3);
 			dr3 = (r1 - r3 << 16) / (y1 - y3);
 			dg3 = (g1 - g3 << 16) / (y1 - y3);
 			db3 = (b1 - b3 << 16) / (y1 - y3);
@@ -1188,8 +1201,8 @@ public final class Canvas3D extends Canvas2D {
 				g3 = g1 <<= 16;
 				b3 = b1 <<= 16;
 				if (y1 < 0) {
-					x3 -= c_to_a * y1;
-					x1 -= a_to_b * y1;
+					x3 -= dx3 * y1;
+					x1 -= dx1 * y1;
 					r3 -= dr3 * y1;
 					g3 -= dg3 * y1;
 					b3 -= db3 * y1;
@@ -1204,19 +1217,19 @@ public final class Canvas3D extends Canvas2D {
 				g2 <<= 16;
 				b2 <<= 16;
 				if (y2 < 0) {
-					x2 -= b_to_c * y2;
+					x2 -= dx2 * y2;
 					r2 -= dr2 * y2;
 					g2 -= dg2 * y2;
 					b2 -= db2 * y2;
 					y2 = 0;
 				}
-				if (y1 != y2 && c_to_a < a_to_b || y1 == y2 && c_to_a > b_to_c) {
+				if (y1 != y2 && dx3 < dx1 || y1 == y2 && dx3 > dx2) {
 					y3 -= y2;
 					y2 -= y1;
 					for (y1 = lineOffsets[y1]; --y2 >= 0; y1 += Canvas2D.width) {
 						method375(Canvas2D.pixels, y1, x3 >> 16, x1 >> 16, r3, g3, b3, r1, g1, b1, z1, depth_slope);
-						x3 += c_to_a;
-						x1 += a_to_b;
+						x3 += dx3;
+						x1 += dx1;
 						r3 += dr3;
 						g3 += dg3;
 						b3 += db3;
@@ -1227,8 +1240,8 @@ public final class Canvas3D extends Canvas2D {
 					}
 					while (--y3 >= 0) {
 						method375(Canvas2D.pixels, y1, x3 >> 16, x2 >> 16, r3, g3, b3, r2, g2, b2, z1, depth_slope);
-						x3 += c_to_a;
-						x2 += b_to_c;
+						x3 += dx3;
+						x2 += dx2;
 						r3 += dr3;
 						g3 += dg3;
 						b3 += db3;
@@ -1244,8 +1257,8 @@ public final class Canvas3D extends Canvas2D {
 				y2 -= y1;
 				for (y1 = lineOffsets[y1]; --y2 >= 0; y1 += Canvas2D.width) {
 					method375(Canvas2D.pixels, y1, x1 >> 16, x3 >> 16, r1, g1, b1, r3, g3, b3, z1, depth_slope);
-					x3 += c_to_a;
-					x1 += a_to_b;
+					x3 += dx3;
+					x1 += dx1;
 					r3 += dr3;
 					g3 += dg3;
 					b3 += db3;
@@ -1256,8 +1269,8 @@ public final class Canvas3D extends Canvas2D {
 				}
 				while (--y3 >= 0) {
 					method375(Canvas2D.pixels, y1, x2 >> 16, x3 >> 16, r2, g2, b2, r3, g3, b3, z1, depth_slope);
-					x3 += c_to_a;
-					x2 += b_to_c;
+					x3 += dx3;
+					x2 += dx2;
 					r3 += dr3;
 					g3 += dg3;
 					b3 += db3;
@@ -1274,8 +1287,8 @@ public final class Canvas3D extends Canvas2D {
 			g2 = g1 <<= 16;
 			b2 = b1 <<= 16;
 			if (y1 < 0) {
-				x2 -= c_to_a * y1;
-				x1 -= a_to_b * y1;
+				x2 -= dx3 * y1;
+				x1 -= dx1 * y1;
 				r2 -= dr3 * y1;
 				g2 -= dg3 * y1;
 				b2 -= db3 * y1;
@@ -1290,19 +1303,19 @@ public final class Canvas3D extends Canvas2D {
 			g3 <<= 16;
 			b3 <<= 16;
 			if (y3 < 0) {
-				x3 -= b_to_c * y3;
+				x3 -= dx2 * y3;
 				r3 -= dr2 * y3;
 				g3 -= dg2 * y3;
 				b3 -= db2 * y3;
 				y3 = 0;
 			}
-			if (y1 != y3 && c_to_a < a_to_b || y1 == y3 && b_to_c > a_to_b) {
+			if (y1 != y3 && dx3 < dx1 || y1 == y3 && dx2 > dx1) {
 				y2 -= y3;
 				y3 -= y1;
 				for (y1 = lineOffsets[y1]; --y3 >= 0; y1 += Canvas2D.width) {
 					method375(Canvas2D.pixels, y1, x2 >> 16, x1 >> 16, r2, g2, b2, r1, g1, b1, z1, depth_slope);
-					x2 += c_to_a;
-					x1 += a_to_b;
+					x2 += dx3;
+					x1 += dx1;
 					r2 += dr3;
 					g2 += dg3;
 					b2 += db3;
@@ -1313,8 +1326,8 @@ public final class Canvas3D extends Canvas2D {
 				}
 				while (--y2 >= 0) {
 					method375(Canvas2D.pixels, y1, x3 >> 16, x1 >> 16, r3, g3, b3, r1, g1, b1, z1, depth_slope);
-					x3 += b_to_c;
-					x1 += a_to_b;
+					x3 += dx2;
+					x1 += dx1;
 					r3 += dr2;
 					g3 += dg2;
 					b3 += db2;
@@ -1330,8 +1343,8 @@ public final class Canvas3D extends Canvas2D {
 			y3 -= y1;
 			for (y1 = lineOffsets[y1]; --y3 >= 0; y1 += Canvas2D.width) {
 				method375(Canvas2D.pixels, y1, x1 >> 16, x2 >> 16, r1, g1, b1, r2, g2, b2, z1, depth_slope);
-				x2 += c_to_a;
-				x1 += a_to_b;
+				x2 += dx3;
+				x1 += dx1;
 				r2 += dr3;
 				g2 += dg3;
 				b2 += db3;
@@ -1342,8 +1355,8 @@ public final class Canvas3D extends Canvas2D {
 			}
 			while (--y2 >= 0) {
 				method375(Canvas2D.pixels, y1, x1 >> 16, x3 >> 16, r1, g1, b1, r3, g3, b3, z1, depth_slope);
-				x3 += b_to_c;
-				x1 += a_to_b;
+				x3 += dx2;
+				x1 += dx1;
 				r3 += dr2;
 				g3 += dg2;
 				b3 += db2;
@@ -1372,8 +1385,8 @@ public final class Canvas3D extends Canvas2D {
 				g1 = g2 <<= 16;
 				b1 = b2 <<= 16;
 				if (y2 < 0) {
-					x1 -= a_to_b * y2;
-					x2 -= b_to_c * y2;
+					x1 -= dx1 * y2;
+					x2 -= dx2 * y2;
 					r1 -= dr1 * y2;
 					g1 -= dg1 * y2;
 					b1 -= db1 * y2;
@@ -1388,19 +1401,19 @@ public final class Canvas3D extends Canvas2D {
 				g3 <<= 16;
 				b3 <<= 16;
 				if (y3 < 0) {
-					x3 -= c_to_a * y3;
+					x3 -= dx3 * y3;
 					r3 -= dr3 * y3;
 					g3 -= dg3 * y3;
 					b3 -= db3 * y3;
 					y3 = 0;
 				}
-				if (y2 != y3 && a_to_b < b_to_c || y2 == y3 && a_to_b > c_to_a) {
+				if (y2 != y3 && dx1 < dx2 || y2 == y3 && dx1 > dx3) {
 					y1 -= y3;
 					y3 -= y2;
 					for (y2 = lineOffsets[y2]; --y3 >= 0; y2 += Canvas2D.width) {
 						method375(Canvas2D.pixels, y2, x1 >> 16, x2 >> 16, r1, g1, b1, r2, g2, b2, z2, depth_slope);
-						x1 += a_to_b;
-						x2 += b_to_c;
+						x1 += dx1;
+						x2 += dx2;
 						r1 += dr1;
 						g1 += dg1;
 						b1 += db1;
@@ -1411,8 +1424,8 @@ public final class Canvas3D extends Canvas2D {
 					}
 					while (--y1 >= 0) {
 						method375(Canvas2D.pixels, y2, x1 >> 16, x3 >> 16, r1, g1, b1, r3, g3, b3, z2, depth_slope);
-						x1 += a_to_b;
-						x3 += c_to_a;
+						x1 += dx1;
+						x3 += dx3;
 						r1 += dr1;
 						g1 += dg1;
 						b1 += db1;
@@ -1428,8 +1441,8 @@ public final class Canvas3D extends Canvas2D {
 				y3 -= y2;
 				for (y2 = lineOffsets[y2]; --y3 >= 0; y2 += Canvas2D.width) {
 					method375(Canvas2D.pixels, y2, x2 >> 16, x1 >> 16, r2, g2, b2, r1, g1, b1, z2, depth_slope);
-					x1 += a_to_b;
-					x2 += b_to_c;
+					x1 += dx1;
+					x2 += dx2;
 					r1 += dr1;
 					g1 += dg1;
 					b1 += db1;
@@ -1440,8 +1453,8 @@ public final class Canvas3D extends Canvas2D {
 				}
 				while (--y1 >= 0) {
 					method375(Canvas2D.pixels, y2, x3 >> 16, x1 >> 16, r3, g3, b3, r1, g1, b1, z2, depth_slope);
-					x1 += a_to_b;
-					x3 += c_to_a;
+					x1 += dx1;
+					x3 += dx3;
 					r1 += dr1;
 					g1 += dg1;
 					b1 += db1;
@@ -1458,8 +1471,8 @@ public final class Canvas3D extends Canvas2D {
 			g3 = g2 <<= 16;
 			b3 = b2 <<= 16;
 			if (y2 < 0) {
-				x3 -= a_to_b * y2;
-				x2 -= b_to_c * y2;
+				x3 -= dx1 * y2;
+				x2 -= dx2 * y2;
 				r3 -= dr1 * y2;
 				g3 -= dg1 * y2;
 				b3 -= db1 * y2;
@@ -1474,19 +1487,19 @@ public final class Canvas3D extends Canvas2D {
 			g1 <<= 16;
 			b1 <<= 16;
 			if (y1 < 0) {
-				x1 -= c_to_a * y1;
+				x1 -= dx3 * y1;
 				r1 -= dr3 * y1;
 				g1 -= dg3 * y1;
 				b1 -= db3 * y1;
 				y1 = 0;
 			}
-			if (a_to_b < b_to_c) {
+			if (dx1 < dx2) {
 				y3 -= y1;
 				y1 -= y2;
 				for (y2 = lineOffsets[y2]; --y1 >= 0; y2 += Canvas2D.width) {
 					method375(Canvas2D.pixels, y2, x3 >> 16, x2 >> 16, r3, g3, b3, r2, g2, b2, z2, depth_slope);
-					x3 += a_to_b;
-					x2 += b_to_c;
+					x3 += dx1;
+					x2 += dx2;
 					r3 += dr1;
 					g3 += dg1;
 					b3 += db1;
@@ -1497,8 +1510,8 @@ public final class Canvas3D extends Canvas2D {
 				}
 				while (--y3 >= 0) {
 					method375(Canvas2D.pixels, y2, x1 >> 16, x2 >> 16, r1, g1, b1, r2, g2, b2, z2, depth_slope);
-					x1 += c_to_a;
-					x2 += b_to_c;
+					x1 += dx3;
+					x2 += dx2;
 					r1 += dr3;
 					g1 += dg3;
 					b1 += db3;
@@ -1514,8 +1527,8 @@ public final class Canvas3D extends Canvas2D {
 			y1 -= y2;
 			for (y2 = lineOffsets[y2]; --y1 >= 0; y2 += Canvas2D.width) {
 				method375(Canvas2D.pixels, y2, x2 >> 16, x3 >> 16, r2, g2, b2, r3, g3, b3, z2, depth_slope);
-				x3 += a_to_b;
-				x2 += b_to_c;
+				x3 += dx1;
+				x2 += dx2;
 				r3 += dr1;
 				g3 += dg1;
 				b3 += db1;
@@ -1526,8 +1539,8 @@ public final class Canvas3D extends Canvas2D {
 			}
 			while (--y3 >= 0) {
 				method375(Canvas2D.pixels, y2, x2 >> 16, x1 >> 16, r2, g2, b2, r1, g1, b1, z2, depth_slope);
-				x1 += c_to_a;
-				x2 += b_to_c;
+				x1 += dx3;
+				x2 += dx2;
 				r1 += dr3;
 				g1 += dg3;
 				b1 += db3;
@@ -1555,8 +1568,8 @@ public final class Canvas3D extends Canvas2D {
 			g2 = g3 <<= 16;
 			b2 = b3 <<= 16;
 			if (y3 < 0) {
-				x2 -= b_to_c * y3;
-				x3 -= c_to_a * y3;
+				x2 -= dx2 * y3;
+				x3 -= dx3 * y3;
 				r2 -= dr2 * y3;
 				g2 -= dg2 * y3;
 				b2 -= db2 * y3;
@@ -1571,19 +1584,19 @@ public final class Canvas3D extends Canvas2D {
 			g1 <<= 16;
 			b1 <<= 16;
 			if (y1 < 0) {
-				x1 -= a_to_b * y1;
+				x1 -= dx1 * y1;
 				r1 -= dr1 * y1;
 				g1 -= dg1 * y1;
 				b1 -= db1 * y1;
 				y1 = 0;
 			}
-			if (b_to_c < c_to_a) {
+			if (dx2 < dx3) {
 				y2 -= y1;
 				y1 -= y3;
 				for (y3 = lineOffsets[y3]; --y1 >= 0; y3 += Canvas2D.width) {
 					method375(Canvas2D.pixels, y3, x2 >> 16, x3 >> 16, r2, g2, b2, r3, g3, b3, z3, depth_slope);
-					x2 += b_to_c;
-					x3 += c_to_a;
+					x2 += dx2;
+					x3 += dx3;
 					r2 += dr2;
 					g2 += dg2;
 					b2 += db2;
@@ -1594,8 +1607,8 @@ public final class Canvas3D extends Canvas2D {
 				}
 				while (--y2 >= 0) {
 					method375(Canvas2D.pixels, y3, x2 >> 16, x1 >> 16, r2, g2, b2, r1, g1, b1, z3, depth_slope);
-					x2 += b_to_c;
-					x1 += a_to_b;
+					x2 += dx2;
+					x1 += dx1;
 					r2 += dr2;
 					g2 += dg2;
 					b2 += db2;
@@ -1611,8 +1624,8 @@ public final class Canvas3D extends Canvas2D {
 			y1 -= y3;
 			for (y3 = lineOffsets[y3]; --y1 >= 0; y3 += Canvas2D.width) {
 				method375(Canvas2D.pixels, y3, x3 >> 16, x2 >> 16, r3, g3, b3, r2, g2, b2, z3, depth_slope);
-				x2 += b_to_c;
-				x3 += c_to_a;
+				x2 += dx2;
+				x3 += dx3;
 				r2 += dr2;
 				g2 += dg2;
 				b2 += db2;
@@ -1623,8 +1636,8 @@ public final class Canvas3D extends Canvas2D {
 			}
 			while (--y2 >= 0) {
 				method375(Canvas2D.pixels, y3, x1 >> 16, x2 >> 16, r1, g1, b1, r2, g2, b2, z3, depth_slope);
-				x2 += b_to_c;
-				x1 += a_to_b;
+				x2 += dx2;
+				x1 += dx1;
 				r2 += dr2;
 				g2 += dg2;
 				b2 += db2;
@@ -1641,8 +1654,8 @@ public final class Canvas3D extends Canvas2D {
 		g1 = g3 <<= 16;
 		b1 = b3 <<= 16;
 		if (y3 < 0) {
-			x1 -= b_to_c * y3;
-			x3 -= c_to_a * y3;
+			x1 -= dx2 * y3;
+			x3 -= dx3 * y3;
 			r1 -= dr2 * y3;
 			g1 -= dg2 * y3;
 			b1 -= db2 * y3;
@@ -1657,19 +1670,19 @@ public final class Canvas3D extends Canvas2D {
 		g2 <<= 16;
 		b2 <<= 16;
 		if (y2 < 0) {
-			x2 -= a_to_b * y2;
+			x2 -= dx1 * y2;
 			r2 -= dr1 * y2;
 			g2 -= dg1 * y2;
 			b2 -= db1 * y2;
 			y2 = 0;
 		}
-		if (b_to_c < c_to_a) {
+		if (dx2 < dx3) {
 			y1 -= y2;
 			y2 -= y3;
 			for (y3 = lineOffsets[y3]; --y2 >= 0; y3 += Canvas2D.width) {
 				method375(Canvas2D.pixels, y3, x1 >> 16, x3 >> 16, r1, g1, b1, r3, g3, b3, z3, depth_slope);
-				x1 += b_to_c;
-				x3 += c_to_a;
+				x1 += dx2;
+				x3 += dx3;
 				r1 += dr2;
 				g1 += dg2;
 				b1 += db2;
@@ -1680,8 +1693,8 @@ public final class Canvas3D extends Canvas2D {
 			}
 			while (--y1 >= 0) {
 				method375(Canvas2D.pixels, y3, x2 >> 16, x3 >> 16, r2, g2, b2, r3, g3, b3, z3, depth_slope);
-				x2 += a_to_b;
-				x3 += c_to_a;
+				x2 += dx1;
+				x3 += dx3;
 				r2 += dr1;
 				g2 += dg1;
 				b2 += db1;
@@ -1697,8 +1710,8 @@ public final class Canvas3D extends Canvas2D {
 		y2 -= y3;
 		for (y3 = lineOffsets[y3]; --y2 >= 0; y3 += Canvas2D.width) {
 			method375(Canvas2D.pixels, y3, x3 >> 16, x1 >> 16, r3, g3, b3, r1, g1, b1, z3, depth_slope);
-			x1 += b_to_c;
-			x3 += c_to_a;
+			x1 += dx2;
+			x3 += dx3;
 			r1 += dr2;
 			g1 += dg2;
 			b1 += db2;
@@ -1709,8 +1722,8 @@ public final class Canvas3D extends Canvas2D {
 		}
 		while (--y1 >= 0) {
 			method375(Canvas2D.pixels, y3, x3 >> 16, x2 >> 16, r3, g3, b3, r2, g2, b2, z3, depth_slope);
-			x2 += a_to_b;
-			x3 += c_to_a;
+			x2 += dx1;
+			x3 += dx3;
 			r2 += dr1;
 			g2 += dg1;
 			b2 += db1;

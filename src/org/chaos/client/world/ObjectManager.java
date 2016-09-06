@@ -628,6 +628,10 @@ public final class ObjectManager {
 										mapTexture = Canvas3D.method369(1);
 										j23 = -1;
 										floorTexture = 1;
+									} else if ((i19 - 1) == 63) {//edge bridge
+										mapTexture = flo_2.rgb = 0x4F4F4F;
+										j23 = -2;
+										floorTexture = -1;
 									}
 
 									if (j23 == 111) { // Water

@@ -11026,7 +11026,7 @@ public class Client extends GameRenderer {
 
 		
 		if (Configuration.FOG_ENABLED) {
-			if (!switchColor) {
+			/*if (!switchColor) {
 				if (fog.rgb != fadeColors(new Color(fog.rgb), new Color(fadingToColor), fadeStep)) {
 					switchColor = true;
 				}
@@ -11040,7 +11040,7 @@ public class Client extends GameRenderer {
 				} else {
 					fog.rgb = fadeColors(new Color(fog.rgb), new Color(fadingToColor), fadeStep);
 				}
-			}
+			}*/
 			fog.render(2250, 3000);
 		}
 		//if(Configuration.PARTICLES) {
