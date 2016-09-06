@@ -1,5 +1,7 @@
 package org.chaos.client.graphics.fonts;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.chaos.client.cache.Archive;
@@ -205,6 +207,62 @@ public final class TextDrawingArea extends Canvas2D {
 			else
 				j += rsb[s.charAt(k)];
 		return j;
+	}
+
+	public String[] wrapText(String text, int maxWidth) {
+		if (text == null) {
+			return new String[]{};
+		}
+		if (maxWidth <= 0) {
+			return new String[]{
+					text
+			};
+		}
+		if (getTextWidth(text) <= maxWidth && !text.contains("\\n")) {
+			return new String[]{
+					text
+			};
+		}
+		if (text.contains("\\n")) {
+			final String[] splits = text.split("\\\\n");
+			List<String> lines = new ArrayList<String>();
+			for (int split = 0; split < splits.length; split++) {
+				String[] lineArray = wrapText(splits[split], maxWidth);
+				for (String line : lineArray) {
+					if (line == null) {
+						continue;
+					}
+					lines.add(line);
+				}
+			}
+			return lines.toArray(new String[lines.size()]);
+		}
+		char[] chars = text.toCharArray();
+		List<String> lines = new ArrayList<String>();
+		StringBuilder line = new StringBuilder();
+		StringBuilder word = new StringBuilder();
+		for (int i = 0; i < chars.length; i++) {
+			word.append(chars[i]);
+			if (chars[i] == ' ') {
+				if (getTextWidth(line.toString() + word.toString()) > maxWidth) {
+					lines.add(line.toString());
+					line.delete(0, line.length());
+				}
+				line.append(word);
+				word.delete(0, word.length());
+			}
+		}
+		if (getTextWidth(word.toString()) > 0) {
+			if (getTextWidth(line.toString() + word.toString()) > maxWidth) {
+				lines.add(line.toString());
+				line.delete(0, line.length());
+			}
+			line.append(word);
+		}
+		if (getTextWidth(line.toString()) > 0) {
+			lines.add(line.toString());
+		}
+		return lines.toArray(new String[lines.size()]);
 	}
 
 	public int charFor(int i, String s) {

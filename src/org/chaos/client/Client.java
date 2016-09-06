@@ -7,12 +7,7 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.net.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -1141,8 +1136,9 @@ public class Client extends GameRenderer {
 	public boolean loggedIn;
 	private ByteBuffer loginBuffer;
 	private int loginFailures;
-	private String loginMessage1;
-	private String loginMessage2;
+	private String loginMessage;
+	private int loginMessageColor = 0xFFFFFF;
+	private String loginDescription;
 	private int loginScreenCursorPos;
 	private int loginScreenState;
 	private int loginState = -1;
@@ -1433,7 +1429,8 @@ public class Client extends GameRenderer {
 		consoleMessages = new String[50];
 		bigX = new int[4000];
 		bigY = new int[4000];
-		loginMessage1 = loginMessage2 = "";
+		loginMessage = loginDescription = "";
+		loginMessageColor = 0xFFFFFF;
 	}
 
 	private void drawConsole() {
@@ -7560,7 +7557,7 @@ public class Client extends GameRenderer {
 				profileclose3hover = true;
 			}
 		}
-		if (!isLoading && !(loginMessage1.length() > 0)) {
+		if (!isLoading && !(loginMessage.length() > 0)) {
 			if (super.mouseX >= 272 && super.mouseX <= 377 && super.mouseY >= 383 && super.mouseY <= 409) {
 				registerHover = handCursor = true;
 			}
@@ -7583,8 +7580,7 @@ public class Client extends GameRenderer {
 				}
 			}
 		} else {
-			if (super.mouseX >= 511 + 38 && super.mouseX <= 522 + 38 && super.mouseY >= 123 + 15
-					&& super.mouseY <= 137 + 15) {
+			if (super.mouseX >= 304 && super.mouseX <= 454 && super.mouseY >= 378 && super.mouseY <= 408) {
 				backButtonHover = handCursor = true;
 			}
 		}
@@ -7629,33 +7625,34 @@ public class Client extends GameRenderer {
 		if(inWorldSwitcher) {
 
 		} else {
+			CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
+			if (loginMessage.length() > 0) { //Logging in screen
+				CacheSpriteLoader.getCacheSprite2(126).drawAdvancedSprite(265, 218);
+				if (loginMessage != null && loginMessage.length() != 0) {
+					boldText.drawCenteredText(loginMessageColor, 765 / 2, loginMessage, 207, true);
 
-			if (loginMessage1.length() > 0) {
-
-				CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
-				// CacheSpriteLoader.getCacheSprite2(20).drawAdvancedSprite(240,
-				// 124);
-
-				//Canvas2D.drawAlphaBox(199, 137, 366, 234, 0, 100);
-				/*
-				if (backButtonHover) {
-					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(511 + 38, 125 + 15);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(511 + 38, 125 + 15);
+					fancyText.drawCenteredText(0xFF914A, 765 / 2, "Information", 240, true);
+					String[] loginDescriptionWrapped = normalText.wrapText(loginDescription, 200);
+					int y = 0;
+					for(int i = 0; i < loginDescriptionWrapped.length; i++) {
+						normalText.drawCenteredText(0x6a6a6a, 765 / 2, loginDescriptionWrapped[i], 255 + y, false);
+						y += 15;
+					}
 				}
-				*/
-				if (loginMessage1 != null && loginMessage1.length() != 0) {
-					int y_1 = (clientHeight / 2) + 28;
-					normalText.drawCenteredText(0xefefef, 381, loginMessage1, y_1 - 30, true);
+				if(!loginMessage.contains("Attempting to login")) {
+					if (backButtonHover) {
+						TextDrawingArea.drawAlphaFilledPixels(305, 379, 150, 30, 0xff0000, 50);
+						normalText.drawCenteredText(0x828282, 382, "Return to login", 397, false);
+					} else {
+						TextDrawingArea.drawAlphaFilledPixels(305, 379, 150, 30, 0xff0000, 100);
+						normalText.drawCenteredText(0xD1D1D1, 382, "Return to login", 397, false);
+					}
 				}
-				if (loginMessage2 != null && loginMessage2.length() != 0) {
-					int y_2 = (clientHeight / 2) + (1 * 20) + 28;
-					normalText.drawCenteredText(0xefefef, 381, loginMessage2, y_2 - 30, true);
-				}
-			} else {
-
-				CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
-
+				//if (loginDescription != null && loginDescription.length() != 0) {
+					//int y_2 = (clientHeight / 2) + (1 * 20) + 28;
+					//normalText.drawCenteredText(0xefefef, 381, loginDescription, y_2 - 30, true);
+				//}
+			} else { //Login screen
 				boldText.drawRegularText(true, 277, 0xcbc6c4, "Username:", 206);
 
 				if (loginScreenCursorPos == 0 && loopCycle % 45 < 10) {
@@ -7665,18 +7662,12 @@ public class Client extends GameRenderer {
 				}
 
 				boldText.drawRegularText(true, 277, 0xcbc6c4, "Password:", 258);
-//				CacheSpriteLoader.getCacheSprite2(input2Hover ? 96 : 94).drawCenteredARGBImage(765 / 2, y + 19);
-//
+
 				if (loginScreenCursorPos == 1 && loopCycle % 45 < 10) {
 					normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password) + "|", 276);
 				} else {
 					normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password), 276);
 				}
-//
-//				CacheSpriteLoader.getCacheSprite2(rememberMeButtonHover ? (rememberMe ? 102 : 98) : (rememberMe ? 101 : 97))
-//						.drawARGBImage(234, y + 40);
-//				normalText.drawRegularText(true, 261, 0xefefef, "Remember me", y + 56);
-
 				if(loginButtonHover) {
 					CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 200);
 				} else {
@@ -7692,22 +7683,7 @@ public class Client extends GameRenderer {
 				} else {
 					CacheSpriteLoader.getCacheSprite2(111).drawSprite3(383, 380, 256);
 				}
-				//Socal media icons
-				if(ahover) { //Facebook
-					CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 200);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 256);
-				}
-				if(bhover) { //Twitter
-					CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 200);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 256);
-				}
-				if(chover) { //YouTube
-					CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 200);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 256);
-				}
+				normalText.drawRegularText(false, 294, 0x3C3C3C, "Remember me", 298);
 				if(rememberMeButtonHover) {
 					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 200);
 					if(rememberMe) {
@@ -7719,53 +7695,68 @@ public class Client extends GameRenderer {
 						CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 200);
 					}
 				}
-				if(profile1hover) {
-					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 200);
-					if (!saved_characters_usernames[0].equals("Empty")) {
-						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 200);
-					}
-				} else {
-					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 256);
-					if (!saved_characters_usernames[0].equals("Empty")) {
-						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 235);
-					}
+			}
+
+
+			//Socal media icons
+			if(ahover) { //Facebook
+				CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 200);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 256);
+			}
+			if(bhover) { //Twitter
+				CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 200);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 256);
+			}
+			if(chover) { //YouTube
+				CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 200);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 256);
+			}
+			if(profile1hover) {
+				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 200);
+				if (!saved_characters_usernames[0].equals("Empty")) {
+					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 200);
 				}
-				if(profile2hover) {
-					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 200);
-					if (!saved_characters_usernames[1].equals("Empty")) {
-						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 200);
-					}
-				} else {
-					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 256);
-					if (!saved_characters_usernames[1].equals("Empty")) {
-						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 235);
-					}
-				}
-				if(profile3hover) {
-					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 200);
-					if (!saved_characters_usernames[2].equals("Empty")) {
-						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 200);
-					}
-				} else {
-					CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 256);
-					if (!saved_characters_usernames[2].equals("Empty")) {
-						CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 235);
-					}
+			} else {
+				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 256);
+				if (!saved_characters_usernames[0].equals("Empty")) {
+					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 235);
 				}
 			}
-			//smallText.drawCenteredText(0xffffff, 382, "World "+world, 427, true);
-
-			normalText.drawRegularText(false, 294, 0x3C3C3C, "Remember me", 298);
+			if(profile2hover) {
+				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 200);
+				if (!saved_characters_usernames[1].equals("Empty")) {
+					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 200);
+				}
+			} else {
+				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 256);
+				if (!saved_characters_usernames[1].equals("Empty")) {
+					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 235);
+				}
+			}
+			if(profile3hover) {
+				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 200);
+				if (!saved_characters_usernames[2].equals("Empty")) {
+					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 200);
+				}
+			} else {
+				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 256);
+				if (!saved_characters_usernames[2].equals("Empty")) {
+					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 235);
+				}
+			}
 
 			if (!saved_characters_usernames[0].equals("Empty")) {
 				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[0], 218, true);
 				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 233, false);
 				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[0], 243, false);
 				if(profileclose1hover) {
-					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 100);
+					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 50);
 					smallText.drawCenteredText(0x828282, 625, "Delete", 262, false);
 				} else {
-					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 175);
+					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 100);
 					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 262, false);
 				}
 			} else {
@@ -7776,10 +7767,10 @@ public class Client extends GameRenderer {
 				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 302, false);
 				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[1], 312, false);
 				if(profileclose2hover) {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 100);
+					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 50);
 					smallText.drawCenteredText(0x828282, 625, "Delete", 331, false);
 				} else {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 175);
+					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 100);
 					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331, false);
 				}
 			} else {
@@ -7790,20 +7781,15 @@ public class Client extends GameRenderer {
 				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 371, false);
 				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[2], 381, false);
 				if(profileclose3hover) {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 100);
+					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 50);
 					smallText.drawCenteredText(0x828282, 625, "Delete", 331 + 69, false);
 				} else {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 175);
+					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 100);
 					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331 + 69, false);
 				}
 			} else {
 				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[2], 374, true);
 			}
-
-			Model model;
-			Animation animation = Animation.cache[9805];
-			RSInterface childInterface = RSInterface.interfaceCache[969];
-
 
 //			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(343, 373);
 //			if (profile2hover) {
@@ -15015,79 +15001,48 @@ public class Client extends GameRenderer {
 			//System.out.println("Test");
 		} else {
 			if (super.clickMode3 == 1) {
-				if (loginMessage1.length() > 0) {
+				if (loginMessage.length() > 0) {
 					if (backButtonHover) {
-						loginMessage1 = "";
-						loginMessage2 = "";
+						loginMessage = "";
+						loginDescription = "";
 						backButtonHover = false;
 					}
-						/*
-					} else if (ahover) {
-						launchURL("http://rune.live");
-					} else if (bhover) {
-						launchURL("");
-					} else if (chover) {
-						launchURL("https://www.youtube.com/channel/UCaZsgSlOltAIGJNPnAD8h1Q/videos");
-					} else if (dhover) {
-						launchURL("http://google.com");
-						*/
-					return;
+				} else {
+					if (input1Hover) {
+						loginScreenCursorPos = 0;
+					} else if (input2Hover) {
+						loginScreenCursorPos = 1;
+					} else if (loginButtonHover) {
+						login(password, myUsername, false, this);
+					} else if (worldButtonHover) {
+
+					}
 				}
 
-				if (input1Hover) {
-					loginScreenCursorPos = 0;
-				} else if (input2Hover) {
-					loginScreenCursorPos = 1;
-				} else if (loginButtonHover) {
-					login(password, myUsername, false, this);
-				} else if (worldButtonHover) {
-					// World interface display
-					/*
-				} else if (ahover) {
-					launchURL("http://rune.live");
+				if (ahover) {
+					launchURL("http://facebook.com");
 				} else if (bhover) {
-					launchURL("");
+					launchURL("http://twitter.com");
 				} else if (chover) {
-					launchURL("https://www.youtube.com/channel/UCaZsgSlOltAIGJNPnAD8h1Q/videos");
-				} else if (dhover) {
-					launchURL("http://google.com");
-					*/
+					launchURL("https://www.youtube.com");
 				} else if (profile1hover) {
-					if (profileclose1hover) {
-						saved_characters_usernames[0] = "Empty";
-						saved_characters_passwords[0] = "none";
-						Settings.save();
-					} else {
-						if (rememberMe) {
-							myUsername = saved_characters_usernames[0];
-							password = saved_characters_passwords[0];
-						}
-						login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
+					if (rememberMe) {
+						myUsername = saved_characters_usernames[0];
+						password = saved_characters_passwords[0];
 					}
+					login(saved_characters_passwords[0], saved_characters_usernames[0], false, this);
 				} else if (profile2hover) {
-					if (profileclose2hover) {
-						saved_characters_usernames[1] = "Empty";
-						saved_characters_passwords[1] = "none";
-						Settings.save();
-					} else {
-						if (rememberMe) {
-							myUsername = saved_characters_usernames[1];
-							password = saved_characters_passwords[1];
-						}
-						login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
+					if (rememberMe) {
+						myUsername = saved_characters_usernames[1];
+						password = saved_characters_passwords[1];
 					}
+					login(saved_characters_passwords[1], saved_characters_usernames[1], false, this);
 				} else if (profile3hover) {
-					if (profileclose3hover) {
-						saved_characters_usernames[2] = "Empty";
-						saved_characters_passwords[2] = "none";
-						Settings.save();
-					} else {
-						if (rememberMe) {
-							myUsername = saved_characters_usernames[2];
-							password = saved_characters_passwords[2];
-						}
-						login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
+					if (rememberMe) {
+						myUsername = saved_characters_usernames[2];
+						password = saved_characters_passwords[2];
 					}
+					login(saved_characters_passwords[2], saved_characters_usernames[2], false, this);
 				} else if (rememberMeButtonHover) {
 					rememberMe = !rememberMe;
 					Settings.save();
@@ -15123,9 +15078,9 @@ public class Client extends GameRenderer {
 						return;
 					}
 
-					if (!loginMessage1.isEmpty() || !loginMessage2.isEmpty()) {
+					if (!loginMessage.isEmpty() || !loginDescription.isEmpty()) {
 						if (keyChar == 32 || keyChar == 10 || keyChar == 8) {
-							loginMessage1 = loginMessage2 = "";
+							loginMessage = loginDescription = "";
 							loggingIn = false;
 						}
 						return;
@@ -15238,27 +15193,41 @@ public class Client extends GameRenderer {
 		username = TextClass.fixName(username);
 		username = optimizeText(username);
 		if (username.startsWith(" ") || username.startsWith("_")) {
-			loginMessage1 = "Your username can't start with a space.";
+			loginMessage = "Your name can't start with a space.";
+			loginDescription = "Your username starts with a space. If your name started with a space we would not be able to tell where your character file is.";
+			loginMessageColor = 0xFF9300;
 			return;
 		}
 		if (username.endsWith(" ") || username.endsWith("_")) {
-			loginMessage1 = "Your username can't end with a space.";
+			loginMessage = "Your name can't end with a space.";
+			loginDescription = "Your username ends with a space. If your name ended with a space we would not be able to tell where your character file is.";
+			loginMessageColor = 0xFF9300;
 			return;
 		}
 		if (username.length() < 1 && password.length() < 1) {
-			loginMessage1 = "You didn't enter anything!";
+			loginMessage = "You didn't enter anything!";
+			loginDescription = "You must enter your username & password when attempting to login.";
+			loginMessageColor = 0xFF9300;
 			return;
 		} else if (password.length() < 3) {
-			loginMessage1 = "Your password is too short.";
+			loginMessage = "Your password is too short.";
+			loginDescription = "Your password is too short, it can only be a minimum of 4 characters.";
+			loginMessageColor = 0xFF9300;
 			return;
 		} else if (username.length() < 1) {
-			loginMessage1 = "Your username is too short.";
+			loginMessage = "Your username is too short.";
+			loginDescription = "Your username has to have something inside of it.";
+			loginMessageColor = 0xFF9300;
 			return;
 		} else if (username.length() > 12) {
-			loginMessage1 = "Your username is too long.";
+			loginMessage = "Your username is too long.";
+			loginDescription = "Your username must be a maximum of 12 characters.";
+			loginMessageColor = 0xFF9300;
 			return;
 		} else if (password.length() > 20) {
-			loginMessage1 = "Your password is too long.";
+			loginMessage = "Your password is too long.";
+			loginDescription = "Your password can only have a maximum of 20 characters in it.";
+			loginMessageColor = 0xFF9300;
 			return;
 		}
 
@@ -15269,16 +15238,18 @@ public class Client extends GameRenderer {
 		try {
 			loggingIn = true;
 
-			loginMessage1 = "Attempting to login";
+			loginMessage = "Attempting to login";
+			loginMessageColor = 0xFFFFFF;
+			loginDescription = "You are currently attempting to login to Chaos.";
 			drawLoginScreen();
 
 			Thread t = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					while (loggingIn && !loggedIn && loginMessage1.contains("Attempting to login")
-							&& loginMessage1.length() <= 29) {
+					while (loggingIn && !loggedIn && loginMessage.contains("Attempting to login")
+							&& loginMessage.length() <= 29) {
 						try {
-							loginMessage1 += ".";
+							loginMessage += ".";
 							drawLoginScreen();
 							Thread.sleep(250);
 						} catch (Exception e) {
@@ -15294,8 +15265,9 @@ public class Client extends GameRenderer {
 			handleResponse(client, responseCode, username, password, reconnecting);
 
 		} catch (IOException _ex) {
-			client.setLoginMessage1("Error connecting to server.");
-			client.setLoginMessage2("");
+			client.setLoginMessage("Error connecting to server.");
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("When the client is having a issue connecting to the game server from your computer, you will get this type of message. This could mean that the game is offline, or your computer is having a connection issue.");
 			loggedIn = loggingIn = false;
 		}
 	}
@@ -15452,18 +15424,21 @@ public class Client extends GameRenderer {
 					login(password, username, reconnecting, client);
 					return false;
 				} else {
-					client.setLoginMessage1("Invalid client UID specified.");
-					client.setLoginMessage2("Download the latest client.");
+					client.setLoginMessage("Invalid client UID specified.");
+					loginMessageColor = 0xFF0000;
+					client.setLoginDescription("test");
 					return false;
 				}
 			} else {
-				client.setLoginMessage1("No response from server");
-				client.setLoginMessage2("Please try using a different world.");
+				client.setLoginMessage("No response from server");
+				loginMessageColor = 0xFF0000;
+				client.setLoginDescription("test");
 				return false;
 			}
 		} else {
-			client.setLoginMessage1("Unexpected server response");
-			client.setLoginMessage2("Please try using a different world.");
+			client.setLoginMessage("Unexpected server response");
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("test");
 			return false;
 		}
 	}
@@ -15471,113 +15446,143 @@ public class Client extends GameRenderer {
 	public boolean handleRejection(int loginCode, String username, boolean reconnecting, Client client, String password)
 			throws IOException {
 		if (loginCode == 3) {
-			loginMessage1 = "Invalid username or password.";
+			loginMessage = "Invalid username or password.";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("The password you have prompted into the client to login is incorrect. If you are having a problem and can't login open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 4) {
-			loginMessage1 = "This account has been banned!";
-			loginMessage2 = "Appeal on the forum.";
+			loginMessage = "This account has been banned!";
+			loginMessageColor = 0xFFFFFF;
+			client.setLoginDescription("Your account is banned from the game for breaking a rule. If you think this is a mistake or have waited more than 3 days (depending on your punishment) you can appeal at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 5) {
-			loginMessage1 = "This account is already logged in.";
-			loginMessage2 = "Please try again in 60 seconds..";
+			loginMessage = "This account is already logged in.";
+			loginMessageColor = 0xFF9300;
+			client.setLoginDescription("Somebody is on your account or your account is stuck logged in. Wait 60 seconds, and try again. If you still have no luck you can log into another account and contact a staff member or open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 6) {
-			loginMessage1 = "Chaos is currently being updated.";
-			loginMessage2 = "Please try again in 60 seconds..";
+			loginMessage = "Chaos is currently being updated.";
+			loginMessageColor = 0xFFFF00;
+			client.setLoginDescription("The game is currently being updated. This usually means that a update timer has just been initiated. Wait 60 seconds and try again.");
 			return false;
 		}
 		if (loginCode == 7) {
-			loginMessage1 = "Chaos is currently busy.";
-			loginMessage2 = "Please try again.";
+			loginMessage = "Chaos is currently busy.";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("The login servers are currently busy, wait 15 seconds and try again.");
 			return false;
 		}
 		if (loginCode == 8) {
-			loginMessage1 = "The Chaos login server is down.";
-			loginMessage2 = "Please try again in 60 seconds..";
+			loginMessage = "The login server is down.";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("The login server is down. Contact support at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 9) {
-			loginMessage1 = "Login limit exceeded. Too many connections";
-			loginMessage2 = "from your address.";
+			loginMessage = "Too many connections!";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("This means you currently have too many accounts logged into the game, or you have attempted to login too many times. Wait 15 seconds and try again. If this fails open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 10) {
-			loginMessage1 = "Unable to connect!";
-			loginMessage2 = "Server responded: bad session id!";
+			loginMessage = "Unable to connect!";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("For some reason you can't connect to the game. Check your connection and open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 11) {
-			loginMessage1 = "Unable to connect!";
-			loginMessage2 = "Server responded: rejected session!";
+			loginMessage = "Unable to connect!";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("For some reason you can't connect to the game. Check your connection and open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 12) {
-			loginMessage1 = "This is a member's only world.";
+			loginMessage = "This is a donator only world.";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("This is a donator only world. You can purchase a donator rank at http://chaosps.com/store");
 			return false;
 		}
 		if (loginCode == 13) {
-			loginMessage1 = "Login could not be completed. Try again!";
+			loginMessage = "Login could not be completed.";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("Your login couldn't be processed. Wait 15 seconds and try again. If this does not work open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 14) {
-			loginMessage1 = "Chaos is currently being updated.";
-			loginMessage2 = "Please try again in 60 seconds..";
+			loginMessage = "Chaos is currently being updated.";
+			loginMessageColor = 0xFFFF00;
+			client.setLoginDescription("The game is currently being updated. This usually means that a update timer has just been initiated. Wait 60 seconds and try again.");
 			return false;
 		}
 		if (loginCode == 23) {
-			loginMessage1 = "Chaos is currently being launched.";
-			loginMessage2 = "Please try again in 60 seconds..";
+			loginMessage = "Chaos is currently being launched.";
+			loginMessageColor = 0xFFFF00;
+			client.setLoginDescription("The game is currently being launched after a game update. Wait 10 seconds and try again.");
 			return false;
 		}
 		if (loginCode == 27) {
-			loginMessage1 = "Your IP-Address has been banned.";
-			loginMessage2 = "Please appeal on the forums.";
+			loginMessage = "Your IP-Address has been banned.";
+			loginMessageColor = 0xFFFFFF;
+			client.setLoginDescription("Your ip address has been banned from the game. If you think this is a mistake open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 28) {
-			loginMessage1 = "Your username contains invalid letters.";
+			loginMessage = "Your username has invalid letters.";
+			loginDescription = "Your username contains some sort of character that is not supported by Chaos.";
+			loginMessageColor = 0xFF9300;
 			return false;
 		}
 		if (loginCode == 29) {
-			loginMessage1 = "Please restart your client.";
+			loginMessage = "Chaos has been updated!";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("This means that a client update has been initiated. All you have to do is restart your client and it will download all the necessary files directly to your computer.");
 			return false;
 		}
 		if (loginCode == 31) {
-			loginMessage1 = "Your username cannot start with a space.";
+			loginMessage = "Your name can't start with a space.";
+			loginDescription = "Your username starts with a space. If your name started with a space we would not be able to tell where your character file is.";
+			loginMessageColor = 0xFF9300;
 			return false;
 		}
 		if (loginCode == 22) {
-			loginMessage1 = "This computer has been banned.";
-			loginMessage2 = "Appeal on the forum!";
+			loginMessage = "This computer has been banned.";
+			loginMessageColor = 0xFFFFFF;
+			client.setLoginDescription("Your computer address has been banned from the game. If you think this is a mistake open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 30) {
-			loginMessage1 = "Chaos has been updated!";
-			loginMessage2 = "Please reload this client.";
+			loginMessage = "Chaos has been updated!";
+			loginMessageColor = 0xFFFF00;
+			client.setLoginDescription("This means that a client update has been initiated. All you have to do is restart your client and it will download all the necessary files directly to your computer.");
 			return false;
 		}
 		if (loginCode == 16) {
-			loginMessage1 = "Login attempts exceeded.";
-			loginMessage2 = "Please wait 1 minute and try again.";
+			loginMessage = "Login attempts exceeded.";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("This means you have attempted to login too many times. Try again in 15 seconds. If this does not work open a support ticket at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 17) {
-			loginMessage1 = "You are standing in a members-only area.";
-			loginMessage2 = "To play on this world move to a free area first.";
+			loginMessage = "You are standing in a donators-only area.";
+			loginDescription = "You are currently in a donators only area.";
+			loginMessageColor = 0xFF9300;
 			return false;
 		}
 		if (loginCode == 20) {
-			loginMessage1 = "Invalid loginserver requested";
-			loginMessage2 = "Please try using a different world.";
+			loginMessage = "Invalid login server requested";
+			loginMessageColor = 0xFF0000;
+			client.setLoginDescription("You have attempted to login to the wrong login server. Contact support at http://chaosps.com/support");
 			return false;
 		}
 		if (loginCode == 21) {
 			for (int loginCode1 = client.getConnection().read(); loginCode1 >= 0; loginCode1--) {
-				loginMessage1 = "You have only just left another world";
-				loginMessage2 = "Your profile will be transferred in: " + loginCode1 + " seconds";
+				loginMessage = "You have only just left another world";
+				loginDescription = "Your profile will be transferred in: " + loginCode1 + " seconds";
+				//loginDescription = "test";
+				loginMessageColor = 0xFF9300;
 				drawLoginScreen();
 				try {
 					Thread.sleep(1000L);
@@ -15698,7 +15703,8 @@ public class Client extends GameRenderer {
 			client.updateGameArea();
 		}
 		// updateSettingsInterface();
-		loginMessage1 = loginMessage2 = "";
+		loginMessage = loginDescription = "";
+		loginMessageColor = 0xFFFFFF;
 		loggingIn = false;
 	}
 
@@ -16549,7 +16555,8 @@ public class Client extends GameRenderer {
 		}
 		currentTarget = null;
 		loggingIn = false;
-		loginMessage1 = loginMessage2 = "";
+		loginMessage = loginDescription = "";
+		loginMessageColor = 0xFFFFFF;
 		consoleOpen = false;
 		lootingBag = false;
 		setConnection(null);
@@ -18650,20 +18657,20 @@ public class Client extends GameRenderer {
 		return (index * 10) + 10;
 	}
 
-	public String getLoginMessage1() {
-		return loginMessage1;
+	public String getLoginMessage() {
+		return loginMessage;
 	}
 
-	public void setLoginMessage1(String loginMessage1) {
-		this.loginMessage1 = loginMessage1;
+	public void setLoginMessage(String loginMessage) {
+		this.loginMessage = loginMessage;
 	}
 
-	public String getLoginMessage2() {
-		return loginMessage2;
+	public String getLoginDescription() {
+		return loginDescription;
 	}
 
-	public void setLoginMessage2(String loginMessage2) {
-		this.loginMessage2 = loginMessage2;
+	public void setLoginDescription(String loginDescription) {
+		this.loginDescription = loginDescription;
 	}
 
 	public Connection getConnection() {

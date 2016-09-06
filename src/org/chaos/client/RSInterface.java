@@ -33,7 +33,6 @@ public class RSInterface {
 			setBounds(interId, x, y, frame, rsi);
 			frame++;
 			interId++;
-
 			addAPlayerHead(interId, a_);
 			setBounds(interId, x - 25, y - 16, frame, rsi);
 			frame++;
