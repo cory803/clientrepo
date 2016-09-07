@@ -1,5 +1,50 @@
 package org.chaos.client;
 
+import org.chaos.Configuration;
+import org.chaos.alertify.Alertify;
+import org.chaos.alertify.AlertifyBuilder;
+import org.chaos.alertify.AlertifyType;
+import org.chaos.alertify.ui.AlertifyWindow;
+import org.chaos.alertify.ui.AlertifyWindowClick;
+import org.chaos.client.accounts.AccountManager;
+import org.chaos.client.cache.Archive;
+import org.chaos.client.cache.CacheIndex;
+import org.chaos.client.cache.definition.*;
+import org.chaos.client.cache.node.Deque;
+import org.chaos.client.cache.node.Node;
+import org.chaos.client.cache.ondemand.CacheFileRequest;
+import org.chaos.client.cache.ondemand.CacheFileRequester;
+import org.chaos.client.constants.GameFrameConstants;
+import org.chaos.client.constants.GameFrameConstants.GameFrameType;
+import org.chaos.client.constants.SizeConstants;
+import org.chaos.client.entity.player.Player;
+import org.chaos.client.entity.player.PlayerHandler;
+import org.chaos.client.graphics.*;
+import org.chaos.client.graphics.fonts.*;
+import org.chaos.client.graphics.gameframe.GameFrame;
+import org.chaos.client.graphics.gameframe.GameFrame.ScreenMode;
+import org.chaos.client.graphics.gameframe.impl.ChatArea;
+import org.chaos.client.graphics.gameframe.impl.MapArea;
+import org.chaos.client.graphics.gameframe.impl.TabArea;
+import org.chaos.client.graphics.rsinterface.*;
+import org.chaos.client.io.ByteBuffer;
+import org.chaos.client.io.ISAACCipher;
+import org.chaos.client.net.Connection;
+import org.chaos.client.particles.Particle;
+import org.chaos.client.particles.ParticleDisplay;
+import org.chaos.client.renderable.*;
+import org.chaos.client.util.*;
+import org.chaos.client.world.*;
+import org.chaos.client.world.background.ScriptManager;
+import org.chaos.client.world.fog.FogProcessor;
+import org.chaos.client.world.music.Class56;
+import org.chaos.client.world.music.Class56_Sub1_Sub1;
+import org.chaos.client.world.sound.*;
+import org.chaos.map.MapView;
+import org.chaos.task.Task;
+import org.chaos.task.TaskManager;
+
+import javax.imageio.ImageIO;
 import java.applet.AppletContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,107 +62,6 @@ import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.GZIPOutputStream;
-
-import javax.imageio.ImageIO;
-
-import org.chaos.Configuration;
-import org.chaos.alertify.Alertify;
-import org.chaos.alertify.AlertifyBuilder;
-import org.chaos.alertify.AlertifyType;
-import org.chaos.alertify.ui.AlertifyWindow;
-import org.chaos.alertify.ui.AlertifyWindowClick;
-import org.chaos.client.accounts.AccountManager;
-import org.chaos.client.cache.Archive;
-import org.chaos.client.cache.CacheIndex;
-import org.chaos.client.cache.definition.Animation;
-import org.chaos.client.cache.definition.FloorOverlay;
-import org.chaos.client.cache.definition.FloorUnderlay;
-import org.chaos.client.cache.definition.IdentityKit;
-import org.chaos.client.cache.definition.ItemDefinition;
-import org.chaos.client.cache.definition.MobDefinition;
-import org.chaos.client.cache.definition.ObjectDefinition;
-import org.chaos.client.cache.definition.SpotAnimDefinition;
-import org.chaos.client.cache.definition.VarBit;
-import org.chaos.client.cache.definition.Varp;
-import org.chaos.client.cache.node.Deque;
-import org.chaos.client.cache.node.Node;
-import org.chaos.client.cache.ondemand.CacheFileRequest;
-import org.chaos.client.cache.ondemand.CacheFileRequester;
-import org.chaos.client.constants.GameFrameConstants;
-import org.chaos.client.constants.GameFrameConstants.GameFrameType;
-import org.chaos.client.constants.SizeConstants;
-import org.chaos.client.entity.player.Player;
-import org.chaos.client.entity.player.PlayerHandler;
-import org.chaos.client.graphics.Background;
-import org.chaos.client.graphics.CacheSpriteLoader;
-import org.chaos.client.graphics.Canvas2D;
-import org.chaos.client.graphics.CursorData;
-import org.chaos.client.graphics.RSImageProducer;
-import org.chaos.client.graphics.ResourceLoader;
-import org.chaos.client.graphics.SnowFlake;
-import org.chaos.client.graphics.Sprite;
-import org.chaos.client.graphics.fonts.Censor;
-import org.chaos.client.graphics.fonts.RSFontSystem;
-import org.chaos.client.graphics.fonts.TextClass;
-import org.chaos.client.graphics.fonts.TextDrawingArea;
-import org.chaos.client.graphics.fonts.TextInput;
-import org.chaos.client.graphics.gameframe.GameFrame;
-import org.chaos.client.graphics.gameframe.GameFrame.ScreenMode;
-import org.chaos.client.graphics.gameframe.impl.ChatArea;
-import org.chaos.client.graphics.gameframe.impl.MapArea;
-import org.chaos.client.graphics.gameframe.impl.TabArea;
-import org.chaos.client.graphics.rsinterface.DamageDealer;
-import org.chaos.client.graphics.rsinterface.GrandExchange;
-import org.chaos.client.graphics.rsinterface.MagicInterfaceData;
-import org.chaos.client.graphics.rsinterface.NotesTab;
-import org.chaos.client.graphics.rsinterface.PetSystem;
-import org.chaos.client.io.ByteBuffer;
-import org.chaos.client.io.ISAACCipher;
-import org.chaos.client.net.Connection;
-import org.chaos.client.particles.Particle;
-import org.chaos.client.particles.ParticleDisplay;
-import org.chaos.client.renderable.Animable;
-import org.chaos.client.renderable.Animable_Sub3;
-import org.chaos.client.renderable.Animable_Sub5;
-import org.chaos.client.renderable.Entity;
-import org.chaos.client.renderable.Item;
-import org.chaos.client.renderable.NPC;
-import org.chaos.client.renderable.PlayerProjectile;
-import org.chaos.client.util.ComputerAddress;
-import org.chaos.client.util.FileUtilities;
-import org.chaos.client.util.StopWatch;
-import org.chaos.client.util.SystemInfo;
-import org.chaos.client.util.SystemProfiler;
-import org.chaos.client.world.Canvas3D;
-import org.chaos.client.world.CollisionMap;
-import org.chaos.client.world.CustomObjects;
-import org.chaos.client.world.Model;
-import org.chaos.client.world.Object1;
-import org.chaos.client.world.Object2;
-import org.chaos.client.world.Object3;
-import org.chaos.client.world.Object5;
-import org.chaos.client.world.ObjectManager;
-import org.chaos.client.world.Texture;
-import org.chaos.client.world.WorldController;
-import org.chaos.client.world.background.ScriptManager;
-import org.chaos.client.world.fog.FogProcessor;
-import org.chaos.client.world.music.Class56;
-import org.chaos.client.world.music.Class56_Sub1_Sub1;
-import org.chaos.client.world.sound.Class25;
-import org.chaos.client.world.sound.Class3_Sub7;
-import org.chaos.client.world.sound.Class3_Sub7_Sub1;
-import org.chaos.client.world.sound.Class3_Sub7_Sub2;
-import org.chaos.client.world.sound.Class3_Sub9_Sub1;
-import org.chaos.client.world.sound.Class5;
-import org.chaos.client.world.sound.Class5_Sub1;
-import org.chaos.client.world.sound.Class5_Sub2;
-import org.chaos.client.world.sound.Class5_Sub2_Sub1;
-import org.chaos.client.world.sound.Class5_Sub2_Sub2;
-import org.chaos.client.world.sound.Sound;
-import org.chaos.client.world.sound.Sounds;
-import org.chaos.map.MapView;
-import org.chaos.task.Task;
-import org.chaos.task.TaskManager;
 
 public class Client extends GameRenderer {
 	
@@ -263,6 +207,8 @@ public class Client extends GameRenderer {
 	private static int musicVolume2;
 	public static Player myPlayer;
 	static String myUsername;
+	static String confirmPassword;
+	static String emailAddress;
 	private static final Pattern NAME_PATTERN = Pattern.compile("@.+@");
 	private static int nodeID = 10;
 	public static int openInterfaceID;
@@ -1401,6 +1347,8 @@ public class Client extends GameRenderer {
 		cameraViewChanged = false;
 		myUsername = "";
 		setPassword("");
+		confirmPassword = "";
+		emailAddress = "";
 		reportAbuseInterfaceID = -1;
 		setaClass19_1179(new Deque());
 		cameraRotationZ = 128;
@@ -3939,9 +3887,9 @@ public class Client extends GameRenderer {
 		}
 
 		if (action == 1414) {
-			
+
 		}
-		
+
 		if (interfaceId == 24630 || interfaceId == 24632) {
 			if (inputDialogState == 3) {
 				getGrandExchange().searching = false;
@@ -4152,7 +4100,7 @@ public class Client extends GameRenderer {
 		}
 		if (action == 315) {
 			switch (interfaceId) {
-			
+
 			case 65216:
 				RSInterface.interfaceCache[65200].message = "";
 				notesTab.colourNote(-1);
@@ -4167,7 +4115,7 @@ public class Client extends GameRenderer {
 					return;
 				notesTab.deleteNotes();
 				break;
-			
+
 			case 24654:
 				amountOrNameInput = "";
 				getGrandExchange().totalItemResults = 0;
@@ -5652,7 +5600,6 @@ public class Client extends GameRenderer {
 	}
 
 	private void draw3dScreen() {
-		fadingScreen.draw();
 		if (!chatArea.componentHidden()) {
 			drawSplitPrivateChat();
 		}
@@ -5678,7 +5625,7 @@ public class Client extends GameRenderer {
 			} else if ((getWalkableInterfaceId() == 201 || getWalkableInterfaceId() == 197) && GameFrame.getScreenMode() != ScreenMode.FIXED) {
 				drawInterface(0, getScreenWidth() - 600, RSInterface.interfaceCache[getWalkableInterfaceId()],
 						-130);
-				
+
 			} else if ((getWalkableInterfaceId() == 25347) && GameFrame.getScreenMode() != ScreenMode.FIXED) {
 				int x = getScreenWidth() - 750;
 				int y = 0;
@@ -5911,7 +5858,7 @@ public class Client extends GameRenderer {
 			Canvas3D.lineOffsets = canvasPixels;
 		}
 	}
-	
+
 	public void drawColorBox(int color, int xPos, int yPos, int width, int height) {
 		Canvas2D.fillRectangle(color, yPos, width, height, 256, xPos);
 	}
@@ -6405,7 +6352,7 @@ public class Client extends GameRenderer {
 				mapAreaIP.drawGraphics(mapArea.getyPos(), super.graphics, mapArea.getxPos());
 			}
 		}
-		
+
 		if (!menuOpen) {
 			processRightClick();
 			drawTooltip();
@@ -6543,7 +6490,7 @@ public class Client extends GameRenderer {
 			yPos += 16;
 		}
 	}
-	
+
 
 	private void refreshScreenOptions() {
 		int childIds[] = { 40043, 40046, 40049 };
@@ -6556,7 +6503,7 @@ public class Client extends GameRenderer {
 	}
 
 	public void drawInterface(int scrollOffset, int interfaceX, RSInterface class9, int interfaceY) {
-		
+
 		if (class9 == null)
 			return;
 
@@ -6780,7 +6727,7 @@ public class Client extends GameRenderer {
 							j3 = childInterface.anInt216;
 						}
 					}
-					
+
 					if (childInterface.opacity == 0) {
 						if (childInterface.filled) {
 							Canvas2D.drawPixels(childInterface.height, childY, childX, j3, childInterface.width);
@@ -7454,7 +7401,10 @@ public class Client extends GameRenderer {
 	private BufferedImage[] loadingImages;
 
 	private int lastPercentage = -1;
-
+	public void setLoadingText(int percent, String text) {
+		this.loadingPercentage = percent;
+		this.loadingText = text;
+	}
 	void drawLoadingText(int percent, String text) {
 		if (percent == lastPercentage) {
 			return;
@@ -7524,17 +7474,18 @@ public class Client extends GameRenderer {
 	boolean homeHover, forumHover, profileclose3hover, profileclose2hover, profileclose1hover, ahover, bhover, chover,
 			dhover, profile1hover, profile2hover, profile3hover, profile4hover, worldButtonHover, voteHover, storeHover,
 			hiscoresHover, recoveryHover, loginButtonHover, input1Hover, input2Hover, rememberMeButtonHover,
-			backButtonHover, hoveringWorldSwitcher, registerHover;
+			backButtonHover, hoveringWorldSwitcher, registerHover, worldSelectionHover, world1SelectionHover, world2SelectionHover;
 
 	boolean inWorldSwitcher = false;
+	boolean inRegistration = false;
 	boolean loadingWorldSwitcher = false;
 
 	public void setLoadingAndLoginHovers() {
-		homeHover = ahover = bhover = hoveringWorldSwitcher = chover = dhover = profileclose3hover = profileclose2hover = profileclose1hover = profile1hover = profile2hover = profile3hover = profile4hover = forumHover = voteHover = storeHover = worldButtonHover = hiscoresHover = recoveryHover = loginButtonHover = input1Hover = rememberMeButtonHover = backButtonHover = input2Hover = registerHover = false;
+		homeHover = ahover = bhover = hoveringWorldSwitcher = world1SelectionHover = world2SelectionHover = chover = worldSelectionHover = dhover = profileclose3hover = profileclose2hover = profileclose1hover = profile1hover = profile2hover = profile3hover = profile4hover = forumHover = voteHover = storeHover = worldButtonHover = hiscoresHover = recoveryHover = loginButtonHover = input1Hover = rememberMeButtonHover = backButtonHover = input2Hover = registerHover = false;
 
 		boolean handCursor = false, textCursor = false;
 
-		if(!isLoading) {
+		if (!isLoading) {
 			if (super.mouseX >= 154 && super.mouseX <= 208 && super.mouseY >= 209 && super.mouseY <= 263) {
 				ahover = true;
 			}
@@ -7557,21 +7508,36 @@ public class Client extends GameRenderer {
 				profileclose3hover = true;
 			}
 		}
-		if (!isLoading && !(loginMessage.length() > 0)) {
-			if (super.mouseX >= 272 && super.mouseX <= 377 && super.mouseY >= 383 && super.mouseY <= 409) {
+		if(!isLoading && inWorldSwitcher) {
+			if (super.mouseX >= 497 && super.mouseX <= 520 && super.mouseY >= 132 && super.mouseY <= 153) {
+				backButtonHover = handCursor = true;
+			}
+			if (super.mouseX >= 330 && super.mouseX <= 434 && super.mouseY >= 289 && super.mouseY <= 316) {
+				worldSelectionHover = handCursor = true;
+			}
+			if (super.mouseX >= 251 && super.mouseX <= 509 && super.mouseY >= 179 && super.mouseY <= 199) {
+				world1SelectionHover = handCursor = true;
+			}
+			if (super.mouseX >= 251 && super.mouseX <= 509 && super.mouseY >= 200 && super.mouseY <= 220) {
+				world2SelectionHover = handCursor = true;
+			}
+		} else if(!isLoading && inRegistration) {
+			if (super.mouseX >= 497 && super.mouseX <= 520 && super.mouseY >= 132 && super.mouseY <= 153) {
+				backButtonHover = handCursor = true;
+			}
+			if (super.mouseX >= 296 && super.mouseX <= 467 && super.mouseY >= 377 && super.mouseY <= 419) {
 				registerHover = handCursor = true;
 			}
+		} else if (!isLoading && !(loginMessage.length() > 0)) {
+			//if (super.mouseX >= 272 && super.mouseX <= 377 && super.mouseY >= 383 && super.mouseY <= 409) {
+				//registerHover = handCursor = true;
+			//}
 			if (super.mouseX >= 281 && super.mouseX <= 483 && super.mouseY >= 319 && super.mouseY <= 369) {
 				loginButtonHover = handCursor = true;
 			}
-			if (super.mouseX >= 388 && super.mouseX <= 493 && super.mouseY >= 385 && super.mouseY <= 411) {
+			if (super.mouseX >= 328 && super.mouseX <= 435 && super.mouseY >= 385 && super.mouseY <= 411) {
 				worldButtonHover = handCursor = true;
 			}
-			/*
-			 * if(super.mouseX >= 260 && super.mouseX <= 503 && super.mouseY >=
-			 * 264 && super.mouseY <= 290) { worldButtonHover = handCursor =
-			 * true; }
-			 */
 			if (super.mouseX >= 235 && super.mouseX <= 532) {
 				if (super.mouseY >= 207 && super.mouseY <= 207 + 30) {
 					input1Hover = textCursor = true;
@@ -7580,8 +7546,10 @@ public class Client extends GameRenderer {
 				}
 			}
 		} else {
-			if (super.mouseX >= 304 && super.mouseX <= 454 && super.mouseY >= 378 && super.mouseY <= 408) {
-				backButtonHover = handCursor = true;
+			if(!inWorldSwitcher) {
+				if (super.mouseX >= 304 && super.mouseX <= 454 && super.mouseY >= 378 && super.mouseY <= 408) {
+					backButtonHover = handCursor = true;
+				}
 			}
 		}
 		if (super.mouseX >= 525 && super.mouseX <= 587 && super.mouseY >= 203 && super.mouseY <= 266) {
@@ -7618,210 +7586,316 @@ public class Client extends GameRenderer {
 
 	boolean rememberMe = true;
 
+	int selectedWorld = 0;
+
+	public int doPing(int worldToPing) {
+		String address = Configuration.WORLDS[world - 1][1];
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					boolean isWindows = System.getProperty("os.name").toLowerCase()
+							.contains("win");
+
+					ProcessBuilder processBuilder = new ProcessBuilder(new String[]{"ping",
+							isWindows ? "-n" : "-c", "1", address});
+
+					Process proc = processBuilder.start();
+
+					BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+					String line = "";
+					while ((line = reader.readLine()) != null) {
+						if ((line.startsWith("Ping request could not find host")) ||
+								(line.contains("unknown host"))) {
+							if(worldToPing == 1) {
+								Client.instance.ping1 = 0;
+							} else {
+								Client.instance.ping2 = 0;
+							}
+							System.out.println("Host is offline");
+							return;
+						}
+						if (line.contains("icmp_seq=")) {
+							line = line.substring(line.indexOf("time="), line.lastIndexOf("ms"));
+							line = line.replaceAll("time=", "");
+							line = line.replaceAll("ms", "");
+							line = line.replaceAll(" ", "");
+							int ping = Integer.parseInt(line);
+							if(worldToPing == 1) {
+								Client.instance.ping1 = ping;
+							} else {
+								Client.instance.ping2 = ping;
+							}
+							System.out.println("Host is online "+ping);
+							return;
+						}
+						if (line.contains("Minimum")) {
+							line = line.replaceAll("    ", "");
+							line = line.substring(0, line.indexOf("ms"));
+							line = line.replaceAll("Minimum = ", "");
+							line = line.replaceAll("ms", "");
+							int ping = Integer.parseInt(line);
+							if(worldToPing == 1) {
+								Client.instance.ping1 = ping;
+							} else {
+								Client.instance.ping2 = ping;
+							}
+							System.out.println("Host is online "+ping);
+							return;
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		if(worldToPing == 1) {
+			return ping1;
+		} else {
+			return ping2;
+		}
+	}
+
+	int ping1 = 0;
+	int ping2 = 0;
+
 	public void drawLoginScreen() {
 		resetImageProducers();
 		titleScreenIP.initDrawingArea();
 		setLoadingAndLoginHovers();
-		if(inWorldSwitcher) {
+		CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
+		if (loginMessage.length() > 0) { //Logging in screen
+			CacheSpriteLoader.getCacheSprite2(126).drawAdvancedSprite(265, 218);
+			if (loginMessage != null && loginMessage.length() != 0) {
+				boldText.drawCenteredText(loginMessageColor, 765 / 2, loginMessage, 207, true);
 
+				fancyText.drawCenteredText(0xFF914A, 765 / 2, "Information", 240, true);
+				String[] loginDescriptionWrapped = normalText.wrapText(loginDescription, 200);
+				int y = 0;
+				for (int i = 0; i < loginDescriptionWrapped.length; i++) {
+					normalText.drawCenteredText(0x6a6a6a, 765 / 2, loginDescriptionWrapped[i], 255 + y, false);
+					y += 15;
+				}
+			}
+			if (!loginMessage.contains("Attempting to login")) {
+				if (backButtonHover) {
+					TextDrawingArea.drawAlphaFilledPixels(305, 379, 150, 30, 0xff0000, 50);
+					normalText.drawCenteredText(0x828282, 382, "Return to login", 397, false);
+				} else {
+					TextDrawingArea.drawAlphaFilledPixels(305, 379, 150, 30, 0xff0000, 100);
+					normalText.drawCenteredText(0xD1D1D1, 382, "Return to login", 397, false);
+				}
+			}
+		} else if(inWorldSwitcher) {
+			CacheSpriteLoader.getCacheSprite2(133).drawAdvancedSprite(247, 137);
+			fancyText.drawCenteredText(0xFFFFFF, 765 / 2, "Current: " + world, 250, true);
+			if (selectedWorld > 0) {
+				fancyText.drawCenteredText(0xcf2f38, 765 / 2, "Selected: " + selectedWorld, 273, true);
+			}
+			if (backButtonHover) {
+				CacheSpriteLoader.getCacheSprite2(134).drawSprite3(492, 127, 220);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(134).drawSprite3(492, 127, 256);
+			}
+			if (worldSelectionHover) {
+				CacheSpriteLoader.getCacheSprite2(129).drawSprite3(326, 285, 220);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(129).drawSprite3(326, 285, 256);
+			}
+			if (world1SelectionHover) {
+				if (selectedWorld == 1) {
+					CacheSpriteLoader.getCacheSprite2(132).drawSprite3(252, 180, 100);
+					smallText.drawCenteredText(0x828282, 765 / 2, "World 1 (Economy)", 195, true);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(132).drawSprite3(252, 180, 200);
+					smallText.drawCenteredText(0x828282, 765 / 2, "World 1 (Economy)", 195, true);
+				}
+			} else {
+				if (selectedWorld == 1) {
+					CacheSpriteLoader.getCacheSprite2(132).drawSprite3(252, 180, 100);
+					smallText.drawCenteredText(0x828282, 765 / 2, "World 1 (Economy)", 195, true);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(132).drawSprite3(252, 180, 256);
+					smallText.drawCenteredText(0xFFFFFF, 765 / 2, "World 1 (Economy)", 195, true);
+				}
+			}
+			if (world2SelectionHover) {
+				if (selectedWorld == 2) {
+					CacheSpriteLoader.getCacheSprite2(131).drawSprite3(252, 201, 100);
+					smallText.drawCenteredText(0x828282, 765 / 2, "World 2 (Beta)", 216, true);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(131).drawSprite3(252, 201, 200);
+					smallText.drawCenteredText(0x828282, 765 / 2, "World 2 (Beta)", 216, true);
+				}
+			} else {
+				if (selectedWorld == 2) {
+					CacheSpriteLoader.getCacheSprite2(131).drawSprite3(252, 201, 100);
+					smallText.drawCenteredText(0x828282, 765 / 2, "World 2 (Beta)", 216, true);
+				} else {
+					CacheSpriteLoader.getCacheSprite2(131).drawSprite3(252, 201, 256);
+					smallText.drawCenteredText(0xFFFFFF, 765 / 2, "World 2 (Beta)", 216, true);
+				}
+			}
+		} else if(inRegistration) {
+			CacheSpriteLoader.getCacheSprite2(136).drawAdvancedSprite(247, 137);
+			if (backButtonHover) {
+				CacheSpriteLoader.getCacheSprite2(134).drawSprite3(492, 127, 220);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(134).drawSprite3(492, 127, 256);
+			}
+			if (registerHover) {
+				CacheSpriteLoader.getCacheSprite2(127).drawSprite3(288, 368, 175);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(127).drawSprite3(288, 368, 256);
+			}
+			boldText.drawRegularText(true, 277, 0xcbc6c4, "Username:", 197);
+			if (loginScreenCursorPos == 0 && loopCycle % 45 < 10) {
+				normalText.drawRegularText(true, 277, 0xcf2f38, myUsername + "|", 215);
+			} else {
+				normalText.drawRegularText(true, 277, 0xcf2f38, myUsername, 215);
+			}
+			boldText.drawRegularText(true, 277, 0xcbc6c4, "Password:", 247);
+			if (loginScreenCursorPos == 1 && loopCycle % 45 < 10) {
+				normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password) + "|", 265);
+			} else {
+				normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password), 265);
+			}
+		} else { //Login screen
+			boldText.drawRegularText(true, 277, 0xcbc6c4, "Username:", 206);
+
+			if (loginScreenCursorPos == 0 && loopCycle % 45 < 10) {
+				normalText.drawRegularText(true, 277, 0xcf2f38, myUsername + "|", 224);
+			} else {
+				normalText.drawRegularText(true, 277, 0xcf2f38, myUsername, 224);
+			}
+
+			boldText.drawRegularText(true, 277, 0xcbc6c4, "Password:", 258);
+
+			if (loginScreenCursorPos == 1 && loopCycle % 45 < 10) {
+				normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password) + "|", 276);
+			} else {
+				normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password), 276);
+			}
+			if(loginButtonHover) {
+				CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 200);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 256);
+			}
+			//if(registerHover) {
+				//CacheSpriteLoader.getCacheSprite2(113).drawSprite3(267, 380, 200);
+			//} else {
+			//	CacheSpriteLoader.getCacheSprite2(113).drawSprite3(267, 380, 256);
+			//}
+			if(worldButtonHover) {
+				CacheSpriteLoader.getCacheSprite2(129).drawSprite3(324, 380, 200);
+			} else {
+				CacheSpriteLoader.getCacheSprite2(129).drawSprite3(324, 380, 256);
+			}
+			normalText.drawRegularText(false, 294, 0x3C3C3C, "Remember me", 298);
+			if(rememberMeButtonHover) {
+				CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 200);
+				if(rememberMe) {
+					CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 150);
+				}
+			} else {
+				CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 150);
+				if(rememberMe) {
+					CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 200);
+				}
+			}
+		}
+
+
+		//Socal media icons
+		if(ahover) { //Facebook
+			CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 200);
 		} else {
-			CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
-			if (loginMessage.length() > 0) { //Logging in screen
-				CacheSpriteLoader.getCacheSprite2(126).drawAdvancedSprite(265, 218);
-				if (loginMessage != null && loginMessage.length() != 0) {
-					boldText.drawCenteredText(loginMessageColor, 765 / 2, loginMessage, 207, true);
-
-					fancyText.drawCenteredText(0xFF914A, 765 / 2, "Information", 240, true);
-					String[] loginDescriptionWrapped = normalText.wrapText(loginDescription, 200);
-					int y = 0;
-					for(int i = 0; i < loginDescriptionWrapped.length; i++) {
-						normalText.drawCenteredText(0x6a6a6a, 765 / 2, loginDescriptionWrapped[i], 255 + y, false);
-						y += 15;
-					}
-				}
-				if(!loginMessage.contains("Attempting to login")) {
-					if (backButtonHover) {
-						TextDrawingArea.drawAlphaFilledPixels(305, 379, 150, 30, 0xff0000, 50);
-						normalText.drawCenteredText(0x828282, 382, "Return to login", 397, false);
-					} else {
-						TextDrawingArea.drawAlphaFilledPixels(305, 379, 150, 30, 0xff0000, 100);
-						normalText.drawCenteredText(0xD1D1D1, 382, "Return to login", 397, false);
-					}
-				}
-				//if (loginDescription != null && loginDescription.length() != 0) {
-					//int y_2 = (clientHeight / 2) + (1 * 20) + 28;
-					//normalText.drawCenteredText(0xefefef, 381, loginDescription, y_2 - 30, true);
-				//}
-			} else { //Login screen
-				boldText.drawRegularText(true, 277, 0xcbc6c4, "Username:", 206);
-
-				if (loginScreenCursorPos == 0 && loopCycle % 45 < 10) {
-					normalText.drawRegularText(true, 277, 0xcf2f38, myUsername + "|", 224);
-				} else {
-					normalText.drawRegularText(true, 277, 0xcf2f38, myUsername, 224);
-				}
-
-				boldText.drawRegularText(true, 277, 0xcbc6c4, "Password:", 258);
-
-				if (loginScreenCursorPos == 1 && loopCycle % 45 < 10) {
-					normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password) + "|", 276);
-				} else {
-					normalText.drawRegularText(true, 277, 0xcf2f38, getStars(password), 276);
-				}
-				if(loginButtonHover) {
-					CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 200);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(110).drawSprite3(271, 309, 256);
-				}
-				if(registerHover) {
-					CacheSpriteLoader.getCacheSprite2(113).drawSprite3(267, 380, 200);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(113).drawSprite3(267, 380, 256);
-				}
-				if(worldButtonHover) {
-					CacheSpriteLoader.getCacheSprite2(111).drawSprite3(383, 380, 200);
-				} else {
-					CacheSpriteLoader.getCacheSprite2(111).drawSprite3(383, 380, 256);
-				}
-				normalText.drawRegularText(false, 294, 0x3C3C3C, "Remember me", 298);
-				if(rememberMeButtonHover) {
-					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 200);
-					if(rememberMe) {
-						CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 150);
-					}
-				} else {
-					CacheSpriteLoader.getCacheSprite2(114).drawSprite3(274, 285, 150);
-					if(rememberMe) {
-						CacheSpriteLoader.getCacheSprite2(112).drawSprite3(274, 285, 200);
-					}
-				}
-			}
-
-
-			//Socal media icons
-			if(ahover) { //Facebook
-				CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 200);
-			} else {
-				CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 256);
-			}
-			if(bhover) { //Twitter
-				CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 200);
-			} else {
-				CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 256);
-			}
-			if(chover) { //YouTube
-				CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 200);
-			} else {
-				CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 256);
-			}
-			if(profile1hover) {
-				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 200);
-				if (!saved_characters_usernames[0].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 200);
-				}
-			} else {
-				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 256);
-				if (!saved_characters_usernames[0].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 235);
-				}
-			}
-			if(profile2hover) {
-				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 200);
-				if (!saved_characters_usernames[1].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 200);
-				}
-			} else {
-				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 256);
-				if (!saved_characters_usernames[1].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 235);
-				}
-			}
-			if(profile3hover) {
-				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 200);
-				if (!saved_characters_usernames[2].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 200);
-				}
-			} else {
-				CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 256);
-				if (!saved_characters_usernames[2].equals("Empty")) {
-					CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 235);
-				}
-			}
-
+			CacheSpriteLoader.getCacheSprite2(121).drawSprite3(148, 196, 256);
+		}
+		if(bhover) { //Twitter
+			CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 200);
+		} else {
+			CacheSpriteLoader.getCacheSprite2(122).drawSprite3(148, 270, 256);
+		}
+		if(chover) { //YouTube
+			CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 200);
+		} else {
+			CacheSpriteLoader.getCacheSprite2(123).drawSprite3(148, 344, 256);
+		}
+		if(profile1hover) {
+			CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 200);
 			if (!saved_characters_usernames[0].equals("Empty")) {
-				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[0], 218, true);
-				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 233, false);
-				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[0], 243, false);
-				if(profileclose1hover) {
-					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 50);
-					smallText.drawCenteredText(0x828282, 625, "Delete", 262, false);
-				} else {
-					TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 100);
-					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 262, false);
-				}
-			} else {
-				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[0], 237, true);
+				CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 200);
 			}
+		} else {
+			CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 192, 256);
+			if (!saved_characters_usernames[0].equals("Empty")) {
+				CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 207, 235);
+			}
+		}
+		if(profile2hover) {
+			CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 200);
 			if (!saved_characters_usernames[1].equals("Empty")) {
-				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[1], 287, true);
-				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 302, false);
-				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[1], 312, false);
-				if(profileclose2hover) {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 50);
-					smallText.drawCenteredText(0x828282, 625, "Delete", 331, false);
-				} else {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 100);
-					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331, false);
-				}
-			} else {
-				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[1], 308, true);
+				CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 200);
 			}
+		} else {
+			CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 262, 256);
+			if (!saved_characters_usernames[1].equals("Empty")) {
+				CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 277, 235);
+			}
+		}
+		if(profile3hover) {
+			CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 200);
 			if (!saved_characters_usernames[2].equals("Empty")) {
-				smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[2], 357, true);
-				smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 371, false);
-				smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[2], 381, false);
-				if(profileclose3hover) {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 50);
-					smallText.drawCenteredText(0x828282, 625, "Delete", 331 + 69, false);
-				} else {
-					TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 100);
-					smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331 + 69, false);
-				}
-			} else {
-				fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[2], 374, true);
+				CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 200);
 			}
+		} else {
+			CacheSpriteLoader.getCacheSprite2(116).drawSprite3(513, 333, 256);
+			if (!saved_characters_usernames[2].equals("Empty")) {
+				CacheSpriteLoader.getCacheSprite2(120).drawSprite3(537, 348, 235);
+			}
+		}
 
-//			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(343, 373);
-//			if (profile2hover) {
-//				if (!saved_characters_usernames[1].equals("Empty")) {
-//					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(343, 373);
-//				}
-//			}
-//			if (!saved_characters_usernames[1].equals("Empty")) {
-//				if (profileclose2hover) {
-//					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(405, 374);
-//				} else {
-//					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(405, 374);
-//				}
-//			}
-//			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(343 + 22, 373 + 5);
-//			smallText.drawCenteredText(0xefefef, 380, saved_characters_usernames[1], 442, true);
-//
-//			CacheSpriteLoader.getCacheSprite2(99).drawAdvancedSprite(422, 373);
-//			if (profile3hover) {
-//				if (!saved_characters_usernames[2].equals("Empty")) {
-//					CacheSpriteLoader.getCacheSprite2(100).drawAdvancedSprite(422, 373);
-//				}
-//			}
-//			if (!saved_characters_usernames[2].equals("Empty")) {
-//				if (profileclose3hover) {
-//					CacheSpriteLoader.getCacheSprite2(26).drawAdvancedSprite(485, 374);
-//				} else {
-//					CacheSpriteLoader.getCacheSprite2(21).drawAdvancedSprite(485, 374);
-//				}
-//			}
-//			CacheSpriteLoader.getCacheSprite2(33).drawAdvancedSprite(422 + 22, 373 + 5);
-//			smallText.drawCenteredText(0xefefef, 459, saved_characters_usernames[2], 442, true);
+		if (!saved_characters_usernames[0].equals("Empty")) {
+			smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[0], 218, true);
+			smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 233, false);
+			smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[0], 243, false);
+			if(profileclose1hover) {
+				TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 50);
+				smallText.drawCenteredText(0x828282, 625, "Delete", 262, false);
+			} else {
+				TextDrawingArea.drawAlphaFilledPixels(595, 251, 62, 13, 0xff0000, 100);
+				smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 262, false);
+			}
+		} else {
+			fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[0], 237, true);
+		}
+		if (!saved_characters_usernames[1].equals("Empty")) {
+			smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[1], 287, true);
+			smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 302, false);
+			smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[1], 312, false);
+			if(profileclose2hover) {
+				TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 50);
+				smallText.drawCenteredText(0x828282, 625, "Delete", 331, false);
+			} else {
+				TextDrawingArea.drawAlphaFilledPixels(595, 320, 62, 13, 0xff0000, 100);
+				smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331, false);
+			}
+		} else {
+			fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[1], 308, true);
+		}
+		if (!saved_characters_usernames[2].equals("Empty")) {
+			smallText.drawCenteredText(0xefefef, 624, saved_characters_usernames[2], 357, true);
+			smallText.drawCenteredText(0x6a6a6a, 624, "Total Level", 371, false);
+			smallText.drawCenteredText(0x6a6a6a, 624, saved_total_levels[2], 381, false);
+			if(profileclose3hover) {
+				TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 50);
+				smallText.drawCenteredText(0x828282, 625, "Delete", 331 + 69, false);
+			} else {
+				TextDrawingArea.drawAlphaFilledPixels(595, 320 + 69, 62, 13, 0xff0000, 100);
+				smallText.drawCenteredText(0xD1D1D1, 625, "Delete", 331 + 69, false);
+			}
+		} else {
+			fancyText.drawCenteredText(0x6a6a6a, 624, saved_characters_usernames[2], 374, true);
 		}
 		titleScreenIP.drawGraphics(0, super.graphics, 0);
 
@@ -7918,7 +7992,7 @@ public class Client extends GameRenderer {
 	private boolean menuToggle = true;
 
 	public boolean changeMenuText;
-	
+
 	public void drawMenu(int xOffSet, int yOffSet) {
 		try {
 			 int xPos = menuOffsetX - (xOffSet - 4);
@@ -7967,7 +8041,7 @@ public class Client extends GameRenderer {
 		            (changeMenuText ? boldText : normalText).drawRegularText(true, xPos + 4, disColor, menuActionName[l1], textY + 1);
 		        }
 		} catch(Exception e) {
-			
+
 		}
     }
 
@@ -8069,7 +8143,7 @@ public class Client extends GameRenderer {
 		}
 
 	}
-	
+
 	public void detectCursor(String tooltip) {
 		if (!Configuration.NEW_CURSORS)
 			return;
@@ -10913,7 +10987,7 @@ public class Client extends GameRenderer {
 			}
 		}
 	}
-	
+
 	 public static SnowFlake[] snowflakes;
 	 public static boolean snowing = true;
 	 public static boolean smoking = true;
@@ -11012,11 +11086,11 @@ public class Client extends GameRenderer {
 	         snowing = false;
 	     }
 	 }
-	
+
 	 public static boolean drawSnowFlakes;
-	 
+
 	public static boolean displayParticles = true;
-	
+
 	public static int fadeStep = 1;
 	public static int fadingToColor;
 	public static boolean switchColor = false;
@@ -11081,7 +11155,7 @@ public class Client extends GameRenderer {
 			worldController.clearObj5Cache();
 		}
 
-		
+
 		if (Configuration.FOG_ENABLED) {
 			/*if (!switchColor) {
 				if (fog.rgb != fadeColors(new Color(fog.rgb), new Color(fadingToColor), fadeStep)) {
@@ -11201,7 +11275,7 @@ public class Client extends GameRenderer {
 		updateEntities();
 		drawHeadIcon();
 		method37(k2);
-		
+
 		if (drawSnowFlakes) {
 			drawSnowflakes(0, 0);
 		}
@@ -11211,8 +11285,8 @@ public class Client extends GameRenderer {
 			drawChatArea();
 			drawMinimap();
 		}
-
 		if (loggedIn) {
+			fadingScreen.draw();
 			draw3dScreen();
 			drawConsoleArea();
 			drawConsole();
@@ -11252,7 +11326,7 @@ public class Client extends GameRenderer {
 			xCameraCurve = l1;
 		}
 	}
-	
+
 	public static AbstractMap.SimpleEntry<Integer, Integer> getNextInteger(ArrayList<Integer> values) {
 		ArrayList<AbstractMap.SimpleEntry<Integer, Integer>> frequencies = new ArrayList<>();
 		int maxIndex = 0;
@@ -11297,7 +11371,7 @@ public class Client extends GameRenderer {
 		}
 		return examine;
 	}
-	
+
 	public final int[] write(int var1, int var2, int var3, int var4, int var5) {
 		if (var1 >= 128 && var3 >= 128 && var1 <= 13056 && var3 <= 13056) {
 			int var6 = method42(plane, var3, var1) - var2;
@@ -11475,7 +11549,7 @@ public class Client extends GameRenderer {
 			if (loggedIn) {
 				getOut().putOpcode(0);
 			}
-			
+
 			objectManager.method171(clippingPlanes, worldController);
 			boolean underground = !(getPlayerX() >= 270 && getPlayerX() <= 465 && getPlayerY() >= 335 && getPlayerY() <= 495);
 			fadingToColor = underground ? 0 : getNextInteger(objectManager.colors).getKey();
@@ -11809,7 +11883,7 @@ public class Client extends GameRenderer {
 		int j2 = intGroundArray[j1][l][i1 + 1] * (128 - k1) + intGroundArray[j1][l + 1][i1 + 1] * k1 >> 7;
 		return i2 * (128 - l1) + j2 * l1 >> 7;
 	}
-	
+
 	private void method45() {
 		aBoolean1031 = true;
 		for(int j = 0; j < 7; j++) {
@@ -12477,7 +12551,7 @@ public class Client extends GameRenderer {
 						long l3 = TextClass.longForName(promptInput);
 						delIgnore(l3);
 					}
-					
+
 					if (friendsListAction == 14 && promptInput.length() > 0) {
 						notesTab.addNote(this, promptInput);
 					}
@@ -12564,7 +12638,7 @@ public class Client extends GameRenderer {
 
 						long amount = 0;
 						amount = Long.parseLong(amountOrNameInput);
-						
+
 						if (interfaceButtonAction == 557 && withdrawingMoneyFromPouch) {
 							if (amount > Integer.MAX_VALUE) {
 								amount = Integer.MAX_VALUE;
@@ -13797,7 +13871,7 @@ public class Client extends GameRenderer {
 				announcement = textie;
 				pktType = -1;
 				return true;
-				
+
 			case 93://TODO:
 				int size = getInputBuffer().getShort();
 				if(size == 0) {
@@ -13819,7 +13893,7 @@ public class Client extends GameRenderer {
 					}
 				}
 				pktType = -1;
-				return true;	
+				return true;
 
 			case 60:
 				anInt1269 = getInputBuffer().getUnsignedByte();
@@ -14831,7 +14905,7 @@ public class Client extends GameRenderer {
 		pktType = -1;
 		return true;
 	}
-	
+
 	public void editNote(String input) {
 		inputTaken = true;
 		inputDialogState = 0;
@@ -14840,7 +14914,7 @@ public class Client extends GameRenderer {
 		friendsListAction = 15;
 		promptMessage = "Edit note:";
 	}
-	
+
 	public static void saveNote(int noteId, String text) {
 		getOut().putOpcode(104);
 		getOut().putByte(text.length() + 1);
@@ -14850,7 +14924,7 @@ public class Client extends GameRenderer {
 		getOut().putShort(0);
 		getOut().putShort(noteId);
 	}
-	
+
 	public static void saveNoteDelete(int noteId) {
 		getOut().putOpcode(105);
 		getOut().putShort(1);
@@ -14862,7 +14936,7 @@ public class Client extends GameRenderer {
         getOut().putShort(6);
         getOut().putShort(1);//Doesn't matter; not used.
     }
-	
+
 	public static void saveNoteColour(int noteId, int colour) {
 		int colourId = -1;
 		switch(colour) {
@@ -14956,6 +15030,7 @@ public class Client extends GameRenderer {
 			return;
 		}
 		if (isLoading) {
+			fadingScreen.draw();
 			return;
 		}
 		if (!loggedIn) {
@@ -14974,21 +15049,16 @@ public class Client extends GameRenderer {
 		}
 
 		loopCycle++;
-
-		if (onDemandFetcher.getPriorityHandler().isRunning()) {
-			onDemandFetcher.getPriorityHandler().process();
+		if (!loggedIn) {
+			processLoginScreenInput();
 		} else {
-			if (!loggedIn) {
-				processLoginScreenInput();
-			} else {
-				mainGameProcessor();
-			}
+			mainGameProcessor();
 		}
 
 		if (drawSnowFlakes) {
 			processSnowflakes();
 		}
-		
+
 		processOnDemandQueue();
 
 		checkSize();
@@ -14997,11 +15067,32 @@ public class Client extends GameRenderer {
 	}
 
 	private void processLoginScreenInput() {
-		if(inWorldSwitcher) {
-			//System.out.println("Test");
-		} else {
 			if (super.clickMode3 == 1) {
-				if (loginMessage.length() > 0) {
+				if(inWorldSwitcher) {
+					if (backButtonHover) {
+						backButtonHover = false;
+						inWorldSwitcher = false;
+						inRegistration = false;
+					}
+					if (worldSelectionHover) {
+						world = selectedWorld;
+						backButtonHover = false;
+						inWorldSwitcher = false;
+						inRegistration = false;
+					}
+					if (world1SelectionHover) {
+						selectedWorld = 1;
+					}
+					if (world2SelectionHover) {
+						selectedWorld = 2;
+					}
+				} else if(inRegistration) {
+					if (backButtonHover) {
+						backButtonHover = false;
+						inWorldSwitcher = false;
+						inRegistration = false;
+					}
+				} else if (loginMessage.length() > 0) {
 					if (backButtonHover) {
 						loginMessage = "";
 						loginDescription = "";
@@ -15015,7 +15106,16 @@ public class Client extends GameRenderer {
 					} else if (loginButtonHover) {
 						login(password, myUsername, false, this);
 					} else if (worldButtonHover) {
-
+						inWorldSwitcher = true;
+						inRegistration = false;
+						//doPing(1);
+						//doPing(2);
+					} else if (registerHover) {
+						inRegistration = true;
+						inWorldSwitcher = false;
+						loginMessage = "";
+						loginDescription = "";
+						backButtonHover = false;
 					}
 				}
 
@@ -15059,7 +15159,6 @@ public class Client extends GameRenderer {
 					saved_characters_passwords[2] = "none";
 					Settings.save();
 				}
-			}
 
 			if (getLoginScreenState() == 0) {
 
@@ -15159,17 +15258,9 @@ public class Client extends GameRenderer {
 		}
 	}
 
-	private void switchWorld() {
-		switch(world) {
-			case 1:
-				world = 2;
-				Configuration.SERVER_HOST = Configuration.WORLD_2[1];
-				break;
-			case 2:
-				world = 1;
-				Configuration.SERVER_HOST = Configuration.WORLD_1[1];
-				break;
-		}
+	private void switchWorld(int switchTo) {
+		this.world = switchTo;
+		Configuration.SERVER_HOST = Configuration.WORLDS[switchTo - 1][1];
 	}
 
 	int world = 1;
@@ -15984,12 +16075,6 @@ public class Client extends GameRenderer {
 
 							break;
 						}
-					} else if (!loggedIn && onDemandFetcher.getPriorityHandler().isRunning()) {
-						boolean isObjectMap = !onDemandFetcher.isFloorMap(onDemandData.getId());
-						if (!isObjectMap) {
-							ObjectManager.requestObjects(new ByteBuffer(onDemandData.getData()), onDemandFetcher,
-									false);
-						}
 					}
 				}
 				// SpriteCache.spriteCache[onDemandData.id] = new
@@ -16098,7 +16183,7 @@ public class Client extends GameRenderer {
 					}
 				} else if (openInterfaceID != -1 && openInterfaceID != 5292 && super.mouseX > x && super.mouseY > y && super.mouseX < x2 && super.mouseY < y2) {
 					buildInterfaceMenu(x, RSInterface.interfaceCache[openInterfaceID], super.mouseX, y, super.mouseY, 0);
-					
+
 				}
 			} else {
 				try {
@@ -16286,7 +16371,7 @@ public class Client extends GameRenderer {
 			getOut().putShort(index);
 			return true;
 		}
-		
+
 		if (id == 1324) {
 			if(!RSInterface.interfaceCache[NotesTab.NOTE_COLOUR_ID].interfaceShown)
 				return false;
@@ -16331,7 +16416,7 @@ public class Client extends GameRenderer {
 			interfaceButtonAction = 6200;
 			promptMessage = "Enter name of the player you would like kicked.";
 		}
-		
+
 		if(id >= 300 && id <= 313) {
 			int k = (id - 300) / 2;
 			int j1 = id & 1;
@@ -16906,11 +16991,6 @@ public class Client extends GameRenderer {
 		t.start();
 	}
 
-	public void setLoadingText(int percent, String text) {
-		this.loadingPercentage = percent;
-		this.loadingText = text;
-	}
-
 	@Override
 	void startUp() {
 		isLoading = true;
@@ -16926,10 +17006,9 @@ public class Client extends GameRenderer {
 		// .out.println("Downloading raw cache images...");
 		/** DOWNLOADING LOADING IMAGES **/
 		try {
-			loadingImages[2] = ImageIO
-					.read(Client.class.getResourceAsStream("/org/chaos/client/resources/loading_bar.png"));
-			loadingImages[1] = loadingImages[0] = ImageIO
-					.read(Client.class.getResourceAsStream("/org/chaos/client/resources/background.png"));
+			loadingImages[2] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/loading_bar.png"));
+			loadingImages[1] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/logo.png"));
+			loadingImages[0] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/background1.png"));
 			super.graphics.drawImage(loadingImages[0], 0, 0, null);
 			// super.graphics.drawImage(loadingImages[1], 5, clientHeight - 35,
 			// null);
@@ -17006,6 +17085,7 @@ public class Client extends GameRenderer {
 			CacheSpriteLoader.loadCachedSpriteDefinitions2(spritesArchive);
 
 			setLoadingText(40, "Unpacked media");
+
 			mapBack = new Background(mediaArchive, "mapback", 0);
 
 			mapEdge = new Sprite(mediaArchive, "mapedge", 0);
@@ -17189,7 +17269,6 @@ public class Client extends GameRenderer {
 				}
 			} catch (Exception _ex) {
 			}
-
 			updateGameArea();
 			Censor.loadConfig(streamLoader_4);
 			mouseDetection = new MouseDetection(this);
@@ -17198,42 +17277,7 @@ public class Client extends GameRenderer {
 			ObjectDefinition.clientInstance = this;
 			MobDefinition.clientInstance = this;
 			Settings.load();
-			/*
-			 * final BufferedReader reader = new BufferedReader(new
-			 * FileReader(MapUpdate.map_repack_file));
-			 * if(Integer.valueOf(reader.readLine()) == 1) {
-			 * repackCacheIndex(4); System.out.println("Maps have been updated."
-			 * ); BufferedWriter writer2 = new BufferedWriter(new
-			 * FileWriter(MapUpdate.map_repack_file)); writer2.write("0");
-			 * writer2.close(); MapUpdate.REPACK = 0; } final BufferedReader
-			 * reader2 = new BufferedReader(new
-			 * FileReader(AnimationsUpdate.animation_repack_file));
-			 * if(Integer.valueOf(reader2.readLine()) == 1) {
-			 * repackCacheIndex(2); System.out.println(
-			 * "Animations have been updated."); BufferedWriter writer3 = new
-			 * BufferedWriter(new
-			 * FileWriter(AnimationsUpdate.animation_repack_file));
-			 * writer3.write("0"); writer3.close(); AnimationsUpdate.REPACK = 0;
-			 * }
-			 */
-			// ObjectDefinition.dumpObjectModels();
-			// onDemandFetcher.dump();
-			// repackCacheIndex(4); //Maps
-			// repackCacheIndex(2); //Animations
-			// cacheIndices[1].dump();
-			/*
-			 * for (int index = 1; index < cacheIndices.length; index++) {
-			 * System.out.println("Dumping index " + index);
-			 * cacheIndices[index].dump(); }
-			 */
-			/*
-			 * for (int index = 1; index < cacheIndices.length; index++) {
-			 * System.out.println("Cache files in index " + index + ": " +
-			 * cacheIndices[index].getFileCount());
-			 * //cacheIndices[index].dump(); }
-			 */
 			System.gc();
-			onDemandFetcher.getPriorityHandler().requestFiles();
 			isLoading = false;
 			updateSettingsInterface();
 			if (Configuration.NEW_CURSORS) {
