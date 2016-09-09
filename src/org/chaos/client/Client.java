@@ -7422,15 +7422,11 @@ public class Client extends GameRenderer {
 		Font font = new Font("Verdana", 0, 10);
 		graphics2D.setFont(font);
 		boolean dont_show_last_percentage = false;
-		int n5 = 385; // X Position
-		if (text.toLowerCase().contains("connecting to web server")) {
-			n5 = 380;
-		}
+		int n5 = 382; // X Position
 		if (text.toLowerCase().contains("downloading")) {
-			n5 = 353;
 			drawCenteredString(graphics2D, String.valueOf(text) + "", n5, 177 + 62);
 		} else {
-			drawCenteredString(graphics2D, String.valueOf(text) + " " + percent + "%", n5, 177 + 62);
+			drawCenteredString(graphics2D, String.valueOf(text) + " - " + percent + "%", n5, 177 + 62);
 		}
 		if (percent > 0) {
 			int n6 = percent = (int) ((double) percent * 1.93);
