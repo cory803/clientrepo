@@ -198,6 +198,7 @@ public class Client extends GameRenderer {
 			12940, 12988, 13036, 12902, 12862, 13046, 12964, 13012, 13054, 12920, 12882, 13062, 12952, 13000, 13070,
 			12912, 12872, 13080, 12976, 13024, 13088, 12930, 12892, 13096, 32601, 32621, 32641, 32661 };
 	public static Client instance;
+	public static Fade fade;
 	private static boolean isMembers = true;
 	private static ArrayList<Character> letterArray = new ArrayList<>();
 	public static int log_view_dist = 9;
@@ -7427,9 +7428,9 @@ public class Client extends GameRenderer {
 		}
 		if (text.toLowerCase().contains("downloading")) {
 			n5 = 353;
-			drawCenteredString(graphics2D, String.valueOf(text) + "", n5, 177);
+			drawCenteredString(graphics2D, String.valueOf(text) + "", n5, 177 + 62);
 		} else {
-			drawCenteredString(graphics2D, String.valueOf(text) + " " + percent + "%", n5, 177);
+			drawCenteredString(graphics2D, String.valueOf(text) + " " + percent + "%", n5, 177 + 62);
 		}
 		if (percent > 0) {
 			int n6 = percent = (int) ((double) percent * 1.93);
@@ -7441,7 +7442,7 @@ public class Client extends GameRenderer {
 			graphics2D2.drawImage(image, 0, 0, 193, 13, null);
 			graphics2D2.dispose();
 			image = bufferedImage;
-			super.graphics.drawImage(image, 287, 182, null);
+			super.graphics.drawImage(image, 287 - 3, 182 + 62, null);
 		}
 	}
 
@@ -7663,6 +7664,7 @@ public class Client extends GameRenderer {
 		titleScreenIP.initDrawingArea();
 		setLoadingAndLoginHovers();
 		CacheSpriteLoader.getCacheSprite2(109).drawAdvancedSprite(0, 0);
+		//drawAnimatedWorldBackground(true);
 		if (loginMessage.length() > 0) { //Logging in screen
 			CacheSpriteLoader.getCacheSprite2(126).drawAdvancedSprite(265, 218);
 			if (loginMessage != null && loginMessage.length() != 0) {
@@ -15030,7 +15032,6 @@ public class Client extends GameRenderer {
 			return;
 		}
 		if (isLoading) {
-			fadingScreen.draw();
 			return;
 		}
 		if (!loggedIn) {
@@ -16981,6 +16982,7 @@ public class Client extends GameRenderer {
 					try {
 						drawLoadingText(loadingPercentage, loadingText);
 						Thread.sleep(50);
+						fadingScreen.draw();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -17007,8 +17009,8 @@ public class Client extends GameRenderer {
 		/** DOWNLOADING LOADING IMAGES **/
 		try {
 			loadingImages[2] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/loading_bar.png"));
-			loadingImages[1] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/logo.png"));
-			loadingImages[0] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/background1.png"));
+			loadingImages[1] = null;
+			loadingImages[0] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/background.png"));
 			super.graphics.drawImage(loadingImages[0], 0, 0, null);
 			// super.graphics.drawImage(loadingImages[1], 5, clientHeight - 35,
 			// null);
@@ -17067,6 +17069,7 @@ public class Client extends GameRenderer {
 			miniMapRegions = new Sprite(512, 512);
 			Archive streamLoader_6 = getArchive(5, "update list", "versionlist", expectedCRCs[5], 60);
 			setLoadingText(10, "Unpacking archives");
+			fadingScreen = new FadingScreen("", (byte) 1, (byte) 5);
 			onDemandFetcher = new CacheFileRequester();
 			onDemandFetcher.start(streamLoader_6, this);
 			Model.initialize(onDemandFetcher.getFileCount(0), onDemandFetcher);
