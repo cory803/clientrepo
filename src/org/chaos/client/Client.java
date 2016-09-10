@@ -7435,10 +7435,10 @@ public class Client extends GameRenderer {
 			Image image = loadingImages[2];
 			BufferedImage bufferedImage = new BufferedImage(n7, 12, 2);
 			Graphics2D graphics2D2 = bufferedImage.createGraphics();
-			graphics2D2.drawImage(image, 0, 0, 193, 13, null);
+			graphics2D2.drawImage(image, 0, 0, 193, 14, null);
 			graphics2D2.dispose();
 			image = bufferedImage;
-			super.graphics.drawImage(image, 287 - 3, 182 + 62, null);
+			super.graphics.drawImage(image, 287 - 3, 182 + 61, null);
 		}
 	}
 
