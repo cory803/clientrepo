@@ -110,6 +110,9 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+			case 10586:
+				itemDef.name = "Knight's Lamp";
+				break;
 			case 10008:
 			case 10009:
 				itemDef.modelOffsetY = -28;
