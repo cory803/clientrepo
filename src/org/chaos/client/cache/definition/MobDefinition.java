@@ -30,7 +30,9 @@ public final class MobDefinition {
         definition.id = id;
         definition.readValues(buffer);
         switch (id) {
-
+            case 2691:
+                definition.name = "Alvin";
+                break;
             case 13727:
                 definition.npcModels = new int[]{8377};
                 definition.name = "Xuan";
