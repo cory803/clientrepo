@@ -653,7 +653,7 @@ public final class MobDefinition {
                 definition.actions = new String[]{"Talk-to", null, null, null, null};
                 break;
             case 747:
-                definition.actions = new String[]{"Takk-to", null, "Trade", "Sell-Artifacts", null};
+                definition.actions = new String[]{"Talk-to", null, "Sell-Artifacts", null, null};
                 definition.walkAnimation = 819;
                 break;
             case 8648:
