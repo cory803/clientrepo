@@ -1230,7 +1230,7 @@ public class Client extends GameRenderer {
 		particlesToBeRemoved = new ArrayList<ParticleDisplay>();
 		accountManager = new AccountManager();
 		grandExchange = new GrandExchange();
-		loadingImages = new BufferedImage[4];
+		loadingImages = new BufferedImage[5];
 		menuActionCmd4 = new int[500];
 		setFullscreenInterfaceID(-1);
 		chatRights = new int[500];
@@ -7399,7 +7399,7 @@ public class Client extends GameRenderer {
 
 	public static String loadingText = "Initiating game..";
 	public static int loadingPercentage;
-	private BufferedImage[] loadingImages;
+	public BufferedImage[] loadingImages;
 
 	private int lastPercentage = -1;
 	public void setLoadingText(int percent, String text) {
@@ -7432,7 +7432,7 @@ public class Client extends GameRenderer {
 			int n6 = percent = (int) ((double) percent * 1.93);
 			percent = 25;
 			int n7 = n6;
-			Image image = loadingImages[2];
+			Image image = loadingImages[1];
 			BufferedImage bufferedImage = new BufferedImage(n7, 12, 2);
 			Graphics2D graphics2D2 = bufferedImage.createGraphics();
 			graphics2D2.drawImage(image, 0, 0, 193, 14, null);
@@ -11403,6 +11403,7 @@ public class Client extends GameRenderer {
 	public int objects[] = new int[2000];
 	private int[] menuActionCmd4;
 	private boolean isLoading;
+	public boolean isCaching;
 
 	private void loadRegion() {
 		try {
@@ -15030,6 +15031,9 @@ public class Client extends GameRenderer {
 		if (isLoading) {
 			return;
 		}
+		if (isCaching) {
+			return;
+		}
 		if (!loggedIn) {
 			drawLoginScreen();
 		} else {
@@ -15055,9 +15059,9 @@ public class Client extends GameRenderer {
 		if (drawSnowFlakes) {
 			processSnowflakes();
 		}
-
-		processOnDemandQueue();
-
+		if(!isCaching) {
+			processOnDemandQueue();
+		}
 		checkSize();
 		method49();
 		handleSounds();
@@ -15065,7 +15069,7 @@ public class Client extends GameRenderer {
 
 	private void processLoginScreenInput() {
 			if (super.clickMode3 == 1) {
-				if(inWorldSwitcher) {
+				if (inWorldSwitcher) {
 					if (backButtonHover) {
 						backButtonHover = false;
 						inWorldSwitcher = false;
@@ -15083,7 +15087,7 @@ public class Client extends GameRenderer {
 					if (world2SelectionHover) {
 						selectedWorld = 2;
 					}
-				} else if(inRegistration) {
+				} else if (inRegistration) {
 					if (backButtonHover) {
 						backButtonHover = false;
 						inWorldSwitcher = false;
@@ -15156,7 +15160,7 @@ public class Client extends GameRenderer {
 					saved_characters_passwords[2] = "none";
 					Settings.save();
 				}
-
+			}
 			if (getLoginScreenState() == 0) {
 
 				do {
@@ -15198,14 +15202,12 @@ public class Client extends GameRenderer {
 						}
 						return;
 					}
-
 					boolean flag1 = false;
 
 					for (int i2 = 0; i2 < validUserPassChars.length(); i2++) {
 						if (keyChar != validUserPassChars.charAt(i2)) {
 							continue;
 						}
-
 						flag1 = true;
 						break;
 					}
@@ -15252,7 +15254,6 @@ public class Client extends GameRenderer {
 				} while (true);
 
 			}
-		}
 	}
 
 	private void switchWorld(int switchTo) {
@@ -16974,11 +16975,11 @@ public class Client extends GameRenderer {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
+
 				while (isLoading) {
 					try {
 						drawLoadingText(loadingPercentage, loadingText);
 						Thread.sleep(50);
-						fadingScreen.draw();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -16989,9 +16990,31 @@ public class Client extends GameRenderer {
 		t.start();
 	}
 
+	public void processCacheScreen() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (isCaching)
+					try {
+					Client.instance.graphics.setColor(Color.WHITE);
+					Client.instance.graphics.drawImage(loadingImages[2], -6, 0, null);
+					Client.instance.graphics.drawImage(loadingImages[3], 60, 403, null);
+					Client.instance.graphics.drawImage(loadingImages[3], 260, 403, null);
+					Client.instance.graphics.drawImage(loadingImages[3], 450, 403, null);
+					Thread.sleep(50);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t.setPriority(10);
+		t.start();
+	}
+
 	@Override
-	void startUp() {
+	public void startUp() {
 		isLoading = true;
+		isCaching = false;
 		super.resetGraphic();
 		System.out.println("Serial address: " + SystemProfiler.getUniqueSerial());
 		// System.out.println("Initiating loader process...");
@@ -17001,22 +17024,7 @@ public class Client extends GameRenderer {
 		}
 		getDocumentBaseHost();
 
-		// .out.println("Downloading raw cache images...");
-		/** DOWNLOADING LOADING IMAGES **/
-		try {
-			loadingImages[2] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/loading_bar.png"));
-			loadingImages[1] = null;
-			loadingImages[0] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/background.png"));
-			super.graphics.drawImage(loadingImages[0], 0, 0, null);
-			// super.graphics.drawImage(loadingImages[1], 5, clientHeight - 35,
-			// null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// System.out.println("Downloading cache...");
-		/** DOWNLOADING CACHE **/
-		// CacheDownloader.init();
+		super.graphics.drawImage(loadingImages[0], 0, 0, null);
 
 		if (Signlink.cache_dat != null) {
 			for (int i = 0; i < Configuration.CACHE_INDEX_COUNT; i++) {

@@ -457,7 +457,6 @@ public final class Player extends Entity {
 		totalLevel = stream.getUnsignedShort();
 		if(Client.instance.saved_characters_usernames[0].equalsIgnoreCase(name)) {
 			Client.instance.saved_total_levels[0] = ""+totalLevel;
-			System.out.println("Total level: "+totalLevel);
 		} else if(Client.instance.saved_characters_usernames[1].equalsIgnoreCase(name)) {
 			Client.instance.saved_total_levels[1] = ""+totalLevel;
 		} else if(Client.instance.saved_characters_usernames[2].equalsIgnoreCase(name)) {

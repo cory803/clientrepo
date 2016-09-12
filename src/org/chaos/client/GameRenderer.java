@@ -24,12 +24,15 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import org.chaos.Configuration;
+import org.chaos.client.cache.download.DownloadCache;
 import org.chaos.client.graphics.CacheSpriteLoader;
 import org.chaos.client.graphics.CursorData;
 import org.chaos.client.graphics.RSImageProducer;
 import org.chaos.client.graphics.Sprite;
 import org.chaos.client.graphics.gameframe.GameFrame;
 import org.chaos.client.graphics.gameframe.GameFrame.ScreenMode;
+
+import javax.imageio.ImageIO;
 
 public class GameRenderer extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener,
 		FocusListener, WindowListener, MouseWheelListener {
@@ -251,7 +254,7 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 
 	private static final Color BACKGROUND_COLOR = Color.black;
 
-	void resetGraphic() {
+	public void resetGraphic() {
 		graphics = (isApplet ? this : mainFrame).getGraphics();
 		try {
 			getGameComponent().repaint();
@@ -1002,7 +1005,21 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 			if (mainFrame != null) {
 				mainFrame.addWindowListener(this);
 			}
-			startUp();
+			try {
+				Client.instance.loadingImages[0] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/background.png")); //Loading background
+				Client.instance.loadingImages[1] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/loading_bar.png")); //Loading bar
+				Client.instance.loadingImages[2] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/cache_download.png")); //Cache download background
+				Client.instance.loadingImages[3] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/continue.png")); //Continue button
+				Client.instance.loadingImages[4] = ImageIO.read(Client.class.getResourceAsStream("/org/chaos/client/resources/continue_hover.png")); //Continue button hover
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(DownloadCache.needsCache()) {
+				Client.instance.isCaching = true;
+				DownloadCache.showDownloadScreen();
+			} else {
+				startUp();
+			}
 			updateGraphics(true);
 			int i = 0;
 			int j = 256;
