@@ -30,6 +30,20 @@ public final class MobDefinition {
         definition.id = id;
         definition.readValues(buffer);
         switch (id) {
+            case 5886:
+                definition.name = "Abyssal Sire";
+                definition.description = "It's an abyssal sire.".getBytes();
+                definition.combatLevel = 350;
+                definition.walkAnimation = 4534;
+                definition.standAnimation = 4533;
+                definition.actions = new String[5];
+                definition.actions[1] = "Attack";
+                definition.npcModels = new int[1];
+                definition.npcModels[0] = 29477;
+                definition.adjustVertextPointZ = 108;
+                definition.adjustVertextPointsXOrY = 108;
+                definition.npcSizeInSquares = 6;
+            break;
             case 2691:
                 definition.name = "Alvin";
                 break;
