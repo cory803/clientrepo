@@ -1243,6 +1243,9 @@ public final class ObjectDefinition {
                 || id == 5167 || id == 5168) {
             definition.actions = new String[5];
         }
+        if(id == 42219) {
+            definition.actions = new String[]{"Enter", null, null, null, null};
+        }
         if (id == 1948) {
             definition.name = "Wall";
         }
