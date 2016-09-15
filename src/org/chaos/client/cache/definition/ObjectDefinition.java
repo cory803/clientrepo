@@ -202,6 +202,12 @@ public final class ObjectDefinition {
                 definition.modelSizeY = 80;
                 definition.modelSizeH = 80;
                 break;
+
+            case 1517:
+            case 1520:
+                definition.hasActions = false;
+                break;
+
             case 2986:
             case 2983:
             case 2984:
