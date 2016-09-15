@@ -1231,13 +1231,9 @@ public final class ObjectDefinition {
             definition.modifiedModelColors = new int[]{74, 43117};
             definition.originalModelColors = new int[]{21543, 21547};
         }
-        if (id == 884) {
-            definition.actions = new String[]{"Investigate", "Contribute", null, null, null};
-            definition.name = "Well of Goodwill";
-        }
         if (id == 26945) {
             definition.actions = new String[]{"Investigate", "Contribute", null, null, null};
-            definition.name = "Well of Goodwill";
+            definition.name = "Well of Goodness";
         }
         if (id == 2515) {
             definition.actions = new String[]{"Climb-in", null, null, null, null};
