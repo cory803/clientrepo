@@ -878,7 +878,7 @@ public class CustomInterfaces extends RSInterface {
 		addSpriteLoader(57001, 655);
 		addText(57002, "Players Online", 0xff9933, true, true, -1, tda, 2);
 		addText(57003, "", 0xff9933, true, true, -1, tda, 1);
-		addText(57007, "www.rune.live", 0xff9933, true, true, -1, tda, 0);
+		addText(57007, "www.chaosps.com", 0xff9933, true, true, -1, tda, 0);
 		addText(57008, "", 0xff9933, true, true, -1, tda, 3);
 		addText(57009, "", 0xff9933, false, true, -1, tda, 0);
 		addText(57010, "", 0xff9933, false, true, -1, tda, 0);
