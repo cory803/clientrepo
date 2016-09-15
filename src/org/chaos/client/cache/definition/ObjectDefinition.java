@@ -1709,7 +1709,7 @@ public final class ObjectDefinition {
     private int offsetY;
     private int[] modifiedModelColors;
     public static List mruNodes1 = new List(500);
-    public String actions[];
+    public String[] actions;
 
     public void preloadModelsExtras(CacheFileRequester requester) {
         if (objectModelIDs == null) {

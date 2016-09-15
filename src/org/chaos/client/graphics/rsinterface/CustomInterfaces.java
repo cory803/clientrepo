@@ -869,7 +869,7 @@ public class CustomInterfaces extends RSInterface {
 			scroll.child(k, i, 6, y);
 			y += 16;
 			k++;
-			addClickableText(i, "Default text", "", fonts, 1, 0x6d6d6d, false, true, 180);
+			addClickableText(i, "", "", fonts, 1, 0x6d6d6d, false, true, 180);
 		}
 	}
 
