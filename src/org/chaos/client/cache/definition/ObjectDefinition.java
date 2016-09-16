@@ -26,7 +26,7 @@ public final class ObjectDefinition {
             26364};
 
     private static final int[] removeObjects = {12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
-            24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349};
+            24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349, 2309};
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public final class ObjectDefinition {
         cacheIndex = (cacheIndex + 1) % 20;
         ObjectDefinition definition = cache[cacheIndex];
         boolean loadNew = (id == 32159 || id == 32157 || id == 36672
-                || id == 36675 || id == 36692 || id == 34138 || id >= 39260 && id <= 39271 || id == 39229 || id == 39230
+                || id == 36675 || id == 36692 || id == 34138 || id >= 39260 && id <= 39271 || id == 39229 || id == 39230 || id == 849
                 || id == 39231 || id == 36676 || id == 36692 || id > 11915 && id <= 11929 || id >= 11426 && id <= 11444
                 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715);
 
@@ -202,6 +202,15 @@ public final class ObjectDefinition {
                 definition.modelSizeY = 80;
                 definition.modelSizeH = 80;
                 break;
+            case 9326:
+                definition.setDefaults();
+                definition.imitate(forID(14435));
+                definition.hasActions = true;
+                definition.actions = new String[]{"Step-on", null, null, null, null};
+                definition.name = "Stone";
+                definition.anIntArray776 = new int[]{10};
+                break;
+
 
             case 1517:
             case 1520:
