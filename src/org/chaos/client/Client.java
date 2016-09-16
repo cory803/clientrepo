@@ -9637,7 +9637,7 @@ public class Client extends GameRenderer {
 		int drawX = y * spriteX + x * spriteY >> 16;
 		int drawY = y * spriteY - x * spriteX >> 16;
 		int finalX = (fixed ? 104 : 83) + drawX - sprite.maxWidth / 2 + 7;
-		int finalY = (fixed ? 89 : 85) - drawY - sprite.maxHeight / 2 - 3;
+		int finalY = (fixed ? 88 : 84) - drawY - sprite.maxHeight / 2 - 3;
 
 		try {
 			sprite.drawSprite(finalX + xPadding, finalY + yPadding);

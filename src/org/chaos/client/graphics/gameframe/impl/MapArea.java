@@ -528,6 +528,15 @@ public class MapArea extends GameFrame {
 	@Override
 	protected void render(Client client, ScreenMode screenMode) {
 		if (isVisible()) {
+			
+			for(int i = 0; i < 78; i++) {
+				int circle = (int) (Math.sqrt(Math.pow(79, 2) - Math.pow(77 - i, 2)));
+				client.mapImagePixelCutRight[i] = 2 * circle + 4;
+				client.mapImagePixelCutRight[151 - i] = 2 * circle + 4;
+				client.mapImagePixelCutLeft[i] = -circle + 73;
+				client.mapImagePixelCutLeft[151 - i] = -circle + 73;
+			}
+			
 			if (screenMode == ScreenMode.FIXED) {
 				client.mapAreaIP.initDrawingArea();
 			}
@@ -550,7 +559,7 @@ public class MapArea extends GameFrame {
 			 * }
 			 */
 			client.miniMapRegions.rotate(152, i, client.mapImagePixelCutRight, 256 + client.minimapZoom,
-					client.mapImagePixelCutLeft, playerPosY, getOffSetY() + (screenMode == ScreenMode.FIXED ? 10 : 5),
+					client.mapImagePixelCutLeft, playerPosY, getOffSetY() + (screenMode == ScreenMode.FIXED ? 9 : 4),
 					getOffSetX() + (screenMode == ScreenMode.FIXED ? 35 : 11), 152, playerPosX);
 			client.compass.rotate(33, client.viewRotation, client.compassArray2, 256, client.compassArray1, 25,
 					getOffSetY() + (screenMode == ScreenMode.FIXED ? 8 : 5),
@@ -760,7 +769,7 @@ public class MapArea extends GameFrame {
 						.drawSprite(getOffSetX() + (GameFrame.getScreenMode() != ScreenMode.FIXED ? 128 : 204), 0);
 			}
 
-			Canvas2D.drawPixels(3, 76 + (GameFrame.getScreenMode() != ScreenMode.FIXED ? 4 : 8) + getOffSetY(),
+			Canvas2D.drawPixels(3, 76 + (GameFrame.getScreenMode() != ScreenMode.FIXED ? 3 : 7) + getOffSetY(),
 					76 + (GameFrame.getScreenMode() != ScreenMode.FIXED ? 9 : 33) + getOffSetX(), 0xffffff, 3);
 
 			if (client.menuOpen && client.menuScreenArea == 3) {
