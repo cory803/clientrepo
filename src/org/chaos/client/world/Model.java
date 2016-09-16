@@ -113,6 +113,7 @@ public class Model extends Animable {
 	}
 
 	public static void nullLoader() {
+		vertexPerspectiveDepth = null;
 		aClass21Array1661 = null;
 		aBooleanArray1663 = null;
 		aBooleanArray1664 = null;
@@ -2384,13 +2385,12 @@ public class Model extends Animable {
 			j5 = i5 * l3 + j5 * i4 >> 16;
 			i5 = j6;
 			anIntArray1667[k4] = j5 - j4;
+			vertexPerspectiveDepth[k4] = j5;
 			anIntArray1665[k4] = l1 + (l4 << 9) / j5;
 			anIntArray1666[k4] = i2 + (i5 << 9) / j5;
 			if (anInt1642 > 0) {
 				anIntArray1668[k4] = l4;
 				anIntArray1669[k4] = i5;
-				anIntArray1670[k4] = j5;
-			} else {
 				anIntArray1670[k4] = j5;
 			}
 		}
@@ -2490,6 +2490,7 @@ public class Model extends Animable {
 			i8 = l7 * j + i8 * k >> 16;
 			l7 = k8;
 			anIntArray1667[j7] = i8 - k2;
+			vertexPerspectiveDepth[j7] = i8;
 			if (i8 >= 50) {
 				anIntArray1665[j7] = l5 + (k7 << Client.log_view_dist) / i8;
 				anIntArray1666[j7] = j6 + (l7 << Client.log_view_dist) / i8;
@@ -2500,8 +2501,6 @@ public class Model extends Animable {
 			if (flag || anInt1642 > 0) {
 				anIntArray1668[j7] = k7;
 				anIntArray1669[j7] = l7;
-				anIntArray1670[j7] = i8;
-			} else {
 				anIntArray1670[j7] = i8;
 			}
 		}
@@ -2680,7 +2679,7 @@ public class Model extends Animable {
 				int x = anIntArray1627[vertex];
 				int y = anIntArray1628[vertex];
 				int z = anIntArray1629[vertex];
-				int depth = anIntArray1670[vertex];
+				int depth = vertexPerspectiveDepth[vertex];
 				int var21;
 				if (E != 0) {
 					int var20 = modelIntArray1[E];
@@ -2761,26 +2760,14 @@ public class Model extends Animable {
 			i1 = anIntArray1637[i] & 3;
 		if (i1 == 0) {
 			Canvas3D.method374(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j],
-					anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i], anIntArray1670[j], anIntArray1670[k],
-					anIntArray1670[l]);
-			if (fog) {
-				Canvas3D.drawFogTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l],
-						anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1670[j],
-						anIntArray1670[k], anIntArray1670[l]);
-				return;
-			}
+					anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i], vertexPerspectiveDepth[j], vertexPerspectiveDepth[k],
+					vertexPerspectiveDepth[l]);
 			return;
 		}
 		if (i1 == 1) {
 			Canvas3D.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j],
-					anIntArray1665[k], anIntArray1665[l], modelIntArray3[anIntArray1634[i]], anIntArray1670[j], anIntArray1670[k],
-					anIntArray1670[l]);
-			if (fog) {
-				Canvas3D.drawFogTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l],
-						anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1670[j],
-						anIntArray1670[k], anIntArray1670[l]);
-				return;
-			}
+					anIntArray1665[k], anIntArray1665[l], modelIntArray3[anIntArray1634[i]], vertexPerspectiveDepth[j], vertexPerspectiveDepth[k],
+					vertexPerspectiveDepth[l]);
 			return;
 		}
 		if (i1 == 2) {
@@ -2791,16 +2778,8 @@ public class Model extends Animable {
 			Canvas3D.method378(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j],
 					anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i], anIntArray1668[l1],
 					anIntArray1668[j2], anIntArray1668[l2], anIntArray1669[l1], anIntArray1669[j2], anIntArray1669[l2],
-					anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], anIntArray1640[i], anIntArray1670[j], anIntArray1670[k],
-					anIntArray1670[l]);
-			if (fog) {
-				Canvas3D.drawTexturedFogTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l],
-						anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1670[j],
-						anIntArray1670[k], anIntArray1670[l], anIntArray1668[l1], anIntArray1668[j2],
-						anIntArray1668[l2], anIntArray1669[l1], anIntArray1669[j2], anIntArray1669[l2],
-						anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], anIntArray1640[i]);
-				return;
-			}
+					anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], anIntArray1640[i], vertexPerspectiveDepth[j], vertexPerspectiveDepth[k],
+					vertexPerspectiveDepth[l]);
 			return;
 		}
 		if (i1 == 3) {
@@ -2811,16 +2790,8 @@ public class Model extends Animable {
 			Canvas3D.method378(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j],
 					anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[i2],
 					anIntArray1668[k2], anIntArray1668[i3], anIntArray1669[i2], anIntArray1669[k2], anIntArray1669[i3],
-					anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], anIntArray1640[i], anIntArray1670[j], anIntArray1670[k],
-					anIntArray1670[l]);
-			if (fog) {
-				Canvas3D.drawTexturedFogTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l],
-						anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1670[j],
-						anIntArray1670[k], anIntArray1670[l], anIntArray1668[i2], anIntArray1668[k2],
-						anIntArray1668[i3], anIntArray1669[i2], anIntArray1669[k2], anIntArray1669[i3],
-						anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], anIntArray1640[i]);
-				return;
-			}
+					anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], anIntArray1640[i], vertexPerspectiveDepth[j], vertexPerspectiveDepth[k],
+					vertexPerspectiveDepth[l]);
 		}
 	}
 
@@ -2919,28 +2890,28 @@ public class Model extends Animable {
 				else
 					l7 = anIntArray1637[i] & 3;
 				if (l7 == 0)
-					Canvas3D.method374(i7, j7, k7, j3, j4, j5, 0, 0, 0, anIntArray1680[0], anIntArray1680[1],
-							anIntArray1680[2]);
+					Canvas3D.method374(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1],
+							anIntArray1680[2], 0, 0, 0);
 				else if (l7 == 1)
-					Canvas3D.method376(i7, j7, k7, j3, j4, j5, 0, 0, 0, modelIntArray3[anIntArray1634[i]]);
+					Canvas3D.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[anIntArray1634[i]], 0, 0, 0);
 				else if (l7 == 2) {
 					int j8 = anIntArray1637[i] >> 2;
 					int k9 = anIntArray1643[j8];
 					int k10 = anIntArray1644[j8];
 					int k11 = anIntArray1645[j8];
-					Canvas3D.method378(i7, j7, k7, j3, j4, j5, 0, 0, 0, anIntArray1680[0], anIntArray1680[1],
+					Canvas3D.method378(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1],
 							anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11],
 							anIntArray1669[k9], anIntArray1669[k10], anIntArray1669[k11], anIntArray1670[k9],
-							anIntArray1670[k10], anIntArray1670[k11], anIntArray1640[i]);
+							anIntArray1670[k10], anIntArray1670[k11], anIntArray1640[i], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 				} else if (l7 == 3) {
 					int k8 = anIntArray1637[i] >> 2;
 					int l9 = anIntArray1643[k8];
 					int l10 = anIntArray1644[k8];
 					int l11 = anIntArray1645[k8];
-					Canvas3D.method378(i7, j7, k7, j3, j4, j5, 0, 0, 0, anIntArray1634[i], anIntArray1634[i],
+					Canvas3D.method378(i7, j7, k7, j3, j4, j5, anIntArray1634[i], anIntArray1634[i],
 							anIntArray1634[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11],
 							anIntArray1669[l9], anIntArray1669[l10], anIntArray1669[l11], anIntArray1670[l9],
-							anIntArray1670[l10], anIntArray1670[l11], anIntArray1640[i]);
+							anIntArray1670[l10], anIntArray1670[l11], anIntArray1640[i], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 				}
 			}
 			if (l == 4) {
@@ -2954,15 +2925,15 @@ public class Model extends Animable {
 					i8 = anIntArray1637[i] & 3;
 				if (i8 == 0) {
 					Canvas3D.method374(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1],
-							anIntArray1680[2], -1F, -1F, -1F);
+							anIntArray1680[2], 0, 0, 0);
 					Canvas3D.method374(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0],
-							anIntArray1680[2], anIntArray1680[3], -1F, -1F, -1F);
+							anIntArray1680[2], anIntArray1680[3], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 					return;
 				}
 				if (i8 == 1) {
 					int l8 = modelIntArray3[anIntArray1634[i]];
-					Canvas3D.method376(i7, j7, k7, j3, j4, j5, l8, -1F, -1F, -1F);
-					Canvas3D.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8, -1F, -1F, -1F);
+					Canvas3D.method376(i7, j7, k7, j3, j4, j5, l8, 0, 0, 0);
+					Canvas3D.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8, vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 					return;
 				}
 				if (i8 == 2) {
@@ -2973,11 +2944,11 @@ public class Model extends Animable {
 					Canvas3D.method378(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1],
 							anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12],
 							anIntArray1669[i10], anIntArray1669[i11], anIntArray1669[i12], anIntArray1670[i10],
-							anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i], -1F, -1F, -1F);
+							anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 					Canvas3D.method378(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0],
 							anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11],
 							anIntArray1668[i12], anIntArray1669[i10], anIntArray1669[i11], anIntArray1669[i12],
-							anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i], -1F, -1F, -1F);
+							anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 					return;
 				}
 				if (i8 == 3) {
@@ -2988,11 +2959,11 @@ public class Model extends Animable {
 					Canvas3D.method378(i7, j7, k7, j3, j4, j5, anIntArray1634[i], anIntArray1634[i],
 							anIntArray1634[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12],
 							anIntArray1669[j10], anIntArray1669[j11], anIntArray1669[j12], anIntArray1670[j10],
-							anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i], -1F, -1F, -1F);
+							anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 					Canvas3D.method378(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1634[i],
 							anIntArray1634[i], anIntArray1634[i], anIntArray1668[j10], anIntArray1668[j11],
 							anIntArray1668[j12], anIntArray1669[j10], anIntArray1669[j11], anIntArray1669[j12],
-							anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i], -1F, -1F, -1F);
+							anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i], vertexPerspectiveDepth[i1], vertexPerspectiveDepth[j1], vertexPerspectiveDepth[k1]);
 				}
 			}
 		}
@@ -3061,6 +3032,7 @@ public class Model extends Animable {
 	private static int anIntArray1623[] = new int[2000];
 	private static int anIntArray1624[] = new int[2000];
 	private static int anIntArray1625[] = new int[2000];
+	private static int vertexPerspectiveDepth[] = new int[8000];
 	private static int anIntArray1665[] = new int[8000];
 	private static int anIntArray1666[] = new int[8000];
 	private static int anIntArray1667[] = new int[8000];

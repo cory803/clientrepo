@@ -1201,11 +1201,7 @@ public final class WorldController {
 		anInt471 = -1;
 	}
 
-	public static boolean fog;
-
-	public void method313(int i, int j, int k, int l, int i1, int j1, boolean fog) {
-		WorldController.fog = fog;
-		Model.fog = fog;
+	public void method313(int i, int j, int k, int l, int i1, int j1) {
 		if (i < 0) {
 			i = 0;
 		} else if (i >= anInt438 * 128) {
@@ -1951,9 +1947,6 @@ public final class WorldController {
 				int i7 = anIntArray485[class43.anInt720];
 				Canvas3D.method374(j6, l6, l5, i6, k6, k5, method317(i7, class43.anInt718), method317(i7, class43.anInt719), method317(i7, class43.anInt717), k3, j3, j2);
 			}
-			if (fog) {
-				Canvas3D.drawFogTriangle(j6, l6, l5, i6, k6, k5, k3, j3, j2);
-			}
 		}
 		if ((i5 - k5) * (l6 - l5) - (j5 - l5) * (k6 - k5) > 0) {
 			Canvas3D.restrict_edges = i5 < 0 || k5 < 0 || k6 < 0 || i5 > Canvas2D.centerX || k5 > Canvas2D.centerX || k6 > Canvas2D.centerX;
@@ -1977,9 +1970,6 @@ public final class WorldController {
 				int j7 = anIntArray485[class43.anInt720];
 				Canvas3D.method374(j5, l5, l6, i5, k5, k6, method317(j7, class43.anInt716), method317(j7, class43.anInt717), method317(j7, class43.anInt719), k2, j2, j3);
 			}
-			if (fog) {
-				Canvas3D.drawFogTriangle(j5, l5, l6, i5, k5, k6, k2, j2, j3);
-			}
 		}
 	}
 
@@ -2001,8 +1991,6 @@ public final class WorldController {
 			if (Configuration.hdTexturing || class40.anIntArray682 != null) {
 				Class40.anIntArray690[l1] = i2;
 				Class40.anIntArray691[l1] = k2;
-				Class40.anIntArray692[l1] = i3;
-			} else if (fog) {
 				Class40.anIntArray692[l1] = i3;
 			}
 			Class40.anIntArray688[l1] = Canvas3D.centerX + (i2 << Client.log_view_dist) / i3;
@@ -2049,9 +2037,6 @@ public final class WorldController {
 				} else {
 					int k5 = anIntArray485[class40.anIntArray682[j2]];
 					Canvas3D.method374(l4, i5, j5, i4, j4, k4, method317(k5, class40.anIntArray676[j2]), method317(k5, class40.anIntArray677[j2]), method317(k5, class40.anIntArray678[j2]), Class40.depthPoint[l2], Class40.depthPoint[j3], Class40.depthPoint[l3]);
-				}
-				if (fog) {
-					Canvas3D.drawFogTriangle(l4, i5, j5, i4, j4, k4, Class40.anIntArray692[l2], Class40.anIntArray692[j3], Class40.anIntArray692[l3]);
 				}
 			}
 		}

@@ -11,7 +11,7 @@ import java.awt.image.ImageProducer;
 
 public final class RSImageProducer implements ImageProducer, ImageObserver {
 
-	public final float depthBuffer[];
+	public final int depthBuffer[];
 	public final int[] anIntArray315;
 	public final int anInt316;
 	public final int anInt317;
@@ -22,7 +22,7 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 	public RSImageProducer(int i, int j, Component component) {
 		anInt316 = i;
 		anInt317 = j;
-		depthBuffer = new float[i * j];
+		depthBuffer = new int[i * j];
 		anIntArray315 = new int[i * j];
 		aColorModel318 = new DirectColorModel(32, 0xff0000, 65280, 255);
 		anImage320 = component.createImage(this);
@@ -47,7 +47,30 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 	public void drawGraphics(int yPos, Graphics g, int xPos) {
 		method239();
 		g.drawImage(anImage320, xPos, yPos, this);
+		resetDepthBuffer();
 	}
+	
+	private void resetDepthBuffer() {
+        if (depthBuffer == null) {
+            return;
+        }
+        int length = depthBuffer.length;
+        int loops = length - (length & 0x7);
+        int position = 0;
+        while (position < loops) {
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        	depthBuffer[position++] = 2147483647;
+        }
+        while (position < length) {
+            depthBuffer[position++] = 2147483647;
+        }
+    }
 
 	@Override
 	public boolean imageUpdate(Image image, int i, int j, int k, int l, int i1) {

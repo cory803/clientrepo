@@ -5843,7 +5843,7 @@ public class Client extends GameRenderer {
 			if (loadingStage == 2) {
 				try {
 					worldController.method313(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, method121(),
-							yCameraCurve, false);
+							yCameraCurve);
 					worldController.clearObj5Cache();
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -11147,9 +11147,13 @@ public class Client extends GameRenderer {
 		Model.anInt1685 = super.mouseX - 4;
 		Model.anInt1686 = super.mouseY - 4;
 		Canvas2D.setAllPixelsToZero();
+		
+		if (Configuration.FOG_ENABLED) {
+			Canvas2D.drawFilledPixels(0, 0, clientWidth, clientHeight, 0xC8C0A8);
+		}
 
 		if (loggedIn) {
-			worldController.method313(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve, false);
+			worldController.method313(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
 			worldController.clearObj5Cache();
 		}
 
@@ -11596,7 +11600,7 @@ public class Client extends GameRenderer {
 		}
 
 		System.gc();
-		Canvas3D.method367();
+		Canvas3D.method367(20);
 		onDemandFetcher.method566();
 		int k = (anInt1069 - 6) / 8 - 1;
 		int j1 = (anInt1069 + 6) / 8 + 1;
@@ -17179,7 +17183,7 @@ public class Client extends GameRenderer {
 			setLoadingText(50, "Unpacking textures");
 			Canvas3D.method368(streamLoader_3);
 			Canvas3D.method372(0.59999999999999998D);
-			Canvas3D.method367();
+			Canvas3D.method367(20);
 			setLoadingText(60, "Unpacked textures");
 			FrameReader.initialise(onDemandFetcher.getAnimCount());
 			Animation.unpackConfig(streamLoader);
