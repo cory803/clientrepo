@@ -1,5 +1,6 @@
 package org.chaos.client.graphics;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -10,11 +11,14 @@ import java.util.List;
 import org.chaos.client.Signlink;
 import org.chaos.client.cache.Archive;
 import org.chaos.client.io.ByteBuffer;
+import org.chaos.client.util.FileUtilities;
 
 public final class CacheSpriteLoader {
 
     private static final List<Integer> cachedSpriteIdList = new ArrayList<>();
     private static final HashMap<Integer, byte[]> cachedSpriteData = new HashMap<>();
+
+    private static boolean DUMP_SPRITES = true;
 
     static {
         /**
@@ -92,9 +96,26 @@ public final class CacheSpriteLoader {
             for (int file = 0; file < totalSprites; file++) {
                 cachedSpritePositions[file] = index.getInt();
                 cachedSpriteSizes[file] = index.getInt();
+                //createSprite(file);
             }
         } catch (IOException e) {
 
+        }
+    }
+
+    /**
+     * Creates a sprite out of the spriteData.
+     *
+     * @param sprite
+     */
+    public static void createSprite(int id) {
+        if (DUMP_SPRITES) {
+            File directory = new File(Signlink.getCacheDirectory() + "/image_dump");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            getCacheSprite(id);
+            FileUtilities.WriteFile(directory.getAbsolutePath() + System.getProperty("file.separator") + id + ".png", cachedSpriteData.get(id));
         }
     }
 

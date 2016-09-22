@@ -15063,9 +15063,9 @@ public class Client extends GameRenderer {
 		if (drawSnowFlakes) {
 			processSnowflakes();
 		}
-		if(!isCaching) {
+		//if(!isCaching) {
 			processOnDemandQueue();
-		}
+		//}
 		checkSize();
 		method49();
 		handleSounds();
