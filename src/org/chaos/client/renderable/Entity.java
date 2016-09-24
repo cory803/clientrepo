@@ -63,6 +63,7 @@ public class Entity extends Animable {
 	public int currentAnim;
 	public int nextGraphicsAnimationFrame;
 	public int nextAnimationFrame;
+	public int worldIndex;
 
 	public Entity() {
 		smallX = new int[10];

@@ -3847,6 +3847,10 @@ public class Client extends GameRenderer {
 
 	private int currentActionMenu;
 
+	private NPC currentNpc;
+	public boolean showCombatBox;
+	public int currentCombatIndex;
+
 	public void doAction(int actionId) {
 		if (actionId < 0) {
 			return;
@@ -11910,6 +11914,7 @@ public class Client extends GameRenderer {
 				npcArray[k] = new NPC();
 			}
 			NPC npc = npcArray[k];
+			npc.worldIndex = k;
 			npcIndices[npcCount++] = k;
 			npc.anInt1537 = loopCycle;
 			int l = stream.getBits(5);
@@ -13058,6 +13063,7 @@ public class Client extends GameRenderer {
 			}
 			playerIndices[playerCount++] = j;
 			Player player = playerArray[j];
+			player.worldIndex = j;
 			player.anInt1537 = loopCycle;
 			int k = stream.getBits(1);
 			if (k == 1) {
@@ -14246,33 +14252,34 @@ public class Client extends GameRenderer {
 				return true;
 
 			case 128:
-				currentTarget = null;
+				currentCombatIndex = -1;
+				currentNpc = null;
+				showCombatBox = false;
 				pktType = -1;
 				return true;
 
 			case 125:
 				int targetIndex = getInputBuffer().getShort();
 				int targetType = getInputBuffer().getByte();
-				if (targetType == 0) { /* DONT READ DAMAGE LIST FOR PLRS */
-					currentTarget = targetIndex < playerArray.length ? playerArray[targetIndex] : null;
+				System.out.println("Reading packet 125");
+				if (targetType == 0) { //Not used
 					pktType = -1;
 					return true;
 				} else {
 					currentTarget = targetIndex < npcArray.length ? npcArray[targetIndex] : null;
 				}
-				if (currentTarget == null) {
+				if (currentNpc == null) {
 					pktType = -1;
 					return true;
 				}
-				NPC npc = (NPC) currentTarget;
-				npc.damageDealers.clear();
+				currentNpc.damageDealers.clear();
 				boolean readDamageList = getInputBuffer().getByte() == 1;
 				if (readDamageList) {
 					int length = getInputBuffer().getByte();
 					for (int t = 0; t < length; t++) {
 						String player = getInputBuffer().getString();
 						int damage = getInputBuffer().getShort();
-						npc.damageDealers.add(new DamageDealer(player, damage));
+						currentNpc.damageDealers.add(new DamageDealer(player, damage));
 					}
 				}
 				pktType = -1;
@@ -14908,7 +14915,56 @@ public class Client extends GameRenderer {
 		pktType = -1;
 		return true;
 	}
+	public void showNpcCombatBox(int currentHp, int maxHp, NPC npc) {
+		if(!showCombatBox || currentCombatIndex != npc.worldIndex) {
+			return;
+		}
 
+		boolean boss = maxHp >= 2500;
+		int height = boss ? 25 + getYPosAddition(npc.damageDealers.size()) : 35;
+		int width = boss ? 125:106;
+		int xPos = 10;
+		int yPos = 30;
+
+
+		if (!Configuration.CONSTITUTION_ENABLED) {
+			currentHp = Math.round(currentHp/10);
+			maxHp /= 10;
+		}
+
+		double percentOfHpLeft = (((double) currentHp / (double) maxHp) * 100);
+		double percentOfHpLost = 100-percentOfHpLeft;
+
+		int hpBarYPos = yPos + height - 20;
+		int hpBarXPps = boss?(xPos + 13):(xPos + 3);
+
+		TextDrawingArea.drawAlphaFilledPixels(xPos, yPos, width, height, 000000, 50);
+		Canvas2D.drawPixels(15, hpBarYPos, hpBarXPps + (int) percentOfHpLeft, 11740160, (int) percentOfHpLost);//red
+		Canvas2D.drawPixels(15, hpBarYPos, hpBarXPps/*-(int)percentOfHpLost*/, 31744, (int) percentOfHpLeft);//green
+		newBoldFont.drawCenteredString(currentHp + "/" + maxHp, xPos + (width/2), hpBarYPos + 13,16777215,0);
+
+		//Names
+		newSmallFont.drawCenteredString(npc.definitionOverride.name, xPos+(width/2), yPos + 10,16777215,0);
+		if(boss) {
+			yPos += 10;
+			xPos += 5;
+			for(int i = 0; i < 5; i++) {
+				newSmallFont.drawBasicString("", xPos, yPos + getYPosAddition(i), false);
+				newSmallFont.drawBasicString("", xPos+90, yPos + getYPosAddition(i), false);
+				if(i >= npc.damageDealers.size()) {
+					continue;
+				}
+				String player = npc.damageDealers.get(i).getPlayer();
+				int damage = npc.damageDealers.get(i).getDamage();
+				if (!Configuration.CONSTITUTION_ENABLED && damage > 0) {
+					damage /= 0;
+				}
+				DecimalFormat df = new DecimalFormat("#");
+				newSmallFont.drawBasicString(player, xPos, yPos + getYPosAddition(i), false);
+				newSmallFont.drawBasicString(""+df.format(damage)+"", xPos+90, yPos + getYPosAddition(i), false);
+			}
+		}
+	}
 	public void editNote(String input) {
 		inputTaken = true;
 		inputDialogState = 0;
@@ -17816,6 +17872,7 @@ public class Client extends GameRenderer {
 					try {
 						npcScreenPos((Entity) obj, ((Entity) obj).height + 15);
 						if (spriteDrawX > -1) {
+							int HpPercent = 0;
 							if (Configuration.NEW_HEALTH_BARS) {
 								int currentHealth = ((Entity) obj).currentHealth;
 								int maxHealth = ((Entity) obj).maxHealth;
@@ -17833,7 +17890,7 @@ public class Client extends GameRenderer {
 								if (hpPercent > 90) {
 									hpPercent = 90;
 								}
-								int HpPercent = (currentHealth * 56 / maxHealth);
+								HpPercent = (currentHealth * 56 / maxHealth);
 								if (HpPercent > 56) {
 									HpPercent = 56;
 								}
@@ -17868,6 +17925,16 @@ public class Client extends GameRenderer {
 												.append((int) maxHitpoints).toString(),
 										spriteDrawX, spriteDrawY - 22, color, 0x000000);
 							}
+							SpriteCache.spriteCache[34].drawSprite(
+									spriteDrawX - 28, spriteDrawY - 5);
+							Sprite s = Sprite.getCutted(
+									SpriteCache.spriteCache[33], HpPercent,
+									SpriteCache.spriteCache[33].myHeight);
+							s.drawSprite(spriteDrawX - 28, spriteDrawY - 5);
+							newRegularFont.drawCenteredString((new StringBuilder()).append(((Entity) (Entity) obj).currentHealth).append("/").append(((Entity) (Entity) obj).maxHealth).toString(), spriteDrawX, spriteDrawY - 19, 0x16B711, 100);
+
+							currentNpc = ((NPC) obj);
+							showNpcCombatBox(currentNpc.currentHealth, currentNpc.maxHealth, currentNpc);
 
 /*
 							//Custom health interface
