@@ -19,6 +19,8 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
+    public static int[] osrsNpcs = {2042, 6593, 497, 6609};
+
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
             if (cache[i].id == id) {
@@ -43,7 +45,7 @@ public final class MobDefinition {
             definition.readValues(buffer);
         }
         switch (id) {
-            case 6593:
+            case 6609:
                 System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {
                     //System.out.println("Model: "+definition.npcModels[i]);
@@ -1439,8 +1441,6 @@ public final class MobDefinition {
         buffer = null;
         osrsBuffer = null;
     }
-
-    public static int[] osrsNpcs = {2042, 6593};
 
     public static void load(Archive archive) {
         buffer = new ByteBuffer(archive.get("npc.dat"));
