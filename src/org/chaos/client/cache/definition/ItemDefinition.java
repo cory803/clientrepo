@@ -17,13 +17,16 @@ import org.chaos.client.world.Model;
 public final class ItemDefinition {
 
 	private static ByteBuffer buffer;
+	private static ByteBuffer bufferOsrs;
 	private static ItemDefinition[] cache;
 	private static int cacheIndex;
 	public static boolean isMembers = true;
 	public static List mruNodes1 = new List(100);
 	public static List mruNodes2 = new List(50);
 	private static int[] streamIndices;
+	private static int[] streamIndicesOsrs;
 	public static int totalItems;
+	public static int totalItemsOsrs;
 
 	public static void dumpItemModelsForId(int i) {
 		try {
@@ -52,6 +55,8 @@ public final class ItemDefinition {
 		}
 	}
 
+	public static int[] osrsItems = {11943};
+
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
 		"Mithril", "Adamant", "Rune", "Dragon",
@@ -71,9 +76,20 @@ public final class ItemDefinition {
 		cacheIndex = (cacheIndex + 1) % 10;
 		ItemDefinition itemDef = cache[cacheIndex];
 		buffer.position = streamIndices[id];
+		boolean osrs = false;
+		for (int i = 0; i < osrsItems.length; i++) {
+			if(osrsItems[i] == id) {
+				bufferOsrs.position = streamIndicesOsrs[id];
+				osrs = true;
+			}
+		}
 		itemDef.id = id;
 		itemDef.setDefaults();
-		itemDef.readValues(buffer);
+		if(osrs) {
+			itemDef.readValues(bufferOsrs);
+		} else {
+			itemDef.readValues(buffer);
+		}
 		
 		if (itemDef.id >= 7454 && itemDef.id <= 7462) {
 			itemDef.name = GLOVE_NAME[itemDef.id - 7454] + " gloves";
@@ -6041,20 +6057,33 @@ public final class ItemDefinition {
 		mruNodes2 = null;
 		mruNodes1 = null;
 		streamIndices = null;
+		streamIndicesOsrs = null;
 		cache = null;
 		buffer = null;
+		bufferOsrs = null;
 	}
 
 	public static void unpackConfig(Archive streamLoader) {
 		buffer = new ByteBuffer(streamLoader.get("obj.dat"));
 		ByteBuffer stream = new ByteBuffer(streamLoader.get("obj.idx"));
+		bufferOsrs = new ByteBuffer(streamLoader.get("osrsobj.dat"));
+		ByteBuffer streamOsrs = new ByteBuffer(streamLoader.get("osrsobj.idx"));
 		totalItems = stream.getUnsignedShort();
+		totalItemsOsrs = streamOsrs.getUnsignedShort();
+		System.out.println("Total items: "+totalItemsOsrs);
 		streamIndices = new int[totalItems];
-		int i = 2;
+		streamIndicesOsrs = new int[totalItemsOsrs];
 
+		int i = 2;
 		for (int j = 0; j < totalItems; j++) {
 			streamIndices[j] = i;
 			i += stream.getUnsignedShort();
+		}
+
+		int iOsrs = 2;
+		for (int j = 0; j < totalItemsOsrs; j++) {
+			streamIndicesOsrs[j] = iOsrs;
+			iOsrs += streamOsrs.getUnsignedShort();
 		}
 
 		cache = new ItemDefinition[10];

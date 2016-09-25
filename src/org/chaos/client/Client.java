@@ -14261,7 +14261,6 @@ public class Client extends GameRenderer {
 			case 125:
 				int targetIndex = getInputBuffer().getShort();
 				int targetType = getInputBuffer().getByte();
-				System.out.println("Reading packet 125");
 				if (targetType == 0) { //Not used
 					pktType = -1;
 					return true;

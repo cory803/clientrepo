@@ -15,7 +15,9 @@ public final class MobDefinition {
     public static Client clientInstance;
     public static List mruNodes = new List(30);
     private static ByteBuffer buffer;
+    private static ByteBuffer osrsBuffer;
     private static int[] streamIndices;
+    private static int[] osrsStreamIndices;
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -27,9 +29,29 @@ public final class MobDefinition {
         cacheIndex = (cacheIndex + 1) % 20;
         MobDefinition definition = cache[cacheIndex] = new MobDefinition();
         buffer.position = streamIndices[id];
+        boolean osrs = false;
+        for (int i = 0; i < osrsNpcs.length; i++) {
+            if(osrsNpcs[i] == id) {
+                osrsBuffer.position = osrsStreamIndices[id];
+                osrs = true;
+            }
+        }
         definition.id = id;
-        definition.readValues(buffer);
+        if(osrs) {
+            definition.readValues(osrsBuffer);
+        } else {
+            definition.readValues(buffer);
+        }
         switch (id) {
+            case 6593:
+                System.out.println("name: "+definition.name);
+                //for (int i = 0; i < definition.npcModels.length; i++) {
+                    //System.out.println("Model: "+definition.npcModels[i]);
+                //}
+                System.out.println("Stand animation: "+definition.standAnimation);
+                System.out.println("Walk animation: "+definition.walkAnimation);
+                System.out.println("Size: "+definition.npcSizeInSquares);
+                break;
             case 5886:
                 definition.name = "Abyssal Sire";
                 definition.description = "It's an abyssal sire.".getBytes();
@@ -945,20 +967,12 @@ public final class MobDefinition {
                 definition.adjustVertextPointsXOrY = 70;
                 definition.npcSizeInSquares = 2;
                 break;
-            case 2042:// regular
-                definition.name = "Zulrah";
-                definition.actions = new String[]{null, "Attack", null, null, null};
-                definition.npcModels = new int[1];
-                definition.npcModels[0] = 14407;
-                definition.standAnimation = 5070;
-                definition.walkAnimation = 5070;
-                definition.combatLevel = 725;
-                definition.npcSizeInSquares = 4;
-                definition.adjustVertextPointsXOrY = 128;
-                definition.adjustVertextPointZ = 128;
-                break;
-            case 10775:// Wilderness frost dragons
-                definition.actions = new String[]{null, "Attack", null, null, null};
+            case 10775: //Lava dragons
+                definition.copy(get(51));
+                definition.name = "Lava dragon";
+                definition.combatLevel = 208;
+                definition.originalModelColours = new int[]{10502, 43906, 11140, 10378, 0, 11138, 809, 33};
+                definition.changedModelColours = new int[]{100, 100, 226770, 100, 100, 100, 226770, 226770};
                 break;
             case 2043:// melee
                 definition.name = "Zulrah";
@@ -1420,20 +1434,36 @@ public final class MobDefinition {
     public static void nullify() {
         mruNodes = null;
         streamIndices = null;
+        osrsStreamIndices = null;
         cache = null;
         buffer = null;
+        osrsBuffer = null;
     }
+
+    public static int[] osrsNpcs = {2042, 6593};
 
     public static void load(Archive archive) {
         buffer = new ByteBuffer(archive.get("npc.dat"));
         ByteBuffer stream2 = new ByteBuffer(archive.get("npc.idx"));
+        osrsBuffer = new ByteBuffer(archive.get("osrsnpc.dat"));
+        ByteBuffer osrsStream2 = new ByteBuffer(archive.get("osrsnpc.idx"));
         int totalNPCs = stream2.getUnsignedShort();
+        int osrsTotalNPCs = osrsStream2.getUnsignedShort();
         streamIndices = new int[totalNPCs];
+        osrsStreamIndices = new int[osrsTotalNPCs];
+
         int position = 2;
 
         for (int i = 0; i < totalNPCs; i++) {
             streamIndices[i] = position;
             position += stream2.getUnsignedShort();
+        }
+
+        int osrsPosition = 2;
+
+        for (int i = 0; i < osrsTotalNPCs; i++) {
+            osrsStreamIndices[i] = osrsPosition;
+            osrsPosition += osrsStream2.getUnsignedShort();
         }
 
         cache = new MobDefinition[20];
