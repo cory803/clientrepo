@@ -705,7 +705,7 @@ public final class MobDefinition {
                 definition.actions = new String[]{"Makeover", null, null, null, null};
                 break;
             case 1360:
-                definition.actions = new String[]{"Talk-to", null, null, null, null};
+                definition.actions = new String[]{"Talk-to", "Bank", null, null, null};
                 break;
             case 494:
                 definition.walkAnimation = 819;
