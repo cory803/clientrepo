@@ -17,7 +17,7 @@ public class ChatArea extends GameFrame {
 	public class ChannelButtons {
 
 		private final String[] channelText = { "All", "Game", "Public", "Private", "Clan", "Trade", "Duel",
-				"Screenshot" };
+				"Report" };
 		private final int[] channelXCoords = { 5, 62, 119, 176, 233, 290, 347, 430 };
 		private final String[] chatStatus = { "On", "Friends", "Off", "Hide", "All" };
 		private final int[] chatTextColor = { 65280, 0xffff00, 0xff0000, 65535, 0xffff00, 65280 };
@@ -140,7 +140,7 @@ public class ChatArea extends GameFrame {
 				}
 				
 				if (client.mouseInRegion(404, 515, Client.clientHeight - 23, Client.clientHeight)) {
-					client.menuActionName[client.menuActionRow] = "Take a screenshot";
+					client.menuActionName[client.menuActionRow] = "Report an issue";
 					client.menuActionID[client.menuActionRow] = 1414;
 					client.menuActionRow++;
 				}
