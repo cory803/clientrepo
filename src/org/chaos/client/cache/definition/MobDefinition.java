@@ -500,6 +500,27 @@ public final class MobDefinition {
                 definition.npcModels = new int[]{65291, 65322, 506, 529, 252, 9642, 62746, 13307, 62743, 53327};
                 definition.dialogueModels = new int[]{39332, 39235};
                 break;
+            case 4519:
+                definition.name = "Banker";
+                definition.description = "A banker of many dangerous values.".getBytes();
+                definition.combatLevel = 0;
+                definition.actions = new String[5];
+                definition.actions[0] = "Talk-to";
+                definition.actions[2] = "Bank";
+                definition.standAnimation = 808;
+                definition.walkAnimation = 819;
+                definition.npcModels = new int[9];
+                definition.npcModels[0] = 3188; // Hat
+                definition.npcModels[1] = 19258; // Platebody
+                definition.npcModels[8] = 40731; // Platebody arms
+                definition.npcModels[2] = 5024; // Platelegs
+                definition.npcModels[3] = 7122; // Cape
+                definition.npcModels[4] = 13307; // Gloves
+                definition.npcModels[5] = 27738; // Boots
+                definition.npcModels[6] = 9642; // Amulet
+                definition.npcModels[7] = 43660; // Weapon
+                definition.dialogueModels = MobDefinition.get(494).dialogueModels;
+                break;
             case 132:
                 definition.name = "Blitz";
                 definition.description = "A master attacker of Chaos.".getBytes();
