@@ -19,7 +19,7 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {2042, 6593, 497, 6609};
+    public static int[] osrsNpcs = {2042, 6593, 497, 6609, 964};
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -198,19 +198,6 @@ public final class MobDefinition {
                 definition.combatLevel = 79;
                 definition.adjustVertextPointsXOrY = 140;
                 definition.adjustVertextPointZ = 140;
-                break;
-            case 5870:
-                definition.name = "Hell Puppy";
-                definition.npcModels = new int[]{29270};
-                definition.npcSizeInSquares = 2;
-                definition.actions = new String[5];
-                definition.actions[0] = "Pick-up";
-                definition.standAnimation = 4484;
-                definition.walkAnimation = 4488;
-                definition.drawYellowDotOnMap = true;
-                definition.combatLevel = 318;
-                definition.adjustVertextPointZ = 40;
-                definition.adjustVertextPointsXOrY = 40;
                 break;
             case 2000:
                 definition.npcModels = new int[2];

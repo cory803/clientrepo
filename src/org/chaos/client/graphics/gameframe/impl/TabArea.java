@@ -91,7 +91,7 @@ public class TabArea extends GameFrame {
 							if (tabID == 13) {
 								return;
 							}
-							CacheSpriteLoader.getCacheSprite(525).drawAdvancedSprite(offsetX, offsetY - 4);
+							CacheSpriteLoader.getCacheSprite(525).drawAdvancedSprite(offsetX + 1, offsetY - 4);
 						} else {
 							int x = offsetX + (screenMode == ScreenMode.FIXED ? getxPos() : 0);
 							int y = offsetY + (screenMode == ScreenMode.FIXED ? getyPos() - 1 : 0);

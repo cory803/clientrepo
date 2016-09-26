@@ -55,7 +55,7 @@ public final class ItemDefinition {
 		}
 	}
 
-	public static int[] osrsItems = {11943};
+	public static int[] osrsItems = {11943, 13178, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
@@ -434,6 +434,11 @@ public final class ItemDefinition {
 				itemDef.groundActions = new String[] { null, null, "Take", null, null };
 				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
+			//Default osrs pets
+			case 13178:
+				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
+				break;
+
 			case 21252:
 				itemDef.imitate(get(12021));
 				itemDef.name = "Pet Beaver";
@@ -5187,8 +5192,8 @@ public final class ItemDefinition {
 				itemDef.maleWearId = 65289;
 				itemDef.femaleWearId = 65314;
 				break;
-			case 10828:
-				System.out.println("Model real: "+itemDef.maleWearId);
+			case 13247:
+				System.out.println("Model inventory: "+itemDef.modelID);
 				break;
 			case 14021:
 				itemDef.modelID = 65261;
@@ -6070,7 +6075,6 @@ public final class ItemDefinition {
 		ByteBuffer streamOsrs = new ByteBuffer(streamLoader.get("osrsobj.idx"));
 		totalItems = stream.getUnsignedShort();
 		totalItemsOsrs = streamOsrs.getUnsignedShort();
-		System.out.println("Total items: "+totalItemsOsrs);
 		streamIndices = new int[totalItems];
 		streamIndicesOsrs = new int[totalItemsOsrs];
 
