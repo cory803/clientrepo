@@ -144,7 +144,7 @@ public class TabArea extends GameFrame {
 						{ 541, 10, 10 }, // clan chat tab
 						{ 538, 10, 8 }, // settings tab
 						{ 539, 10, 8 }, // emotes tab
-						{ 540, 10, 7 }, // music tab
+						{ -1, 10, 7 }, // music tab
 						{ 542, 11, 8 }, // notes tab
 				};
 				for (int i = 0; i < gameFrameData.length; i++) {
