@@ -34,8 +34,8 @@ public class Configuration {
 	public static final boolean DROPBOX_MODE = false;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.0";
-	public final static String CLIENT_NAME = "Chaos " + CLIENT_VERSION + "";
+	public static final String CLIENT_VERSION = "1.01";
+	public final static String CLIENT_NAME = "Chaos Beta " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos"; // Cache
 																	// folder
 																	// name
