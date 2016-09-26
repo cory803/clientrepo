@@ -92,6 +92,12 @@ public class Client extends GameRenderer {
 	private AccountManager accountManager;
 	private GrandExchange grandExchange;
 
+	public boolean usingCtrl = false;
+	public boolean selectDrop = false;
+	public boolean[] selectedDrops = new boolean[28];
+	public int[] dropAmounts = new int[28];
+	public int selectDropX = 0;
+
 	public int getPlayerX() {
 		return (baseX + (myPlayer.x - 6 >> 7)) >> 3;
 	}
@@ -1224,7 +1230,13 @@ public class Client extends GameRenderer {
 	public final void I(ParticleDisplay particle) {
 		displayedParticles.add(particle);
 	}
-
+	public boolean checkChatArea() {
+		if (messagePromptRaised || inputDialogState > 0 || backDialogID > 0
+				|| dialogID > 0 || aString844 != null) {
+			return true;
+		}
+		return false;
+	}
 	public Client() {
 		displayedParticles = new ArrayList<ParticleDisplay>(10000);
 		particlesToBeRemoved = new ArrayList<ParticleDisplay>();
@@ -2731,7 +2743,18 @@ public class Client extends GameRenderer {
 										continue;
 									}
 									ItemDefinition definition = ItemDefinition.get(id);
-
+									if (children.isInventoryInterface && usingCtrl) {
+										menuActionName[menuActionRow] = "Drop All Selected Items";
+										menuActionID[menuActionRow] = 23426;
+										menuActionCmd2[menuActionRow] = k2;
+										menuActionRow++;
+										menuActionName[menuActionRow] = "Select @lre@"
+												+ definition.name;
+										menuActionID[menuActionRow] = 23425;
+										menuActionCmd2[menuActionRow] = k2;
+										menuActionRow++;
+										continue;
+									}
 									if (itemSelected == 1 && children.isInventoryInterface) {
 										if (children.id != anInt1284 || k2 != anInt1283) {
 											menuActionName[menuActionRow] = "Use " + selectedItemName + " with @lre@"
@@ -3851,6 +3874,13 @@ public class Client extends GameRenderer {
 	public boolean showCombatBox;
 	public int currentCombatIndex;
 
+	public void resetSelectDrops() {
+		for (int i = 0; i < selectedDrops.length; i++) {
+			selectedDrops[i] = false;
+			dropAmounts[i] = -1;
+		}
+	}
+
 	public void doAction(int actionId) {
 		if (actionId < 0) {
 			return;
@@ -3886,11 +3916,36 @@ public class Client extends GameRenderer {
 			toggleQuickAidsSelection();
 			return;
 		}
-
+		if (action == 23423) {
+			for (int hth = 0; hth < 28; hth++) {
+				selectedDrops[hth] = true;
+			}
+		}
+		if (action == 23424) {
+			selectDrop = !selectDrop;
+			pushMessage(
+					selectDrop == true ? "Select multiple items in your inventory to drop."
+							: "Multiple item dropping disabled", 0, "");
+			if (!selectDrop) {
+				resetSelectDrops();
+			}
+		}
+		if (action == 23425) {
+			selectedDrops[slot] = !selectedDrops[slot];
+		}
+		if (action == 23426) {
+			String extra = "";
+			for (int lol = 0; lol < selectedDrops.length; lol++) {
+				int f = selectedDrops[lol] == true ? 1 : 0;
+				extra += "" + f + "#" + dropAmounts[lol] + "-";
+			}
+			performCommand("::dropselecteditems-" + extra);
+			resetSelectDrops();
+			selectDrop = false;
+		}
 		if (action >= 2000) {
 			action -= 2000;
 		}
-
 		if (interfaceId == 24630 || interfaceId == 24632) {
 			if (inputDialogState == 3) {
 				getGrandExchange().searching = false;
@@ -5339,7 +5394,12 @@ public class Client extends GameRenderer {
 			Settings.save();
 		}
 	}
-
+	public void performCommand(String s) {
+		String f = inputString;
+		inputString = s;
+		sendPacket(103);
+		inputString = f;
+	}
 	private void doFlamesDrawing() {
 	}
 
@@ -6520,6 +6580,11 @@ public class Client extends GameRenderer {
 		if (class9.interfaceShown && anInt1026 != class9.id && anInt1048 != class9.id && anInt1039 != class9.id) {
 			return;
 		}
+		if (selectDrop && openInterfaceID > 0) {
+			selectDrop = false;
+			resetSelectDrops();
+		}
+
 		int i1 = Canvas2D.topX;
 		int j1 = Canvas2D.topY;
 		int k1 = Canvas2D.bottomX;
@@ -6607,7 +6672,10 @@ public class Client extends GameRenderer {
 									if (itemSelected == 1 && anInt1283 == i3 && anInt1284 == childInterface.id) {
 										l9 = 0xffffff;
 									}
-
+									if (childInterface.isInventoryInterface) {
+										if ((selectedDrops[i3] && (usingCtrl || selectDrop)))
+											l9 = 65535;
+									}
 									Sprite selectedItem = ItemDefinition.getSprite(j9, childInterface.invStackSizes[i3],
 											l9);
 

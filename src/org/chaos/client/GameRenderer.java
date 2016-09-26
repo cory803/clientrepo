@@ -531,7 +531,13 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 			Client.consoleOpen = !Client.consoleOpen;
 		}
 
-		// System.out.println(keyCode + " : " + keyChar);
+		//Ctrl key for selecting items in inventory
+		if(keyCode == 17) {
+			if(!Client.instance.usingCtrl) {
+				Client.instance.usingCtrl = true;
+			}
+		}
+
 		if (!Configuration.NEW_FUNCTION_KEYS) {
 			if (keyCode == KeyEvent.VK_ESCAPE) {
 				Client.setTab(13);
@@ -666,6 +672,15 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 		int keyCode = keyevent.getKeyCode();
 		char keyChar = keyevent.getKeyChar();
 
+		//Ctrl key for selecting items in inventory
+		if(keyCode == 17) {
+			if(Client.instance.usingCtrl) {
+				Client.instance.usingCtrl = false;
+				//Client.instance.selectedDrops = new boolean[28];
+				//Client.instance.dropAmounts = new int[28];
+				//Client.instance.selectDropX = 0;
+			}
+		}
 		if (keyChar < '\036') {
 			keyChar = '\0';
 		}
