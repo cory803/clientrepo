@@ -126,6 +126,11 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+            //Default osrs pets
+            case 13247:
+            case 13178:
+                itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
+                break;
 			case 10586:
 				itemDef.name = "Knight's Lamp";
 				break;
@@ -432,10 +437,6 @@ public final class ItemDefinition {
 			case 7887:
 				itemDef.name = "Pet Seagull";
 				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			//Default osrs pets
-			case 13178:
 				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
 
@@ -5191,9 +5192,6 @@ public final class ItemDefinition {
 				itemDef.modelID = 65271;
 				itemDef.maleWearId = 65289;
 				itemDef.femaleWearId = 65314;
-				break;
-			case 13247:
-				System.out.println("Model inventory: "+itemDef.modelID);
 				break;
 			case 14021:
 				itemDef.modelID = 65261;
