@@ -92,7 +92,6 @@ public class Client extends GameRenderer {
 	private AccountManager accountManager;
 	private GrandExchange grandExchange;
 
-	public boolean usingCtrl = false;
 	public boolean selectDrop = false;
 	public boolean[] selectedDrops = new boolean[28];
 	public int[] dropAmounts = new int[28];
@@ -2743,7 +2742,7 @@ public class Client extends GameRenderer {
 										continue;
 									}
 									ItemDefinition definition = ItemDefinition.get(id);
-									if (children.isInventoryInterface && usingCtrl) {
+									if (children.isInventoryInterface && selectDrop) {
 										menuActionName[menuActionRow] = "Drop All Selected Items";
 										menuActionID[menuActionRow] = 23426;
 										menuActionCmd2[menuActionRow] = k2;
@@ -3937,7 +3936,7 @@ public class Client extends GameRenderer {
 			String extra = "";
 			for (int lol = 0; lol < selectedDrops.length; lol++) {
 				int f = selectedDrops[lol] == true ? 1 : 0;
-				extra += "" + f + "#" + dropAmounts[lol] + "-";
+				extra += "" + f + "#";
 			}
 			performCommand("::dropselecteditems-" + extra);
 			resetSelectDrops();
@@ -6673,7 +6672,7 @@ public class Client extends GameRenderer {
 										l9 = 0xffffff;
 									}
 									if (childInterface.isInventoryInterface) {
-										if ((selectedDrops[i3] && (usingCtrl || selectDrop)))
+										if ((selectedDrops[i3] && selectDrop))
 											l9 = 65535;
 									}
 									Sprite selectedItem = ItemDefinition.getSprite(j9, childInterface.invStackSizes[i3],

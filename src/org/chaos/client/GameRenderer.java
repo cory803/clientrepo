@@ -533,8 +533,8 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 
 		//Ctrl key for selecting items in inventory
 		if(keyCode == 17) {
-			if(!Client.instance.usingCtrl) {
-				Client.instance.usingCtrl = true;
+			if(!Client.instance.selectDrop) {
+				Client.instance.selectDrop = true;
 			}
 		}
 
@@ -674,8 +674,8 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 
 		//Ctrl key for selecting items in inventory
 		if(keyCode == 17) {
-			if(Client.instance.usingCtrl) {
-				Client.instance.usingCtrl = false;
+			if(Client.instance.selectDrop) {
+				Client.instance.selectDrop = false;
 				//Client.instance.selectedDrops = new boolean[28];
 				//Client.instance.dropAmounts = new int[28];
 				//Client.instance.selectDropX = 0;
