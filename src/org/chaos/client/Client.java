@@ -3891,10 +3891,6 @@ public class Client extends GameRenderer {
 			action -= 2000;
 		}
 
-		if (action == 1414) {
-
-		}
-
 		if (interfaceId == 24630 || interfaceId == 24632) {
 			if (inputDialogState == 3) {
 				getGrandExchange().searching = false;
@@ -4725,6 +4721,11 @@ public class Client extends GameRenderer {
 			cButtonCPos = 6;
 			chatTypeView = 4;
 			inputTaken = true;
+		}
+
+		if(action == 1414) {
+			getOut().putOpcode(185);
+			getOut().putShort(action - 100);
 		}
 
 		if (action == 493) {
