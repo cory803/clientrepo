@@ -216,7 +216,9 @@ public final class ObjectDefinition {
             case 1520:
                 definition.hasActions = false;
                 break;
-
+            case 42219:
+                definition.name = "Bounty portal";
+                break;
             case 2986:
             case 2983:
             case 2984:
