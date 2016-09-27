@@ -55,7 +55,7 @@ public final class ItemDefinition {
 		}
 	}
 
-	public static int[] osrsItems = {11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
+	public static int[] osrsItems = {12954, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
@@ -126,11 +126,10 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
-            //Default osrs pets
             case 13247:
             case 13178:
             case 12921:
-            //case 12940:
+            case 12940:
             case 12939:
             case 12643:
             case 12644:
@@ -151,15 +150,14 @@ public final class ItemDefinition {
             case 13322:
             case 13320:
             case 13321:
-                //System.out.println("------");
-                //System.out.println("Name: "+itemDef.name);
-                //System.out.println("Model ID: "+itemDef.modelID);
                 itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
                 break;
-            case 12940:
-                System.out.println("------");
-                System.out.println("Name: "+itemDef.name);
-                System.out.println("Model ID: "+itemDef.modelID);
+            case 12954:
+//                System.out.println("------");
+//                System.out.println("Name: "+itemDef.name);
+//                System.out.println("Model ID: "+itemDef.modelID);
+//                System.out.println("Male wear: "+itemDef.maleWearId);
+//                System.out.println("Female wear: "+itemDef.femaleWearId);
                 break;
 			case 10586:
 				itemDef.name = "Knight's Lamp";
@@ -191,34 +189,10 @@ public final class ItemDefinition {
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Lick";
 				break;
-
 			case 4490:
 				itemDef.name = "Poop";
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Shovel";
-				break;
-			case 9722:
-				itemDef.name = "Key of death";
-				itemDef.originalModelColors = new int[] { 2866, 2858, 2870 };
-				itemDef.modifiedModelColors = new int[] { 5194, 5186, 5198 };
-				break;
-			case 9725:
-				itemDef.imitate(get(9722));
-				itemDef.name = "Key of fear";
-				itemDef.originalModelColors = new int[] { 933, 933 - 8, 933 + 12 };
-				itemDef.modifiedModelColors = new int[] { 5194, 5186, 5198 };
-				break;
-			case 9724:
-				itemDef.imitate(get(9722));
-				itemDef.name = "Key of cobra";
-				itemDef.modifiedModelColors = new int[] { 226770, 226764, 226774 };
-				itemDef.originalModelColors = new int[] { 5194, 5186, 5198 };
-				break;
-			case 9723:
-				itemDef.imitate(get(9722));
-				itemDef.name = "Key of blitz";
-				itemDef.modifiedModelColors = new int[] { 2866, 2858, 2870 };
-				itemDef.originalModelColors = new int[] { 5194, 5186, 5198 };
 				break;
 			case 19670:
 				itemDef.name = "Vote scroll";
@@ -226,20 +200,6 @@ public final class ItemDefinition {
 				itemDef.actions[4] = "Drop";
 				itemDef.actions[0] = "Claim";
 				itemDef.actions[2] = "Claim-All";
-				break;
-			case 19891:
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 12703:
-				// itemDef.setDefaults();
-				itemDef.name = "Hellpuppy";
-				itemDef.modelID = 29392;
-				itemDef.modelRotation1 = 0;
-				itemDef.modelRotation2 = 0;
-				itemDef.modelZoom = 3000;
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
 			case 21089:
 				itemDef.modelID = 66994;
@@ -434,13 +394,6 @@ public final class ItemDefinition {
 				itemDef.actions[1] = "Wield";
 				itemDef.actions[4] = "Drop";
 				break;
-
-			/*
-			case 13889:
-				itemDef.actions[2] = "Check";
-				break;
-			*/
-
 			case 21101:
 				itemDef.modelID = 67011;
 				itemDef.name = "Off-hand drygore mace";
@@ -463,29 +416,6 @@ public final class ItemDefinition {
 				itemDef.name = "Water cape";
 				itemDef.originalModelColors = new int[] { 52 };
 				itemDef.modifiedModelColors = new int[] { 40 };
-				break;
-			case 7887:
-				itemDef.name = "Pet Seagull";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-
-			case 21252:
-				itemDef.imitate(get(12021));
-				itemDef.name = "Pet Beaver";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 21251:
-				itemDef.imitate(get(9976));
-				itemDef.name = "Pet Chinchompa";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 21250:
-				itemDef.name = "Pet Rock Golem";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
 			case 21117:
 				itemDef.imitate(get(6199));
@@ -514,19 +444,6 @@ public final class ItemDefinition {
 				itemDef.actions = new String[5];
 				itemDef.actions[1] = "Wear";
 				itemDef.actions[4] = "Drop";
-				break;
-
-			case 21103:
-				itemDef.setDefaults();
-				itemDef.modelID = 70011;
-				itemDef.modelZoom = 1380;
-				itemDef.modelRotation1 = 67;
-				itemDef.modelRotation2 = 67;
-				itemDef.modelOffset1 = 9;
-				itemDef.modelOffsetY = -4;
-				itemDef.name = "Venenatis spiderling";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
 			case 3046:
 			case 3044:
@@ -992,212 +909,6 @@ public final class ItemDefinition {
 				itemDef.modifiedModelColors = new int[] { 17467 };
 				itemDef.stackable = true;
 				break;
-			/*
-			case 12540:
-				itemDef.name = "3rd age longsword";
-				itemDef.description2 = "It's a longsword from the 3rd age!";
-				itemDef.modelZoom = 1726;
-				itemDef.modelRotation1 = 1576;
-				itemDef.modelRotation2 = 242;
-				itemDef.modelOffset1 = 5;
-				itemDef.modelOffsetY = 4;
-				itemDef.actions = new String[] { null, "Wield", null, null, "Drop" };
-				itemDef.modelID = 28633;
-				itemDef.maleWearId = 28618;
-				itemDef.femaleWearId = 28618;
-				break;
-				*/
-			case 21085:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77000;
-				itemDef.femaleWearId = 77000;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 49950, 49950, 49950, 49950 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21086:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77001;
-				itemDef.femaleWearId = 77001;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 10939, 10939, 10939, 10939 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-
-			case 21087:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77002;
-				itemDef.femaleWearId = 77002;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 3016, 3016, 3016, 3016 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21095:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77003;
-				itemDef.femaleWearId = 77003;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 926, 926, 926, 926 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21099:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77004;
-				itemDef.femaleWearId = 77004;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 34503, 34503, 34503, 34503 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21098:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77005;
-				itemDef.femaleWearId = 77005;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 22428, 22428, 22428, 22428 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21097:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77006;
-				itemDef.femaleWearId = 77006;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 43848, 43848, 43848, 43848 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21096: //White
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77007;
-				itemDef.femaleWearId = 77007;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 127, 127, 127, 127 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21093:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77008;
-				itemDef.femaleWearId = 77008;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 10388, 10388, 10388, 10388 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
-			case 21094:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 77009;
-				itemDef.femaleWearId = 77009;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
-				itemDef.originalModelColors = new int[] { 1, 1, 1, 1 };
-				itemDef.modifiedModelColors = new int[] { 65214, 65200, 65186, 62995 };
-				break;
 			case 21078:
 				itemDef.setDefaults();
 				itemDef.name = "Serpentine visage";
@@ -1255,35 +966,6 @@ public final class ItemDefinition {
 				itemDef.name = "Imbue Scroll";
 				itemDef.actions = new String[] { null, null, null, null, "Destroy" };
 				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				break;
-			case 11996:
-				MobDefinition kbd = MobDefinition.get(50);
-				itemDef.imitate(ItemDefinition.get(17488));
-				itemDef.name = "Pet King black dragon";
-				itemDef.modelID = kbd.npcModels[0];
-				itemDef.anInt167 = 40;
-				itemDef.anInt192 = 40;
-				itemDef.anInt191 = 40;
-				itemDef.modelOffset1 = 70;
-				itemDef.modelOffsetY -= 60;
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 13000:
-				itemDef.setDefaults();
-				MobDefinition kbd2 = MobDefinition.get(50);
-				itemDef.imitate(ItemDefinition.get(17488));
-				itemDef.name = "Pet Queen white dragon";
-				itemDef.modelID = kbd2.npcModels[0];
-				itemDef.anInt167 = 40;
-				itemDef.anInt192 = 40;
-				itemDef.anInt191 = 40;
-				itemDef.modelOffset1 = 70;
-				itemDef.modelOffsetY -= 60;
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.modifiedModelColors = new int[] { 10502, 43906, 11140, 10378, 0, 11138, 809, 33 };
-				itemDef.originalModelColors = new int[] { 100, 100, 226770, 100, 100, 100, 226770, 226770 };
 				break;
 			case 21050:
 				itemDef.setDefaults();
@@ -1709,125 +1391,6 @@ public final class ItemDefinition {
 				itemDef.actions[1] = "Wear";
 				itemDef.actions[4] = "Drop";
 				break;
-			case 13001:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 12487:
-				itemDef.name = "Raccoon";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 7500:
-				itemDef.name = "Jonny";
-				itemDef.actions = new String[5];
-				itemDef.actions[4] = "Drop";
-				itemDef.actions[0] = "Roast";
-				itemDef.actions[2] = "Shave head";
-				break;
-			case 13002:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 13003:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 13004:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 13005:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 13006:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 13007:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 13008:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Rock crab";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				itemDef.stackable = false;
-				break;
-			case 11997:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet General graardor";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11978:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet TzTok-Jad";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 12001:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Corporeal beast";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 12002:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Kree'arra";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 12003:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet K'ril tsutsaroth";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 12004:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Commander zilyana";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
 			case 5020:
 				itemDef.name = "Claim 10 Yells";
 				itemDef.actions = new String[] { "Claim", null, null, null, "Drop" };
@@ -1854,118 +1417,6 @@ public final class ItemDefinition {
 				itemDef.setDefaults();
 				itemDef.imitate(get(12458));
 				itemDef.name = "Pet Dagannoth supreme";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 12006:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Dagannoth prime";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11990:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Dagannoth rex";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11991:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Frost dragon";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11992:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Tormented demon";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11993:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Kalphite queen";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11994:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Slash bash";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11989:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Phoenix";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11988:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Bandos avatar";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11987:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Nex";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11986:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Jungle strykewyrm";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11985:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Desert strykewyrm";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11984:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Ice strykewyrm";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11983:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Green dragon";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11982:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Baby blue dragon";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11981:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Blue dragon";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
-				break;
-			case 11979:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Black dragon";
 				itemDef.groundActions = new String[] { null, null, "Take", null, null };
 				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
@@ -5048,22 +4499,6 @@ public final class ItemDefinition {
 				itemDef.modelOffsetX = 0;
 				itemDef.modelRotation1 = 339;
 				itemDef.modelRotation2 = 192;
-				break;
-			case 13262:
-				itemDef.modelID = 62368;
-				itemDef.name = "Dragon defender";
-				itemDef.modelZoom = 592;
-				itemDef.modelRotation1 = 323;
-				itemDef.modelRotation2 = 1845;
-				itemDef.modelOffset1 = -16;
-				itemDef.modelOffsetY = -3;
-				itemDef.maleWearId = 62367;
-				itemDef.femaleWearId = 62367;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wield";
-				itemDef.actions[4] = "Drop";
 				break;
 			case 20072:
 				itemDef.modelID = 62368;

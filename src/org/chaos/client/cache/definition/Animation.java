@@ -6,8 +6,8 @@ import org.chaos.client.io.ByteBuffer;
 
 public final class Animation {
 
-    public static int[] osrsAnimations = {5070, 5805, 1829, 1828};
-    public static int[] grabFileId = {1829, 1828};
+    public static int[] osrsAnimations = {5070, 5805, 1829, 1828, 1688, 2417};
+    public static int[] grabFileId = {};
 
     public static void dumpFileId(int frame) {
         String s = "";
