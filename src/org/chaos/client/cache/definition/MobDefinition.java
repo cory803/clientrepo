@@ -53,6 +53,11 @@ public final class MobDefinition {
                 definition.standAnimation = 6943;
                 definition.walkAnimation = 6942;
                 break;
+            case 6717: //Correcting animations for Beaver Pet (Woodcutting)
+                definition.walkAnimation = 7719;
+                definition.standAnimation = 9952;
+                break;
+            case 6808:
             case 2127:
             case 2129:
             case 2128:
@@ -70,18 +75,18 @@ public final class MobDefinition {
             case 495:
             case 5547:
             case 6655:
-            case 6717:
             case 6715:
             case 6716:
             case 964:
-                System.out.println("----");
-                System.out.println("name: "+definition.name);
+            case 5892:
+                //System.out.println("----");
+                //System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {
                     //System.out.println("Model "+i+": "+definition.npcModels[i]);
                 //}
-                System.out.println("Size: "+definition.npcSizeInSquares);
+                //System.out.println("Size: "+definition.npcSizeInSquares);
                 //System.out.println("Stand animation: "+definition.standAnimation);
-               // System.out.println("Walk animation: "+definition.walkAnimation);
+                //System.out.println("Walk animation: "+definition.walkAnimation);
                 //System.out.println("Size: "+definition.npcSizeInSquares);
                 break;
             case 5886:
@@ -617,7 +622,6 @@ public final class MobDefinition {
             case 7353:
             case 6835:
             case 6845:
-            case 6808:
             case 7370:
             case 7333:
             case 7351:

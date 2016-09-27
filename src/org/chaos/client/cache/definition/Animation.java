@@ -6,15 +6,44 @@ import org.chaos.client.io.ByteBuffer;
 
 public final class Animation {
 
+    public static int[] osrsAnimations = {5070, 5805, 1829, 1828};
+    public static int[] grabFileId = {1829, 1828};
+
+    public static void dumpFileId(int frame) {
+        String s = "";
+        int file = 0;
+        int k = 0;
+        s = Integer.toHexString(frame);
+        file = Integer.parseInt(s.substring(0, s.length() - 4), 16);
+        k = Integer.parseInt(s.substring(s.length() - 4), 16);
+        System.out.println("Frame: "+frame+" - File: "+file);
+    }
+
     public static void unpackConfig(Archive streamLoader) {
         ByteBuffer stream = new ByteBuffer(streamLoader.get("seq.dat"));
+        ByteBuffer streamOsrs = new ByteBuffer(streamLoader.get("osrsseq.dat"));
         int length = stream.getUnsignedShort();
+        int lengthOsrs = streamOsrs.getUnsignedShort();
         if (cache == null)
             cache = new Animation[length];
+        if (cacheOsrs == null)
+            cacheOsrs = new Animation[lengthOsrs];
+
+        for (int j = 0; j < lengthOsrs; j++) {
+            if (cacheOsrs[j] == null)
+                cacheOsrs[j] = new Animation();
+
+            cacheOsrs[j].readValues(streamOsrs);
+            for (int s = 0; s < grabFileId.length; s++) {
+                if(j == grabFileId[s])
+                    dumpFileId(cacheOsrs[j].frameIDs[0]);
+            }
+        }
         for (int j = 0; j < length; j++) {
             if (cache[j] == null)
                 cache[j] = new Animation();
-            cache[j].readValues(stream);
+
+                cache[j].readValues(stream);
             /*
 			 * Zulrah
 			 */
@@ -61,6 +90,13 @@ public final class Animation {
                     cache[j].priority = 7;
                     cache[j].delays = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
                     cache[j].frameIDs = new int[]{141557879, 141557903, 141557892, 141557863, 141557915, 141557938, 141557990, 141557840, 141557814, 141557772, 141557924, 141558023, 141558014, 141557952, 141557763, 141558058, 141557992, 141557879};
+                    break;
+                case 9952:
+                    //cache[j].id = 9952;
+                    //cache[j].fileId = 3723;
+                    cache[j].frameCount = 12;
+                    cache[j].delays = new int[]{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
+                    cache[j].frameIDs = new int[]{243990573, 243990602, 243990577, 243990549, 243990622, 243990634, 243990582, 243990648, 243990616, 243990662, 243990671, 243990585};
                     break;
                 case 8756:
                     cache[j].frameCount = 41;
@@ -479,22 +515,6 @@ public final class Animation {
                 cache[j].resetWhenWalk = -1;
                 cache[j].priority = -1;
             }
-            if (j == 5070) {
-                cache[j] = new Animation();
-                cache[j].frameCount = 9;
-                cache[j].loopDelay = -1;
-                cache[j].forcedPriority = 5;
-                cache[j].leftHandItem = -1;
-                cache[j].rightHandItem = -1;
-                cache[j].frameStep = 99;
-                cache[j].resetWhenWalk = 0;
-                cache[j].priority = 0;
-                cache[j].delayType = 2;
-                cache[j].oneSquareAnimation = false;
-                cache[j].frameIDs = new int[]{11927608, 11927625, 11927598, 11927678, 11927582, 11927600, 11927669,
-                        11927597, 11927678};
-                cache[j].delays = new int[]{5, 4, 4, 4, 5, 5, 5, 4, 4};
-            }
             if (j == 876) {
                 cache[j].frameCount = 9;
                 cache[j].frameIDs = new int[]{118751240, 118751239, 118751235, 118751234, 118751237, 118751238,
@@ -689,6 +709,11 @@ public final class Animation {
                         4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 3};
             }
         }
+        //Loads OSRS Animations
+        for (int i = 0; i < osrsAnimations.length; i++) {
+            cache[osrsAnimations[i]] = new Animation();
+            cache[osrsAnimations[i]] = cacheOsrs[osrsAnimations[i]];
+        }
     }
 
     public int getFrameLength(int i) {
@@ -808,6 +833,7 @@ public final class Animation {
     }
 
     public static Animation cache[];
+    public static Animation cacheOsrs[];
     public int frameCount;
     public int frameIDs[];
     public int frameIDs2[];
