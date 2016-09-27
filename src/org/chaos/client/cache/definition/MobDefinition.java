@@ -69,6 +69,7 @@ public final class MobDefinition {
                 //System.out.println("Size: "+definition.npcSizeInSquares);
                 break;
             case 5886: //TODO: Add abyssal sire models
+            case 5866:
                 definition.actions = new String[5];
                 definition.actions[1] = "Attack";
             break;
