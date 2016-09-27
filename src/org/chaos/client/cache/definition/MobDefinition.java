@@ -57,9 +57,9 @@ public final class MobDefinition {
                 definition.walkAnimation = 7719;
                 definition.standAnimation = 9952;
                 break;
-            case 388:
-                //System.out.println("----");
-                //System.out.println("name: "+definition.name);
+            case 5907:
+                System.out.println("----");
+                System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {
                     //System.out.println("Model "+i+": "+definition.npcModels[i]);
                 //}
@@ -67,6 +67,9 @@ public final class MobDefinition {
                 //System.out.println("Stand animation: "+definition.standAnimation);
                 //System.out.println("Walk animation: "+definition.walkAnimation);
                 //System.out.println("Size: "+definition.npcSizeInSquares);
+                for (int i = 0; i < definition.dialogueModels.length; i++) {
+                    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
+                }
                 break;
             case 5886: //TODO: Add abyssal sire models
             case 5866:

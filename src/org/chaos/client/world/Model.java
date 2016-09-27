@@ -463,6 +463,34 @@ public class Model extends Animable {
 		anIntArray1633 = facePoint3;
 		convertTexturesTo317(textureIds, texTrianglesPoint1, texTrianglesPoint2, texTrianglesPoint3);
 		filterTriangles();
+		//Used to increase the size of OSRS boss pet dialog models
+		switch(modelID) {
+			case 10417:
+			case 10418:
+			case 10419:
+			case 28855:
+			case 28856:
+			case 28857:
+			case 28858:
+			case 28859:
+			case 28860:
+			case 28861:
+			case 28862:
+			case 28864:
+			case 28865:
+			case 28866:
+			case 29184:
+			case 29185:
+			case 29186:
+			case 29187:
+			case 29320:
+			case 29758:
+			case 28761:
+			case 29762:
+			case 5805:
+				upscale(1);
+				break;
+		}
 	}
 
 	public Model(int modelId) {
@@ -471,7 +499,8 @@ public class Model extends Animable {
 			read622Model(is, modelId);
 		else
 			readOldModel(modelId);
-		
+
+		System.out.println(""+modelId);
 		/*if (newmodel[modelId]) {
 			if (anIntArray1638 != null) {
 				for (int index = 0; index < anIntArray1638.length; index++) {
@@ -1074,6 +1103,7 @@ public class Model extends Animable {
 	}
 
 	private void readOldModel(int i) {
+
 		int j = -870;
 		aBoolean1618 = true;
 		aBoolean1659 = false;

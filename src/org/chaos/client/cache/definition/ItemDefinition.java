@@ -139,6 +139,7 @@ public final class ItemDefinition {
             case 12651:
             case 12652:
             case 12653:
+            case 12816:
             case 11995:
             case 12654:
             case 12655:
