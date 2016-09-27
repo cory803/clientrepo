@@ -19,7 +19,7 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {2042, 6593, 497, 6609, 964};
+    public static int[] osrsNpcs = {2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -45,14 +45,44 @@ public final class MobDefinition {
             definition.readValues(buffer);
         }
         switch (id) {
-            case 6609:
+            case 6644: //Correcting animations for Bandos Pet
+                definition.standAnimation = 7059;
+                definition.walkAnimation = 7058;
+                break;
+            case 6647: //Correcting animations for Zamorak Pet
+                definition.standAnimation = 6943;
+                definition.walkAnimation = 6942;
+                break;
+            case 2127:
+            case 2129:
+            case 2128:
+            case 6626:
+            case 6627:
+            case 6641:
+            case 6643:
+            case 6652:
+            case 5907:
+            case 6653:
+            case 6656:
+            case 5546:
+            case 497:
+            case 5536:
+            case 495:
+            case 5547:
+            case 6655:
+            case 6717:
+            case 6715:
+            case 6716:
+            case 964:
+                System.out.println("----");
                 System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {
-                    //System.out.println("Model: "+definition.npcModels[i]);
+                    //System.out.println("Model "+i+": "+definition.npcModels[i]);
                 //}
-                System.out.println("Stand animation: "+definition.standAnimation);
-                System.out.println("Walk animation: "+definition.walkAnimation);
                 System.out.println("Size: "+definition.npcSizeInSquares);
+                //System.out.println("Stand animation: "+definition.standAnimation);
+               // System.out.println("Walk animation: "+definition.walkAnimation);
+                //System.out.println("Size: "+definition.npcSizeInSquares);
                 break;
             case 5886:
                 definition.name = "Abyssal Sire";
@@ -356,12 +386,6 @@ public final class MobDefinition {
                 break;
             case 5418:
                 definition.combatLevel = 90;
-                break;
-            case 6715:
-                definition.combatLevel = 91;
-                break;
-            case 6716:
-                definition.combatLevel = 128;
                 break;
             case 6701:
                 definition.combatLevel = 173;
@@ -793,19 +817,6 @@ public final class MobDefinition {
                 definition.combatLevel = 580;
                 definition.standAnimation = 6972;
                 definition.walkAnimation = 6973;
-                definition.adjustVertextPointZ = 43;
-                definition.adjustVertextPointsXOrY = 43;
-                definition.npcSizeInSquares = 2;
-                break;
-
-            case 3036:
-                definition.name = "K'ril tsutsaroth";
-                definition.actions = new String[5];
-                definition.actions[0] = "Pick-up";
-                definition.npcModels = new int[]{27768, 27773, 27764, 27765, 27770};
-                definition.combatLevel = 650;
-                definition.standAnimation = 6943;
-                definition.walkAnimation = 6942;
                 definition.adjustVertextPointZ = 43;
                 definition.adjustVertextPointsXOrY = 43;
                 definition.npcSizeInSquares = 2;

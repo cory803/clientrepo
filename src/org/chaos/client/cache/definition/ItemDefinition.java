@@ -55,7 +55,7 @@ public final class ItemDefinition {
 		}
 	}
 
-	public static int[] osrsItems = {11943, 13178, 13247};
+	public static int[] osrsItems = {11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
@@ -129,7 +129,37 @@ public final class ItemDefinition {
             //Default osrs pets
             case 13247:
             case 13178:
+            case 12921:
+            //case 12940:
+            case 12939:
+            case 12643:
+            case 12644:
+            case 12645:
+            case 12649:
+            case 12650:
+            case 12651:
+            case 12652:
+            case 12653:
+            case 11995:
+            case 12654:
+            case 12655:
+            case 13181:
+            case 13179:
+            case 13177:
+            case 13225:
+            case 12648:
+            case 13322:
+            case 13320:
+            case 13321:
+                //System.out.println("------");
+                //System.out.println("Name: "+itemDef.name);
+                //System.out.println("Model ID: "+itemDef.modelID);
                 itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
+                break;
+            case 12940:
+                System.out.println("------");
+                System.out.println("Name: "+itemDef.name);
+                System.out.println("Model ID: "+itemDef.modelID);
                 break;
 			case 10586:
 				itemDef.name = "Knight's Lamp";
@@ -656,19 +686,6 @@ public final class ItemDefinition {
 				// itemDef.modelRotation1 = 85;
 				// itemDef.modelRotation2 = 1867;
 				itemDef.actions = new String[] { null, null, "Check", "Config", "Drop" };
-				break;
-			case 11995:
-				itemDef.setDefaults();
-				itemDef.modelID = 28256;
-				itemDef.modelZoom = 1284;
-				itemDef.modelRotation1 = 0;
-				itemDef.modelRotation2 = 175;
-				itemDef.modelOffset1 = -66;
-				itemDef.modelOffsetY = 75;
-				itemDef.modelOffsetX = 1939;
-				itemDef.name = "Chaos Elemental Jr.";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
 			case 11882:
 				itemDef.actions = new String[5];
