@@ -210,8 +210,9 @@ public final class ObjectDefinition {
                 definition.name = "Stone";
                 definition.anIntArray776 = new int[]{10};
                 break;
-
-
+            case 62:
+                definition.actions = new String[]{"Touch", null, null, null, null};
+                break;
             case 1517:
             case 1520:
                 definition.hasActions = false;
