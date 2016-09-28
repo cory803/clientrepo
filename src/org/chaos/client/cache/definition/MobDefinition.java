@@ -105,7 +105,9 @@ public final class MobDefinition {
                 definition.adjustVertextPointsXOrY = 128;
                 definition.adjustVertextPointZ = 128;
                 break;
-
+            case 437:
+                definition.actions = new String[]{"Talk-to", null, null, null, null};
+                break;
             case 2722:
                 MobDefinition spot1 = get(318);
                 definition.npcSizeInSquares = spot1.npcSizeInSquares;
