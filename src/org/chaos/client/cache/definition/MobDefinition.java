@@ -19,7 +19,9 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
+    private static MobDefinition caveKraken;
+
+    public static int[] osrsNpcs = {5535, 491, 492, 493, 496, 491, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -35,6 +37,9 @@ public final class MobDefinition {
         for (int i = 0; i < osrsNpcs.length; i++) {
             if(osrsNpcs[i] == id) {
                 osrsBuffer.position = osrsStreamIndices[id];
+                if(id == 494) {
+                    buffer.position = streamIndices[id];
+                }
                 osrs = true;
             }
         }
@@ -57,19 +62,34 @@ public final class MobDefinition {
                 definition.walkAnimation = 7719;
                 definition.standAnimation = 9952;
                 break;
-            case 5907:
-                System.out.println("----");
-                System.out.println("name: "+definition.name);
+            case 502: //Kraken boss
+                definition.npcModels = new int[1];
+                definition.npcModels[0] = 28231;
+                definition.name = "Kraken";
+                definition.actions = new String[] {null, "Attack", null, null, null};
+                definition.standAnimation = 3989;
+                definition.walkAnimation = 3989;
+                definition.combatLevel = 291;
+                definition.npcSizeInSquares = 6;
+                definition.adjustVertextPointsXOrY = 150;
+                definition.adjustVertextPointZ = 150;
+                definition.modelLightning = 30;
+                definition.modelShadowing = 150;
+                break;
+            case 5535:
+            case 6611:
+                //System.out.println("----");
+                //System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {
                     //System.out.println("Model "+i+": "+definition.npcModels[i]);
                 //}
                 //System.out.println("Size: "+definition.npcSizeInSquares);
-                //System.out.println("Stand animation: "+definition.standAnimation);
+                System.out.println("Stand animation: "+definition.standAnimation);
                 //System.out.println("Walk animation: "+definition.walkAnimation);
                 //System.out.println("Size: "+definition.npcSizeInSquares);
-                for (int i = 0; i < definition.dialogueModels.length; i++) {
-                    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
-                }
+                //for (int i = 0; i < definition.dialogueModels.length; i++) {
+                //    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
+                //}
                 break;
             case 5886: //TODO: Add abyssal sire models
             case 5866:
@@ -211,16 +231,6 @@ public final class MobDefinition {
                 definition.walkAnimation = scor.walkAnimation;
                 definition.combatLevel = 464;
                 definition.npcSizeInSquares = 3;
-                break;
-            case 2002:
-                definition.npcModels = new int[1];
-                definition.npcModels[0] = 28299;
-                definition.name = "Vet'ion";
-                definition.actions = new String[]{null, "Attack", null, null, null};
-                MobDefinition vet = get(90);
-                definition.standAnimation = vet.standAnimation;
-                definition.walkAnimation = vet.walkAnimation;
-                definition.combatLevel = 464;
                 break;
             case 6139:
                 definition.actions = new String[]{"Talk-to", null, "Change Home", null, null};

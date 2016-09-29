@@ -19,6 +19,7 @@ public final class ObjectDefinition {
     private static int[] streamIndices;
     private static int[] streamIndices667;
     private static int[] streamIndicesOsrs;
+    private static ByteBuffer stream;
     private static ByteBuffer stream667;
     private static ByteBuffer streamOsrs;
 
@@ -27,6 +28,38 @@ public final class ObjectDefinition {
 
     private static final int[] removeObjects = {12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
             24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349, 2309};
+
+    private static final int[] osrsObjects = {
+            //Cerberus
+            21772,
+
+            //Kraken
+            316,
+            324,
+            536,
+            538,
+            655,
+            816,
+            1457,
+            1459,
+            1460,
+            2745,
+            4909,
+            5456,
+            5587,
+            12299,
+            14390,
+            14456,
+            14457,
+            14459,
+            14460,
+            14468,
+            26529,
+            26530,
+            26534,
+            26552,
+            26555
+    };
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
 
@@ -43,26 +76,30 @@ public final class ObjectDefinition {
                 || id == 39231 || id == 36676 || id == 36692 || id > 11915 && id <= 11929 || id >= 11426 && id <= 11444
                 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715);
 
-        boolean oldschoolObjects = id == 22348;
         if (id < 0) {
             id = 0;
+        }
+        boolean oldschoolObjects = false;
+        for (int i = 0; i < osrsObjects.length; i++) {
+            if(osrsObjects[i] == id) {
+                oldschoolObjects = true;
+            }
         }
         try {
             if (oldschoolObjects)
                 streamOsrs.position = streamIndicesOsrs[id];
-            else if (id > streamIndices.length || loadNew) {
+            else if (id > streamIndices.length || loadNew)
                 stream667.position = streamIndices667[id];
-            } else
+            else
                 stream.position = streamIndices[id];
         } catch (Exception e) {
             e.printStackTrace();
         }
         definition.id = id;
         definition.setDefaults();
-        // definition.readValues(stream);
-        if (oldschoolObjects)
+        if (oldschoolObjects) {
             definition.readValues(streamOsrs);
-        else if (id > streamIndices.length || loadNew)
+        } else if (id > streamIndices.length || loadNew)
             definition.readValues(stream667);
         else
             definition.readValues(stream);
@@ -77,12 +114,11 @@ public final class ObjectDefinition {
         }
 
 
-//        if (!clientInstance.onDemandFetcher.getPriorityHandler().isRunning()) {
-//            if (!OBJECT_MODELS.contains(id)) {
-//                System.out.println("Object Id: " + id);
-//                OBJECT_MODELS.add(id);
-//            }
-//        }
+        //Dump objects for OSRS maps
+        if (!OBJECT_MODELS.contains(id)) {
+           System.out.println(id+",");
+           OBJECT_MODELS.add(id);
+        }
 
 /*
         if(id == 1902) {
@@ -950,16 +986,6 @@ public final class ObjectDefinition {
                 definition.hasActions = false;
                 break;
 
-            case 21772:
-                definition.setDefaults();
-                definition.objectModelIDs = new int[]{29399};
-                definition.name = "Portcullis";
-                definition.sizeX = 3;
-                definition.aBoolean764 = true;
-                definition.actions = new String[]{"Exit", null, null, null, null};
-                definition.hasActions = true;
-                break;
-
             case 21773:
                 definition.setDefaults();
                 definition.objectModelIDs = new int[]{29280};
@@ -1613,6 +1639,7 @@ public final class ObjectDefinition {
         mruNodes1 = null;
         mruNodes2 = null;
         streamIndices = null;
+        streamIndicesOsrs = null;
         cache = null;
         stream = null;
     }
@@ -1648,7 +1675,8 @@ public final class ObjectDefinition {
 
         int totalObjects = stream.getUnsignedShort();
         int totalObjects667 = streamIdx667.getUnsignedShort();
-        int totalObjectsOsrs = streamOsrs.getUnsignedShort();
+        int totalObjectsOsrs = streamIdxOsrs.getUnsignedShort();
+        System.out.println("Total objects osrs: "+totalObjectsOsrs);
         streamIndices = new int[totalObjects];
         streamIndices667 = new int[totalObjects667];
         streamIndicesOsrs = new int[totalObjectsOsrs];
@@ -1666,7 +1694,6 @@ public final class ObjectDefinition {
         for (int j = 0; j < totalObjectsOsrs; j++) {
             streamIndicesOsrs[j] = i;
             i += streamIdxOsrs.getUnsignedShort();
-            streamOsrs.position = streamIndicesOsrs[j];
             //ObjectDefinition definition = new ObjectDefinition();
             //definition.readValues(streamOsrs);
             //System.out.println("Definition: "+definition.name+", "+j);
@@ -1691,7 +1718,6 @@ public final class ObjectDefinition {
     public int configID;
     private boolean aBoolean751;
     public static boolean lowDetail;
-    private static ByteBuffer stream;
     public int id;
     public boolean aBoolean757;
     public int mapSceneID;

@@ -848,6 +848,9 @@ public final class CacheFileRequester implements Runnable {
 		int[] dntUse = new int[] { 5181, 5182, 5183, 5184, 5180, 5179, 5175, 5176, 4014, 3997, 5314, 5315, 5172 };
 		for (int i2 = 0; i2 < mapCount; i2++) {
 			mapIndices1[i2] = stream2.getUnsignedShort();
+			if(mapIndices1[i2] == 14681) {
+				System.out.println("Map array "+i2);
+			}
 			mapIndices2[i2] = stream2.getUnsignedShort();
 			mapIndices3[i2] = stream2.getUnsignedShort();
 			for (int i : dntUse) {
@@ -876,6 +879,20 @@ public final class CacheFileRequester implements Runnable {
 		mapIndices1[150] = 9264;
 		mapIndices2[150] = 956;
 		mapIndices3[150] = 957;
+
+		/** KRAKEN CAVES **/
+		mapIndices1[941] = 14681;
+		mapIndices2[941] = 1960;
+		mapIndices3[941] = 1961;
+
+		mapIndices1[1604] = 14682;
+		mapIndices2[1604] = 1870;
+		mapIndices3[1604] = 1871;
+
+		mapIndices1[1605] = -1;
+		mapIndices2[1605] = -1;
+		mapIndices3[1605] = -1;
+
 		/*
 		 * j1 = abyte2.length / 6; int loopVal = j1; mapIndices1 = new int[j1];
 		 * mapIndices2 = new int[j1]; mapIndices3 = new int[j1]; mapIndices4 =

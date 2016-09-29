@@ -500,7 +500,7 @@ public class Model extends Animable {
 		else
 			readOldModel(modelId);
 
-		System.out.println(""+modelId);
+		//System.out.println(""+modelId);
 		/*if (newmodel[modelId]) {
 			if (anIntArray1638 != null) {
 				for (int index = 0; index < anIntArray1638.length; index++) {
