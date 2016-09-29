@@ -115,10 +115,10 @@ public final class ObjectDefinition {
 
 
         //Dump objects for OSRS maps
-        if (!OBJECT_MODELS.contains(id)) {
-           System.out.println(id+",");
-           OBJECT_MODELS.add(id);
-        }
+        //if (!OBJECT_MODELS.contains(id)) {
+           //System.out.println(id+",");
+           //OBJECT_MODELS.add(id);
+        //}
 
 /*
         if(id == 1902) {

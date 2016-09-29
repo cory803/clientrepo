@@ -55,7 +55,7 @@ public final class ItemDefinition {
 		}
 	}
 
-	public static int[] osrsItems = {12954, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
+	public static int[] osrsItems = {12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
@@ -153,13 +153,19 @@ public final class ItemDefinition {
             case 13321:
                 itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
                 break;
-            case 12954:
+//			case 12004:
+//			case 12005:
+//			case 12006:
+//			case 12899:
+//			case 12900:
+//			case 11905:
+//			case 11906:
 //                System.out.println("------");
 //                System.out.println("Name: "+itemDef.name);
 //                System.out.println("Model ID: "+itemDef.modelID);
 //                System.out.println("Male wear: "+itemDef.maleWearId);
 //                System.out.println("Female wear: "+itemDef.femaleWearId);
-                break;
+//                break;
 			case 10586:
 				itemDef.name = "Knight's Lamp";
 				break;
@@ -172,11 +178,6 @@ public final class ItemDefinition {
 				break;
 			case 15355:
 				itemDef.name = "Wilderness scroll";
-				break;
-			case 11906:
-				itemDef.name = "Gold-trimmed wizard set";
-				itemDef.actions = new String[5];
-				itemDef.actions[0] = "Open";
 				break;
 			case 12437:
 				itemDef.actions = new String[5];
@@ -1413,13 +1414,6 @@ public final class ItemDefinition {
 				itemDef.name = "Vote Reward Book";
 				itemDef.actions = new String[] { "Claim", null, null, null, "Drop" };
 				itemDef.stackable = true;
-				break;
-			case 12005:
-				itemDef.setDefaults();
-				itemDef.imitate(get(12458));
-				itemDef.name = "Pet Dagannoth supreme";
-				itemDef.groundActions = new String[] { null, null, "Take", null, null };
-				itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
 				break;
 			case 1543:
 			case 1544:
