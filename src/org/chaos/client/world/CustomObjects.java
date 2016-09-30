@@ -24,6 +24,15 @@ public class CustomObjects {
 	}
 
 	public static final int[][] CUSTOM_OBJECTS = {
+			//rune ore @ BH
+			{ 14859, 3118, 3690, 0, 1 },
+			{ 14859, 3117, 3691, 0, 1 },
+			{ 14859, 3119, 3689, 0, 1 },
+			{ 14859, 3117, 3688, 0, 1 },
+			{ 14859, 3116, 3688, 0, 1 },
+			{ 14859, 3115, 3690, 0, 1 },
+			{ 14859, 3116, 3689, 0, 1 },
+			//giant crystal
 			/* Training Grounds Skillzone */
 			//giant crystal
 			{ 62, 2508, 3363, 0, 2 },
