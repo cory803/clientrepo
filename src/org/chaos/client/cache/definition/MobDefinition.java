@@ -97,6 +97,16 @@ public final class MobDefinition {
             case 2691:
                 definition.name = "Alvin";
                 break;
+            case 321:
+                definition.name = "Rocktail";
+                definition.description = "The wilderness rocktail fishing spot.".getBytes();
+                definition.actions = new String[]{"Fish", null, null, null, null};
+                break;
+            case 322:
+                definition.name = "Karambwan";
+                definition.description = "The wilderness karambwan fishing spot.".getBytes();
+                definition.actions = new String[]{"Net", null, null, null, null};
+                break;
             case 13727:
                 definition.npcModels = new int[]{8377};
                 definition.name = "Xuan";
