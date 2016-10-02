@@ -25,6 +25,18 @@ public final class SpotAnimDefinition {
 	}
 
 	private static void custom() {
+		//Chaos fanatic bomb
+		cache[157].modelId = 3116;
+		cache[157].animationId = 693;
+		cache[157].sizeXY = 128;
+		cache[157].sizeZ = 128;
+		cache[157].rotation = 0;
+		cache[157].shadow = 60;
+		cache[157].lightness = 60;
+		cache[157].originalModelColours = new int[] {0, 0, 0, 0, 0, 0};
+		cache[157].changedModelColours = new int[] {0, 0, 0, 0, 0, 0};
+		cache[157].animation = Animation.cache[693];
+
 		cache[2274].modelId = cache[2281].modelId;
 		cache[2274].animationId = cache[2281].animationId;
 		cache[2274].rotation = 90;
@@ -48,20 +60,18 @@ public final class SpotAnimDefinition {
 		cache[1005].animationId = 5630;
 		cache[1005].animation = Animation.cache[5630];
 
-		// Blowpipe
-		// System.out.println("Color codes start ---");
-		// for(int i = 0; i < cache[226].changedModelColours.length; i++) {
-		// System.out.println(""+cache[226].changedModelColours[i]);
-		// }
-		// System.out.println(cache[226].modelId+"");
-
-		// Zulrah
-		cache[1044].modelId = 70003;
+		// Zulrah shoot gfx
+		cache[1044].modelId = 20390;
 		cache[1044].animationId = 5358;
-		cache[1044].animation = Animation.cache[5358];
+		cache[1044].sizeXY = 128;
+		cache[1044].sizeZ = 128;
+		cache[1044].rotation = 0;
 		cache[1044].shadow = 20;
-		cache[1044].originalModelColours = new int[] { 22476, 25511, 0, 0, 0, 0, };
-		cache[1044].changedModelColours = new int[] { 30608, 30236, 0, 0, 0, 0, };
+		cache[1044].lightness = 0;
+		cache[1044].originalModelColours = new int[] {22476, 25511, 0, 0, 0, 0};
+		cache[1044].changedModelColours = new int[] {30608, 30236, 0, 0, 0, 0};
+		cache[1044].animation = Animation.cache[5358];
+
 
 		cache[1046].modelId = 70004;
 		cache[1046].animationId = 6648;

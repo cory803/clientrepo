@@ -186,7 +186,10 @@ public final class ObjectDefinition {
             14709,
             14710,
             14718,
-            14719
+            14719,
+
+            //Chaos fanatic
+            26765
     };
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
@@ -243,26 +246,23 @@ public final class ObjectDefinition {
 
 
         //Dump objects for OSRS maps
-        if (!OBJECT_MODELS.contains(id)) {
-           System.out.println(id+",");
-           OBJECT_MODELS.add(id);
-        }
+       // if (!OBJECT_MODELS.contains(id)) {
+          // System.out.println(id+",");
+           //OBJECT_MODELS.add(id);
+        //}
 
-/*
-        if(id == 1902) {
-			if (!clientInstance.onDemandFetcher.getPriorityHandler().isRunning()) {
-				if (definition.objectModelIDs != null) {
-					for (int i2 = 0; i2 < definition.objectModelIDs.length; i2++) {
-						if (!OBJECT_MODELS.contains(definition.objectModelIDs[i2])) {
-							System.out.println("Object Model: " + definition.objectModelIDs[i2]);
-							OBJECT_MODELS.add(definition.objectModelIDs[i2]);
-						}
-					}
-				}
-			}
-			definition.objectModelIDs = new int[] {1, 2, 3};
+
+        if(id == 26765) {
+            if (definition.objectModelIDs != null) {
+                for (int i2 = 0; i2 < definition.objectModelIDs.length; i2++) {
+                    if (!OBJECT_MODELS.contains(definition.objectModelIDs[i2])) {
+                        System.out.println("Object Model: " + definition.objectModelIDs[i2]);
+                        OBJECT_MODELS.add(definition.objectModelIDs[i2]);
+                    }
+                }
+            }
 		}
-*/
+
 
         int[][] shootingStars = {{38661, 42165}, {38662, 42166}, {38663, 42163}, {38664, 42164},
                 {38665, 42160}, {38666, 42159}, {38667, 42168}, {38668, 42169},};
