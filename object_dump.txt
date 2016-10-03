@@ -1,0 +1,164 @@
+Object Model: 23908
+Object Model: 782
+Object Model: 783
+Object Model: 784
+Object Model: 834
+Object Model: 24630
+Object Model: 24640
+Object Model: 1105
+Object Model: 2214
+Object Model: 4873
+Object Model: 16239
+Object Model: 2215
+Object Model: 16238
+Object Model: 6932
+Object Model: 15553
+Object Model: 15554
+Object Model: 15555
+Object Model: 15556
+Object Model: 29520
+Object Model: 29522
+Object Model: 29537
+Object Model: 29540
+Object Model: 29582
+Object Model: 29549
+Object Model: 29530
+Object Model: 29579
+Object Model: 29529
+Object Model: 29535
+Object Model: 29521
+Object Model: 29585
+Object Model: 29570
+Object Model: 29553
+Object Model: 29541
+Object Model: 29560
+Object Model: 29555
+Object Model: 29526
+Object Model: 29574
+Object Model: 29532
+Object Model: 29587
+Object Model: 29564
+Object Model: 29569
+Object Model: 29551
+Object Model: 29563
+Object Model: 29552
+Object Model: 29568
+Object Model: 29545
+Object Model: 29527
+Object Model: 29573
+Object Model: 29571
+Object Model: 29554
+Object Model: 29427
+Object Model: 29428
+Object Model: 29525
+Object Model: 29544
+Object Model: 29523
+Object Model: 29536
+Object Model: 29581
+Object Model: 29586
+Object Model: 29565
+Object Model: 29567
+Object Model: 29543
+Object Model: 29550
+Object Model: 29547
+Object Model: 29528
+Object Model: 29572
+Object Model: 29577
+Object Model: 29534
+Object Model: 29566
+Object Model: 29557
+Object Model: 29576
+Object Model: 29583
+Object Model: 29580
+Object Model: 29538
+Object Model: 29561
+Object Model: 29559
+Object Model: 29542
+Object Model: 29546
+Object Model: 29524
+Object Model: 29558
+Object Model: 29548
+Object Model: 29533
+Object Model: 29430
+Object Model: 29539
+Object Model: 29436
+Object Model: 29452
+Object Model: 29465
+Object Model: 29450
+Object Model: 29455
+Object Model: 29467
+Object Model: 29449
+Object Model: 29466
+Object Model: 29445
+Object Model: 29435
+Object Model: 29437
+Object Model: 29457
+Object Model: 29458
+Object Model: 29464
+Object Model: 29447
+Object Model: 29434
+Object Model: 29470
+Object Model: 29469
+Object Model: 29456
+Object Model: 29468
+Object Model: 29444
+Object Model: 29431
+Object Model: 29442
+Object Model: 29433
+Object Model: 29463
+Object Model: 29438
+Object Model: 29446
+Object Model: 29432
+Object Model: 29459
+Object Model: 29460
+Object Model: 29440
+Object Model: 29441
+Object Model: 29439
+Object Model: 29461
+Object Model: 29451
+Object Model: 29443
+Object Model: 29454
+Object Model: 29453
+Object Model: 29462
+Object Model: 29448
+Object Model: 29589
+Object Model: 29590
+Object Model: 29588
+Object Model: 29584
+Object Model: 29531
+Object Model: 29562
+Object Model: 29575
+
+
+
+
+<hero description="Chaos is the #1 leading RuneScape Private Server in 2017. View guides &amp; many other things on our official wiki." imagename="" cropposition="" />[[Category:Browse]]
+
+<center>
+{| width="auto"
+|[[File:Bosses.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Bosses]]
+|[[File:Shops.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Shops]]
+|[[File:Skilling.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Skilling]]
+|-
+|[[File:Minigames.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Minigames]]
+|[[File:Other_guides.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Other_Guides]]
+|[[File:Monsters.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Monsters]]
+|-
+|[[File:Forums.png|thumb|270px|center|link=http://chaosps.com/forums
+|[[File:Play Now.png|thumb|270px|center|link=http://chaosps.com/play
+|[[File:Teams.png|thumb|270px|center|link=http://chaosps.wikia.com/wiki/Teams]]
+|}
+
+----
+{| class="article-table" border="1" cellpadding="1" cellspacing="1" style="width: 750px;"
+|-
+! scope="col" style="text-align:center;width:50px;" |About RuneLive
+|-
+|
+After the closure of Ikov in 2016, Ikov2 was remade as the original phenomenom's success. Ikov2 then renamed to RuneLive shortly after. This community runs from loyal members, to owners who enjoyed their Ikov experience, that recreating its division had to be done.
+
+This RuneScape Private Server continues to bring excitement to its warm community of over 200+ online members each day. Suggestions and improvements to the server continues to be recognized as RuneLive expands.
+
+Without the help of the supportive strong community, and dedicated owners; '''Jonny''' '''&''' '''Grenade''' this project couldn't have been made.
+|}
+</center>

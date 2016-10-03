@@ -174,23 +174,14 @@ public final class ObjectDefinition {
             14676,
             14680,
             14685,
-            489,
-            490,
-            491,
-            721,
-            1596,
-            1597,
-            14462,
-            14463,
-            14706,
-            14709,
-            14710,
-            14718,
-            14719,
 
             //Chaos fanatic
             26765
     };
+
+    public static int[] debugObjects = {
+    };
+
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
 
@@ -246,13 +237,16 @@ public final class ObjectDefinition {
 
 
         //Dump objects for OSRS maps
-       // if (!OBJECT_MODELS.contains(id)) {
-          // System.out.println(id+",");
-           //OBJECT_MODELS.add(id);
-        //}
+//        if (!OBJECT_MODELS.contains(id)) {
+//           System.out.println(id+",");
+//           OBJECT_MODELS.add(id);
+//        }
 
 
-        if(id == 26765) {
+        for (int j = 0; j < debugObjects.length; j++) {
+            if(debugObjects[j] != definition.id) {
+                continue;
+            }
             if (definition.objectModelIDs != null) {
                 for (int i2 = 0; i2 < definition.objectModelIDs.length; i2++) {
                     if (!OBJECT_MODELS.contains(definition.objectModelIDs[i2])) {
