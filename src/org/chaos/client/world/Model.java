@@ -463,10 +463,12 @@ public class Model extends Animable {
 		anIntArray1633 = facePoint3;
 		convertTexturesTo317(textureIds, texTrianglesPoint1, texTrianglesPoint2, texTrianglesPoint3);
 		filterTriangles();
-		//Used to increase the size of OSRS boss pet dialog models
+		//Used to increase the size of OSRS dialog models
 		switch(modelID) {
 			case 10417:
 			case 10418:
+			case 48:
+			case 83:
 			case 10419:
 			case 28855:
 			case 28856:
@@ -1238,6 +1240,12 @@ public class Model extends Animable {
 			anIntArray1643[j4] = stream.getUnsignedShort();
 			anIntArray1644[j4] = stream.getUnsignedShort();
 			anIntArray1645[j4] = stream.getUnsignedShort();
+		}
+		switch(i) {
+			case 48:
+			case 83:
+				upscale(1);
+				break;
 		}
 	}
 

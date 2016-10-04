@@ -19,7 +19,7 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 491, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
+    public static int[] osrsNpcs = {401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -27,7 +27,9 @@ public final class MobDefinition {
                 return cache[i];
             }
         }
-
+        if(id == 490) {
+            System.out.println("Npc: 490");
+        }
         cacheIndex = (cacheIndex + 1) % 20;
         MobDefinition definition = cache[cacheIndex] = new MobDefinition();
         buffer.position = streamIndices[id];
@@ -74,20 +76,43 @@ public final class MobDefinition {
                 definition.modelLightning = 30;
                 definition.modelShadowing = 150;
                 break;
-            case 5535:
-            case 6611:
-                //System.out.println("----");
-                //System.out.println("name: "+definition.name);
+            case 401:
+                System.out.println("----");
+                System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {
-                    //System.out.println("Model "+i+": "+definition.npcModels[i]);
-                //}
+                  //  System.out.println("Model "+i+": "+definition.npcModels[i]);
+               // }
                 //System.out.println("Size: "+definition.npcSizeInSquares);
-                System.out.println("Stand animation: "+definition.standAnimation);
+               // System.out.println("Stand animation: "+definition.standAnimation);
                 //System.out.println("Walk animation: "+definition.walkAnimation);
                 //System.out.println("Size: "+definition.npcSizeInSquares);
-                //for (int i = 0; i < definition.dialogueModels.length; i++) {
-                //    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
-                //}
+                for (int i = 0; i < definition.dialogueModels.length; i++) {
+                    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
+                }
+                break;
+            case 490:
+                definition.name = "Nieve";
+                definition.walkAnimation = 1205;
+                definition.standAnimation = 813;
+                definition.npcModels = new int[10];
+                definition.npcModels[0] = 392; // Hat
+                definition.npcModels[1] = 27644; // Platebody
+                definition.npcModels[8] = 27640; // Platebody arms
+                definition.npcModels[2] = 19951; // Platelegs
+                definition.npcModels[3] = 3661; // Cape
+                definition.npcModels[4] = 28827; // Gloves
+                definition.npcModels[5] = 9644; // Boots
+                definition.npcModels[6] = 27654; // Amulet
+                definition.npcModels[7] = 9640; // Fire cape
+                definition.npcModels[9] = 40942; // Elysian spirit shield
+                definition.dialogueModels = new int[] {10031};
+                definition.actions = new String[] {"Talk-to", "Trade", null, null, null};
+                definition.combatLevel = 0;
+                definition.npcSizeInSquares = 1;
+                definition.adjustVertextPointsXOrY = 128;
+                definition.adjustVertextPointZ = 128;
+                definition.originalModelColours = new int[] {6798};
+                definition.changedModelColours = new int[] {9137};
                 break;
             case 5886: //TODO: Add abyssal sire models
             case 5866:
