@@ -4436,6 +4436,13 @@ public final class ItemDefinition {
 				itemDef.actions = new String[] { "Drink", null, null, null, null, "Drop" };
 				itemDef.modelID = 61812;
 				break;
+            case 16389:
+                itemDef.name = "Sir owen's longsword";
+                itemDef.description2 = "It's a sir owen's longsword.";
+                itemDef.actions = new String[5];
+                itemDef.actions[1] = "Wield";
+                itemDef.actions[4] = "Drop";
+                break;
 			case 15262:
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Open";
