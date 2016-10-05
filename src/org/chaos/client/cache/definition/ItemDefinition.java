@@ -4453,7 +4453,7 @@ public final class ItemDefinition {
 				break;
 			case 4155:
 				itemDef.name = "Slayer gem";
-				itemDef.actions = new String[] { "Activate", null, "Social-Slayer", null, "Destroy" };
+				itemDef.actions = new String[] { "Activate", null, "Visit Master", null, "Destroy" };
 				break;
 			case 13663:
 				itemDef.name = "Stat reset cert.";
