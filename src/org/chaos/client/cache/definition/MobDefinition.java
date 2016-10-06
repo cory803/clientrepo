@@ -19,7 +19,7 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {635, 401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
+    public static int[] osrsNpcs = {637, 635, 401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -72,6 +72,9 @@ public final class MobDefinition {
                 definition.adjustVertextPointZ = 150;
                 definition.modelLightning = 30;
                 definition.modelShadowing = 150;
+                break;
+            case 553:
+                definition.copy(get(637));
                 break;
             case 6247:
                 definition.npcModels = get(6646).npcModels;
