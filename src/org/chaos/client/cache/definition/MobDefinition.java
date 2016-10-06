@@ -395,15 +395,15 @@ public final class MobDefinition {
             case 314:
             case 312:
             case 313:
-                definition.adjustVertextPointsXOrY = 30;
+                definition.copyFishing(get(635));
                 break;
             case 309:
                 definition.name = "Rocky shoal";
                 definition.actions = new String[]{"Bait", null, null, null, null};
-                definition.adjustVertextPointsXOrY = 30;
+                definition.copyFishing(get(635));
                 break;
             case 318:
-                definition.adjustVertextPointsXOrY = 30;
+                definition.copyFishing(get(635));
                 definition.actions = new String[]{"Net", null, "Lure", null, null};
                 break;
             case 8022:
@@ -611,6 +611,19 @@ public final class MobDefinition {
         standAnimation = other.standAnimation;
         walkAnimation = other.walkAnimation;
         actions = other.actions;
+        combatLevel = other.combatLevel;
+        adjustVertextPointZ = other.adjustVertextPointZ;
+        visibilityOrRendering = other.visibilityOrRendering;
+        dialogueModels = other.dialogueModels;
+    }
+
+    public void copyFishing(MobDefinition other) {
+        name = other.name;
+        npcModels = other.npcModels;
+        npcSizeInSquares = other.npcSizeInSquares;
+        adjustVertextPointsXOrY = other.adjustVertextPointsXOrY;
+        standAnimation = other.standAnimation;
+        walkAnimation = other.walkAnimation;
         combatLevel = other.combatLevel;
         adjustVertextPointZ = other.adjustVertextPointZ;
         visibilityOrRendering = other.visibilityOrRendering;
