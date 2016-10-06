@@ -468,6 +468,8 @@ public class Model extends Animable {
 			case 10417:
 			case 10418:
 			case 48:
+			case 70:
+			case 14337:
 			case 83:
 			case 10419:
 			case 28855:
@@ -1250,6 +1252,8 @@ public class Model extends Animable {
             case 84:
             case 43:
             case 2925:
+			case 70:
+			case 14337:
             case 10031:
 				upscale(1);
 				break;
