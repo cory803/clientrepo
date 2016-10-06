@@ -17454,109 +17454,45 @@ public class Client extends GameRenderer {
 	public final String loyaltyRank(int i) {
 		switch (i) {
 		case 1:
-			return "The Real";
+			return "Knight";
 		case 2:
-			return "The Boss";
+			return "Realism";
 		case 3:
-			return "Maximum";
+			return "Ironman";
 		case 4:
-			return "Completionist";
-		case 5:
-			return "The Loyal";
-		case 6:
-			return "The Devoted";
-		case 7:
-			return "Weakling";
-		case 8:
-			return "Cowardly";
-		case 9:
-			return "Sir Lame";
-		case 10:
-			return "Grumpy";
-		case 11:
-			return "Overlord";
-		case 12:
-			return "Pker";
-		case 13:
-			return "Cheerful";
-		case 14:
-			return "@blu@War-Chief";
-		case 15:
-			return "PK Master";
-		case 16:
-			return "The Wise";
-		case 17:
-			return "The Explorer";
-		case 18:
-			return "@gr3@The Wealthy";
-		case 19:
-			return "Yt'Haar";
-		case 20:
-			return "Champion";
-		case 21:
-			return "The Skilful";
-		case 22:
-			return "Master";
-		case 23:
-			return "Oldschool";
-		case 24:
-			return "The Mighty";
-		case 25:
-			return "Warrior";
-		case 26:
-			return "Magician";
-		case 27:
-			return "Archer";
-		case 28:
-			return "The Faithful";
-		case 29:
-			return "The Lucky";
-		case 30:
-			return "Rioter";
-		case 31:
-			return "Lazy";
-		case 32:
-			return "Void Knight";
-		case 33:
-			return "The Avenger";
-		case 34:
-			return "Wingman";
-		case 35:
-			return "King";
-		case 36:
-			return "Queen";
-		case 37:
 			return "@or3@Donator";
-		case 38:
+		case 5:
 			return "@369@Super";
-		case 39:
+		case 6:
 			return "@gre@Extreme";
-		case 40:
+		case 7:
 			return "@mag@Legendary";
-		case 41:
+		case 8:
 			return "@mds@Moderator";
-		case 42:
+		case 9:
 			return "@yel@Administrator";
-		case 43:
+		case 10:
 			return "@red@Owner";
-		case 44:
+		case 11:
 			return "@spt@Support";
-		case 45:
+		case 12:
 			return "@dbl@Developer";
-		case 46:
+		case 13:
 			return "@yel@Uber";
-		case 47:
+		case 14:
 			return "@glb@Global Mod";
-		case 48:
+		case 15:
 			return "@wke@Wiki Editor";
-		case 49:
+		case 16:
 			return "@325@Wiki Manager";
-		case 50:
+		case 17:
 			return "@red@Manager";
-		case 51:
+		case 18:
 			return "@hbd@Hybrid";
-		case 52:
+		case 19:
 			return "@smm@Staff Manager";
+        case 20:
+            return "@red@YouTuber";
 		}
 		return "";
 	}

@@ -360,6 +360,7 @@ public final class MobDefinition {
             case 10216:
                 definition.actions = new String[]{null, "Attack", null, null, null};
                 break;
+            case 817:
             case 7969:
                 definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
                 break;
