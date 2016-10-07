@@ -35,8 +35,9 @@ public class CustomObjects {
 			{ 14859, 3116, 3688, 0, 1 },
 			{ 14859, 3115, 3690, 0, 1 },
 			{ 14859, 3116, 3689, 0, 1 },
-			//giant crystal
 			/* Training Grounds Skillzone */
+			//summoning ladder
+			{ 1746, 2514, 3382, 0, 4},
 			//giant crystal
 			{ 62, 2508, 3363, 0, 2 },
 			//dummies
