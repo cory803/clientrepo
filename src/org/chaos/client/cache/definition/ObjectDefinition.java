@@ -168,11 +168,13 @@ public final class ObjectDefinition {
             14685,
 
             //Chaos fanatic
-            26765
+            26765,
     };
 
     public static int[] debugObjects = {
     };
+
+    public static int[] fightPitsObjectsFix = {9371, 9383, 9372, 9370, 9373, 9393, 9341, 9342, 9343, 9368, 9344, 9369, 9345, 9346, 9347, 9348, 9349, 9350, 9356, 9351, 9397, 9396, 9395, 9352, 9343, 9349, 9383, 9384};
 
 
     public static ArrayList<Integer> OBJECT_MODELS = new ArrayList<>();
@@ -223,6 +225,16 @@ public final class ObjectDefinition {
                 definition.originalModelColors = new int[1];
                 definition.modifiedModelColors[0] = 0;
                 definition.originalModelColors[0] = 1;
+            }
+
+        }
+
+        for (int element : fightPitsObjectsFix) {
+            if (id == element) {
+                definition.modifiedModelColors = new int[1];
+                definition.originalModelColors = new int[1];
+                definition.modifiedModelColors[0] = 33676;
+                definition.originalModelColors[0] = 0;
             }
 
         }
@@ -345,6 +357,12 @@ public final class ObjectDefinition {
             }
         }
         switch (id) {
+            case 9383:
+                definition.modifiedModelColors = new int[1];
+                definition.originalModelColors = new int[1];
+                definition.modifiedModelColors[0] = 6689;
+                definition.originalModelColors[0] = 0;
+                break;
             case 6189://cheap fix for black furnace, unsure on the real problem. oh well
                 definition.setDefaults();
                 definition.imitate(forID(11666));
