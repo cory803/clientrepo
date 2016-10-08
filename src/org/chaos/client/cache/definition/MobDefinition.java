@@ -126,6 +126,9 @@ public final class MobDefinition {
                 definition.actions = new String[5];
                 definition.actions[1] = "Attack";
             break;
+            case 247:
+                definition.actions = new String[]{"Talk-to", null, null, null, null};
+                break;
             case 2691:
                 definition.name = "Alvin";
                 break;
