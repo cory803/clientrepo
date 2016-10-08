@@ -3,6 +3,8 @@ package org.chaos.client;
 import org.apache.commons.codec.binary.Base64;
 import org.chaos.Configuration;
 import org.chaos.client.net.HttpDownloadUtility;
+import org.chaos.client.util.SystemInfo;
+import org.chaos.mac.Updater;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,6 +44,9 @@ public final class GameWindow extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+        if(SystemInfo.isMac()) {
+            Updater.update();
+        }
         icons = new ArrayList<>();
         try {
             icons.add(ImageIO.read(GameWindow.class.getResourceAsStream("/org/chaos/client/resources/16x16.png")));

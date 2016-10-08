@@ -61,14 +61,6 @@ public final class ObjectDefinition {
             26555,
 
             //Resource area (wilderness)
-            324,
-            325,
-            326,
-            335,
-            336,
-            337,
-            720,
-            9375,
             10627,
             14437,
             14438,

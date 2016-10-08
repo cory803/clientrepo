@@ -41,6 +41,12 @@ public final class CacheSpriteLoader {
     private static int dataFile2Offset;
     private static RandomAccessFile dataFile2;
 
+    private static int[] cachedSpritePositions3;
+    private static int[] cachedSpriteSizes3;
+    private static Sprite[] cachedSprites3;
+    private static int dataFile3Offset;
+    private static RandomAccessFile dataFile3;
+
     public static byte[] getCacheSpriteData(int index) {
         if (!cachedSpriteData.containsKey(index) || cachedSpriteData.get(index) == null) {
             getCacheSprite(index);
@@ -60,6 +66,13 @@ public final class CacheSpriteLoader {
             cachedSprites2[index] = decodeSprite2(index);
         }
         return cachedSprites2[index];
+    }
+
+    public static Sprite getCacheSprite3(int index) {
+        if (cachedSprites3[index] == null) {
+            cachedSprites3[index] = decodeSprite3(index);
+        }
+        return cachedSprites3[index];
     }
 
     public static void loadCachedSpriteDefinitions(Archive archive) {
@@ -87,7 +100,7 @@ public final class CacheSpriteLoader {
 
             ByteBuffer index = new ByteBuffer(idx);
             int totalSprites = index.getShort();
-//            System.out.println("Total sprites: " + totalSprites);
+            System.out.println("Total sprites in firstsprites: " + totalSprites);
 
             cachedSprites = new Sprite[totalSprites];
             cachedSpritePositions = new int[totalSprites];
@@ -155,6 +168,42 @@ public final class CacheSpriteLoader {
         }
     }
 
+    public static void loadCachedSpriteDefinitions3(Archive archive) {
+        final String fileName = "thirdsprites.data";
+        byte[] data = archive.get(fileName);
+        try {
+            dataFile3 = new RandomAccessFile(Signlink.getCacheDirectory() + fileName, "rw");
+
+            dataFile3.setLength(0);
+            dataFile3.seek(0);
+            dataFile3.write(data);
+            dataFile3.seek(0);
+
+            int spriteCount = dataFile3.readShort();
+
+            int idxSize = dataFile3.readShort();
+            dataFile3Offset = 4 + idxSize;
+            byte[] idx = new byte[idxSize];
+            dataFile3.read(idx);
+
+            ByteBuffer index = new ByteBuffer(idx);
+            int totalSprites = index.getShort();
+            System.out.println("Total sprites in thirdsprites: "+totalSprites);
+            cachedSprites3 = new Sprite[totalSprites];
+            cachedSpritePositions3 = new int[totalSprites];
+            cachedSpriteSizes3 = new int[totalSprites];
+
+            for (int file = 0; file < totalSprites; file++) {
+                cachedSpritePositions3[file] = index.getInt();
+                cachedSpriteSizes3[file] = index.getInt();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static Sprite decodeSprite(int index) {
         int pos = cachedSpritePositions[index];
         int size = cachedSpriteSizes[index];
@@ -180,6 +229,20 @@ public final class CacheSpriteLoader {
             byte[] data = new byte[size];
             dataFile2.read(data);
             return new Sprite(data, index, 2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static Sprite decodeSprite3(int index) {
+        int pos = cachedSpritePositions3[index];
+        int size = cachedSpriteSizes3[index];
+        try {
+            dataFile3.seek(dataFile3Offset + pos);
+            byte[] data = new byte[size];
+            dataFile3.read(data);
+            return new Sprite(data, index, 3);
         } catch (IOException e) {
             e.printStackTrace();
         }

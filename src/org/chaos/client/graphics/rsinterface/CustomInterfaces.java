@@ -17,6 +17,68 @@ public class CustomInterfaces extends RSInterface {
 		this.tda = tda;
 	}
 
+	public static void npcTracker(TextDrawingArea[] tda) {
+		RSInterface tab = addInterface(35250);
+		addSprite3(35251, 0);
+		addText(35252, "Monster Kill Tracker", tda, 2, 0xff981f, true, true);
+		int[] same = {35253, 35254, 35255};
+		addToggleButton(35253, same, 1, 2, "Select", true);
+		addToggleButton(35254, same, 1, 2, "Select", false);
+		addToggleButton(35255, same, 1, 2, "Select", false);
+		addText(35256, "Normal", tda, 0, 0xff981f, true, true);
+		addText(35257, "Bosses", tda, 0, 0xff981f, true, true);
+		addText(35258, "Slayer", tda, 0, 0xff981f, true, true);
+
+		int x = 70, y = 40;
+		tab.totalChildren(11);
+		tab.child(0, 35251, x, y);
+		tab.child(1, 35252, 177+x, 4+y);
+		tab.child(2, 35253, 23+x, 33+y);
+		tab.child(3, 35254, 80+x, 33+y);
+		tab.child(4, 35255, 137+x, 33+y);
+		tab.child(5, 35256, 51+x, 36+y);
+		tab.child(6, 35257, 108+x, 36+y);
+		tab.child(7, 35258, 165+x, 36+y);
+		tab.child(8, 35260, 23+x, 50+y);
+		tab.child(9, 65216, 320+x, 4+y);
+		tab.child(10, 65217, 320+x, 4+y);
+
+		addSprite3(35259, 3);
+
+		RSInterface normal = addInterface(35260);
+		normal.width = 279;
+		normal.height = 165;
+		normal.scrollMax = 950;
+		normal.totalChildren(100);
+		for (int i = 0; i < 50; i++) {
+			addText(35261 + i, "", tda, 0, 0xffffff, false, true);
+			normal.child(i, 35261 + i, 3, 6 + (i * 19));
+			normal.child(i + 50, 35259, 0, 19 + (i * 19));
+		}
+
+		RSInterface bosses = addInterface(35320);
+		bosses.width = 279;
+		bosses.height = 165;
+		bosses.scrollMax = 665;
+		bosses.totalChildren(70);
+		for (int i = 0; i < 35; i++) {
+			addText(35321 + i, "", tda, 0, 0xffffff, false, true);
+			bosses.child(i, 35321 + i, 3, 6 + (i * 19));
+			bosses.child(i + 35, 35259, 0, 19 + (i * 19));
+		}
+
+		RSInterface slayer = addInterface(35360);
+		slayer.width = 279;
+		slayer.height = 165;
+		slayer.scrollMax = 950;
+		slayer.totalChildren(100);
+		for (int i = 0; i < 50; i++) {
+			addText(35361 + i, "", tda, 0, 0xffffff, false, true);
+			slayer.child(i, 35361 + i, 3, 6 + (i * 19));
+			slayer.child(i + 50, 35259, 0, 19 + (i * 19));
+		}
+	}
+
 	public void notesTabInterface() {
 		RSInterface rsi = addTabInterface(59999);
 
@@ -113,6 +175,7 @@ public class CustomInterfaces extends RSInterface {
 
 	public void loadCustoms() {
 		notesTabInterface();
+		npcTracker(tda);
 		playersOnline();
 		editClan();
 		capeColor(tda);

@@ -4154,6 +4154,13 @@ public class Client extends GameRenderer {
 			getOut().putByte(currentActionMenu);
 		}
 		if (action == 315) {
+			RSInterface class9 = RSInterface.interfaceCache[interfaceId];
+			if (class9.isToggler) {
+				for (int ffs = 0; ffs < class9.togglers.length; ffs++) {
+					RSInterface.interfaceCache[class9.togglers[ffs]].toggled = false;
+				}
+				class9.toggled = true;
+			}
 			switch (interfaceId) {
 
 			case 65216:
@@ -4194,8 +4201,6 @@ public class Client extends GameRenderer {
 			case 26022: // fullscreen
 				toggleSize(ScreenMode.FULLSCREEN);
 			}
-
-			RSInterface class9 = RSInterface.interfaceCache[interfaceId];
 			boolean flag8 = true;
 			if ((class9.contentType == 1321) || (class9.contentType == 1322) || (class9.contentType == 1323)) {
 				int index = class9.id - 79924;
@@ -7362,6 +7367,14 @@ public class Client extends GameRenderer {
 						e.printStackTrace();
 					}
 					/// }
+				} else if (childInterface.type == 24) {
+					Sprite sprite;
+					if (childInterface.toggled)
+						sprite = childInterface.sprite2;
+					else
+						sprite = childInterface.sprite1;
+					if (sprite != null)
+						sprite.drawSprite(childX, childY);
 				} else if (childInterface.type == 13) {
 					Sprite sprite;
 					if (interfaceIsSelected(childInterface)) {
@@ -17217,6 +17230,8 @@ public class Client extends GameRenderer {
 //			FileUtilities.WriteFile(Signlink.getCacheDirectory() + "sprites2.data", spritesArchive.get("sprites2.data"));
 			//byte[] idx2 = spritesArchive.get("sprites2.idx");
 			CacheSpriteLoader.loadCachedSpriteDefinitions2(spritesArchive);
+
+			CacheSpriteLoader.loadCachedSpriteDefinitions3(spritesArchive);
 
 			setLoadingText(40, "Unpacked media");
 

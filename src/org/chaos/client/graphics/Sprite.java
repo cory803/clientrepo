@@ -207,7 +207,7 @@ public class Sprite extends Canvas2D {
 			setTransparency(255, 0, 255);
 
 			//White color transparency
-			if(type == 1) {
+			if(type == 1 || type == 3) {
 				setTransparency(255, 255, 255);
 			} else if(type == 2) {
 				if(index >= 109 && index <= 140) {

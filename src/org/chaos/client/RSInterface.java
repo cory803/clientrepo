@@ -18,6 +18,20 @@ import org.chaos.client.world.Model;
 
 public class RSInterface {
 
+	public static void addToggleButton(int id, int[] same, int sprite, int onSprite, String tooltip, boolean on) {
+		RSInterface tab = addInterface(id);
+		tab.type = 24;
+		tab.atActionType = 1;
+		tab.contentType = 0;
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(sprite);
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(onSprite);
+		tab.width = tab.sprite1.myWidth;
+		tab.height = tab.sprite2.myHeight;
+		tab.tooltip = tooltip;
+		tab.togglers = same;
+		tab.toggled = on;
+		tab.isToggler = true;
+	}
 	
 	public static void buildPlayerMenu(ArrayList<Account> a) {
 		RSInterface rsi = addTabInterface(31000);
@@ -90,6 +104,9 @@ public class RSInterface {
 	private static final List aMRUNodes_264 = new List(30);
 	public static TextDrawingArea[] fonts;
 	public static RSInterface[] interfaceCache;
+	public int[] togglers;
+	public boolean toggled = false;
+	public boolean isToggler = false;
 
 	private static void addActionButton(int id, int sprite, int sprite2, int width, int height, String s) {
 		RSInterface rsi = interfaceCache[id] = new RSInterface();
@@ -1568,6 +1585,25 @@ public class RSInterface {
 		if (spriteId != -1) {
 			tab.sprite1 = CacheSpriteLoader.getCacheSprite(spriteId);
 			tab.sprite2 = CacheSpriteLoader.getCacheSprite(spriteId);
+		}
+
+		tab.width = 512;
+		tab.height = 334;
+	}
+
+	public static void addSprite3(int id, int spriteId) {
+		RSInterface tab = interfaceCache[id] = new RSInterface();
+		tab.id = id;
+		tab.parentID = id;
+		tab.type = 5;
+		tab.atActionType = 0;
+		tab.contentType = 0;
+		tab.opacity = (byte) 0;
+		tab.hoverType = 52;
+
+		if (spriteId != -1) {
+			tab.sprite1 = CacheSpriteLoader.getCacheSprite3(spriteId);
+			tab.sprite2 = CacheSpriteLoader.getCacheSprite3(spriteId);
 		}
 
 		tab.width = 512;
