@@ -24,6 +24,10 @@ public class CustomObjects {
 	}
 
 	public static final int[][] CUSTOM_OBJECTS = {
+			/* Home Objects */
+			{ 409, 3085, 3509, 0, 1 },
+			{ 172, 3090, 3495, 0, 1 },
+			/* End Home Objects */
 			//Rfd Chest & Portal
 			{ 2182, 3081, 3495, 0, 3 },
 			{ 12356, 3077, 3492, 0, 2 },
