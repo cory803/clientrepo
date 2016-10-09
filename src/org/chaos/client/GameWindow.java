@@ -199,8 +199,9 @@ public final class GameWindow extends JFrame implements ActionListener {
             String line;
 
             while ((line = in.readLine()) != null) {
-                String[] args = line.split(",\"");
-                String link = args[20].replaceAll("\"", "").replaceAll("\\\\", "");
+                String[] format = line.split("link\":\"");
+                String[] format2 = format[1].split("\"},\"success\"");
+                String link = "http:" + format2[0].replaceAll("\"", "").replaceAll("\\\\", "");
                 //System.out.println(link.substring(5));
                 text.setText(link.substring(5));
                 currentImage = link.substring(5);
