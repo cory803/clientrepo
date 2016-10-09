@@ -17454,15 +17454,16 @@ public class Client extends GameRenderer {
 		modIcons[8] = CacheSpriteLoader.getCacheSprite2(15); // Legendary Donator
 		modIcons[9] = CacheSpriteLoader.getCacheSprite2(14); // Extreme Donator
 		modIcons[10] = CacheSpriteLoader.getCacheSprite2(37); // Platimum Donator
-		modIcons[11] = CacheSpriteLoader.getCacheSprite2(38); // Uber Donator
-		modIcons[12] = CacheSpriteLoader.getCacheSprite(840); // Regular Ironman
-		modIcons[13] = CacheSpriteLoader.getCacheSprite(839); // Hardcore
+		modIcons[11] = CacheSpriteLoader.getCacheSprite3(4); // Uber Donator
+		modIcons[12] = CacheSpriteLoader.getCacheSprite(839); // Regular Ironman
+		modIcons[13] = CacheSpriteLoader.getCacheSprite(840); // Hardcore
 																// Ironman
 		modIcons[14] = CacheSpriteLoader.getCacheSprite2(3); // Manager
 		modIcons[15] = CacheSpriteLoader.getCacheSprite2(66); // Wiki Editor
 		modIcons[16] = CacheSpriteLoader.getCacheSprite2(65); // Wiki Manager
 		modIcons[17] = CacheSpriteLoader.getCacheSprite2(90); // Staff Manager
 		modIcons[18] = CacheSpriteLoader.getCacheSprite2(19); //Developer
+		modIcons[19] = CacheSpriteLoader.getCacheSprite3(5); //Developer
 
 	}
 

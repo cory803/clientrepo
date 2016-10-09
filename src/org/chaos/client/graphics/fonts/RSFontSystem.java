@@ -403,7 +403,8 @@ public class RSFontSystem extends Canvas2D {
 								case 9:
 								case 10:
 								case 11:
-									offsetY = offsetY + 2;
+								case 19:
+									offsetY = offsetY + 1;
 									break;
 								}
 								if (transparency == 256) {

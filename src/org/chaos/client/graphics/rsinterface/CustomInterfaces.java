@@ -30,7 +30,7 @@ public class CustomInterfaces extends RSInterface {
 		addText(35258, "Slayer", tda, 0, 0xff981f, true, true);
 
 		int x = 70, y = 40;
-		tab.totalChildren(11);
+		tab.totalChildren(10);
 		tab.child(0, 35251, x, y);
 		tab.child(1, 35252, 177+x, 4+y);
 		tab.child(2, 35253, 23+x, 33+y);
@@ -38,10 +38,9 @@ public class CustomInterfaces extends RSInterface {
 		tab.child(4, 35255, 137+x, 33+y);
 		tab.child(5, 35256, 51+x, 36+y);
 		tab.child(6, 35257, 108+x, 36+y);
-		tab.child(7, 35258, 165+x, 36+y);
-		tab.child(8, 35260, 23+x, 50+y);
-		tab.child(9, 65216, 320+x, 4+y);
-		tab.child(10, 65217, 320+x, 4+y);
+		tab.child(7, 35260, 23+x, 50+y);
+		tab.child(8, 65216, 320+x, 4+y);
+		tab.child(9, 65217, 320+x, 4+y);
 
 		addSprite3(35259, 3);
 
@@ -65,17 +64,6 @@ public class CustomInterfaces extends RSInterface {
 			addText(35321 + i, "", tda, 0, 0xffffff, false, true);
 			bosses.child(i, 35321 + i, 3, 6 + (i * 19));
 			bosses.child(i + 35, 35259, 0, 19 + (i * 19));
-		}
-
-		RSInterface slayer = addInterface(35360);
-		slayer.width = 279;
-		slayer.height = 165;
-		slayer.scrollMax = 950;
-		slayer.totalChildren(100);
-		for (int i = 0; i < 50; i++) {
-			addText(35361 + i, "", tda, 0, 0xffffff, false, true);
-			slayer.child(i, 35361 + i, 3, 6 + (i * 19));
-			slayer.child(i + 50, 35259, 0, 19 + (i * 19));
 		}
 	}
 

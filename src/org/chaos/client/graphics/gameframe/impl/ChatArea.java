@@ -342,6 +342,7 @@ public class ChatArea extends GameFrame {
 									case 9:
 									case 10:
 									case 11:
+									case 19:
 										offsetY = offsetY + 1;
 										xPos2 += 2;
 										xPos -= 1;
@@ -433,6 +434,7 @@ public class ChatArea extends GameFrame {
 										case 9:
 										case 10:
 										case 11:
+										case 19:
 											yoffset += 1;
 											break;
 										case 5:
@@ -578,6 +580,7 @@ public class ChatArea extends GameFrame {
 						case 9:
 						case 10:
 						case 11:
+						case 19:
 							xOffset = 1;
 							break;
 						case 17:
@@ -592,6 +595,7 @@ public class ChatArea extends GameFrame {
 							drawOffsetX += 3;
 							xOffset -= 3;
 							yOffset += 2;
+							break;
 						}
 						client.modIcons[crown].drawTransparentSprite(drawOffsetX + 1 + xOffset,
 								getOffSetY() + 133 - 11 + yOffset, 255);
