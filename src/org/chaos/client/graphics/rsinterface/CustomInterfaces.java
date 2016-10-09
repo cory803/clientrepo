@@ -21,26 +21,23 @@ public class CustomInterfaces extends RSInterface {
 		RSInterface tab = addInterface(35250);
 		addSprite3(35251, 0);
 		addText(35252, "Monster Kill Tracker", tda, 2, 0xff981f, true, true);
-		int[] same = {35253, 35254, 35255};
+		int[] same = {35253, 35254};
 		addToggleButton(35253, same, 1, 2, "Select", true);
 		addToggleButton(35254, same, 1, 2, "Select", false);
-		addToggleButton(35255, same, 1, 2, "Select", false);
 		addText(35256, "Normal", tda, 0, 0xff981f, true, true);
 		addText(35257, "Bosses", tda, 0, 0xff981f, true, true);
-		addText(35258, "Slayer", tda, 0, 0xff981f, true, true);
 
 		int x = 70, y = 40;
-		tab.totalChildren(10);
+		tab.totalChildren(9);
 		tab.child(0, 35251, x, y);
 		tab.child(1, 35252, 177+x, 4+y);
 		tab.child(2, 35253, 23+x, 33+y);
 		tab.child(3, 35254, 80+x, 33+y);
-		tab.child(4, 35255, 137+x, 33+y);
-		tab.child(5, 35256, 51+x, 36+y);
-		tab.child(6, 35257, 108+x, 36+y);
-		tab.child(7, 35260, 23+x, 50+y);
-		tab.child(8, 65216, 320+x, 4+y);
-		tab.child(9, 65217, 320+x, 4+y);
+		tab.child(4, 35256, 51+x, 36+y);
+		tab.child(5, 35257, 108+x, 36+y);
+		tab.child(6, 35260, 23+x, 50+y);
+		tab.child(7, 65216, 320+x, 4+y);
+		tab.child(8, 65217, 320+x, 4+y);
 
 		addSprite3(35259, 3);
 
