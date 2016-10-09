@@ -393,7 +393,7 @@ public final class GameWindow extends JFrame implements ActionListener {
         if (str.equalsIgnoreCase("home")) {
             Client.launchURL("www.chaosps.com");
         } else if (str.equalsIgnoreCase("forum")) {
-            Client.launchURL("www.chaosps.com/forum");
+            Client.launchURL("www.chaosps.com/forums");
         } else if (str.equalsIgnoreCase("store")) {
             Client.launchURL("www.chaosps.com/store/");
         } else if (str.equalsIgnoreCase("vote")) {
@@ -485,13 +485,13 @@ public final class GameWindow extends JFrame implements ActionListener {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            if (SwingUtilities.isLeftMouseButton(e)) {
-                int x = (panel.getWidth() / 2 - (765 / 2));
-                int tab = (e.getX() - x) / 109;
-                if (tab > -1 && tab < Configuration.NAV_LINKS.length) {
-                    Client.launchURL(Configuration.NAV_LINKS[tab]);
-                }
-            }
+//            if (SwingUtilities.isLeftMouseButton(e)) {
+//                int x = (panel.getWidth() / 2 - (765 / 2));
+//                int tab = (e.getX() - x) / 109;
+//                if (tab > -1 && tab < Configuration.NAV_LINKS.length) {
+//                    Client.launchURL(Configuration.NAV_LINKS[tab]);
+//                }
+//            }
         }
     }
 

@@ -27,11 +27,6 @@ public class Configuration {
 	public final static int JAGGRAB_PORT = DEVELOPER_FILE_SERVER ? 43596 : 43595;
 	public final static int ONDEMAND_PORT = DEVELOPER_FILE_SERVER ? 43592 : 43593;
 
-	/** LINKS FOR NAVBAR **/
-	public static final String[] NAV_LINKS = { "http://rune.live", "http://rune.live/forum", "http://rune.live/vote",
-			"http://rune.live/hiscores", "http://rune.live/store", "http://rune.live/forum/?app=tickets",
-			"http://rune.live/wiki", };
-
 	/** LOADS CACHE FROM ./ IF TRUE, OTHERWISE USER.HOME FOLDER **/
 	public static final boolean DROPBOX_MODE = false;
 
