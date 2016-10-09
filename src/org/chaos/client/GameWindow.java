@@ -44,7 +44,7 @@ public final class GameWindow extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        if(SystemInfo.isMac()) {
+        if(Configuration.MAC) {
             Updater.update();
         }
         icons = new ArrayList<>();

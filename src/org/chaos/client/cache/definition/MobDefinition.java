@@ -79,16 +79,12 @@ public final class MobDefinition {
             case 6247:
                 definition.npcModels = get(6646).npcModels;
                 break;
-            case 401:
-            case 402:
-            case 403:
-            case 404:
-            case 405:
-                //System.out.println("----");
-                //System.out.println("name: "+definition.name);
-                //for (int i = 0; i < definition.npcModels.length; i++) {
-                  //  System.out.println("Model "+i+": "+definition.npcModels[i]);
-               // }
+            case 1613:
+                System.out.println("----");
+                System.out.println("name: "+definition.name);
+                for (int i = 0; i < definition.npcModels.length; i++) {
+                    System.out.println("Model "+i+": "+definition.npcModels[i]);
+                }
                 //System.out.println("Size: "+definition.npcSizeInSquares);
                // System.out.println("Stand animation: "+definition.standAnimation);
                 //System.out.println("Walk animation: "+definition.walkAnimation);

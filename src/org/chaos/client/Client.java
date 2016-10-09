@@ -16089,7 +16089,7 @@ public class Client extends GameRenderer {
 				int actionIndex = -1;
 
 				for (int index = 0; index < menuActionRow; index++) {
-					int row = yOffset + 31 + (menuActionRow - 1 - index) * 15;
+					int row = yOffset + 29 + (menuActionRow - 1 - index) * 15;
 
 					if (clickX > xOffset && clickX < xOffset + width && clickY > row - 11 && clickY < row + 5) {
 						actionIndex = index;
