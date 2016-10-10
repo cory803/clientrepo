@@ -40,6 +40,8 @@ import org.chaos.client.world.fog.FogProcessor;
 import org.chaos.client.world.music.Class56;
 import org.chaos.client.world.music.Class56_Sub1_Sub1;
 import org.chaos.client.world.sound.*;
+import org.chaos.dump.ItemListDumper;
+import org.chaos.dump.NpcListDumper;
 import org.chaos.map.MapView;
 import org.chaos.task.Task;
 import org.chaos.task.TaskManager;
@@ -1486,6 +1488,12 @@ public class Client extends GameRenderer {
 			break;
 		case "fps":
 			fpsOn = !fpsOn;
+			break;
+		case "dumplistitems":
+			ItemListDumper.dump();
+			break;
+		case "dumplistnpcs":
+			NpcListDumper.dump();
 			break;
 		case "noclip":
 			if (myRights == 3) {

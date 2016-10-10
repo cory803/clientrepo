@@ -663,6 +663,8 @@ public final class MobDefinition {
         osrsBuffer = null;
     }
 
+    public static int totalNpcs = 0;
+
     public static void load(Archive archive) {
         buffer = new ByteBuffer(archive.get("npc.dat"));
         ByteBuffer stream2 = new ByteBuffer(archive.get("npc.idx"));
@@ -670,6 +672,7 @@ public final class MobDefinition {
         ByteBuffer osrsStream2 = new ByteBuffer(archive.get("osrsnpc.idx"));
         int totalNPCs = stream2.getUnsignedShort();
         int osrsTotalNPCs = osrsStream2.getUnsignedShort();
+        totalNpcs = totalNPCs;
         streamIndices = new int[totalNPCs];
         osrsStreamIndices = new int[osrsTotalNPCs];
 
