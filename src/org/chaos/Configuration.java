@@ -8,11 +8,11 @@ package org.chaos;
 public class Configuration {
 
 	/** CONNECTION **/
-	public final static boolean LOCAL = true;
+	public final static boolean LOCAL = false;
 	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "74.63.248.118"; // 158.69.125.71
 	public final static int SERVER_PORT = 59018;
 
-	public static boolean MAC = false;
+	public static boolean MAC = true;
 
 	public final static String[][] WORLDS = {
 			{"Economy", LOCAL ? "127.0.0.1" : "74.63.248.118"}, //World 1
@@ -31,7 +31,7 @@ public class Configuration {
 	public static final boolean DROPBOX_MODE = false;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.06";
+	public static final String CLIENT_VERSION = "1.07";
 	public final static String CLIENT_NAME = "Chaos Beta " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos"; // Cache
 																	// folder
