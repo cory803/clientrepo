@@ -162,6 +162,18 @@ public final class ItemDefinition {
 //                System.out.println("Male wear: "+itemDef.maleWearId);
 //                System.out.println("Female wear: "+itemDef.femaleWearId);
                 break;
+			case 20789:
+				itemDef.maleWearId = 75000;
+				itemDef.femaleWearId = 75001;
+				break;
+			case 20790:
+				itemDef.modelID = 75002;
+				System.out.println("------");
+				System.out.println("Name: "+itemDef.name);
+				System.out.println("Model ID: "+itemDef.modelID);
+				System.out.println("Male wear: "+itemDef.maleWearId);
+				System.out.println("Female wear: "+itemDef.femaleWearId);
+				break;
 			case 10586:
 				itemDef.name = "Knight's Lamp";
 				break;
