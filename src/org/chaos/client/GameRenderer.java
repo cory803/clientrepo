@@ -1,16 +1,9 @@
 package org.chaos.client;
 
 import java.applet.Applet;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.RenderingHints;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -22,6 +15,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 
 import org.chaos.Configuration;
 import org.chaos.client.cache.download.DownloadCache;
@@ -537,7 +531,17 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 				Client.instance.selectDrop = true;
 			}
 		}
-
+		//System.out.println("Key code: "+keyCode);
+		if ((keyCode == 86) && ((keyevent.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
+			try {
+				Client.instance.inputString += SystemClipboard.get();
+			} catch (UnsupportedFlavorException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//clpbrd.get
+		}
 		if (!Configuration.NEW_FUNCTION_KEYS) {
 			if (keyCode == KeyEvent.VK_ESCAPE) {
 				Client.setTab(13);

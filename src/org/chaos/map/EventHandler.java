@@ -1,8 +1,14 @@
 package org.chaos.map;
 
+import org.chaos.client.SystemClipboard;
+import org.chaos.client.Client;
+
 import java.applet.Applet;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class EventHandler extends Applet implements Runnable, MouseListener,
 		MouseMotionListener, KeyListener, FocusListener, WindowListener {
