@@ -168,12 +168,16 @@ public final class ItemDefinition {
 				break;
 			case 20790:
 				itemDef.modelID = 75002;
+                break;
+
+            case 11849:
 				System.out.println("------");
 				System.out.println("Name: "+itemDef.name);
 				System.out.println("Model ID: "+itemDef.modelID);
 				System.out.println("Male wear: "+itemDef.maleWearId);
 				System.out.println("Female wear: "+itemDef.femaleWearId);
 				break;
+
 			case 10586:
 				itemDef.name = "Knight's Lamp";
 				break;
@@ -1448,9 +1452,6 @@ public final class ItemDefinition {
 				itemDef.modelOffsetX = itemDef2.modelOffsetX;
 				itemDef.modelOffsetY = itemDef2.modelOffsetY;
 				itemDef.modelZoom = itemDef2.modelZoom;
-				break;
-			case 2996:
-				itemDef.name = "Agility ticket";
 				break;
 			case 5510:
 			case 5512:
