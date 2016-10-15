@@ -126,6 +126,28 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+			//Experience lamps
+			case 11137:
+				itemDef.name = "Lamp of 10K";
+				break;
+			case 11139:
+				itemDef.name = "Lamp of 25K";
+				break;
+			case 11141:
+				itemDef.name = "Lamp of 50K";
+				break;
+			case 11185:
+				itemDef.name = "Lamp of 100K";
+				break;
+			case 11186:
+				itemDef.name = "Lamp of 500K";
+				break;
+			case 11187:
+				itemDef.name = "Lamp of 1M";
+				break;
+			case 11188:
+				itemDef.name = "Lamp of 2M";
+				break;
             case 13247:
             case 13178:
             case 12921:
