@@ -126,6 +126,9 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+            case 20435:
+                itemDef.name = "Donator Tokens";
+                break;
 			//Experience lamps
 			case 11137:
 				itemDef.name = "Lamp of 10K";
