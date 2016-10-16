@@ -1756,6 +1756,7 @@ public final class ObjectDefinition {
                 definition.actions[0] = "Use";
                 break;
             case 2732:
+            case 41687:
                 definition.actions = new String[5];
                 definition.actions[0] = "Add logs";
                 break;
