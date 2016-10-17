@@ -2925,9 +2925,9 @@ public final class ItemDefinition {
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				itemDef.actions[4] = "Drop";
-				itemDef.description = "This scroll can be redeemed for a $125 Chaos payment. [137,500 credits]"
+				itemDef.description = "This scroll can be redeemed for a $100 Chaos payment. [100 points]"
 						.getBytes();
-				itemDef.name = "$125 Payment Scroll";
+				itemDef.name = "Scroll of $100";
 				break;
 			case 14136:
 				itemDef.setDefaults();
@@ -4554,22 +4554,22 @@ public final class ItemDefinition {
 				break;
 			case 10934:
 				itemDef.imitate(get(607));
-				itemDef.name = "$25 Payment Scroll";
-				itemDef.description = "This scroll can be redeemed for a $25 Chaos payment. [27,875 credits]".getBytes();
+				itemDef.name = "Scroll of $25";
+				itemDef.description = "This scroll can be redeemed for a $25 Chaos payment. [25 points]".getBytes();
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				break;
 			case 10935:
 				itemDef.imitate(get(608));
-				itemDef.name = "$50 Payment Scroll";
-				itemDef.description = "This scroll can be redeemed for a $50 Chaos payment. [55,750 credits]".getBytes();
+				itemDef.name = "Scroll of $50";
+				itemDef.description = "This scroll can be redeemed for a $50 Chaos payment. [50 points]".getBytes();
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				break;
 			case 10943:
 				itemDef.imitate(get(607));
-				itemDef.name = "$10 Payment Scroll";
-				itemDef.description = "This scroll can be redeemed for a $10 Chaos payment. [10,000 credits]".getBytes();
+				itemDef.name = "Scroll of $10";
+				itemDef.description = "This scroll can be redeemed for a $10 Chaos payment. [10 points]".getBytes();
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				break;
