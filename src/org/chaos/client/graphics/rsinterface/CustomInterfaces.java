@@ -164,6 +164,7 @@ public class CustomInterfaces extends RSInterface {
 		playersOnline();
 		editClan();
 		capeColor(tda);
+        dropGenerator(tda);
 		dungeonInfo();
 		formParty();
 		addToShop();
@@ -283,6 +284,115 @@ public class CustomInterfaces extends RSInterface {
 
 			y += 24;
 		}
+	}
+
+	public static void dropGenerator(TextDrawingArea[] tda) {
+		RSInterface rsi = addInterface(42499);
+        RSInterface scroll = addTabInterface(42507);
+
+        addSpriteLoader3(42500, 6);
+
+        addCloseButton(42501, 42505, 17001);
+
+        addText(42506, "Drop Generator", tda, 2, 0xff9b00, true, true);
+        addText(42601, "Rare", tda, 3, 0xff9b00, true, true);
+        addText(42602, "Epic", tda, 3, 0xff9b00, true, true);
+
+        //Rare
+        addItemOnInterface(42603, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42604, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42605, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42606, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42607, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42608, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42609, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42610, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42611, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42612, 3323, new String[] { "Check-rate" });
+
+        //Epic
+        addItemOnInterface(42613, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42614, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42615, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42616, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42617, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42618, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42619, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42620, 3323, new String[] { "Check-rate" });
+
+        addItemOnInterface(42621, 3323, new String[] { "Check-rate" });
+        addItemOnInterface(42622, 3323, new String[] { "Check-rate" });
+
+        scroll.totalChildren(92);
+        scroll.width = 258;
+        scroll.height = 264;
+        scroll.scrollMax = 1500;
+
+        setChildren(27, rsi);
+
+        setBounds(42500, 12, 15, 0, rsi);
+        setBounds(42501, 472, 21, 1, rsi);
+        setBounds(42505, 472, 21, 2, rsi);
+        setBounds(42506, 520 / 2 - 16, 24, 3, rsi);
+        setBounds(42507, 110, 50, 4, rsi);
+        setBounds(42601, 68, 53, 5, rsi);
+        setBounds(42602, 378 + 12 + 51, 53, 6, rsi);
+
+        //Rare
+        setBounds(42603, 27, 93, 7, rsi);
+        setBounds(42604, 77, 93, 8, rsi);
+
+        setBounds(42605, 27, 93 + 43, 9, rsi);
+        setBounds(42606, 77, 93 + 43, 10,  rsi);
+
+        setBounds(42607, 27, 93 + 43 * 2, 11, rsi);
+        setBounds(42608, 77, 93 + 43 * 2, 12, rsi);
+
+        setBounds(42609, 27, 93 + 43 * 3, 13, rsi);
+        setBounds(42610, 77, 93 + 43 * 3, 14, rsi);
+
+        setBounds(42611, 27, 93 + 43 * 4, 15, rsi);
+        setBounds(42612, 77, 93 + 43 * 4, 16, rsi);
+
+        //Epic
+        setBounds(42613, 427 - 27, 93, 17, rsi);
+        setBounds(42614, 477 - 27, 93, 18, rsi);
+
+        setBounds(42615, 427 - 27, 93 + 43, 19, rsi);
+        setBounds(42616, 477 - 27, 93 + 43, 20,  rsi);
+
+        setBounds(42617, 427 - 27, 93 + 43 * 2, 21, rsi);
+        setBounds(42618, 477 - 27, 93 + 43 * 2, 22, rsi);
+
+        setBounds(42619, 427 - 27, 93 + 43 * 3, 23, rsi);
+        setBounds(42620, 477 - 27, 93 + 43 * 3, 24, rsi);
+
+        setBounds(42621, 427 - 27, 93 + 43 * 4, 25, rsi);
+        setBounds(42622, 477 - 27, 93 + 43 * 4, 26, rsi);
+
+        int k = 0;
+        int y = 4;
+        for (int i = 42508; i < 42600; i++) {
+            scroll.child(k, i, 258 / 2, y);
+            y += 17;
+            k++;
+            if(k == 1) { //Npc name
+                addText(i, "", tda, 3, 0xff9b00, true, true);
+                y += 3;
+            } else {
+                addText(i, "", tda, 1, 0xff0000, true, true);
+            }
+        }
+
+
+
 	}
 
 	public static void capeColor(TextDrawingArea[] TDA) {

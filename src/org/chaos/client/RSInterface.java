@@ -2164,6 +2164,27 @@ public class RSInterface {
 		rsi.height = rsi.sprite1.myHeight - 2;
 		// rsi.isFalseTooltip = true;
 	}
+
+	public static void addSpriteLoader3(int childId, int spriteId) {
+		RSInterface rsi = RSInterface.interfaceCache[childId] = new RSInterface();
+		rsi.id = childId;
+		rsi.parentID = childId;
+		rsi.type = 5;
+		rsi.atActionType = 0;
+		rsi.contentType = 0;
+		rsi.sprite2 = CacheSpriteLoader.getCacheSprite3(spriteId);
+		rsi.sprite1 = CacheSpriteLoader.getCacheSprite3(spriteId);
+
+		// rsi.sprite1.spriteLoader = rsi.sprite2.spriteLoader = true;
+		// rsi.hoverSprite1 = CacheSpriteLoader.getCacheSprite(hoverSpriteId];
+		// rsi.hoverSprite2 = CacheSpriteLoader.getCacheSprite(hoverSpriteId];
+		// rsi.hoverSprite1.spriteLoader = rsi.hoverSprite2.spriteLoader = true;
+		// rsi.sprite1 = rsi.sprite2 = spriteId;
+		// rsi.hoverSprite1Id = rsi.hoverSprite2Id = hoverSpriteId;
+		rsi.width = rsi.sprite2.myWidth;
+		rsi.height = rsi.sprite1.myHeight - 2;
+		// rsi.isFalseTooltip = true;
+	}
 	
 	public static void addCloseButton2(int child, int hoverChild, int hoverImageChild) {
 		addHoverButtonWSpriteLoader(child, 661, 16, 16, "Close", 250, hoverChild, 3);

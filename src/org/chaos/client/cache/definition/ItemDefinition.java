@@ -2921,7 +2921,7 @@ public final class ItemDefinition {
 				break;
 			case 7629:
 				itemDef.setDefaults();
-				itemDef.imitate(get(761));
+				//itemDef.imitate(get(761));
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				itemDef.actions[4] = "Drop";

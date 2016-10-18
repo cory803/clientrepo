@@ -8,11 +8,11 @@ package org.chaos;
 public class Configuration {
 
 	/** CONNECTION **/
-	public final static boolean LOCAL = true;
+	public final static boolean LOCAL = false;
 	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "74.63.248.118"; // 158.69.125.71
 	public final static int SERVER_PORT = 59018;
 
-	public static boolean MAC = false;
+	public static boolean MAC = true;
 
 	public final static String[][] WORLDS = {
 			{"Economy", LOCAL ? "127.0.0.1" : "74.63.248.118"}, //World 1

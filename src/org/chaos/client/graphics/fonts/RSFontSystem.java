@@ -172,6 +172,7 @@ public class RSFontSystem extends Canvas2D {
 		text = text.replaceAll("@cha@", "<col=f04141>");
 		text = text.replaceAll("@hbd@", "<col=0000AF>");
 		text = text.replaceAll("@smm@", "<col=000000>");
+		text = text.replaceAll("@fmd@", "<col=8624FF>");
 		text = text.replaceAll("@sm2@", "<shad=ffffff>");
 		text = text.replaceAll("@red@", "<col=ff0000>");
 		text = text.replaceAll("@4e4@", "<col=4e4e4e>");
@@ -389,7 +390,7 @@ public class RSFontSystem extends Canvas2D {
 									imageId = 838 + imageId - 88;
 									offsetY += 3;
 								}
-								if (imageId <= 19) {
+								if (imageId <= 20) {
 									spriteVersion = 2;
 								}
 								Sprite icon = CacheSpriteLoader.getCacheSprite(imageId);

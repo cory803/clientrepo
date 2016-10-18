@@ -17471,7 +17471,8 @@ public class Client extends GameRenderer {
 		modIcons[16] = CacheSpriteLoader.getCacheSprite2(65); // Wiki Manager
 		modIcons[17] = CacheSpriteLoader.getCacheSprite2(90); // Staff Manager
 		modIcons[18] = CacheSpriteLoader.getCacheSprite2(19); //Developer
-		modIcons[19] = CacheSpriteLoader.getCacheSprite3(5); //Developer
+		modIcons[19] = CacheSpriteLoader.getCacheSprite3(5); //Platinum donator
+		modIcons[20] = CacheSpriteLoader.getCacheSprite3(7); //Forum mod
 
 	}
 
@@ -17517,6 +17518,8 @@ public class Client extends GameRenderer {
 			return "@smm@Staff Manager";
         case 20:
             return "@red@YouTuber";
+        case 21:
+            return "@fmd@Forum Mod";
 		}
 		return "";
 	}

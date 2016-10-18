@@ -43,6 +43,7 @@ public class ChatArea extends GameFrame {
 			case 4:
 			case 5:
 			case 6:
+			case 20:
 				CacheSpriteLoader.getCacheSprite(1).drawSprite(getOffSetX() + channelXCoords[client.cButtonCPos],
 						getOffSetY() + 143);
 				break;
@@ -56,6 +57,7 @@ public class ChatArea extends GameFrame {
 				case 4:
 				case 5:
 				case 6:
+				case 20:
 					CacheSpriteLoader.getCacheSprite(2).drawSprite(getOffSetX() + channelXCoords[client.cButtonHPos],
 							getOffSetY() + 143);
 					break;
@@ -71,6 +73,7 @@ public class ChatArea extends GameFrame {
 				case 4:
 				case 5:
 				case 6:
+				case 20:
 					CacheSpriteLoader.getCacheSprite(0).drawSprite(getOffSetX() + channelXCoords[client.cButtonHPos],
 							getOffSetY() + 143);
 					break;
@@ -352,6 +355,7 @@ public class ChatArea extends GameFrame {
 									case 14:
 									case 6:
 									case 3:
+									case 20:
 										// xPos += 5;
 										break;
 									case 5:
@@ -427,6 +431,7 @@ public class ChatArea extends GameFrame {
 										case 2:
 										case 3:
 										case 6:
+										case 20:
 											xoffset += 2;
 											break;
 										case 7:
@@ -588,6 +593,7 @@ public class ChatArea extends GameFrame {
 						case 14:
 						case 6:
 						case 3:
+						case 20:
 							drawOffsetX += 2;
 							xOffset -= 2;
 							break;
