@@ -55,15 +55,15 @@ public final class ItemDefinition {
 		}
 	}
 
-	public static int[] osrsItems = {11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
+	public static int[] osrsItems = {13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
 		"Mithril", "Adamant", "Rune", "Dragon",
 		"Barrows"
 	};
-	
-	public static ItemDefinition get(int id) {
+
+		public static ItemDefinition get(int id) {
 		for (int i = 0; i < 10; i++) {
 			if (cache[i].id == id) {
 				if (i == 21088) {
@@ -181,12 +181,18 @@ public final class ItemDefinition {
 			case 4587:
 				itemDef.maleWieldY = 4; // char up/down
 				itemDef.maleWieldZ = -8; // char up/down
+
+			case 13190:
+				itemDef.name = "Bond of Chaos";
+				break;
+
+//			case 13190:
 //                System.out.println("------");
 //                System.out.println("Name: "+itemDef.name);
 //                System.out.println("Model ID: "+itemDef.modelID);
-//                System.out.println("Male wear: "+itemDef.maleWearId);
-//                System.out.println("Female wear: "+itemDef.femaleWearId);
-                break;
+////                System.out.println("Male wear: "+itemDef.maleWearId);
+////                System.out.println("Female wear: "+itemDef.femaleWearId);
+//                break;
 			case 20789:
 				itemDef.maleWearId = 75000;
 				itemDef.femaleWearId = 75001;
@@ -194,14 +200,6 @@ public final class ItemDefinition {
 			case 20790:
 				itemDef.modelID = 75002;
                 break;
-
-            case 11849:
-				System.out.println("------");
-				System.out.println("Name: "+itemDef.name);
-				System.out.println("Model ID: "+itemDef.modelID);
-				System.out.println("Male wear: "+itemDef.maleWearId);
-				System.out.println("Female wear: "+itemDef.femaleWearId);
-				break;
 
 			case 10586:
 				itemDef.name = "Knight's Lamp";
