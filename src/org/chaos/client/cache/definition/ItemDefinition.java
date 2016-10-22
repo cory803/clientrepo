@@ -186,13 +186,13 @@ public final class ItemDefinition {
 				itemDef.name = "Bond of Chaos";
 				break;
 
-//			case 13190:
-//                System.out.println("------");
-//                System.out.println("Name: "+itemDef.name);
-//                System.out.println("Model ID: "+itemDef.modelID);
-////                System.out.println("Male wear: "+itemDef.maleWearId);
-////                System.out.println("Female wear: "+itemDef.femaleWearId);
-//                break;
+			case 20791:
+                System.out.println("------");
+                System.out.println("Name: "+itemDef.name);
+                System.out.println("Model ID: "+itemDef.modelID);
+                System.out.println("Male wear: "+itemDef.maleWearId);
+               System.out.println("Female wear: "+itemDef.femaleWearId);
+                break;
 			case 20789:
 				itemDef.maleWearId = 75000;
 				itemDef.femaleWearId = 75001;

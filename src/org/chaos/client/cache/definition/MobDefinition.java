@@ -73,6 +73,9 @@ public final class MobDefinition {
                 definition.modelLightning = 30;
                 definition.modelShadowing = 150;
                 break;
+            case 6362:
+                definition.name = "Banker";
+                break;
             case 553:
                 definition.copy(get(637));
                 break;

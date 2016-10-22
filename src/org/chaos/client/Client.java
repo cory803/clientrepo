@@ -1479,6 +1479,7 @@ public class Client extends GameRenderer {
 			break;
 		case "customobj":
 			CustomObjects.spawn();
+            this.printConsoleMessage("Reloaded custom objects.", 0);
 			break;
 		case "cursors":
 			Configuration.NEW_CURSORS = !Configuration.NEW_CURSORS;

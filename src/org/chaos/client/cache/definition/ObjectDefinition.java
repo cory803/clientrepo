@@ -169,6 +169,9 @@ public final class ObjectDefinition {
 
             //Chaos fanatic
             26765,
+
+            //Cerberus
+            21708
     };
 
     public static int[] debugObjects = {
@@ -240,7 +243,7 @@ public final class ObjectDefinition {
         }
 
 
-        //Dump objects for OSRS maps
+//        Dump objects for OSRS maps
 //        if (!OBJECT_MODELS.contains(id)) {
 //           System.out.println(id+",");
 //           OBJECT_MODELS.add(id);
@@ -769,17 +772,6 @@ public final class ObjectDefinition {
                 definition.name = "null";
                 definition.isUnwalkable = false;
                 definition.adjustToTerrain = true;
-                definition.hasActions = false;
-                break;
-
-            case 21708:
-                definition.setDefaults();
-                definition.objectModelIDs = new int[]{29344};
-                definition.anIntArray776 = new int[]{22};
-                definition.name = "null";
-                definition.isUnwalkable = false;
-                definition.adjustToTerrain = true;
-                definition.nonFlatShading = true;
                 definition.hasActions = false;
                 break;
 
