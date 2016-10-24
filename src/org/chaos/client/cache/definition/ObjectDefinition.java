@@ -27,9 +27,10 @@ public final class ObjectDefinition {
             26364};
 
     private static final int[] removeObjects = {11726, 733, 5126, 10527, 10529, 12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
-            24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349, 2309};
+            24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349, 2309, 4879};
 
     private static final int[] osrsObjects = {
+
             //Cerberus
             21772,
 
@@ -95,7 +96,6 @@ public final class ObjectDefinition {
             1761,
             1791,
             1815,
-            2097,
             2741,
             2742,
             2743,
@@ -1747,6 +1747,7 @@ public final class ObjectDefinition {
                 definition.actions = new String[5];
                 definition.actions[0] = "Use";
                 break;
+            case 4767:
             case 2732:
             case 41687:
                 definition.actions = new String[5];

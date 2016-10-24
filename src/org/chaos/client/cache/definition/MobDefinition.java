@@ -82,19 +82,22 @@ public final class MobDefinition {
             case 6247:
                 definition.npcModels = get(6646).npcModels;
                 break;
-            case 1613:
+            case 151481:
                 System.out.println("----");
                 System.out.println("name: "+definition.name);
-                for (int i = 0; i < definition.npcModels.length; i++) {
-                    System.out.println("Model "+i+": "+definition.npcModels[i]);
-                }
+                //for (int i = 0; i < definition.npcModels.length; i++) {
+                //    System.out.println("Model "+i+": "+definition.npcModels[i]);
+                //}
                 //System.out.println("Size: "+definition.npcSizeInSquares);
                // System.out.println("Stand animation: "+definition.standAnimation);
                 //System.out.println("Walk animation: "+definition.walkAnimation);
                 //System.out.println("Size: "+definition.npcSizeInSquares);
-                //for (int i = 0; i < definition.dialogueModels.length; i++) {
-                 //   System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
-                //}
+                for (int i = 0; i < definition.dialogueModels.length; i++) {
+                    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
+                }
+                break;
+            case 402:
+                definition.dialogueModels[0] = 76000;
                 break;
             case 490:
                 definition.name = "Nieve";
@@ -119,6 +122,15 @@ public final class MobDefinition {
                 definition.adjustVertextPointZ = 128;
                 definition.originalModelColours = new int[] {6798};
                 definition.changedModelColours = new int[] {9137};
+                break;
+            case 5428:
+                definition.name = "Agility Penguin";
+                definition.actions = new String[]{"Talk-to", null, "Trade", "Travel", null};
+                definition.adjustVertextPointsXOrY = 135;
+                definition.adjustVertextPointZ = 135;
+                for (int i = 0; i < definition.dialogueModels.length; i++) {
+                    System.out.println("Dialogue Model "+i+": "+definition.dialogueModels[i]);
+                }
                 break;
             case 5886: //TODO: Add abyssal sire models
             case 5866:
@@ -279,6 +291,9 @@ public final class MobDefinition {
             case 6139:
                 definition.actions = new String[]{"Talk-to", null, "Change Home", null, null};
                 break;
+            case 1396:
+                definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
+                break;
             case 4646:
                 definition.actions = new String[]{"Talk-to", null, "Teleport", null, null};
                 break;
@@ -364,6 +379,16 @@ public final class MobDefinition {
                 break;
             case 817:
             case 7969:
+                definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
+                break;
+            case 5110:
+                definition.actions = new String[]{"Talk-to", null, "Trade", "Travel", null};
+                break;
+            case 805:
+                definition.actions = new String[]{"Talk-to", null, "Tan-hides", null, null};
+                break;
+            case 308:
+                definition.name = "Martin";
                 definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
                 break;
             case 1382:
