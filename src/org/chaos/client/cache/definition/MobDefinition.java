@@ -476,6 +476,10 @@ public final class MobDefinition {
                 definition.npcModels[7] = 43660; // Weapon
                 definition.dialogueModels = MobDefinition.get(494).dialogueModels;
                 break;
+            case 595:
+                definition.name = "Ellis";
+                definition.description = "Hmm... I wonder how he got here?".getBytes();
+                break;
             case 572:
                 definition.name = "Barrows brother";
                 definition.description = "A brother of great historic resemblance.".getBytes();
