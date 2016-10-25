@@ -476,6 +476,37 @@ public final class MobDefinition {
                 definition.npcModels[7] = 43660; // Weapon
                 definition.dialogueModels = MobDefinition.get(494).dialogueModels;
                 break;
+            case 572:
+                definition.name = "Barrows brother";
+                definition.description = "A brother of great historic resemblance.".getBytes();
+                definition.actions = new String[] {"Talk-to", null, null, null, null};
+                break;
+            case 4252:
+                definition.name = "Donovan";
+                definition.description = "Gunther, The Chaos donation master.".getBytes();
+                definition.combatLevel = 0;
+                definition.actions = new String[5];
+                definition.actions[0] = "Talk-to";
+                definition.standAnimation = 808;
+                definition.walkAnimation = 819;
+                definition.npcModels = new int[8];
+                definition.npcModels[0] = ItemDefinition.get(1057).maleWearId; // Hat
+                definition.npcModels[1] = ItemDefinition.get(15040).maleWearId; // Platebody
+                definition.npcModels[2] = ItemDefinition.get(15042).maleWearId; // Platelegs
+                definition.npcModels[3] = ItemDefinition.get(14022).maleWearId; // Cape
+                definition.npcModels[4] = ItemDefinition.get(15044).maleWearId; // Gloves
+                definition.npcModels[5] = ItemDefinition.get(15043).maleWearId; // Boots
+                definition.npcModels[6] = ItemDefinition.get(19335).maleWearId; // Amulet
+                //definition.npcModels[7] = ItemDefinition.get(15040).maleWearId2; // Arms #2
+                definition.npcModels[7] = ItemDefinition.get(15449).maleWearId; // Shield
+
+                definition.adjustVertextPointsXOrY = 142;
+                definition.adjustVertextPointZ = 142;
+                definition.dialogueModels = new int[] {ItemDefinition.get(1057).maleWearId};
+
+                definition.changedModelColours = new int[] { 788, 786, 786, 786, 783, 778, 1, 788, 786, 1, 947};
+                definition.originalModelColours = new int[] { 43306, 43302, 47530, 41, 47532, 47528, 0, 31762, 47512, 0, 22439 };
+                break;
             case 6830:
             case 6841:
             case 6796:

@@ -15670,7 +15670,7 @@ public class Client extends GameRenderer {
 			} else {
 				client.setLoginMessage("No response from server");
 				loginMessageColor = 0xFF0000;
-				client.setLoginDescription("test");
+				client.setLoginDescription("This usually means that you have attempted to login too many times. Wait about 10 seconds and try again.");
 				return false;
 			}
 		} else {

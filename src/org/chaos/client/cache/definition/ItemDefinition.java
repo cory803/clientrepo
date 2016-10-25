@@ -126,9 +126,6 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
-            case 20435:
-                itemDef.name = "Donator Tokens";
-                break;
 			//Experience lamps
 			case 11137:
 				itemDef.name = "Lamp of 10K";
@@ -151,6 +148,11 @@ public final class ItemDefinition {
 			case 11188:
 				itemDef.name = "Lamp of 2M";
 				break;
+			case 12843:
+				itemDef.imitate(get(2996));
+				itemDef.name = "Donator tickets";
+				break;
+
             case 13247:
             case 13178:
             case 12921:
@@ -186,12 +188,16 @@ public final class ItemDefinition {
 				itemDef.name = "Bond of Chaos";
 				break;
 
-			case 20791:
+			case 15449:
                 System.out.println("------");
                 System.out.println("Name: "+itemDef.name);
                 System.out.println("Model ID: "+itemDef.modelID);
                 System.out.println("Male wear: "+itemDef.maleWearId);
-               System.out.println("Female wear: "+itemDef.femaleWearId);
+              	System.out.println("Female wear: "+itemDef.femaleWearId);
+				for (int i = 0; i < itemDef.originalModelColors.length; i++) {
+					System.out.println("originalModelColors: "+itemDef.originalModelColors[i]);
+					System.out.println("modifiedModelColors: "+itemDef.modifiedModelColors[i]);
+				}
                 break;
 			case 20789:
 				itemDef.maleWearId = 75000;
@@ -2918,14 +2924,14 @@ public final class ItemDefinition {
 				itemDef.modelID = 61729;
 				break;
 			case 7629:
-				itemDef.setDefaults();
+				//itemDef.setDefaults();
 				//itemDef.imitate(get(761));
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				itemDef.actions[4] = "Drop";
-				itemDef.description = "This scroll can be redeemed for a $100 Chaos payment. [100 points]"
+				itemDef.description = "This scroll can be redeemed for a $100 Chaos payment. [12000 points]"
 						.getBytes();
-				itemDef.name = "Scroll of $100";
+				itemDef.name = "$100 Scroll";
 				break;
 			case 14136:
 				itemDef.setDefaults();
@@ -4552,22 +4558,22 @@ public final class ItemDefinition {
 				break;
 			case 10934:
 				itemDef.imitate(get(607));
-				itemDef.name = "Scroll of $25";
-				itemDef.description = "This scroll can be redeemed for a $25 Chaos payment. [25 points]".getBytes();
+				itemDef.name = "$25 Scroll";
+				itemDef.description = "This scroll can be redeemed for a $25 Chaos payment. [2500 points]".getBytes();
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				break;
 			case 10935:
 				itemDef.imitate(get(608));
-				itemDef.name = "Scroll of $50";
-				itemDef.description = "This scroll can be redeemed for a $50 Chaos payment. [50 points]".getBytes();
+				itemDef.name = "$50 Scroll";
+				itemDef.description = "This scroll can be redeemed for a $50 Chaos payment. [5500 points]".getBytes();
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				break;
 			case 10943:
 				itemDef.imitate(get(607));
-				itemDef.name = "Scroll of $10";
-				itemDef.description = "This scroll can be redeemed for a $10 Chaos payment. [10 points]".getBytes();
+				itemDef.name = "$10 Scroll";
+				itemDef.description = "This scroll can be redeemed for a $10 Chaos payment. [1000 points]".getBytes();
 				itemDef.actions = new String[5];
 				itemDef.actions[0] = "Redeem";
 				break;
