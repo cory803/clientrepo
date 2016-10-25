@@ -18,6 +18,11 @@ public final class IdentityKit {
             cache[j].anIntArray659[0] = 55232;
             cache[j].anIntArray660[0] = 6798;
         }
+        //Fixes weird bandos appearances
+        cache[99].anIntArray658[0] = 79000;
+        cache[102].anIntArray658[0] = 79001;
+
+        //System.out.println("Equipment id: "+cache[99].anIntArray658[0]);
     }
 
     private void readValues(ByteBuffer stream) {
@@ -27,7 +32,7 @@ public final class IdentityKit {
                 return;
             if (i == 1) { //Maybe equipment id
                 anInt657 = stream.getUnsignedByte();
-            } else if (i == 2) {
+            } else if (i == 2) { //Definitely model id
                 int j = stream.getUnsignedByte();
                 anIntArray658 = new int[j];
                 for (int k = 0; k < j; k++) {

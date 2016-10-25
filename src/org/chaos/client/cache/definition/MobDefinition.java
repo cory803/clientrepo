@@ -97,7 +97,7 @@ public final class MobDefinition {
                 }
                 break;
             case 402:
-                definition.dialogueModels[0] = 76000;
+                definition.dialogueModels[0] = 76500;
                 break;
             case 490:
                 definition.name = "Nieve";

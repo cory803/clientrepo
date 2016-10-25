@@ -188,7 +188,7 @@ public final class ItemDefinition {
 				itemDef.name = "Bond of Chaos";
 				break;
 
-			case 15449:
+			case 11724:
                 System.out.println("------");
                 System.out.println("Name: "+itemDef.name);
                 System.out.println("Model ID: "+itemDef.modelID);
