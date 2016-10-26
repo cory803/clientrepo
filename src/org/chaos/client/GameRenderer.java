@@ -18,7 +18,6 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 
 import org.chaos.Configuration;
-import org.chaos.client.cache.download.DownloadCache;
 import org.chaos.client.graphics.CacheSpriteLoader;
 import org.chaos.client.graphics.CursorData;
 import org.chaos.client.graphics.RSImageProducer;
@@ -1033,12 +1032,12 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if(DownloadCache.needsCache()) {
-				Client.instance.isCaching = true;
-				DownloadCache.showDownloadScreen();
-			} else {
+			//if(DownloadCache.needsCache()) {
+				//Client.instance.isCaching = true;
+				//DownloadCache.showDownloadScreen();
+			//} else {
 				startUp();
-			}
+			//}
 			updateGraphics(true);
 			int i = 0;
 			int j = 256;
