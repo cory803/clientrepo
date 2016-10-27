@@ -1433,7 +1433,18 @@ public class Client extends GameRenderer {
 			consoleMessages[0] = s;
 		}
 	}
+	public MapTheme getMapTheme() {
+		return mapTheme;
+	}
 
+	public void setMapTheme(MapTheme mapTheme) {
+		if (getMapTheme() == mapTheme)
+			return;
+		this.mapTheme = mapTheme;
+		if (loggedIn) {
+			queuedMapTheme = true;
+		}
+	}
 	public String date() {
 		Date date = new Date();
 		SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
@@ -6377,6 +6388,9 @@ public class Client extends GameRenderer {
 		}
 	}
 
+	private MapTheme mapTheme = MapTheme.HALLOWEEN;
+	private boolean queuedMapTheme;
+
 	private void drawGameScreen() {
 		if (getFullscreenInterfaceID() != -1 && (loadingStage == 2 || super.fullGameScreen != null)) {
 			if (loadingStage == 2) {
@@ -6507,7 +6521,10 @@ public class Client extends GameRenderer {
 			drawConsoleArea();
 			setInputTaken(false);
 		}
-
+		if (queuedMapTheme) {
+			queuedMapTheme = false;
+			loadRegion();
+		}
 		if (loadingStage == 2) {
 			method146();
 		}

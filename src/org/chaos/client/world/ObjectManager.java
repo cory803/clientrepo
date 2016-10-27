@@ -1,6 +1,7 @@
 package org.chaos.client.world;
 
 import org.chaos.client.Class4;
+import org.chaos.client.Client;
 import org.chaos.client.cache.definition.FloorOverlay;
 import org.chaos.client.cache.definition.FloorUnderlay;
 import org.chaos.client.cache.definition.ObjectDefinition;
@@ -1359,12 +1360,37 @@ public final class ObjectManager {
 
 				if (l1 <= 49) {
 					aByteArrayArrayArray130[l][k][i] = stream.getSignedByte();
+					if (Client.getClient().getMapTheme().getOverlay() != -1) {
+						switch (aByteArrayArrayArray130[l][k][i]) {
+							case 75:
+							case 98:
+							case 42:
+							case 55:
+							case 22:
+							case 23:
+							case 56:
+							case -83:
+							case -84:
+							case -85:
+							case -93:
+							case 95:
+							case 94:
+							case 14:
+							case 80:
+								aByteArrayArrayArray130[l][k][i] = Client.getClient().getMapTheme().getOverlay();
+								break;
+						}
+					}
 					aByteArrayArrayArray136[l][k][i] = (byte) ((l1 - 2) / 4);
 					aByteArrayArrayArray148[l][k][i] = (byte) (l1 - 2 + i1 & 3);
 				} else if (l1 <= 81) {
 					aByteArrayArrayArray149[l][k][i] = (byte) (l1 - 49);
 				} else {
-					aByteArrayArrayArray142[l][k][i] = (byte) (l1 - 81);
+					if (Client.getClient().getMapTheme().getUnderlay() != -1) {
+						aByteArrayArrayArray142[l][k][i] = Client.getClient().getMapTheme().getUnderlay();
+					} else {
+						aByteArrayArrayArray142[l][k][i] = (byte) (l1 - 81);
+					}
 				}
 			} while (true);
 		}
