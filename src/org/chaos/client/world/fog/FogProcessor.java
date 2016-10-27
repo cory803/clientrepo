@@ -7,7 +7,8 @@ import org.chaos.client.graphics.Canvas2D;
  */
 public class FogProcessor {
 	
-	public int rgb = 0xc8c0a8;
+	public int rgb = 0x202020;
+    //Old fog = c8c0a8
 
     public void render(int begin, int end) {
         for (int depth = Canvas2D.depthBuffer.length - 1; depth >= 0; depth--) {
