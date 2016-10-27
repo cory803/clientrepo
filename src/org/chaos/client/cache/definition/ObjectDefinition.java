@@ -1586,7 +1586,7 @@ public final class ObjectDefinition {
             definition.hasActions = true;
             definition.name = "Mystical Monolith";
             definition.actions = new String[5];
-            definition.actions[0] = "Travel";
+            definition.actions[0] = "Travel-with";
             definition.actions[1] = "Pray-at";
         }
 

@@ -47,6 +47,9 @@ public final class MobDefinition {
             definition.readValues(buffer);
         }
         switch (id) {
+            case 1304:
+                definition.actions = new String[] {"Talk-to", null, "Travel-with", null, null};
+                break;
             case 6644: //Correcting animations for Bandos Pet
                 definition.standAnimation = 7059;
                 definition.walkAnimation = 7058;
@@ -382,7 +385,7 @@ public final class MobDefinition {
                 definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
                 break;
             case 5110:
-                definition.actions = new String[]{"Talk-to", null, "Trade", "Travel", null};
+                definition.actions = new String[]{"Talk-to", null, "Trade", "Travel-with", null};
                 break;
             case 805:
                 definition.actions = new String[]{"Talk-to", null, "Tan-hides", null, null};
@@ -653,7 +656,7 @@ public final class MobDefinition {
                 definition.name = "Chaos Guide";
                 break;
             case 5030:
-                definition.actions[2] = "Travel";
+                definition.actions[2] = "Travel-with";
                 break;
 
             case 548:
