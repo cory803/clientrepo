@@ -183,7 +183,7 @@ public final class ItemDefinition {
 			case 4587:
 				itemDef.maleWieldY = 4; // char up/down
 				itemDef.maleWieldZ = -8; // char up/down
-
+				break;
 			case 13190:
 				itemDef.name = "Bond of Chaos";
 				break;
