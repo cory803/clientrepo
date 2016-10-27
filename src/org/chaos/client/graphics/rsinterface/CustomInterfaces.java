@@ -665,7 +665,7 @@ public class CustomInterfaces extends RSInterface {
 			addHoverButtonWSpriteLoader(79924 + i, 622, 60, 27, "Set Level Goal", 1321, -1, 1);
 			addHoverButtonWSpriteLoader(79949 + i, 622, 60, 27, "Set Exp Goal", 1322, -1, 1);
 			addHoverButtonWSpriteLoader(79974 + i, 622, 60, 27, "Clear Goal", 1323, -1, 1);
-			addHoverButtonWSpriteLoader(80000 + i, 622, 60, 27, "Prestige", 5000 + i, -1, 1);
+			//addHoverButtonWSpriteLoader(80000 + i, 622, 60, 27, "Prestige", 5000 + i, -1, 1);
 			addSpriteLoader(icons[i], spriteIds[i]);
 		}
 
@@ -673,7 +673,7 @@ public class CustomInterfaces extends RSInterface {
 			addSkillText(newText[0][i], false, i + 21);
 			addSkillText(newText[1][i], true, i + 21);
 		}
-		skill.totalChildren(icons.length + (text.length * 2) + hovers.length + buttons.length * 5 + 1);
+		skill.totalChildren(icons.length + (text.length * 2) + buttons.length * 5 + 1);
 
 		RSInterface totalLevel = addInterface(3984);
 		addSpriteLoader(31196, 649);
@@ -689,7 +689,7 @@ public class CustomInterfaces extends RSInterface {
 		skill.child(frame, 3984, 0, 0);
 		frame++;
 		for (int i = 0; i < buttons.length; i++) {
-			skill.child(frame++, 80000 + i, buttonCoords[i][0], buttonCoords[i][1]);
+			//skill.child(frame++, 80000 + i, buttonCoords[i][0], buttonCoords[i][1]);
 			skill.child(frame++, 79974 + i, buttonCoords[i][0], buttonCoords[i][1]);
 			skill.child(frame++, 79949 + i, buttonCoords[i][0], buttonCoords[i][1]);
 			skill.child(frame++, 79924 + i, buttonCoords[i][0], buttonCoords[i][1]);
