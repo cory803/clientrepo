@@ -452,7 +452,6 @@ public final class MobDefinition {
                 definition.combatLevel = 1337;
                 definition.actions = new String[5];
                 definition.actions[0] = "Talk-to";
-                definition.actions[2] = "Trade";
                 definition.standAnimation = 808;
                 definition.walkAnimation = 819;
                 definition.npcModels = new int[]{65291, 65322, 506, 529, 252, 9642, 62746, 13307, 62743, 53327};
