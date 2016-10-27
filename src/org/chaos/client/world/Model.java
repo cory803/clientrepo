@@ -1255,6 +1255,7 @@ public class Model extends Animable {
 			case 70:
 			case 14337:
             case 10031:
+			case 76500:
 				upscale(1);
 				break;
 		}
