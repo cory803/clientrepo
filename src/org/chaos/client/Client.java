@@ -54,6 +54,7 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
 import java.io.*;
+import java.lang.reflect.Method;
 import java.net.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -4870,7 +4871,7 @@ public class Client extends GameRenderer {
 
 			if (class9_2.valueIndexArray != null && class9_2.valueIndexArray[0][0] == 5) {
 				int i2 = class9_2.valueIndexArray[0][1];
-
+				System.out.println("I2: "+i2);
 				if (variousSettings[i2] != class9_2.requiredValues[0]) {
 					variousSettings[i2] = class9_2.requiredValues[0];
 					updateConfig(i2);
@@ -9176,34 +9177,32 @@ public class Client extends GameRenderer {
 		});
 	}
 
-	private static void openUrl(String url) {
-		if (Desktop.isDesktopSupported()) {
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.browse(new URI(url));
-			} catch (IOException e) {
-				System.err.println("Desktop supported, IOException occurred while opening url: " + url);
-			} catch (URISyntaxException e) {
-				System.err.println("Desktop supported, URISyntaxException occurred while opening url: " + url);
+	public static void openUrl(String url) {
+		String osName = System.getProperty("os.name");
+		try {
+			if (osName.startsWith("Mac OS")) {
+				Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
+				Method openURL = fileMgr.getDeclaredMethod("openURL",
+						new Class[] { String.class });
+				openURL.invoke(null, new Object[] { url });
+			} else if (osName.startsWith("Windows"))
+				Runtime.getRuntime().exec(
+						"rundll32 url.dll,FileProtocolHandler " + url);
+			else {
+				String[] browsers = { "firefox", "opera", "konqueror",
+						"epiphany", "mozilla", "netscape", "safari" };
+				String browser = null;
+				for (int count = 0; count < browsers.length && browser == null; count++)
+					if (Runtime.getRuntime()
+							.exec(new String[] { "which", browsers[count] })
+							.waitFor() == 0)
+						browser = browsers[count];
+				if (browser == null) {
+					throw new Exception("Could not find web browser");
+				} else
+					Runtime.getRuntime().exec(new String[] { browser, url });
 			}
-		} else {
-			Runtime runtime = Runtime.getRuntime();
-			if (SystemInfo.isMac()) {
-				String[] args = { "osascript", "-e", "open location \"" + url + "\"" };
-				try {
-					runtime.exec(args);
-				} catch (IOException e) {
-					System.err.println(
-							"Desktop not supported, IOException occurred while opening url (osascript): " + url);
-				}
-			} else {
-				try {
-					runtime.exec("xdg-open " + url);
-				} catch (IOException e) {
-					System.err.println(
-							"Desktop not supported, IOException occurred while opening url (xdg-open): " + url);
-				}
-			}
+		} catch (Exception e) {
 		}
 	}
 
@@ -14812,14 +14811,15 @@ public class Client extends GameRenderer {
 			case 87:
 				int configId = getInputBuffer().getShortBigEndian();
 				int configValue = getInputBuffer().method439();
-				settings[configId] = configValue;
 
+				settings[configId] = configValue;
+				System.out.println(""+configId+": "+configValue);
 				switch (configId) {
 				case 2000:
 					updateBankInterface();
 					break;
 				}
-				if (configId < 2000) {
+				//if (configId < 2000) {
 					if (variousSettings[configId] != configValue) {
 						variousSettings[configId] = configValue;
 						updateConfig(configId);
@@ -14828,7 +14828,7 @@ public class Client extends GameRenderer {
 							inputTaken = true;
 						}
 					}
-				}
+				//}
 
 				pktType = -1;
 				return true;

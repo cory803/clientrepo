@@ -1,8 +1,8 @@
 package org.chaos.client;
 
 /**
- *
- * @author relex lawl
+ * Handles Chaos Map Themes
+ * @author Jonny, relex
  */
 public enum MapTheme {
 	

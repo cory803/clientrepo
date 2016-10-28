@@ -8,9 +8,11 @@ public final class VarBit {
 	public static VarBit[] cache;
 
 	public static void unpackConfig(Archive archive) {
-		ByteBuffer buffer = new ByteBuffer(archive.get("varbit.dat"));
-		int size = 5133;
+		byte[] data = archive.get("varbit.dat");
+		ByteBuffer buffer = new ByteBuffer(data);
+		int size = buffer.getUnsignedShort();
 
+		System.out.println("Varbit size: "+size);
 		if (cache == null) {
 			cache = new VarBit[size];
 		}
@@ -36,27 +38,10 @@ public final class VarBit {
 	}
 
 	private void readValues(ByteBuffer buffer) {
-		do {
-			int opcode = buffer.getUnsignedByte();
+		configId = buffer.getUnsignedShort();
+		configValue = buffer.getUnsignedByte();
+		anInt650 = buffer.getUnsignedByte();
 
-			if (opcode == 0) {
-				return;
-			}
-
-			if (opcode == 1) {
-				configId = buffer.getUnsignedShort();
-				configValue = buffer.getUnsignedByte();
-				anInt650 = buffer.getUnsignedByte();
-			} else if (opcode == 10) {
-				buffer.getString();
-			} else if (opcode == 3) {
-				buffer.getIntLittleEndian();
-			} else if (opcode == 4) {
-				buffer.getIntLittleEndian();
-			} else if (opcode != 2) {
-				System.out.println("Error unrecognised config code: " + opcode);
-			}
-		} while (true);
 	}
 
 }
