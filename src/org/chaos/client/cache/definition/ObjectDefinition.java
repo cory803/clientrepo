@@ -193,10 +193,13 @@ public final class ObjectDefinition {
         boolean loadNew = (id == 32159 || id == 32157 || id == 36672
                 || id == 36675 || id == 36692 || id == 34138 || id >= 39260 && id <= 39271 || id == 39229 || id == 39230 || id == 849
                 || id == 39231 || id == 36676 || id == 36692 || id > 11915 && id <= 11929 || id >= 11426 && id <= 11444
-                || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715 || id == 8390 || id == 8389 || id == 8388 || id == 8550 || id == 8551 || id == 8552 || id == 8553 || id == 8554 || id == 8555 || id == 8556 || id == 8557 || id == 7847 || id == 7849 || id == 7850 || id == 7579 || id == 8337 || id == 8150 || id == 8151 || id == 8152 || id == 8153 || id == 7848);
+                || id == 35256 || id == 19123 || id == 33781 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715 || id == 8390 || id == 8389 || id == 8388 || id == 8550 || id == 8551 || id == 8552 || id == 8553 || id == 8554 || id == 8555 || id == 8556 || id == 8557 || id == 7847 || id == 7849 || id == 7850 || id == 7579 || id == 8337 || id == 8150 || id == 8151 || id == 8152 || id == 8153 || id == 7848);
         if (id < 0) {
             id = 0;
         }
+        //if(id == 33781) {
+            //System.out.println("Loadnew: "+loadNew);
+       // }
         boolean oldschoolObjects = false;
         for (int i = 0; i < osrsObjects.length; i++) {
             if(osrsObjects[i] == id) {
@@ -216,11 +219,11 @@ public final class ObjectDefinition {
         definition.id = id;
         definition.setDefaults();
         if (oldschoolObjects) {
-            definition.readValues(streamOsrs);
+            definition.readValues(streamOsrs, false);
         } else if (id > streamIndices.length || loadNew)
-            definition.readValues(stream667);
+            definition.readValues(stream667, true);
         else
-            definition.readValues(stream);
+            definition.readValues(stream, false);
         for (int element : showBlack) {
             if (id == element) {
                 definition.modifiedModelColors = new int[1];
@@ -271,7 +274,7 @@ public final class ObjectDefinition {
             if (id == i[0]) {
                 stream.position = streamIndices[3514];
                 definition.setDefaults();
-                definition.readValues(stream);
+                definition.readValues(stream, false);
                 definition.objectModelIDs = new int[1];
                 definition.objectModelIDs[0] = i[1];
                 definition.sizeX = 2;
@@ -386,6 +389,14 @@ public final class ObjectDefinition {
             case 589:
                 definition.actions = new String[]{"Enchant", null, null, null, null};
                 break;
+
+            case 35256:
+                System.out.println("Name: "+definition.name);
+                for(int i = 0; i < definition.objectModelIDs.length; i++) {
+                    System.out.println("Object model: "+i+": "+definition.objectModelIDs[i]);
+                }
+                break;
+
 
             case 1517:
             case 1520:
@@ -1875,7 +1886,7 @@ public final class ObjectDefinition {
     private int offsetY;
     private int[] modifiedModelColors;
     public static List mruNodes1 = new List(500);
-    public String[] actions;
+    public String actions[];
 
     public void preloadModelsExtras(CacheFileRequester requester) {
         if (objectModelIDs == null) {
@@ -2117,7 +2128,7 @@ public final class ObjectDefinition {
             15330, 15330, 34138, 34138, 15330, 34138, 15330, 15331, 15331, 36675, 36672, 36672, 36675, 36672, 36675,
             36675, 36672, 15331, 15331, 15330, 15330, 15257, 15256, 15259, 15259, 15327, 15326};
 
-    private void readValues(ByteBuffer stream) {
+    private void readValues(ByteBuffer stream, boolean higherRevision) {
         int i = -1;
         label0:
         do {
@@ -2137,7 +2148,8 @@ public final class ObjectDefinition {
                                 anIntArray776[k1] = stream.getUnsignedByte();
                             }
                         } else {
-                            stream.position += k * 3;
+                            if(!higherRevision)
+                                stream.position += k * 3;
                         }
                 } else if (opcode == 2)
                     name = stream.getString();
@@ -2152,7 +2164,8 @@ public final class ObjectDefinition {
                             for (int l1 = 0; l1 < l; l1++)
                                 objectModelIDs[l1] = stream.getUnsignedShort();
                         } else {
-                            stream.position += l * 2;
+                            if(!higherRevision)
+                                stream.position += l * 2;
                         }
                 } else if (opcode == 14)
                     sizeX = stream.getUnsignedByte();
@@ -2168,9 +2181,12 @@ public final class ObjectDefinition {
                         hasActions = true;
                 } else if (opcode == 21)
                     adjustToTerrain = true;
-                else if (opcode == 22)
+                else if (opcode == 22) {
                     nonFlatShading = false;
-                else if (opcode == 23)
+                    //if(higherRevision) {
+                       // nonFlatShading = false;
+                   //}
+                } else if (opcode == 23)
                     aBoolean764 = true;
                 else if (opcode == 24) {
                     animationID = stream.getUnsignedShort();
@@ -2186,7 +2202,7 @@ public final class ObjectDefinition {
                     if (actions == null)
                         actions = new String[10];
                     actions[opcode - 30] = stream.getString();
-                    if (actions[opcode - 30].equalsIgnoreCase("hidden"))
+                    if (actions[opcode - 30].equalsIgnoreCase("hidden") || actions[opcode - 30].equalsIgnoreCase("null") || actions[opcode - 30].contains("�"))
                         actions[opcode - 30] = null;
                 } else if (opcode == 40) {
                     int i1 = stream.getUnsignedByte();
@@ -2248,6 +2264,8 @@ public final class ObjectDefinition {
             hasActions = objectModelIDs != null && (anIntArray776 == null || anIntArray776[0] == 10);
             if (actions != null)
                 hasActions = true;
+            if(name == null || name == "null")
+                hasActions = false;
         }
         if (isSolidObject) {
             isUnwalkable = false;
