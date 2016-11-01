@@ -14480,6 +14480,12 @@ public class Client extends GameRenderer {
 					}
 					pktType = -1;
 					return true;
+				} else if (frame == 1 && text.contains("[ANNOUNCE]")) {
+					String[] args = text.split("-");
+					announcementTimer = Integer.parseInt(args[1]) * 30;
+					announcement = args[2];
+					pktType = -1;
+					return true;
 				} else if (frame == 1 && text.equals("ZULRAHFADE")) {
 					fadingScreen = new FadingScreen("", (byte) 1, (byte) 4);
 					pktType = -1;
