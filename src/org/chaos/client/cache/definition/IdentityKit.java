@@ -21,8 +21,9 @@ public final class IdentityKit {
         //Fixes weird bandos appearances
         cache[99].anIntArray658[0] = 79000;
         cache[102].anIntArray658[0] = 79001;
+        cache[140].anIntArray658[0] = 79002;
 
-        System.out.println("Equipment id: "+cache[102].anIntArray658[0]);
+        System.out.println("Equipment id: "+cache[140].anIntArray658[0]);
     }
 
     private void readValues(ByteBuffer stream) {

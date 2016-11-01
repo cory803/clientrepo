@@ -318,9 +318,9 @@ public class TabArea extends GameFrame {
 							} else if(tabID == 13) {
 								tabID = 1;
 							}
-							if (screenMode != ScreenMode.FIXED) {
-								setHideComponent(Client.tabID != i ? false : componentHidden() ? false : true);
-							}
+							//if (screenMode != ScreenMode.FIXED) {
+								//setHideComponent(Client.tabID != i ? false : componentHidden() ? false : true);
+							//}
 							//System.out.println(""+tabID);
 							Client.setTab(tabID);
 							break;
