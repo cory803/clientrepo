@@ -6396,7 +6396,7 @@ public class Client extends GameRenderer {
 		}
 	}
 
-	private MapTheme mapTheme = MapTheme.HALLOWEEN;
+	private MapTheme mapTheme = MapTheme.DEFAULT;
 	private boolean queuedMapTheme;
 
 	private void drawGameScreen() {

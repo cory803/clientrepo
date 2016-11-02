@@ -62,6 +62,9 @@ public final class MobDefinition {
                 definition.walkAnimation = 7719;
                 definition.standAnimation = 9952;
                 break;
+            case 9713:
+                definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
+                break;
             case 502: //Kraken boss
                 definition.npcModels = new int[1];
                 definition.npcModels[0] = 28231;

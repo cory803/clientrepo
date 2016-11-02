@@ -193,7 +193,7 @@ public final class ObjectDefinition {
         boolean loadNew = (id == 32159 || id == 32157 || id == 36672
                 || id == 36675 || id == 36692 || id == 34138 || id >= 39260 && id <= 39271 || id == 39229 || id == 39230 || id == 849
                 || id == 39231 || id == 36676 || id == 36692 || id > 11915 && id <= 11929 || id >= 11426 && id <= 11444
-                || id == 35256 || id == 19123 || id == 33781 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715 || id == 8390 || id == 8389 || id == 8388 || id == 8550 || id == 8551 || id == 8552 || id == 8553 || id == 8554 || id == 8555 || id == 8556 || id == 8557 || id == 7847 || id == 7849 || id == 7850 || id == 7579 || id == 8337 || id == 8150 || id == 8151 || id == 8152 || id == 8153 || id == 7848);
+                || id == 35256 || id == 41807 || id == 42000 || id == 19123 || id == 33781 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715 || id == 8390 || id == 8389 || id == 8388 || id == 8550 || id == 8551 || id == 8552 || id == 8553 || id == 8554 || id == 8555 || id == 8556 || id == 8557 || id == 7847 || id == 7849 || id == 7850 || id == 7579 || id == 8337 || id == 8150 || id == 8151 || id == 8152 || id == 8153 || id == 7848);
         if (id < 0) {
             id = 0;
         }
@@ -390,11 +390,15 @@ public final class ObjectDefinition {
                 definition.actions = new String[]{"Enchant", null, null, null, null};
                 break;
 
-            case 35256:
-                System.out.println("Name: "+definition.name);
-                for(int i = 0; i < definition.objectModelIDs.length; i++) {
-                    System.out.println("Object model: "+i+": "+definition.objectModelIDs[i]);
-                }
+            case 41807:
+                //definition.imitate(forID(41795));
+                //definition.setDefaults();
+                //definition.anIntArray776 = new int[] {22};
+                //definition.objectModelIDs = new int[] {37531};
+                //System.out.println("Name: "+definition.name);
+                //for(int i = 0; i < definition.anIntArray776.length; i++) {
+                    //System.out.println("Object model: "+i+": "+definition.anIntArray776[i]);
+               // }
                 break;
 
 

@@ -370,6 +370,7 @@ public final class CacheFileRequester implements Runnable {
 						if (mapIndices2[j1] == cheapHax)
 							return mapIndices2[j1];
 					mapCount2 = mapIndices2[j1] > 3535 ? -1 : mapIndices2[j1];
+					System.out.println("Mapcount2: "+mapCount2+" "+regionId);
 					return mapCount2;
 				} else {
 					if (mapIndices3[j1] >= 3700 && mapIndices3[j1] <= 3840)
@@ -378,9 +379,11 @@ public final class CacheFileRequester implements Runnable {
 						if (mapIndices3[j1] == cheapHax)
 							return mapIndices3[j1];
 					mapCount3 = mapIndices3[j1] > 3535 ? -1 : mapIndices3[j1];
+					System.out.println("Mapcount3: "+mapCount3+" "+regionId);
 					return mapCount3;
 				}
 			}
+			System.out.println("Region id: "+regionId);
 		return -1;
 	}
 
@@ -397,7 +400,7 @@ public final class CacheFileRequester implements Runnable {
 			3653, 3654, 4067, 4068, 3639, 3640, 1976, 1977, 3571, 3572, 5129, 5130, 2066, 2067, 3545, 3546, 3559, 3560,
 			3569, 3570, 3551, 3552, 3579, 3580, 3575, 3576, 1766, 1767, 3547, 3548, 3682, 3683, 3696, 3697, 3692, 3693,
 			4013, 4079, 4080, 4082, 3996, 4083, 4084, 4075, 4076, 3664, 3993, 3994, 3995, 4077, 4078, 4073, 4074, 4011,
-			4012, 3998, 3999, 4081, };
+			4012, 3998, 3999, 4081, 4161, 4162, 4165, 4166, 3674, 3675 };
 
 	public void setExtraPriority(byte byte0, int i, int j) {
 		try {
@@ -848,11 +851,16 @@ public final class CacheFileRequester implements Runnable {
 		int[] dntUse = new int[] { 5181, 5182, 5183, 5184, 5180, 5179, 5175, 5176, 4014, 3997, 5314, 5315, 5172 };
 		for (int i2 = 0; i2 < mapCount; i2++) {
 			mapIndices1[i2] = stream2.getUnsignedShort();
-			if(mapIndices1[i2] == 14681) {
-				System.out.println("Map array "+i2);
-			}
+//			if(mapIndices1[i2] == 14681) {
+//				System.out.println("Map array "+i2);
+//			}
 			mapIndices2[i2] = stream2.getUnsignedShort();
 			mapIndices3[i2] = stream2.getUnsignedShort();
+			if(mapIndices2[i2] == 4161) {
+				System.out.println("Map array "+i2);
+				System.out.println("Map Test1 "+mapIndices2[i2]);
+				System.out.println("Map Test2 "+mapIndices3[i2]);
+			}
 			for (int i : dntUse) {
 				if (mapIndices2[i2] == i)
 					mapIndices2[i2] = -1;
@@ -967,6 +975,10 @@ public final class CacheFileRequester implements Runnable {
 		mapIndices3[1017] = 1997;
 
 */
+
+		//mapIndices1[1505] = 13882;
+		//mapIndices2[1505] = 900;
+		//mapIndices3[1505] = 901;
 
 		data = archive.get("midi_index");
 		stream2 = new ByteBuffer(data);

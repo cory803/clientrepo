@@ -4505,11 +4505,6 @@ public final class ItemDefinition {
 			case 292:
 				itemDef.name = "Ingredients book";
 				break;
-			case 15707:
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[0] = "Create Party";
-				break;
 			case 6040:
 				itemDef.name = "Healthorg's Amulet";
 				itemDef.actions = new String[5];
