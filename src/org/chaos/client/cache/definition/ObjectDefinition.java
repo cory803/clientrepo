@@ -3193,7 +3193,7 @@ public final class ObjectDefinition {
 
     public static void dumpObjectModels() {
         dumpObjectModels(streamIndices);
-        dumpObjectModels(streamIndices667);
+        //dumpObjectModels(streamIndices667);
     }
 
     public static void dumpObjectModels(int[] indices) {
@@ -3214,6 +3214,7 @@ public final class ObjectDefinition {
                     fos.close();
                     dumped++;
                 } catch (Exception e) {
+                    e.printStackTrace();
                     exceptions++;
                 }
             }

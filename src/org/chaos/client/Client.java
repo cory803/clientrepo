@@ -10,6 +10,7 @@ import org.chaos.client.accounts.AccountManager;
 import org.chaos.client.cache.Archive;
 import org.chaos.client.cache.CacheIndex;
 import org.chaos.client.cache.definition.*;
+import org.chaos.client.cache.download.CacheDownloader;
 import org.chaos.client.cache.node.Deque;
 import org.chaos.client.cache.node.Node;
 import org.chaos.client.cache.ondemand.CacheFileRequest;
@@ -298,6 +299,10 @@ public class Client extends GameRenderer {
 		return Signlink.getCacheDirectory() + "/index" + cacheIndex + "/" + (index != -1 ? index + ".gz" : "");
 	}
 
+	/**
+	 * Repacks a cache archive
+	 * @param cacheIndex
+	 */
 	public void repackCacheIndex(int cacheIndex) {
 		System.out.println("Started repacking index " + cacheIndex + ".");
 		int indexLength = new File(indexLocation(cacheIndex, -1)).listFiles().length;
@@ -1458,10 +1463,12 @@ public class Client extends GameRenderer {
 				consoleMessages[j] = null;
 			}
 		}
-		if (cmd.contains("dumpitem")) {
+		if (cmd.contains("dumpitems")) {
 			System.out.println("Command process: " + cmd + "");
 			String[] cmd2 = cmd.split(" ");
-			ItemDefinition.dumpItemModelsForId(Integer.parseInt(cmd2[1]));
+			for(int k = 0; k < ItemDefinition.totalItems; k++) {
+				ItemDefinition.dumpItemModelsForId(k);
+			}
 		}
 		if (cmd.contains("itemimages")) {
 			System.out.println("Command process: " + cmd + "");
@@ -7528,6 +7535,7 @@ public class Client extends GameRenderer {
 			return;
 		}
 		super.graphics.drawImage(loadingImages[0], 0, 0, null);
+
 		Graphics2D graphics2D = (Graphics2D) super.graphics;
 		super.graphics.setColor(Color.WHITE);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -17198,6 +17206,10 @@ public class Client extends GameRenderer {
 
 		super.graphics.drawImage(loadingImages[0], 0, 0, null);
 
+		System.out.println("Downloading cache...");
+
+		CacheDownloader.process(CacheDownloader.Cache.PARTIAL_CACHE);
+
 		if (Signlink.cache_dat != null) {
 			for (int i = 0; i < Configuration.CACHE_INDEX_COUNT; i++) {
 				cacheIndices[i] = new CacheIndex(Signlink.cache_dat, Signlink.cache_idx[i], i + 1);
@@ -17457,6 +17469,8 @@ public class Client extends GameRenderer {
 			Animable_Sub5.clientInstance = this;
 			ObjectDefinition.clientInstance = this;
 			MobDefinition.clientInstance = this;
+			//repackCacheIndex(1);
+			//ObjectDefinition.dumpObjectModels();
 			Settings.load();
 			System.gc();
 			isLoading = false;

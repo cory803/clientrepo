@@ -1,4 +1,4 @@
-package org.chaos.client.cache;
+package org.chaos.client.cache.download;
 
 import org.chaos.client.Client;
 import org.chaos.client.Signlink;
@@ -22,21 +22,68 @@ import java.io.*;
  * @author Gabriel Hannason
  */
 public class CacheDownloader {
-	
-	public static final String cache_version = "1";
-	public static final File cache_version_file = new File(Signlink.getCacheDirectory() + "versions/cache_version");
-	public static final String fileToExtract = Signlink.getCacheDirectory() + "chaos_dl.zip";
 
-	public static void init() {
+	private Cache cache = Cache.NO_CACHE;
+
+	/**
+	 * Handles the different types of cache
+	 */
+	public enum Cache {
+
+		PARTIAL_CACHE("partial_cache.zip", "https://dl.dropboxusercontent.com/u/344464529/Chaos/cache/partial_cache.zip"),
+		NO_CACHE(null, null);
+
+		Cache(String fileName, String link) {
+			this.fileName = fileName;
+			this.link = link;
+		}
+
+		private String fileName;
+		private String link;
+
+		/**
+		 * Get the cache download url
+		 * @return
+		 */
+		public String getLink() {
+			return this.link;
+		}
+
+		/**
+		 * Get the cache file name
+		 * @return
+		 */
+		public String getFileName() {
+			return this.fileName;
+		}
+	}
+
+	/**
+	 * Gets your current cache set
+	 * @return
+	 */
+	public Cache getCache() {
+		return this.cache;
+	}
+
+
+	public static String cacheVersion = "1";
+	public static final File cacheVersionFile = new File(Signlink.getCacheDirectory() + "versions/cache_version");
+
+	/**
+	 * Starts the initial download process
+	 * @param cache
+	 */
+	public static void process(Cache cache) {
 		try {
-			if(!cache_version_file.exists()) {
-				downloadCache();
-				unZip();
+			if(!cacheVersionFile.exists()) {
+				download(cache.getFileName(), cache.getLink());
+				unZip(cache.getFileName());
 				if(!new File(Signlink.getCacheDirectory() +"versions").exists()) {
 					new File(Signlink.getCacheDirectory() +"versions").mkdir();
 				}
-				BufferedWriter writer = new BufferedWriter(new FileWriter(cache_version_file));
-				writer.write(String.valueOf(cache_version));
+				BufferedWriter writer = new BufferedWriter(new FileWriter(cacheVersionFile));
+				writer.write(String.valueOf(cacheVersion));
 				writer.close();
 				Signlink.startpriv(InetAddress.getLocalHost());
 			}
@@ -44,32 +91,32 @@ public class CacheDownloader {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Sets the cahce downloading text
+	 * @param amount
+	 * @param text
+	 */
 	private static void drawLoadingText(int amount, String text) {
 		Client.loadingPercentage = amount;
 		Client.loadingText = text;
 	}
-	public static void downloadCache() throws IOException {
-		String fileURL = "https://dl.dropboxusercontent.com/u/344464529/ikov_dl.zip";
-		URL url = new URL(fileURL);
+
+	/**
+	 * Downloads the cache
+	 * @param fileName
+	 * @param downloadUrl
+	 * @throws IOException
+	 */
+	public static void download(String fileName, String downloadUrl) throws IOException {
+		URL url = new URL(downloadUrl);
 		HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 		httpConn.addRequestProperty("User-Agent", "Mozilla/4.76");
 		int responseCode = httpConn.getResponseCode();
 
 		// always check HTTP response code first
 		if (responseCode == HttpURLConnection.HTTP_OK) {
-			String fileName = "";
 			String disposition = httpConn.getHeaderField("Content-Disposition");
-
-			if (disposition != null) {
-				// extracts file name from header field
-				int index = disposition.indexOf("filename=");
-				if (index > 0) {
-					fileName = "ikov_dl.zip";
-				}
-			} else {
-				// extracts file name from URL
-				fileName = "ikov_dl.zip";
-			}
 
 			// opens input stream from the HTTP connection
 			InputStream inputStream = httpConn.getInputStream();
@@ -90,29 +137,33 @@ public class CacheDownloader {
 				downloaded += bytesRead;
 				int percentage = (int)(((double)numWritten / (double)length) * 100D);
 				int downloadSpeed = (int) ((downloaded / 1024) / (1 + ((System.currentTimeMillis() - startTime) / 1000)));
-				drawLoadingText(percentage, (new StringBuilder()).append("Downloading cache: "+percentage+"% ").append("@ "+downloadSpeed+"Kb/s").toString());
+				drawLoadingText(percentage, (new StringBuilder()).append("Downloading "+fileName+": "+percentage+"% ").append("@ "+downloadSpeed+"Kb/s").toString());
 			}
 
 			outputStream.close();
 			inputStream.close();
 
 		} else {
-			System.out.println("ikov2.org replied HTTP code: " + responseCode);
+			System.out.println("dropbox.com replied HTTP code: " + responseCode);
 		}
 		httpConn.disconnect();
 	}
 
-	public static void unZip() {
+	/**
+	 * Starts the intiial file unzipping process
+	 * @param fileName
+	 */
+	public static void unZip(String fileName) {
 		try {
-			InputStream in = new BufferedInputStream(new FileInputStream(fileToExtract));
+			InputStream in = new BufferedInputStream(new FileInputStream(Signlink.getCacheDirectory() + fileName));
 			ZipInputStream zin = new ZipInputStream(in);
 			ZipEntry e;
 			while ((e = zin.getNextEntry()) != null) {
 				if (e.isDirectory()) {
 					(new File(Signlink.getCacheDirectory() + e.getName())).mkdir();
 				} else {
-					if (e.getName().equals(fileToExtract)) {
-						unzip(zin, fileToExtract);
+					if (e.getName().equals(Signlink.getCacheDirectory() + fileName)) {
+						unzip(zin, Signlink.getCacheDirectory() + fileName);
 						break;
 					}
 					unzip(zin, Signlink.getCacheDirectory() + e.getName());
@@ -124,6 +175,12 @@ public class CacheDownloader {
 		}
 	}
 
+	/**
+	 * Actually unzips the file...
+	 * @param zin
+	 * @param s
+	 * @throws IOException
+	 */
 	public static void unzip(ZipInputStream zin, String s) throws IOException {
 		FileOutputStream out = new FileOutputStream(s);
 		byte[] b = new byte[1024];
