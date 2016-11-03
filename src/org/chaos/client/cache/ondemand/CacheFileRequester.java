@@ -370,7 +370,6 @@ public final class CacheFileRequester implements Runnable {
 						if (mapIndices2[j1] == cheapHax)
 							return mapIndices2[j1];
 					mapCount2 = mapIndices2[j1] > 3535 ? -1 : mapIndices2[j1];
-					System.out.println("Mapcount2: "+mapCount2+" "+regionId);
 					return mapCount2;
 				} else {
 					if (mapIndices3[j1] >= 3700 && mapIndices3[j1] <= 3840)
@@ -379,11 +378,10 @@ public final class CacheFileRequester implements Runnable {
 						if (mapIndices3[j1] == cheapHax)
 							return mapIndices3[j1];
 					mapCount3 = mapIndices3[j1] > 3535 ? -1 : mapIndices3[j1];
-					System.out.println("Mapcount3: "+mapCount3+" "+regionId);
 					return mapCount3;
 				}
 			}
-			System.out.println("Region id: "+regionId);
+			//System.out.println("Region id: "+regionId);
 		return -1;
 	}
 

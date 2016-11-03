@@ -152,7 +152,9 @@ public final class ItemDefinition {
 				itemDef.imitate(get(2996));
 				itemDef.name = "Donator tickets";
 				break;
-
+			case 18236:
+				itemDef.name = "War key";
+				break;
             case 13247:
             case 13178:
             case 12921:

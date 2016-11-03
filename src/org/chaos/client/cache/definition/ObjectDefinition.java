@@ -26,7 +26,7 @@ public final class ObjectDefinition {
     private static final int[] showBlack = {3735, 26346, 26347, 26348, 26358, 26359, 26360, 26361, 26362, 26363,
             26364};
 
-    private static final int[] removeObjects = {2111, 11726, 733, 5126, 10527, 10529, 12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
+    private static final int[] removeObjects = {614, 6644, 2111, 11726, 733, 5126, 10527, 10529, 12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
             24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349, 2309, 4879};
 
     private static final int[] osrsObjects = {
@@ -401,6 +401,9 @@ public final class ObjectDefinition {
                // }
                 break;
 
+            case 2403:
+                definition.name = "War-chest";
+                break;
 
             case 1517:
             case 1520:
