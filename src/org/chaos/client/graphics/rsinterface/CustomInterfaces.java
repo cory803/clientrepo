@@ -1254,11 +1254,11 @@ public class CustomInterfaces extends RSInterface {
 
 	private void dungeonInfo() {
 		RSInterface tab = addTabInterface(37500);
-		addText(37508, "Party deaths: 0", tda, 2, 0x86B404, true, true);
-		addText(37509, "Party kills: 0", tda, 2, 0x86B404, true, true);
+		addText(37508, "Party kills: 0", tda, 2, 0x86B404, false, true);
+		addText(37509, "Party deaths: 0", tda, 2, 0x86B404, false, true);
 		tab.totalChildren(2);
-		tab.child(0, 37508, 50, 299);
-		tab.child(1, 37509, 41, 315);
+		tab.child(0, 37508, 4, 299);
+		tab.child(1, 37509, 4, 315);
 	}
 
 	private void formParty() {
