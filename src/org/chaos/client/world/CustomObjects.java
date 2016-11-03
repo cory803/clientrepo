@@ -24,6 +24,9 @@ public class CustomObjects {
 	}
 
 	public static final int[][] CUSTOM_OBJECTS = {
+			//dungeoneering
+			{ -1, 3281, 9195, 0, 1 },
+			{ -1, 3305, 9195, 0, 1 },
 			//skilling zone (high)
 			{ 2781, 2856, 2966, 0, 0 },
 			{ 14859, 2819, 2998, 0, 0 },
