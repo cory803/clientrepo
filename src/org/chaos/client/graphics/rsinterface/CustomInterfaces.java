@@ -1319,7 +1319,7 @@ public class CustomInterfaces extends RSInterface {
 		addHoveredButton(26245, 1023, 1023, 61, 20, 26246);
 		addHoverButton(26247, 1022, 1022, 61, 20, "Change", 250, 26248, 5);
 		addHoveredButton(26248, 1023, 1023, 61, 20, 26249);
-		addHoverButton(26250, 1020, 1020, 90, 32, "Invite player", 250, 26251, 5);
+		addHoverButton(26250, 1020, 1020, 90, 32, "Join party", 250, 26251, 5);
 		addHoveredButton(26251, 1021, 1021, 90, 32, 26252);
 		int[][] data = { { 26225, 0, 0 }, { 26226, 171, 1 }, { 26227, 171, 1 }, { 26229, 5, 111 }, { 26230, 5, 111 },
 				/*

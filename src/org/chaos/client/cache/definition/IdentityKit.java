@@ -23,7 +23,7 @@ public final class IdentityKit {
         cache[102].anIntArray658[0] = 79001;
         cache[140].anIntArray658[0] = 79002;
 
-        System.out.println("Equipment id: "+cache[140].anIntArray658[0]);
+        System.out.println("Equipment id: "+cache[0].anIntArray658[0]);
     }
 
     private void readValues(ByteBuffer stream) {
