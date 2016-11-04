@@ -50,6 +50,7 @@ public final class MobDefinition {
             case 3368: //smaller size fishing spot
                 definition.copy(get(318));
                 definition.adjustVertextPointsXOrY = 105;
+                definition.drawYellowDotOnMap = false;
                 break;
             case 1304:
                 definition.actions = new String[] {"Talk-to", null, "Travel-with", null, null};
@@ -359,6 +360,9 @@ public final class MobDefinition {
                 break;
             case 4540:
                 definition.combatLevel = 299;
+                break;
+            case 2998:
+                definition.actions = new String[]{"Talk-to", null, "Trade", null, null};
                 break;
             case 3101:
                 definition.adjustVertextPointZ = definition.adjustVertextPointsXOrY = 80;
