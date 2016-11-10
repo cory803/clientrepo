@@ -1,6 +1,7 @@
 package org.chaos.client.graphics.rsinterface;
 
 import org.chaos.Configuration;
+import org.chaos.client.Client;
 import org.chaos.client.RSInterface;
 import org.chaos.client.Skills;
 import org.chaos.client.cache.definition.ItemDefinition;
@@ -15,6 +16,217 @@ public class CustomInterfaces extends RSInterface {
 
 	public CustomInterfaces(TextDrawingArea tda[]) {
 		this.tda = tda;
+	}
+
+	public static void colorChanger(TextDrawingArea[] tda) {
+		RSInterface tab = addInterface(18725);
+		addSprite3(18726, 27);
+		addColorBox(18727, 0xff0000, 133, 133);
+		addColorBox(18728, 0xFF9900, 166, 11);
+		addHDButton(18732, 28, "Select");
+		interfaceCache[18732].atActionType = 7828;
+		newHoverButton(18729, "Confirm", 30, 29, "Confirm", newFonts[1], 65280, true);
+		newHoverButton(18738, "Cancel", 30, 29, "Cancel", newFonts[1], 0xff0000, true);
+		addButton(18737, 31, "Select");
+		interfaceCache[18737].atActionType = 7828;
+		addSprite3(18733, 32);
+		tab.totalChildren(8);
+		tab.child(0, 18726, 0, 0);
+		tab.child(1, 18727, 9, 7);
+		tab.child(2, 18728, 9, 147);
+		tab.child(3, 18737, 149, 7);
+		tab.child(4, 18732, 9, 7);
+		tab.child(5, 18733, 147, 7);
+		tab.child(6, 18729, 10, 162);
+		tab.child(7, 18738, 103, 162);
+	}
+
+	public static void colorChangerParents() {
+		//phatAndWeenCustomizer(fonts);
+		RSInterface fog = addInterface(18802);
+		fog.totalChildren(1);
+		fog.child(0, 18725, 50, 40);
+		RSInterface note = addInterface(18803);
+		note.totalChildren(1);
+		note.child(0, 18725, 50, 40);
+	}
+
+	public static void phatAndWeenCustomizer(TextDrawingArea[] tda) {
+		RSInterface ween = addInterface(18800);
+		addSprite3(18946, 754);
+		addChar(18947, 150, 60, 650, 366);
+		addText(18948, "PartyHat/Halloween Mask Customizer", tda, 2, 0xffb000, true, true);
+		int x = 30, y = 15;
+		ween.totalChildren(4);
+		ween.child(0, 18946, x, y);
+		ween.child(1, 18725, 32+x, 50+y);
+		ween.child(2, 18947, 270+x, 140+y);
+		ween.child(3, 18948, 217+x, 10+y);
+
+		RSInterface phat = addInterface(18801);
+		phat.totalChildren(4);
+		phat.child(0, 18946, x, y);
+		phat.child(1, 18725, 32+x, 50+y);
+		phat.child(2, 18947, 270+x, 140+y);
+		phat.child(3, 18948, 217+x, 10+y);
+	}
+
+	public static void compCape(TextDrawingArea[] tda) {
+		RSInterface tab = addInterface(18700);
+		addSprite3(18701, 12);
+		addText(18702, "Cape Customizer", tda, 2, 0xFF9900, true, true);
+		addChar(18765, 150, 900, 580, 366);
+		//addResizableItem(18716);
+		//RSInterface k = interfaceCache[18716];
+		//k.mediaType = 4; k.mediaID = 20769; k.modelZoom = 440; k.modelRotation1 = 210; k.modelRotation2 = 1020; k.displaysRecolorable = true;
+		addHoverButton3(18717, 13, 59, 19, "Done", 0, 18718, 1);
+		addHoveredButton3(18718, 14, 59, 19, 18719);
+		addText(18720, "Done", tda, 1, 65280, true, true);
+		newHoverButton(18721, "Close", 15, 16, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18750, "Randomize Colors", 15, 16, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18753, "Reset Colors", 15, 16, "", newFonts[0], 0xffffff, true);
+		addButton(18900, 17, "Open presets");
+		addButton(18901, 18, "Close presets");
+		addSprite3(18756, 19);
+		addSprite3(18757, 20);
+		addText(18758, "Main", tda, 0, 0xFF9900, true, true);
+		addText(18759, "Other", tda, 0, 0xFF9900, true, true);
+		addText(18760, "Matcher", tda, 0, 0xFF9900, true, true);
+		addButtonNoSprite(18761, "Main color editor", 70, 15);
+		addButtonNoSprite(18762, "Other color editor", 70, 15);
+		addButtonNoSprite(18763, "Color matcher", 70, 15);
+		newHoverButton(18764, "Change view", 15, 16, "", newFonts[0], 0xffffff, true);
+		int x = 10, y = 7;
+		tab.totalChildren(21);
+		tab.child(0, 18701, x, y);
+		tab.child(1, 18702, 245+x, 6+y);
+		tab.child(2, 18711, 60+x, 77+y);
+		tab.child(3, 18765, 280+x, 175+y);
+		tab.child(4, 18721, 465+x, 6+y);
+		tab.child(5, 18757, 32+x, 54+y);
+		tab.child(6, 18761, 32+x, 54+y);
+		tab.child(7, 18762, 102+x, 57+y);
+		tab.child(8, 18763, 172+x, 57+y);
+		tab.child(9, 18758, 66+x, 57+y);
+		tab.child(10, 18759, 137+x, 57+y);
+		tab.child(11, 18760, 207+x, 57+y);
+		tab.child(12, 18717, 216+x, 295+y);
+		tab.child(13, 18718, 216+x, 295+y);
+		tab.child(14, 18720, 246+x, 297+y);
+		tab.child(15, 18750, 435+x, 296+y);
+		tab.child(16, 18753, 463+x, 296+y);
+		tab.child(17, 18756, 425+x, 31+y);
+		tab.child(18, 18900, 477+x, 117+y);
+		tab.child(19, 18756, 416+x, 117+y);
+		tab.child(20, 18764, 407+x, 296+y);
+
+
+		RSInterface boxes = addInterface(18711);
+		String[] actions = {"Random color", "Paste color", "Copy color", "Reset color", "Change color"};
+		addButton(18703, 21, actions);
+		addButton(18704, 21, actions);
+		addButton(18705, 21, actions);
+		addButton(18706, 21, actions);
+		addText(18707, "Detail (top)", tda, 0, 0xffffff, true, true);
+		addText(18708, "Background (top)", tda, 0, 0xffffff, true, true);
+		addText(18709, "Detail (bottom)", tda, 0, 0xffffff, true, true);
+		addText(18710, "Background (bottom)", tda, 0, 0xffffff, true, true);
+		addColorBox(18712, Client.compCapeDefaultColors[0], 59, 59);
+		addColorBox(18713, Client.compCapeDefaultColors[1], 59, 59);
+		addColorBox(18714, Client.compCapeDefaultColors[2], 59, 59);
+		addColorBox(18715, Client.compCapeDefaultColors[3], 59, 59);
+		boxes.totalChildren(12);
+		boxes.child(0, 18703, 5, 12);
+		boxes.child(1, 18704, 105, 12);
+		boxes.child(2, 18705, 5, 95);
+		boxes.child(3, 18706, 105, 95);
+		boxes.child(4, 18707, 37, 77);
+		boxes.child(5, 18708, 138, 77);
+		boxes.child(6, 18709, 37, 160);
+		boxes.child(7, 18710, 138, 160);
+		boxes.child(8, 18712, 8, 15);
+		boxes.child(9, 18713, 108, 15);
+		boxes.child(10, 18714, 8, 98);
+		boxes.child(11, 18715, 108, 98);
+
+
+		RSInterface other = addInterface(18770);
+		addButton(18771, 21, actions);
+		addButton(18772, 21, actions);
+		addButton(18773, 21, actions);
+		addText(18774, "Trim (Main)", tda, 0, 0xffffff, true, true);
+		addText(18775, "Gems (All)", tda, 0, 0xffffff, true, true);
+		addText(18776, "Trim (Boarder)", tda, 0, 0xffffff, true, true);
+		addColorBox(18777, Client.compCapeDefaultColors[4], 59, 59);
+		addColorBox(18778, Client.compCapeDefaultColors[5], 59, 59);
+		addColorBox(18779, Client.compCapeDefaultColors[6], 59, 59);
+		other.totalChildren(9);
+		other.child(0, 18771, 5, 12);
+		other.child(1, 18772, 105, 12);
+		other.child(2, 18773, 5, 95);
+		other.child(3, 18774, 37, 77);
+		other.child(4, 18775, 138, 77);
+		other.child(5, 18776, 37, 160);
+		other.child(6, 18777, 8, 15);
+		other.child(7, 18778, 108, 15);
+		other.child(8, 18779, 8, 98);
+
+
+		RSInterface matcher = addInterface(18840);
+		addSprite3(18841, 22);
+		itemGroup(18842, 4, 2, 20, 10, false, true);
+		matcher.totalChildren(52);
+		matcher.child(0, 18841, 0, 0);
+		matcher.child(1, 18842, 9, 10);
+		x = 11;
+		y = 100;
+		for (int i = 0; i < 50; i++) {
+			addColorBox(18845 + i, 0, 26, 26);
+			interfaceCache[18845 + i].sprite4 = CacheSpriteLoader.getCacheSprite3(23);
+			interfaceCache[18845 + i].tooltip = "Copy color";
+			interfaceCache[18845 + i].atActionType = 1;
+			matcher.child(2 + i, 18845 + i, x, y);
+			x += 34;
+			if (x == 215) {
+				x = 11;
+				y += 34;
+			}
+		}
+		matcher.width = 218;
+		matcher.height = 204;
+		matcher.scrollMax = 410;
+
+
+		RSInterface presets = addInterface(18910);
+		addSprite3(18911, 24);
+		addText(18935, "Preset 1", tda, 0, 0xffffff, true, true);
+		addText(18936, "Preset 2", tda, 0, 0xffffff, true, true);
+		addText(18937, "Preset 3", tda, 0, 0xffffff, true, true);
+		newHoverButton(18939, "Save as preset 1", 25, 25, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18940, "Save as preset 2", 25, 25, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18941, "Save as preset 3", 25, 25, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18942, "Load preset 1", 26, 26, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18943, "Load preset 1", 26, 26, "", newFonts[0], 0xffffff, true);
+		newHoverButton(18944, "Load preset 1", 26, 26, "", newFonts[0], 0xffffff, true);
+		presets.totalChildren(31);
+		presets.child(0, 18911, 0, 0);
+		int total = 1;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 7; j++) {
+				addColorBox(18912 + total, Client.compCapeDefaultColors[j], 7, 7);
+				presets.child(total, 18912 + total, getPresetColorCoords(i, j)[0], getPresetColorCoords(i, j)[1]);
+				total++;
+			}
+		}
+		presets.child(22, 18935, 32, 4);
+		presets.child(23, 18936, 32, 89);
+		presets.child(24, 18937, 32, 175);
+		presets.child(25, 18939, 9, 19);
+		presets.child(26, 18940, 9, 105);
+		presets.child(27, 18941, 9, 191);
+		presets.child(28, 18942, 33, 19);
+		presets.child(29, 18943, 33, 105);
+		presets.child(30, 18944, 33, 191);
 	}
 
 	public static void npcTracker(TextDrawingArea[] tda) {
@@ -209,6 +421,9 @@ public class CustomInterfaces extends RSInterface {
 		levelUpInterfaces();
 		godWars();
 		optionTab();
+		compCape(tda);
+		colorChanger(tda);
+		colorChangerParents();
 		// settingsInterface();
 		wildernessInterface();
 		sidebarInterfaces();

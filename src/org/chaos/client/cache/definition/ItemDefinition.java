@@ -1,5 +1,6 @@
 package org.chaos.client.cache.definition;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -28,6 +29,12 @@ public final class ItemDefinition {
 	public static int totalItems;
 	public static int totalItemsOsrs;
 
+	public Model getColoredModel(int gender, int[] newColors) {
+		this.originalModelColors = newColors;
+		Model m = getEquippedModel(gender);
+		return m;
+	}
+
 	public static void dumpItemModelsForId(int i) {
 		try {
 			ItemDefinition d = get(i);
@@ -53,6 +60,15 @@ public final class ItemDefinition {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static int rgbToHSL(int color) {
+		Color col = new Color(color);
+		float[] hsb = Color.RGBtoHSB(col.getRed(), col.getGreen(), col.getBlue(), null);
+		int H6bit = (int) (hsb[0] * 63);
+		int S3bit = (int) (hsb[1] * 7);
+		int L7bit = (int) (hsb[2] * 127);
+		return (H6bit << 10) + (S3bit << 7) + (L7bit);
 	}
 
 	public static int[] osrsItems = {13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
@@ -4699,21 +4715,8 @@ public final class ItemDefinition {
 				itemDef.actions[1] = "Wear";
 				break;
 			case 14022:
-				itemDef.modelID = 65270;
-				itemDef.name = "Completionist cape";
-				itemDef.description2 = "We'd pat you on the back, but this cape would get in the way.";
-				itemDef.modelZoom = 1316;
-				itemDef.modelOffset1 = -1;
-				itemDef.modelOffsetY = 24;
-				itemDef.modelRotation1 = 252;
-				itemDef.modelRotation2 = 1020;
-				itemDef.maleWearId = 65297;
-				itemDef.femaleWearId = 65297;
-				itemDef.groundActions = new String[5];
-				itemDef.groundActions[2] = "Take";
-				itemDef.actions = new String[5];
-				itemDef.actions[1] = "Wear";
-				itemDef.actions[3] = "Customise";
+				itemDef.imitate(get(20769));
+				System.out.println("Female: "+itemDef.femaleWearId);
 				break;
 			case 9666:
 			case 11814:

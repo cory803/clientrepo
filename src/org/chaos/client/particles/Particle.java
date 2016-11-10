@@ -8,9 +8,7 @@ import org.chaos.client.particles.impl.*;
 public class Particle {
 
 	public static final Particle[] PARTICLE_ARRAY = new Particle[] { new MaxParticle(), new TokHaarParticle(), new DungeoneeringParticle(),
-			new CompletionistParticle(), new TrimmedCompletionistParticle(), new BlackCompletionistParticle(), new GrayCompletionistParticle(),
-			new WhiteCompletionistParticle(), new BlueCompletionistParticle(), new GreenCompletionistParticle(), new AquaCompletionistParticle(),
-			new RedCompletionistParticle(), new PurpleCompletionistParticle(), new YellowCompletionistParticle(), new OrangeCompletionistParticle()
+			new CompletionistParticle(), new TrimmedCompletionistParticle()
 	};
 
 	public static final Random I = new Random(System.currentTimeMillis());

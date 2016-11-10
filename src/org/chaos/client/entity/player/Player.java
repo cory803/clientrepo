@@ -47,8 +47,10 @@ public final class Player extends Entity {
 	public int hintIcon;
 	public boolean skulled;
 	public int playerRights;
-
 	public int loyaltyRank;
+	public int[] compColor = new int[] {65214, 65200, 65186, 62995, 64639, 961, 5683};
+	public int[] defaultColors = {65214, 65200, 65186, 62995, 64639, 961, 954, 5706, 5683, 5708};
+	public boolean colorNeedsUpdate = false;
 
 	/**
 	 * The color of the loyalty title, 255 by default = blue
@@ -226,6 +228,12 @@ public final class Player extends Entity {
 		}
 
 		Model model_1 = (Model) mruNodes.insertFromCache(l);
+		for(int l2 = 0; l2 < 12; l2++) {
+			int i3 = equipment[l2];
+			if (i3 >= 512 && recolorableItem(i3 - 512)) {
+				model_1 = null;
+			}
+		}
 		if(model_1 == null)
 		{
 			boolean flag = false;
@@ -250,7 +258,7 @@ public final class Player extends Entity {
 					return null;
 			}
 		}
-		if(model_1 == null)
+		if(model_1 == null || colorNeedsUpdate)
 		{
 			Model aclass30_sub2_sub4_sub6s[] = new Model[12];
 			int j2 = 0;
@@ -275,8 +283,13 @@ public final class Player extends Entity {
 						for (int i11 = 0; i11 < def.modifiedModelColors.length; i11++)
 							model_4.method476(def.modifiedModelColors[i11], modifiedColors[l2][i11]);
 					}*/
-					if(model_4 != null)
+					if(model_4 != null) {
+						if (def != null && recolorableItem(i3 - 512)) {
+							//System.out.println("Get color model...");
+							model_4 = getColorableItemModel(model_4, myGender, i3 - 512);
+						}
 						aclass30_sub2_sub4_sub6s[j2++] = model_4;
+					}
 				}
 			}
 
@@ -308,6 +321,7 @@ public final class Player extends Entity {
 		model_2.method466();
 		model_2.anIntArrayArray1658 = null;
 		model_2.anIntArrayArray1657 = null;
+		colorNeedsUpdate = false;
 		return model_2;
 	}
 
@@ -365,9 +379,28 @@ public final class Player extends Entity {
 		return model;
 	}
 
+	public boolean recolorableItem(int item) {
+		return ((item == 14022) || (item == 22546) || (item == 22547));
+	}
+
+	public Model getColorableItemModel(Model model, int gender, int itemId) {
+		int[] colors = null;
+		if (itemId == 14022) {
+			colors = new int[] {compColor[0], compColor[1], compColor[2], compColor[3], compColor[4],
+					compColor[5], compColor[5], compColor[5], compColor[6], compColor[6]};
+		}
+		for(int i = 0; i < colors.length; i++) {
+			model.setColor(Client.myPlayer.defaultColors[i], colors[i]);
+		}
+		return model;
+	}
+
 	public void updatePlayer(ByteBuffer stream) {
 		stream.position = 0;
 		myGender = stream.getUnsignedByte();//0 = male, 1 = female
+		for (int i = 0; i < 7; i++) {
+			compColor[i] = stream.getUnsignedShort();
+		}
 		headIcon = stream.getUnsignedByte();
 		bountyHunterIcon = stream.getUnsignedByte();
 		skulled = stream.getUnsignedShort() == 1;
@@ -486,6 +519,8 @@ public final class Player extends Entity {
 
 		aLong1718 <<= 1;
 		aLong1718 += myGender;
+
+		Client.getClient().updateColored();
 	}
 
 	public int getRights() {

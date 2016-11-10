@@ -950,6 +950,70 @@ public class Sprite extends Canvas2D {
 		}
 	}
 
+	public void draw24BitSprite(int x, int y) {
+		int alpha = 256;
+		x += this.drawOffsetX;// offsetX
+		y += this.drawOffsetY;// offsetY
+		int destOffset = x + y * Canvas2D.width;
+		int srcOffset = 0;
+		int height = this.myHeight;
+		int width = this.myWidth;
+		int destStep = Canvas2D.width - width;
+		int srcStep = 0;
+		if (y < Canvas2D.topY) {
+			int trimHeight = Canvas2D.topY - y;
+			height -= trimHeight;
+			y = Canvas2D.topY;
+			srcOffset += trimHeight * width;
+			destOffset += trimHeight * Canvas2D.width;
+		}
+		if (y + height > Canvas2D.bottomY) {
+			height -= (y + height) - Canvas2D.bottomY;
+		}
+		if (x < Canvas2D.topX) {
+			int trimLeft = Canvas2D.topX - x;
+			width -= trimLeft;
+			x = Canvas2D.topX;
+			srcOffset += trimLeft;
+			destOffset += trimLeft;
+			srcStep += trimLeft;
+			destStep += trimLeft;
+		}
+		if (x + width > Canvas2D.bottomX) {
+			int trimRight = (x + width) - Canvas2D.bottomX;
+			width -= trimRight;
+			srcStep += trimRight;
+			destStep += trimRight;
+		}
+		if (!((width <= 0) || (height <= 0))) {
+			set24BitPixels(width, height, Canvas2D.pixels, myPixels, alpha, destOffset,
+					srcOffset, destStep, srcStep);
+		}
+	}
+
+	private void set24BitPixels(int width, int height, int destPixels[], int srcPixels[],
+								int srcAlpha, int destOffset, int srcOffset, int destStep, int srcStep) {
+		int srcColor;
+		int destAlpha;
+		for (int loop = -height; loop < 0; loop++) {
+			for (int loop2 = -width; loop2 < 0; loop2++) {
+				srcAlpha = ((this.myPixels[srcOffset] >> 24) & 255);
+				destAlpha = 256 - srcAlpha;
+				srcColor = srcPixels[srcOffset++];
+				if (srcColor != 0 && srcColor != 0xffffff) {
+					int destColor = destPixels[destOffset];
+					destPixels[destOffset++] = ((srcColor & 0xff00ff) * srcAlpha
+							+ (destColor & 0xff00ff) * destAlpha & 0xff00ff00)
+							+ ((srcColor & 0xff00) * srcAlpha + (destColor & 0xff00) * destAlpha & 0xff0000) >> 8;
+				} else {
+					destOffset++;
+				}
+			}
+			destOffset += destStep;
+			srcOffset += srcStep;
+		}
+	}
+
 	public void drawSprite(int i, int k, int color) {
 		autoUpdate();
 		int tempWidth = myWidth + 2;

@@ -9,6 +9,7 @@ import org.chaos.client.cache.definition.MobDefinition;
 import org.chaos.client.entity.player.Player;
 import org.chaos.client.graphics.CacheSpriteLoader;
 import org.chaos.client.graphics.Sprite;
+import org.chaos.client.graphics.fonts.RSFontSystem;
 import org.chaos.client.graphics.fonts.TextClass;
 import org.chaos.client.graphics.fonts.TextDrawingArea;
 import org.chaos.client.graphics.rsinterface.CustomInterfaces;
@@ -31,6 +32,22 @@ public class RSInterface {
 		tab.togglers = same;
 		tab.toggled = on;
 		tab.isToggler = true;
+	}
+
+	public static void addResizableItem(int id) {
+		RSInterface k = addInterface(id);
+		k.type = 6;
+		k.modelZoom = 560;
+		k.modelRotation1 = 150;
+		k.modelRotation2 = 0;
+		k.height = 200;
+		k.width = 150;
+		k.hoverType = 0;
+		k.opacity = 0;
+		k.atActionType = 0;
+		k.disabledAnimationId = -1;
+		k.enabledAnimationId = -1;
+		k.mediaID = 4000;
 	}
 	
 	public static void buildPlayerMenu(ArrayList<Account> a) {
@@ -103,6 +120,7 @@ public class RSInterface {
 	private static List aMRUNodes_238;
 	private static final List aMRUNodes_264 = new List(30);
 	public static TextDrawingArea[] fonts;
+	public static RSFontSystem[] newFonts;
 	public static RSInterface[] interfaceCache;
 	public int[] togglers;
 	public boolean toggled = false;
@@ -154,6 +172,68 @@ public class RSInterface {
 		tab.atActionType = 0;
 		tab.contentType = 0;
 		tab.opacity = (byte) opacity;
+	}
+
+	public static void addButtonNoSprite(int id, String tooltip, int w, int h) {
+		RSInterface tab = interfaceCache[id] = new RSInterface();
+		tab.id = id;
+		tab.parentID = id;
+		tab.type = 5;
+		tab.atActionType = 1;
+		tab.contentType = 0;
+		tab.width = w;
+		tab.height = h;
+		tab.tooltip = tooltip;
+	}
+
+	public static void addButton(int id, int sid, String tooltip) {
+		RSInterface tab = interfaceCache[id] = new RSInterface();
+		tab.id = id;
+		tab.parentID = id;
+		tab.type = 5;
+		tab.atActionType = 1;
+		tab.contentType = 0;
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(sid);
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(sid);
+		tab.width = tab.sprite1.myWidth;
+		tab.height = tab.sprite2.myHeight;
+		tab.tooltip = tooltip;
+	}
+
+	public static void addButton(int id, int sid, String[] actions) {
+		RSInterface tab = interfaceCache[id] = new RSInterface();
+		tab.id = id;
+		tab.parentID = id;
+		tab.type = 5;
+		tab.atActionType = 666;
+		tab.contentType = 0;
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(sid);
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(sid);
+		tab.width = tab.sprite1.myWidth;
+		tab.height = tab.sprite2.myHeight;
+		tab.actions = actions;
+	}
+
+
+	public static void newHoverButton(int id, String action, int offSprite, int onSprite, String buttonText, RSFontSystem font, int color, boolean centerText) {
+		RSInterface tab = addInterface(id);
+		tab.tooltip = action;
+		tab.atActionType = 1;
+		tab.type = 35;
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(offSprite);
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(onSprite);
+		tab.width = tab.sprite1.myWidth;
+		tab.height = tab.sprite1.myHeight;
+		tab.msgX = tab.width / 2;
+		tab.msgY = (tab.height / 2) + 5;
+		tab.message = buttonText;
+		tab.toggled = false;
+		tab.rsFont = font;
+		tab.textColor = color;
+		tab.centerText = centerText;
+		if (id >= 50410 && id <= 50510) {
+			tab.shadowColor = -1;
+		}
 	}
 
 	public static void constructRegularInterface(int id, String title) {
@@ -666,6 +746,16 @@ public class RSInterface {
 		rsi.width = width;
 		rsi.anInt219 = 0xFF0000;
 	}
+
+	public static void addColorBox(int id, int color, int width, int height) {
+		RSInterface tab = addInterface(id);
+		tab.width = width;
+		tab.height = height;
+		tab.color = color;
+		tab.type = 19;
+		tab.id = id;
+		tab.contentType = 0;
+	}
 	
 	public static void addItemModel(int interfaceID, int width, int height, int zoom) {
 		RSInterface rsi = addTabInterface(interfaceID);
@@ -889,6 +979,24 @@ public class RSInterface {
 		t.enabledAnimationId = -1;
 	}
 
+	public static void addChar(int ID, int rotation1, int rotation2, int zoom, int contentType) {
+		RSInterface t = interfaceCache[ID] = new RSInterface();
+		t.id = ID;
+		t.parentID = ID;
+		t.type = 6;
+		t.atActionType = 0;
+		t.contentType = contentType;
+		t.width = 136;
+		t.height = 168;
+		t.opacity = 0;
+		t.hoverType = 0;
+		t.modelZoom = zoom;
+		t.modelRotation1 = rotation1;
+		t.modelRotation2 = rotation2;
+		t.enabledAnimationId = -1;
+		t.disabledAnimationId = -1;
+	}
+
 	public static void addConfigButton(int ID, int pID, int bID, int bID2, int width, int height, String tT,
 			int configID, int aT, int configFrame) {
 		RSInterface Tab = addTabInterface(ID);
@@ -1091,6 +1199,32 @@ public class RSInterface {
 		tab.tooltip = text;
 	}
 
+	public static void addHoverButton3(int interfaceId, int spriteId, int width, int height, String text,
+			int contentType, int hoverOver, int actionType) {
+		addHoverButton3(interfaceId, spriteId, width, height, text, contentType, hoverOver, actionType, null);
+	}
+
+	public static void addHoverButton3(int interfaceId, int spriteId, int width, int height, String text, int contentType, int hoverOver, int actionType,
+			String tooltip) {
+		RSInterface tab = addTabInterface(interfaceId);
+		tab.id = interfaceId;
+		tab.parentID = interfaceId;
+		tab.type = 5;
+		tab.atActionType = actionType;
+		tab.contentType = contentType;
+		tab.opacity = 0;
+		tab.hoverType = hoverOver;
+
+		if (spriteId >= 0) {
+			tab.sprite1 = CacheSpriteLoader.getCacheSprite3(spriteId);
+			tab.sprite2 = CacheSpriteLoader.getCacheSprite3(spriteId);
+		}
+
+		tab.width = width;
+		tab.height = height;
+		tab.tooltip = text;
+	}
+
 	public static void addHoverButton2(int interfaceId, int spriteId, int width, int height, String text,
 			int contentType, int hoverOver, int actionType) {
 		// hoverable button
@@ -1201,6 +1335,24 @@ public class RSInterface {
 		tab.child(0, IMAGEID, 0, 0);
 	}
 
+	public static void addHoveredButton3(int i, int j, int w, int h, int IMAGEID) {
+		// hoverable button
+		RSInterface tab = addTabInterface(i);
+		tab.parentID = i;
+		tab.id = i;
+		tab.type = 0;
+		tab.atActionType = 0;
+		tab.width = w;
+		tab.height = h;
+		tab.interfaceShown = true;
+		tab.opacity = 0;
+		tab.hoverType = -1;
+		tab.scrollMax = 0;
+		addHoverImage3(IMAGEID, j, j);
+		tab.totalChildren(1);
+		tab.child(0, IMAGEID, 0, 0);
+	}
+
 	private static void addHoverImage(int i, int j, int k) {
 		RSInterface tab = addTabInterface(i);
 		tab.id = i;
@@ -1214,6 +1366,21 @@ public class RSInterface {
 		tab.hoverType = 52;
 		tab.sprite1 = CacheSpriteLoader.getCacheSprite(j);
 		tab.sprite2 = CacheSpriteLoader.getCacheSprite(k);
+	}
+
+	private static void addHoverImage3(int i, int j, int k) {
+		RSInterface tab = addTabInterface(i);
+		tab.id = i;
+		tab.parentID = i;
+		tab.type = 5;
+		tab.atActionType = 0;
+		tab.contentType = 0;
+		tab.width = 512;
+		tab.height = 334;
+		tab.opacity = 0;
+		tab.hoverType = 52;
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(j);
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(k);
 	}
 
 	private static void addHoverImage2(int i, int j, int k) {
@@ -2578,9 +2745,10 @@ public class RSInterface {
 		rsi.textDrawingAreas = tda[idx];
 	}
 
-	static void unpack(Archive streamLoader, TextDrawingArea textDrawingAreas[], Archive streamLoader_1) {
+	static void unpack(Archive streamLoader, TextDrawingArea textDrawingAreas[], Archive streamLoader_1, RSFontSystem[] newFontSystem) {
 		aMRUNodes_238 = new List(50000);
 		fonts = textDrawingAreas;
+		newFonts = newFontSystem;
 		ByteBuffer stream = new ByteBuffer(streamLoader.get("data"));
 		int i = -1;
 		stream.getUnsignedShort();
@@ -3140,7 +3308,7 @@ public class RSInterface {
 	int anInt208;
 	int anInt216;
 	public int anInt219;
-	int mediaType;
+	public int mediaType;
 	int anInt239;
 	int anInt246;
 	private int anInt255;
@@ -3159,6 +3327,7 @@ public class RSInterface {
 	public int height;
 	public int hoverType;
 	public int id;
+	public Sprite sprite4;
 	public boolean interfaceShown;
 	public int[] inv;
 	public int invSpritePadX;
@@ -3166,11 +3335,11 @@ public class RSInterface {
 	public int[] invStackSizes;
 	public boolean isInventoryInterface;
 	public boolean drawInfinity;
-	int mediaID;
+	public int mediaID;
 	public String message;
-	int modelRotation1;
-	int modelRotation2;
-	int modelZoom;
+	public int modelRotation1;
+	public int modelRotation2;
+	public int modelZoom;
 	public int enabledOpacity;
 	public byte opacity;
 	public int parentID;
@@ -3188,6 +3357,7 @@ public class RSInterface {
 	int[] spritesY;
 	public int textColor;
 	TextDrawingArea textDrawingAreas;
+	RSFontSystem rsFont;
 	boolean textShadow;
 	public String tooltip;
 	String tooltipBoxText;
@@ -3205,8 +3375,57 @@ public class RSInterface {
 	public int itemSpriteId;
 	public int itemSpriteZoom;
 	public int itemSpriteIndex;
+	public boolean displaysRecolorable = false;
+	public int color;
+	public Model displayModel = null;
 
 	public RSInterface() {
+	}
+
+	public static void addHDButton(int id, int sid, String tooltip) {
+		RSInterface tab = interfaceCache[id] = new RSInterface();
+		tab.id = id;
+		tab.parentID = id;
+		tab.type = 1000;
+		tab.atActionType = 1;
+		tab.contentType = 0;
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(sid);
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(sid);
+		tab.width = tab.sprite1.myWidth;
+		tab.height = tab.sprite2.myHeight;
+		tab.tooltip = tooltip;
+	}
+
+	public static int[] getPresetColorCoords(int i, int j) {
+		int[] c = {0,0};
+		if (j == 0) { c[0] = 13; c[1] = 42; }
+		if (j == 1) { c[0] = 27; c[1] = 42; }
+		if (j == 2) { c[0] = 41; c[1] = 42; }
+		if (j == 3) { c[0] = 13; c[1] = 56; }
+		if (j == 4) { c[0] = 27; c[1] = 56; }
+		if (j == 5) { c[0] = 41; c[1] = 56; }
+		if (j == 6) { c[0] = 27; c[1] = 70; }
+		if (i == 1) c[1] += 86;
+		if (i == 2) c[1] += 172;
+		return c;
+	}
+
+	public static void itemGroup(int id, int w, int h, int x, int y, boolean drag, boolean examine) {
+		RSInterface rsi = addInterface(id);
+		rsi.width = w;
+		rsi.height = h;
+		rsi.inv = new int[w * h];
+		rsi.invStackSizes = new int[w * h];
+		rsi.usableItemInterface = false;
+		rsi.isInventoryInterface = false;
+		rsi.invSpritePadX = x;
+		rsi.invSpritePadY = y;
+		rsi.spritesX = new int[20];
+		rsi.spritesY = new int[20];
+		rsi.sprites = new Sprite[20];
+		rsi.deletesTargetSlot = drag;
+		//rsi.examine = examine;
+		rsi.type = 2;
 	}
 
 	public void child(int id, int interID, int x, int y) {
@@ -3245,7 +3464,11 @@ public class RSInterface {
 			model = Client.myPlayer.getPlayerModel();
 		}
 		if (i == 4) {
-			model = ItemDefinition.get(j).method202(50);
+			if(displaysRecolorable) {
+				displayModel = model = ItemDefinition.get(j).getEquippedModel(0);
+			} else {
+				model = ItemDefinition.get(j).method202(50);
+			}
 		}
 		if (i == 5) {
 			model = null;
@@ -3270,7 +3493,11 @@ public class RSInterface {
 		if (flag) {
 			model = getMediaModel(anInt255, anInt256);
 		} else {
-			model = getMediaModel(mediaType, mediaID);
+			if (displaysRecolorable && displayModel != null) {
+				model = displayModel;
+			} else {
+				model = getMediaModel(mediaType, mediaID);
+			}
 		}
 		if (model == null) {
 			return null;
@@ -3288,8 +3515,23 @@ public class RSInterface {
 		if (j != -1) {
 			model_1.applyTransform(j);
 		}
-		model_1.method479(84, 1000, -90, -580, -90, true);
+		if (displaysRecolorable) {
+			model_1.method479(64, 2000, -50, -10, -50, true);
+		} else {
+			model_1.method479(84, 1000, -90, -580, -90, true);
+		}
 		return model_1;
+	}
+
+	public void updateCapeModelColors(Player m) {
+		//if(m.displayModel == null) {
+			displayModel = ItemDefinition.get(14022).getEquippedModel(0);
+		//}
+		int[] newColors = {m.compColor[0], m.compColor[1], m.compColor[2], m.compColor[3], m.compColor[4],
+				m.compColor[5], m.compColor[5], m.compColor[5], m.compColor[6], m.compColor[6]};
+		for(int i = 0; i < m.defaultColors.length; i++) {
+			displayModel.setColor(m.defaultColors[i], newColors[i]);
+		}
 	}
 
 	private void specialBar(int id) // 7599
@@ -3359,8 +3601,9 @@ public class RSInterface {
 	public long[] showChangeExclamationDelay;
 	public int[] showChangeExclamationTimer;
 	public boolean[] showChangeExclamation;
-
+	public int msgX, msgY;
 	public int sprite1ID;
 	public int sprite2ID;
+	public int shadowColor = 0;
 
 }

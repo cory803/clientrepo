@@ -46,6 +46,7 @@ import org.chaos.dump.NpcListDumper;
 import org.chaos.map.MapView;
 import org.chaos.task.Task;
 import org.chaos.task.TaskManager;
+import sun.dc.pr.Rasterizer;
 
 import javax.imageio.ImageIO;
 import java.applet.AppletContext;
@@ -70,6 +71,40 @@ import java.util.zip.GZIPOutputStream;
 public class Client extends GameRenderer {
 	
 	private NotesTab notesTab = new NotesTab();
+
+	public static int[] compCapeDefaultColors = { -2805961, -5626324, -8643808,
+			-12249823, -66051, -449772, -5342402 };
+
+	public void randomColor(RSInterface box) {
+		box.color = (int) (Math.random() * 0xffffff);
+	}
+
+	public void clickCompCapeColorBoxes(int button, int action) {
+		int colID = button > 18770 ? button + 6 : button + 9;
+		RSInterface color = RSInterface.interfaceCache[colID];
+		if (action == 0) {// change color
+			RSInterface.interfaceCache[18700].children[2] = 18725;
+			compCapeColorEdit = colID;
+			oldCapeColor = RSInterface.interfaceCache[compCapeColorEdit].color;
+		} else if (action == 1) {// reset color
+			if (button > 18770) {
+				color.color = compCapeDefaultColors[(button - 18770) + 4];
+			} else {
+				color.color = compCapeDefaultColors[button - 18703];
+			}
+		} else if (action == 2) {// copy color
+			copiedColor = color.color;
+		} else if (action == 3) {// paste color
+			if (copiedColor != -1) {
+				color.color = copiedColor;
+			} else {
+				pushMessage("You don't have a color copied.", 0, "");
+			}
+		} else if (action == 4) {// random color
+			randomColor(color);
+		}
+		updateCompCapeColors();
+	}
 
 	private void displayEntityFeed(String name, int currentHP, int maxHP) {
 		if (name == null) {
@@ -122,6 +157,23 @@ public class Client extends GameRenderer {
 			return true;
 		}
 		return false;
+	}
+
+	public RSInterface getInterface(int j) {
+		return RSInterface.interfaceCache[j];
+	}
+
+	public void updateCompCapeColors() {
+		myPlayer.compColor[0] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18712].color);
+		myPlayer.compColor[1] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18713].color);
+		myPlayer.compColor[2] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18714].color);
+		myPlayer.compColor[3] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18715].color);
+		myPlayer.compColor[4] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18777].color);
+		myPlayer.compColor[5] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18778].color);
+		myPlayer.compColor[6] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18779].color);
+		myPlayer.colorNeedsUpdate = true;
+		getInterface(18716).updateCapeModelColors(myPlayer);
+		uLinkNodes();
 	}
 	
 	public boolean clickInRegion(int x1, int y1, int x2, int y2) {
@@ -1151,6 +1203,10 @@ public class Client extends GameRenderer {
 	public int ironman;
 	private String name;
 	public RSFontSystem newSmallFont, newRegularFont, newBoldFont;
+	public RSFontSystem bold;
+	public RSFontSystem fancy;
+	public static RSFontSystem small;
+	public RSFontSystem regular;
 	private int nextSong;
 	public TextDrawingArea normalText;
 	public NPC[] npcArray;
@@ -1486,9 +1542,10 @@ public class Client extends GameRenderer {
 		case "reloaditf":
 			try {
 				TextDrawingArea[] fonts = { smallText, normalText, boldText, fancyText };
+				RSFontSystem[] newFonts = { small, regular, bold, fancy };
 				Archive interfaceArchive = getArchive(3, "interface", "interface", expectedCRCs[3], 35);
 				Archive mediaArchive = getArchive(4, "2d graphics", "media", expectedCRCs[4], 40);
-				RSInterface.unpack(interfaceArchive, fonts, mediaArchive);
+				RSInterface.unpack(interfaceArchive, fonts, mediaArchive, newFonts);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1530,7 +1587,8 @@ public class Client extends GameRenderer {
 			Archive streamLoader_1 = getArchive(3, "interface", "interface", expectedCRCs[3], 35);
 			Archive mediaArchive = getArchive(4, "2d graphics", "media", expectedCRCs[4], 40);
 			TextDrawingArea[] aclass30_sub2_sub1_sub4s = { smallText, normalText, boldText, fancyText };
-			RSInterface.unpack(streamLoader_1, aclass30_sub2_sub1_sub4s, mediaArchive);
+			RSFontSystem[] newFonts = { small, regular, bold, fancy };
+			RSInterface.unpack(streamLoader_1, aclass30_sub2_sub1_sub4s, mediaArchive, newFonts);
 			break;
 		case "idf":
 			Archive streamLoader = getArchive(2, "config", "config", expectedCRCs[2], 30);
@@ -2079,7 +2137,6 @@ public class Client extends GameRenderer {
 										menuActionRow++;
 									}
 								}
-
 								menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name
 										+ (myRights == 3 ? " (" + itemDef.id + ")" : "");
 								menuActionID[menuActionRow] = 1448;
@@ -2581,6 +2638,38 @@ public class Client extends GameRenderer {
 		}
 	}
 
+	public int copiedColor = -1;
+	public int colorSelected = 0;
+	public int compCapeColorEdit = 0;
+	public int oldCapeColor = 0;
+	public int oldTab = 18711;
+
+	public void getColorFromCoords(int type) {
+		PointerInfo var37 = MouseInfo.getPointerInfo();
+		Point var14 = var37.getLocation();
+		try {
+			var14 = MouseInfo.getPointerInfo().getLocation();
+			Robot robot = new Robot();
+			Color color = robot.getPixelColor((int) var14.getX(),
+					(int) var14.getY());
+			if (type == 1) {
+				RSInterface.interfaceCache[18727].color = color.getRGB();
+			} else if (type == 2) {
+				colorSelected = color.getRGB();
+				RSInterface.interfaceCache[18728].color = colorSelected;
+				handleColorGrab(openInterfaceID, color);
+			}
+		} catch (AWTException e) {
+		}
+	}
+
+	public void handleColorGrab(int i, Color col) {
+		if (openInterfaceID == 18700) {
+			RSInterface.interfaceCache[compCapeColorEdit].color = colorSelected;
+			updateCompCapeColors();
+		}
+	}
+
 	private void buildInterfaceMenu(int xPadding, RSInterface rsInterface, int xPos, int yPadding, int yPos,
 			int scrollPoint) {
 		if (rsInterface == null) {
@@ -2638,8 +2727,9 @@ public class Client extends GameRenderer {
 				}
 			} else {
 
-				if (children.atActionType == 1 && xPos >= xSpritePos && yPos >= ySpritePos
-						&& xPos < xSpritePos + children.width && yPos < ySpritePos + children.height) {
+				if (children.atActionType == 1) {
+					if(xPos >= xSpritePos && yPos >= ySpritePos
+							&& xPos < xSpritePos + children.width && yPos < ySpritePos + children.height) {
 					boolean flag = false, flag1 = false;
 
 					if (children.contentType != 0) {
@@ -2650,7 +2740,7 @@ public class Client extends GameRenderer {
 						if (children.actions != null) {
 							for (int i = children.actions.length - 1; i >= 0; i--) {
 								String s = children.actions[i];
-								if(rsInterface.id == NotesTab.NOTE_TAB_ID && (children.message.equals("") || !RSInterface.interfaceCache[NotesTab.NOTE_COLOUR_ID].interfaceShown))
+								if (rsInterface.id == NotesTab.NOTE_TAB_ID && (children.message.equals("") || !RSInterface.interfaceCache[NotesTab.NOTE_COLOUR_ID].interfaceShown))
 									continue;
 								if (s != null) {
 									menuActionName[menuActionRow] = s;
@@ -2673,6 +2763,14 @@ public class Client extends GameRenderer {
 							menuActionID[menuActionRow] = 315;
 							menuActionCmd3[menuActionRow] = children.id;
 							menuActionRow++;
+						}
+						if (children.type == 35) {
+							children.toggled = true;
+						}
+					}
+					} else {
+						if (children.type == 35) {
+							children.toggled = false;
 						}
 					}
 				}
@@ -2726,7 +2824,27 @@ public class Client extends GameRenderer {
 						// class9_1.hoverText);
 					}
 				}
-
+				if (children.atActionType == 7828 && xPos >= xSpritePos && yPos >= ySpritePos
+						&& xPos < xSpritePos + children.width && yPos < ySpritePos + children.height) {
+					menuActionName[menuActionRow] = children.tooltip;
+					menuActionID[menuActionRow] = 1329;
+					menuActionCmd3[menuActionRow] = children.id;
+					menuActionRow++;
+					if (super.clickType == 2 || super.clickType == 0) {
+						if (children.id == 18737) {
+							RSInterface.interfaceCache[18725].childY[5] = super.mouseY - ySpritePos + 6;
+							getColorFromCoords(1);
+						} else if (children.id == 18732) {
+							getColorFromCoords(2);
+						} else if (children.type == 40) {
+							children.scrollPosition = super.mouseX - xSpritePos;
+							if (children.scrollPosition >= children.width - 5) {
+								children.scrollPosition = children.width - 6;
+							}
+							//SliderHandler.handleSlider(children);
+						}
+					}
+				}
 				if (children.atActionType == 5 && xPos >= xSpritePos && yPos >= ySpritePos
 						&& xPos < xSpritePos + children.width && yPos < ySpritePos + children.height) {
 					// System.out.println("3"+class9_1.tooltip + ", " +
@@ -2735,6 +2853,29 @@ public class Client extends GameRenderer {
 					menuActionID[menuActionRow] = 646;
 					menuActionCmd3[menuActionRow] = children.id;
 					menuActionRow++;
+				}
+
+				if (children.atActionType == 666) {
+					if (xPos >= xSpritePos && yPos >= ySpritePos && xPos < xSpritePos + children.width && yPos < ySpritePos + children.height) {
+						if (children.actions != null) {
+							int kk = children.actions.length - 1;
+							for (int i777 = 0; i777 < children.actions.length; i777++) {
+								menuActionName[menuActionRow] = children.actions[i777];
+								menuActionID[menuActionRow] = 1799;
+								menuActionCmd2[menuActionRow] = children.id;
+								menuActionCmd3[menuActionRow] = kk;
+								menuActionRow++;
+								kk--;
+							}
+						}
+						if (children.type == 35) {
+							children.toggled = true;
+						}
+					} else {
+						if (children.type == 35) {
+							children.toggled = false;
+						}
+					}
 				}
 
 				if (children.atActionType == 6 && !aBoolean1149 && xPos >= xSpritePos && yPos >= ySpritePos
@@ -2973,6 +3114,13 @@ public class Client extends GameRenderer {
 													menuActionRow++;
 												}
 											}
+										}
+										if (children.id == 18842) {
+											menuActionName[menuActionRow] = "View colors @lre@"
+													+ definition.name;
+											menuActionID[menuActionRow] = 1542;
+											menuActionCmd1[menuActionRow] = definition.id;
+											menuActionRow++;
 										}
 									}
 								}
@@ -3901,6 +4049,12 @@ public class Client extends GameRenderer {
 	public boolean showCombatBox;
 	public int currentCombatIndex;
 
+	public void clearEquipmentMatcher() {
+		for (int i = 0; i < 50; i++) {
+			RSInterface.interfaceCache[18840].children[i + 2] = 18756;
+		}
+	}
+
 	public void resetSelectDrops() {
 		for (int i = 0; i < selectedDrops.length; i++) {
 			selectedDrops[i] = false;
@@ -3957,6 +4111,10 @@ public class Client extends GameRenderer {
 				resetSelectDrops();
 			}
 		}
+		if (action == 1542) {// matcher item click
+			clearEquipmentMatcher();
+			loadMatcherColors(nodeId);
+		}
 		if (action == 23425) {
 			selectedDrops[slot] = !selectedDrops[slot];
 		}
@@ -3973,12 +4131,75 @@ public class Client extends GameRenderer {
 		if (action >= 2000) {
 			action -= 2000;
 		}
+		System.out.println(""+action);
+		if (slot >= 18703 && slot <= 18706 || slot >= 18771 && slot <= 18773) {
+			clickCompCapeColorBoxes(slot, interfaceId);
+		}
 		if (interfaceId == 24630 || interfaceId == 24632) {
 			if (inputDialogState == 3) {
 				getGrandExchange().searching = false;
 				getGrandExchange().totalItemResults = 0;
 				amountOrNameInput = "";
 			}
+		}
+		if (interfaceId >= 18845 && interfaceId < 18898) {
+			copiedColor = RSInterface.interfaceCache[interfaceId].color;
+		}
+		switch(interfaceId) {
+			case 18764:
+				//if (getInterface(18700).children[3] == 18716) {
+				//	getInterface(18700).children[3] = 18765;
+				//} else {
+				//	getInterface(18700).children[3] = 18716;
+				//}
+				break;
+			case 18939:
+			case 18940:
+			case 18941:
+				saveCapePreset(interfaceId - 18939);
+				break;
+			case 18942:
+			case 18943:
+			case 18944:
+				loadCapePreset(interfaceId - 18942);
+				break;
+
+			case 18900:
+				RSInterface ksk = RSInterface.interfaceCache[18700];
+				ksk.children[18] = 18756;
+				ksk.children[19] = 18901;
+				ksk.children[17] = 18910;
+				break;
+			case 18901:
+				ksk = RSInterface.interfaceCache[18700];
+				ksk.children[18] = 18900;
+				ksk.children[19] = 18756;
+				ksk.children[17] = 18756;
+				break;
+
+			case 18761:
+				RSInterface.interfaceCache[18757].sprite1 = CacheSpriteLoader.getCacheSprite3(33);
+				RSInterface.interfaceCache[18700].children[2] = 18711;
+				oldTab = 18711;
+				RSInterface.interfaceCache[18700].childX[2] = 70;
+				RSInterface.interfaceCache[18700].childY[2] = 84;
+				break;
+			case 18762:
+				RSInterface.interfaceCache[18757].sprite1 = CacheSpriteLoader.getCacheSprite3(34);
+				RSInterface.interfaceCache[18700].children[2] = 18770;
+				oldTab = 18770;
+				RSInterface.interfaceCache[18700].childX[2] = 70;
+				RSInterface.interfaceCache[18700].childY[2] = 84;
+				break;
+			case 18763:
+				RSInterface.interfaceCache[18757].sprite1 = CacheSpriteLoader.getCacheSprite3(35);
+				RSInterface.interfaceCache[18700].children[2] = 18840;
+				RSInterface.interfaceCache[18700].childX[2] = 44;
+				RSInterface.interfaceCache[18700].childY[2] = 76;
+				putEquipmentOnMatcher();
+				clearEquipmentMatcher();
+				RSInterface.interfaceCache[18840].scrollPosition = 0;
+				break;
 		}
 
 		if (action == 22700 || action == 1251) {
@@ -4040,6 +4261,43 @@ public class Client extends GameRenderer {
 			setNorth();
 		}
 
+		if(interfaceId == 18729) {
+			if (openInterfaceID == 18700) {
+				oldCapeColor = RSInterface.interfaceCache[compCapeColorEdit].color;
+				RSInterface.interfaceCache[compCapeColorEdit].color = colorSelected;
+				RSInterface.interfaceCache[18700].children[2] = oldTab;
+			}
+		}
+
+		if(interfaceId == 18717) {
+			performCommand("::sendcaperecolor-" + myPlayer.compColor[0] + "-"
+					+ myPlayer.compColor[1] + "-" + myPlayer.compColor[2] + "-"
+					+ myPlayer.compColor[3] + "-" + myPlayer.compColor[4] + "-"
+					+ myPlayer.compColor[5] + "-" + myPlayer.compColor[6] + "");
+			String ffs = "";
+			for (int i = 0; i < 4; i++) {
+				ffs += "" + RSInterface.interfaceCache[18712 + i].color + "-";
+			}
+			for (int i = 0; i < 3; i++) {
+				ffs += "" + RSInterface.interfaceCache[18777 + i].color + "-";
+			}
+			performCommand("::capergbcolors-" + ffs + "");
+			openInterfaceID = -1;
+		}
+		if(interfaceId == 18750) {
+			for (int i = 0; i < 4; i++)
+				randomColor(RSInterface.interfaceCache[18712 + i]);
+			for (int i = 0; i < 3; i++)
+				randomColor(RSInterface.interfaceCache[18777 + i]);
+			updateCompCapeColors();
+		}
+		if(interfaceId == 18753) {
+			for (int i = 0; i < 4; i++)
+				RSInterface.interfaceCache[18712 + i].color = compCapeDefaultColors[i];
+			for (int i = 0; i < 3; i++)
+				RSInterface.interfaceCache[18777 + i].color = compCapeDefaultColors[i + 4];
+			updateCompCapeColors();
+		}
 		if (action == 1007) {
 			PlayerHandler.canGainXP = PlayerHandler.canGainXP ? false : true;
 		}
@@ -5426,6 +5684,85 @@ public class Client extends GameRenderer {
 			Settings.save();
 		}
 	}
+
+	public void putEquipmentOnMatcher() {
+		RSInterface m = RSInterface.interfaceCache[18842];
+		RSInterface e = RSInterface.interfaceCache[1688];
+		int cur = 0;
+		for (int i = 0; i < m.inv.length; i++) {
+			m.inv[i] = -1;
+		}
+		for (int i = 0; i < e.inv.length; i++) {
+			if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5
+					|| i == 7 || i == 10) {
+				if (e.inv[i] > 0) {
+					m.inv[cur] = e.inv[i];
+					m.invStackSizes[cur] = 1;
+					cur++;
+				}
+			}
+		}
+	}
+
+	private void loadCapePreset(int j) {
+		for (int i = 0; i < 7; i++) {
+			getColorBox(i).color = getInterface(18912 + (j * 7) + i + 1).color;
+		}
+		updateCompCapeColors();
+	}
+
+	private void saveCapePreset(int j) {
+		String s = "::setCompPreset-" + j + "";
+		for (int i = 0; i < 7; i++) {
+			getInterface(18912 + (j * 7) + i + 1).color = getColorBox(i).color;
+			s += "-" + getColorBox(i).color;
+		}
+		performCommand(s);
+	}
+
+	private RSInterface getColorBox(int i) {
+		if (i == 0)
+			return getInterface(18712);
+		if (i == 1)
+			return getInterface(18713);
+		if (i == 2)
+			return getInterface(18714);
+		if (i == 3)
+			return getInterface(18715);
+		if (i == 4)
+			return getInterface(18777);
+		if (i == 5)
+			return getInterface(18778);
+		if (i == 6)
+			return getInterface(18779);
+		return null;
+	}
+
+	public void loadMatcherColors(int item) {
+		Model m = ItemDefinition.get(item).getEquippedModel(0);
+		if (m != null) {
+			int[] colors = m.getColors();
+			int found = 0;
+			for (int i = 0; i < colors.length; i++) {
+				if (colors[i] > 0) {
+					RSInterface.interfaceCache[18840].children[found + 2] = 18845 + found;
+					RSInterface.interfaceCache[18845 + found].color = Integer
+							.parseInt(HSLToRGB(colors[i]));
+					found++;
+				}
+			}
+		}
+	}
+
+	public static String HSLToRGB(int hsl) {
+		int color = Canvas3D.anIntArray1482[hsl];
+		double r = (color >> 16 & 0xff);
+		double g = (color >> 8 & 0xff);
+		double b = (color & 0xff);
+		Color f = new Color((int) r, (int) g, (int) b);
+		return "" + f.getRGB() + "";
+	}
+
 	public void performCommand(String s) {
 		String f = inputString;
 		inputString = s;
@@ -6076,7 +6413,27 @@ public class Client extends GameRenderer {
 			class9.message = ignoreCount + "";
 			return;
 		}
-
+		if (j == 366) {
+			RSInterface rsInterface = class9;
+			if (aBoolean1031) {
+				Model characterDisplay = myPlayer.method452();
+				for (int l2 = 0; l2 < 5; l2++)
+					if (anIntArray990[l2] != 0) {
+						characterDisplay.method476(anIntArrayArray1003[l2][0],
+								anIntArrayArray1003[l2][anIntArray990[l2]]);
+						if (l2 == 1)
+							characterDisplay.method476(anIntArray1204[0],
+									anIntArray1204[anIntArray990[l2]]);
+					}
+				int staticFrame = myPlayer.anInt1511;
+				characterDisplay.method469();
+				characterDisplay.method470(Animation.cache[staticFrame].frameIDs[0]);
+				rsInterface.mediaType = 5;
+				rsInterface.mediaID = 0;
+				RSInterface.clearModelCache(aBoolean994, characterDisplay);
+			}
+			return;
+		}
 		if (j >= 101 && j <= 200 || j >= 801 && j <= 900) {
 			int l = friendCount;
 
@@ -6820,6 +7177,17 @@ public class Client extends GameRenderer {
 							i3++;
 						}
 					}
+				} else if (childInterface.type == 35) {
+					if (childInterface.toggled) {
+						childInterface.sprite2.drawSprite(childX, childY);
+						childInterface.toggled = false;
+					} else {
+						childInterface.sprite1.drawSprite(childX, childY);
+					}
+					if (childInterface.centerText)
+						childInterface.rsFont.drawCenteredString(childInterface.message, childX + childInterface.msgX, childY + childInterface.msgY, childInterface.textColor, childInterface.shadowColor);
+					else
+						childInterface.rsFont.drawBasicString(childInterface.message, childX + 5, childY + childInterface.msgY, childInterface.textColor, childInterface.shadowColor);
 				} else if (childInterface.type == 3) {
 					boolean flag = false;
 					if ((this.anInt1039 == childInterface.id) || (this.anInt1048 == childInterface.id)
@@ -7134,6 +7502,11 @@ public class Client extends GameRenderer {
 							k4++;
 						}
 					}
+				} else if (childInterface.type == 19) {
+					if (childInterface.sprite4 != null)
+						childInterface.sprite4.drawSprite(childX - 2, childY - 2);
+					Canvas2D.drawPixels(childInterface.height, childY, childX,
+							childInterface.color, childInterface.width);
 				} else if (childInterface.type == 8 && (anInt1500 == childInterface.id || anInt1044 == childInterface.id
 						|| anInt1129 == childInterface.id) && anInt1501 == 30 && !menuOpen) {
 					int boxWidth = 0;
@@ -7422,6 +7795,15 @@ public class Client extends GameRenderer {
 						else
 							sprite.drawSprite(childX, childY);
 					}
+				} else if(childInterface.type == 1000) {
+					Sprite sprite;
+					if (interfaceIsSelected(childInterface))
+						sprite = childInterface.sprite2;
+					else
+						sprite = childInterface.sprite1;
+					if (sprite != null) {
+						sprite.draw24BitSprite(childX, childY);
+					}
 				} else if(childInterface.type == 14) {
 					drawColorBox(childInterface.anInt219, childX, childY, childInterface.width, childInterface.height);
 				}
@@ -7480,6 +7862,7 @@ public class Client extends GameRenderer {
 		}
 		achievement = null;
 	}
+
 	public void drawOnBankInterface() {
 		if (openInterfaceID == 5292 && RSInterface.interfaceCache[27000].message.equals("1")) {
 			int i = Integer.parseInt(RSInterface.interfaceCache[27001].message);
@@ -14122,6 +14505,9 @@ public class Client extends GameRenderer {
 						String s8 = s.substring(s.indexOf(":") + 1, s.length() - 9);
 						pushMessage(s8, 8, s5);
 					}
+				} else if (s.endsWith(":compu:")) {
+					myPlayer.colorNeedsUpdate = true;
+					uLinkNodes();
 				} else {
 					pushMessage(s, 0, "");
 				}
@@ -14478,6 +14864,54 @@ public class Client extends GameRenderer {
 			case 126:
 				String text = getInputBuffer().getString();
 				int frame = getInputBuffer().getShort();
+				if (frame == 18939) {
+					String[] comps = text.split(" ");
+					RSInterface.interfaceCache[18913].color = Integer.parseInt(comps[0]);
+					RSInterface.interfaceCache[18914].color = Integer.parseInt(comps[1]);
+					RSInterface.interfaceCache[18915].color = Integer.parseInt(comps[2]);
+					RSInterface.interfaceCache[18916].color = Integer.parseInt(comps[3]);
+					RSInterface.interfaceCache[18917].color = Integer.parseInt(comps[4]);
+					RSInterface.interfaceCache[18918].color = Integer.parseInt(comps[5]);
+					RSInterface.interfaceCache[18919].color = Integer.parseInt(comps[6]);
+					pktType = -1;
+					return true;
+				}
+				if (frame == 18940) {
+					String[] comps = text.split(" ");
+					RSInterface.interfaceCache[18920].color = Integer.parseInt(comps[0]);
+					RSInterface.interfaceCache[18921].color = Integer.parseInt(comps[1]);
+					RSInterface.interfaceCache[18922].color = Integer.parseInt(comps[2]);
+					RSInterface.interfaceCache[18923].color = Integer.parseInt(comps[3]);
+					RSInterface.interfaceCache[18924].color = Integer.parseInt(comps[4]);
+					RSInterface.interfaceCache[18925].color = Integer.parseInt(comps[5]);
+					RSInterface.interfaceCache[18926].color = Integer.parseInt(comps[6]);
+					pktType = -1;
+					return true;
+				}
+				if (frame == 18941) {
+					String[] comps = text.split(" ");
+					RSInterface.interfaceCache[18927].color = Integer.parseInt(comps[0]);
+					RSInterface.interfaceCache[18928].color = Integer.parseInt(comps[1]);
+					RSInterface.interfaceCache[18929].color = Integer.parseInt(comps[2]);
+					RSInterface.interfaceCache[18930].color = Integer.parseInt(comps[3]);
+					RSInterface.interfaceCache[18931].color = Integer.parseInt(comps[4]);
+					RSInterface.interfaceCache[18932].color = Integer.parseInt(comps[5]);
+					RSInterface.interfaceCache[18933].color = Integer.parseInt(comps[6]);
+					pktType = -1;
+					return true;
+				}
+				if (frame == 18712) {
+					String[] comps = text.split(" ");
+					RSInterface.interfaceCache[18712].color = Integer.parseInt(comps[0]);
+					RSInterface.interfaceCache[18713].color = Integer.parseInt(comps[1]);
+					RSInterface.interfaceCache[18714].color = Integer.parseInt(comps[2]);
+					RSInterface.interfaceCache[18715].color = Integer.parseInt(comps[3]);
+					RSInterface.interfaceCache[18777].color = Integer.parseInt(comps[4]);
+					RSInterface.interfaceCache[18778].color = Integer.parseInt(comps[5]);
+					RSInterface.interfaceCache[18779].color = Integer.parseInt(comps[6]);
+					pktType = -1;
+					return true;
+				}
 				if (text.startsWith("https://") || text.startsWith("http://") || text.startsWith("www.")) {
 					launchURL(text);
 					pktType = -1;
@@ -14804,7 +15238,12 @@ public class Client extends GameRenderer {
 					backDialogID = -1;
 					inputTaken = true;
 				}
-
+				if (l7 == 18700) {
+					RSInterface.interfaceCache[18700].children[2] = 18711;
+					oldTab = 18711;
+					RSInterface.interfaceCache[18757].sprite1 = CacheSpriteLoader.getCacheSprite3(33);
+					updateCompCapeColors();
+				}
 				if (inputDialogState != 0) {
 					inputDialogState = 0;
 					inputTaken = true;
@@ -15035,6 +15474,24 @@ public class Client extends GameRenderer {
 		pktType = -1;
 		return true;
 	}
+
+	public void uLinkNodes() {
+		System.out.println("Update nodes");
+		MobDefinition.mruNodes.unlinkAll();
+		ItemDefinition.mruNodes2.unlinkAll();
+		ItemDefinition.mruNodes1.unlinkAll();
+		Player.mruNodes.unlinkAll();
+	}
+
+	public void updateColored() {
+		for (int i = 0; i < playerArray.length; i++) {
+			if (playerArray[i] != null) {
+				playerArray[i].colorNeedsUpdate = true;
+			}
+		}
+		uLinkNodes();
+	}
+
 	public void showNpcCombatBox(int currentHp, int maxHp, NPC npc) {
 		if(!showCombatBox || currentCombatIndex != npc.worldIndex) {
 			return;
@@ -17235,6 +17692,10 @@ public class Client extends GameRenderer {
 			newSmallFont = new RSFontSystem(false, "p11_full", titleStreamLoader);
 			newRegularFont = new RSFontSystem(false, "p12_full", titleStreamLoader);
 			newBoldFont = new RSFontSystem(false, "b12_full", titleStreamLoader);
+			small = new RSFontSystem(false, "p11_full", titleStreamLoader);
+			regular = new RSFontSystem(false, "p12_full", titleStreamLoader);
+			bold = new RSFontSystem(false, "b12_full", titleStreamLoader);
+			fancy = new RSFontSystem(true, "q8_full", titleStreamLoader);
 			drawLogo();
 			loadTitleScreen();
 			aClass3_Sub7_Sub1_1493 = method407(instance);
@@ -17396,10 +17857,11 @@ public class Client extends GameRenderer {
 			}
 
 			setLoadingText(95, "Unpacking interfaces");
+			RSFontSystem[] newFonts = { small, regular, bold, fancy };
 			TextDrawingArea[] fonts = { smallText, normalText, boldText, fancyText };
 
 			try {
-				RSInterface.unpack(interfaceArchive, fonts, mediaArchive);
+				RSInterface.unpack(interfaceArchive, fonts, mediaArchive, newFonts);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

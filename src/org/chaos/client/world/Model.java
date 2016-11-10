@@ -11,9 +11,36 @@ import org.chaos.client.cache.ondemand.CacheFileRequester;
 import org.chaos.client.graphics.Canvas2D;
 import org.chaos.client.io.ByteBuffer;
 import org.chaos.client.particles.*;
+import org.chaos.client.particles.impl.CompletionistParticle;
 import org.chaos.client.renderable.Animable;
 
+import java.awt.*;
+
 public class Model extends Animable {
+
+	public int[] getColors() {
+		int[] col = new int[50];
+		int[] sent = new int[100];
+		int cur = 0;
+		for (int k = 0; k < anInt1630; k++) {
+			if (anIntArray1640 != null) {
+				boolean gone = false;
+				for (int j = 0; j < sent.length; j++) {
+					if (sent[j] == anIntArray1640[k])
+						gone = true;
+				}
+				if (!gone) {
+					col[cur] = anIntArray1640[k];
+					sent[cur] = anIntArray1640[k];
+					cur++;
+				}
+				if (cur == 50) {
+					return col;
+				}
+			}
+		}
+		return col;
+	}
 
 	private final void removeColors(int[] colors) {
 		if (anIntArray1640 == null) {
@@ -31,7 +58,13 @@ public class Model extends Animable {
 			}
 		}
 	}
-	
+
+	public void setColor(int i, int j) {
+		for (int k = 0; k < anInt1630; k++)
+			if (anIntArray1640 != null && anIntArray1640[k] == i)
+				anIntArray1640[k] = j;
+	}
+
 	private void filterTriangles() {
 	    for (int id = 0; id < anInt1630; id++) {
 	        int triA = anIntArray1631[id];
@@ -2760,6 +2793,16 @@ public class Model extends Animable {
 						};
 						display.setRgb(getRGBInt(colorc[0], colorc[1], colorc[2]));
 					}
+					//if(anIntArray1639 != null)
+					//	System.out.println("Size: "+anIntArray1639.length);
+					//else
+					//	System.out.println("IT IS NULL");
+					//if(var27.getRGB() == 0xDBDBDB) {
+						//for(Integer value : this.anIntArray1640) {
+							//System.out.println("a "+value);
+						//}
+						//var27.setRGB(this.getColors()[11]);
+					//}
 					Client.instance.I(display);
 				}
 			}
@@ -2774,6 +2817,22 @@ public class Model extends Animable {
 		{0, 0, 255}, // blue
 		{255, 0, 255}, // purple
 	};
+
+	public static String convertColorToHexadeimal(int rgb)
+	{
+		String hex = Integer.toHexString(rgb & 0xffffff);
+		if(hex.length() < 6)
+		{
+			if(hex.length()==5)
+				hex = "0" + hex;
+			if(hex.length()==4)
+				hex = "00" + hex;
+			if(hex.length()==3)
+				hex = "000" + hex;
+		}
+		hex = "#" + hex;
+		return hex;
+	}
 
 	public static int getRGBInt(int r, int g, int b) {
 		int color = 0;

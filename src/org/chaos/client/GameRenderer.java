@@ -66,6 +66,13 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 	public int offsetX = 0;
 	public int offsetY = 0;
 
+	public int clickType;
+	public final int LEFT = 0;
+	public final int RIGHT = 1;
+	public final int DRAG = 2;
+	public final int RELEASED = 3;
+	public final int MOVE = 4;
+
 	void prepareGraphics() {
 		while (graphics == null) {
 			graphics = (isApplet ? this : mainFrame).getGraphics();
@@ -789,6 +796,7 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 			mouseX = x;
 			mouseY = y;
 		}
+		clickType = DRAG;
 	}
 
 	@Override
@@ -825,6 +833,7 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 			mouseX = x;
 			mouseY = y;
 		}
+		clickType = MOVE;
 	}
 
 	public int mouseWheelX;
@@ -860,9 +869,11 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 		if (mouseevent.isMetaDown()) {
 			clickMode1 = 2;
 			setClickMode2(2);
+			clickType = RIGHT;
 		} else {
 			clickMode1 = 1;
 			setClickMode2(1);
+			clickType = LEFT;
 		}
 	}
 
@@ -871,6 +882,7 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 		idleTime = 0;
 		mouseWheelDown = false;
 		setClickMode2(0);
+		clickType = RELEASED;
 	}
 
 	/*public void mouseWheelMoved(MouseWheelEvent e) {
