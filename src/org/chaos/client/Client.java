@@ -3020,7 +3020,19 @@ public class Client extends GameRenderer {
 											menuActionCmd3[menuActionRow] = children.id;
 											menuActionRow++;
 										}
-
+										if (children.id == 1688) {
+											if (ItemDefinition.equipmentActions[definition.id] != null) {
+												menuActionName[menuActionRow] = ""
+														+ ItemDefinition.equipmentActions[definition.id]
+														+ " @lre@"
+														+ definition.name;
+												menuActionID[menuActionRow] = 1734;
+												menuActionCmd1[menuActionRow] = definition.id;
+												menuActionCmd2[menuActionRow] = k2;
+												menuActionCmd3[menuActionRow] = children.id;
+												menuActionRow++;
+											}
+										}
 										if (openInterfaceID != 24700 && children.isInventoryInterface
 												&& definition.actions != null) {
 											for (int i4 = 2; i4 >= 0; i4--) {
@@ -5340,7 +5352,12 @@ public class Client extends GameRenderer {
 				atInventoryInterfaceType = 3;
 			}
 		}
-
+		if (action == 1734) {
+			getOut().putOpcode(16);
+			getOut().writeUnsignedWordA(nodeId);
+			getOut().writeSignedBigEndian(slot);
+			getOut().writeSignedBigEndian(interfaceId);
+		}
 		if (action == 543) {
 			getOut().putOpcode(237);
 			getOut().putShort(slot);
@@ -8654,7 +8671,7 @@ public class Client extends GameRenderer {
 		tooltip = tooltip.replaceAll("@gre@", "");
 		tooltip = tooltip.replaceAll("@yel@", "");
 		for (CursorData cursorData : CursorData.values()) {
-			if (tooltip.startsWith(cursorData.tooltip)) {
+			if (tooltip.startsWith(cursorData.tooltip) && !tooltip.toLowerCase().contains("take bob")) {
 				newCursor = cursorData;
 				break;
 			}
@@ -13163,7 +13180,7 @@ public class Client extends GameRenderer {
 					inputTaken = true;
 				}
 			} else if (inputDialogState == 2) {
-				if (key >= 32 && key <= 122 && amountOrNameInput.length() < 12) {
+				if (key >= 32 && key <= 122 && amountOrNameInput.length() < 70) {
 					amountOrNameInput += (char) key;
 					inputTaken = true;
 				}
@@ -17931,6 +17948,7 @@ public class Client extends GameRenderer {
 			Animable_Sub5.clientInstance = this;
 			ObjectDefinition.clientInstance = this;
 			MobDefinition.clientInstance = this;
+			ItemDefinition.loadEquipmentActions();
 			//repackCacheIndex(1);
 			//ObjectDefinition.dumpObjectModels();
 			Settings.load();

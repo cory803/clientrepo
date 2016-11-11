@@ -57,6 +57,12 @@ public class CustomObjects {
 			{ -1, 2831, 3445, 0, 0 },
 			{ -1, 2830, 3445, 0, 0 },
 
+			//Random stairs next to edgeville
+			{ -1, 3123, 3509, 0, 0 },
+
+			//Edgeville trapdoor
+			{ 1756, 3097, 3468, 0, 3 },
+
 			//skilling zone (high)
 			{ 2781, 2856, 2966, 0, 0 },
 			{ 14859, 2819, 2998, 0, 0 },

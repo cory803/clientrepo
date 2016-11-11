@@ -29,6 +29,35 @@ public final class ItemDefinition {
 	public static int totalItems;
 	public static int totalItemsOsrs;
 
+	public static void loadEquipmentActions() {
+		int[] taunt = {11696, 11698, 13902, 11694, 11700, 1305, 1249, 3204, 4587, 1434, 10887, 1215, 1231,
+				5680, 5698, 11730, 4151, 15445, 15444, 15443, 15442, 15441, 14484, 13905, 13899,
+				4153, 1377, 19780};
+		int[] operate = {11283, 1712};
+		int[] charges = {4708, 4856, 4710, 4862, 4712, 4868, 4714, 4874, 4716, 4880, 4718, 4886, 4720,
+				4892, 4722, 4898, 4724, 4904, 4726, 4910, 4728, 4916, 4730, 4922, 4732, 4928, 4734,
+				4934, 4736, 4940, 4738, 4946, 4745, 4952, 4747, 4958, 4749, 4964, 4751, 4970, 4753,
+				4976, 4755, 4982, 4757, 4988, 4759, 4994, 18349, 18349, 18351, 18351, 18353, 18353,
+				18355, 18355, 18357, 18357, 18359, 18359, 20135, 20137, 20139, 20141, 20143, 20145,
+				20147, 20149, 20151, 20153, 20155, 20157, 20159, 20161, 20163, 20165, 20167, 20169,
+				20171, 20173, 13889, 13895, 13907, 13901, 13886, 13892, 13898, 13904, 13860, 13863,
+				13866, 13869, 13872, 13875, 13878, 13913, 13919, 13931, 13925, 13910, 13916, 13922,
+				13928, 13934, 13937, 13940, 13943, 13946, 13949, 13952};
+		int[] customize = {14022, 20770, 22546, 22547};
+		for (int i = 0; i < taunt.length; i++) {
+			equipmentActions[taunt[i]] = "Taunt";
+		}
+		for (int i = 0; i < operate.length; i++) {
+			equipmentActions[operate[i]] = "Operate";
+		}
+		for (int i = 0; i < charges.length; i++) {
+			equipmentActions[charges[i]] = "Check Charges";
+		}
+		for (int i = 0; i < customize.length; i++) {
+			equipmentActions[customize[i]] = "Customize";
+		}
+	}
+
 	public Model getColoredModel(int gender, int[] newColors) {
 		this.originalModelColors = newColors;
 		Model m = getEquippedModel(gender);
@@ -6140,5 +6169,7 @@ public final class ItemDefinition {
 		description = ("Swap this note at any bank for " + s + " " + definition.name + ".").getBytes();
 		stackable = true;
 	}
+
+	public static String[] equipmentActions = new String[22600];
 
 }

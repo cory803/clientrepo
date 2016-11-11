@@ -80,7 +80,7 @@ public class SummoningInterfaceData {
 			{ 12163, 2363, -1 }, // Rune minotaur pouch
 			{ 12159, 237, -1 }, // Unicorn stallion pouch
 			{ 12163, 1444, -1 }, // Geyser titan pouch
-			{ 12160, 3226, 2859 }, // Wolpertinger pouch
+			{ 12160, 3226, -1 }, // Wolpertinger pouch
 			{ 12159, 12161, -1 }, // Abyssal titan pouch
 			{ 12160, 1115, -1 }, // Iron titan pouch
 			{ 12160, 10818, -1 }, // Pack yak pouch

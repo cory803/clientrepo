@@ -93,7 +93,10 @@ public final class MobDefinition {
             case 6247:
                 definition.npcModels = get(6646).npcModels;
                 break;
-            case 151481:
+            case 405:
+                definition.dialogueModels = new int[] {78500, 78501};
+                break;
+            case 1545151:
                 System.out.println("----");
                 System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {

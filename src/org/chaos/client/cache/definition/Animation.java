@@ -652,6 +652,11 @@ public final class Animation {
                         11927670, 11927636, 11927685, 11927595, 11927623};
                 cache[j].delays = new int[]{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2};
             }
+            if(j == 10228) {
+                //cache[j] = new Animation();
+                cache[j].immitate(cache[10226]);
+                cache[j].rightHandItem = 12704 + 512;
+            }
             if (j == 5806) {
                 cache[j].frameCount = 55;
                 cache[j].loopDelay = -1;
@@ -806,6 +811,11 @@ public final class Animation {
         resetWhenWalk = anim.resetWhenWalk;
         priority = anim.priority;
         delayType = anim.delayType;
+        frameIDs = anim.frameIDs;
+        frameIDs2 = anim.frameIDs2;
+        delays = anim.delays;
+        frameCount = anim.frameCount;
+        animationFlowControl = anim.animationFlowControl;
     }
 
     public void sysOut() {
