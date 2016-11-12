@@ -15493,11 +15493,10 @@ public class Client extends GameRenderer {
 	}
 
 	public void uLinkNodes() {
-		System.out.println("Update nodes");
-		MobDefinition.mruNodes.unlinkAll();
-		ItemDefinition.mruNodes2.unlinkAll();
-		ItemDefinition.mruNodes1.unlinkAll();
-		Player.mruNodes.unlinkAll();
+		//MobDefinition.mruNodes.unlinkAll();
+		//ItemDefinition.mruNodes2.unlinkAll();
+		//ItemDefinition.mruNodes1.unlinkAll();
+		//Player.mruNodes.unlinkAll();
 	}
 
 	public void updateColored() {

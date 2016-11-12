@@ -254,11 +254,12 @@ public final class Player extends Entity {
 			{
 				if(aLong1697 != -1L)
 					model_1 = (Model) mruNodes.insertFromCache(aLong1697);
-				if(model_1 == null)
+				if(model_1 == null) {
 					return null;
+				}
 			}
 		}
-		if(model_1 == null || colorNeedsUpdate)
+		if(model_1 == null)
 		{
 			Model aclass30_sub2_sub4_sub6s[] = new Model[12];
 			int j2 = 0;
@@ -307,8 +308,9 @@ public final class Player extends Entity {
 			mruNodes.removeFromCache(model_1, l);
 			aLong1697 = l;
 		}
-		if(aBoolean1699)
+		if(aBoolean1699) {
 			return model_1;
+		}
 		Model model_2 = Model.aModel_1621;
 		model_2.method464(model_1, FrameReader.isNullFrame(currentFrame) & FrameReader.isNullFrame(i1));
 		if (currentFrame != -1 && i1 != -1) {
