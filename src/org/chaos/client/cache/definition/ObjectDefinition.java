@@ -362,6 +362,9 @@ public final class ObjectDefinition {
             }
         }
         switch (id) {
+            case 7818:
+                definition.actions = new String[]{"Dump-weeds", null, null, null, null};
+                break;
             case 9383:
                 definition.modifiedModelColors = new int[1];
                 definition.originalModelColors = new int[1];

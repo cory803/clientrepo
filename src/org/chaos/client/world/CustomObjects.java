@@ -24,6 +24,9 @@ public class CustomObjects {
 	}
 
 	public static final int[][] CUSTOM_OBJECTS = {
+			//compost bins
+			{ 7808, 2661, 3375, 0, 3},
+			{ 7818, 3610, 3522, 0, 1},
 			//Dungeoneering exit portals
 			{ 2477, 3284, 9195, 0, 0 },
 			{ 2477, 3279, 9195, 0, 0 },
