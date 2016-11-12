@@ -2041,61 +2041,6 @@ public class CustomInterfaces extends RSInterface {
 		setBounds(21007, 15, 33, 1, rsinterface2);
 		setBounds(21008, 15, 51, 2, rsinterface2);
 		setBounds(21009, 15, 69, 3, rsinterface2);
-
-		RSInterface tab1 = addTabInterface(18730);
-		addSpriteLoader(18732, 686);
-
-		addButtonWSpriteLoader(18733, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18734, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18735, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18737, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18740, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18741, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18742, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18745, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18743, 688, "Enchant");
-
-		addButtonWSpriteLoader(18728, 689, "Close Window", 16, 16);
-
-		addText(18729, "", tda, 0, 0xFFA500, false, true);
-
-		// addButton(18776, 0, "PestControl/X", 102, 22, "extra", 1);
-		tab1.totalChildren(13);
-		tab1.child(0, 18731, 4, 16);
-		tab1.child(1, 18732, 4, 16);
-		tab1.child(2, 18733, 30, 127);
-		tab1.child(3, 18734, 30, 201);
-		tab1.child(4, 18735, 184, 127);
-		tab1.child(5, 18737, 184, 201);
-
-		tab1.child(6, 18740, 184, 274);
-		tab1.child(7, 18741, 338, 127);
-		tab1.child(8, 18742, 338, 201);
-		tab1.child(9, 18743, 56, 231);
-		tab1.child(10, 18728, 480, 20);
-		tab1.child(11, 18729, 370, 47);
-		tab1.child(12, 18745, 338, 274);
-
-		// tab1.child(17, 18776, 334, 46);
-		/* Equipment Tab Void */
-		RSInterface tab2 = addTabInterface(18746);
-
-		addSpriteLoader(18747, 690);
-		addButtonWSpriteLoader(18748, 691, "Back");
-
-		addButtonWSpriteLoader(18749, 687, "Purchase", 142, 14);
-		addButtonWSpriteLoader(18750, 687, "Purchase", 142, 14);
-
-		addButtonWSpriteLoader(18728, 689, "Close Window", 16, 16);
-		// addButton(18776, 0, "PestControl/X", 102, 22, "extra", 1);
-		tab2.totalChildren(6);
-		tab2.child(0, 18747, 4, 16);
-		tab2.child(1, 18748, 56, 231);
-		tab2.child(2, 18749, 30, 127);
-		tab2.child(3, 18750, 184, 127);
-		tab2.child(4, 18728, 480, 20);
-		tab2.child(5, 18729, 370, 47);
-
 	}
 
 	private void friendsTabInterface() {
