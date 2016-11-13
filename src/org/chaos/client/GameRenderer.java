@@ -532,9 +532,11 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 		}
 
 		//Ctrl key for selecting items in inventory
-		if(keyCode == 17) {
-			if(!Client.instance.selectDrop) {
-				Client.instance.selectDrop = true;
+		if(Configuration.TOGGLE_CTRL) {
+			if (keyCode == 17) {
+				if (!Client.instance.selectDrop) {
+					Client.instance.selectDrop = true;
+				}
 			}
 		}
 		//System.out.println("Key code: "+keyCode);

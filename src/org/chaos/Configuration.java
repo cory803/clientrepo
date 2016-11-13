@@ -58,6 +58,8 @@ public class Configuration {
 	public static boolean NEW_CURSORS = true;
 	public static boolean NEW_FUNCTION_KEYS = true;
 
+	public static boolean TOGGLE_CTRL = false;
+
 	public static boolean FOG_ENABLED = true;
 	/**
 	 * The client will run in high memory with textures rendering

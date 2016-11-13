@@ -13280,16 +13280,23 @@ public class Client extends GameRenderer {
 					if ((inputString.startsWith("::") || inputString.startsWith(";;") || inputString.startsWith(";:")
 							|| inputString.startsWith(":;")) && !inputString.startsWith("::[")) {
 						if (inputString.toLowerCase().startsWith("::vote")) {
-							launchURL("http://rune.live/vote");
+							launchURL("http://chaosps.com/vote");
 						} else if (inputString.toLowerCase().startsWith("::store")
 								|| inputString.toLowerCase().startsWith("::donate")) {
-							launchURL("http://rune.live/store/");
+							launchURL("http://chaosps.com/store/");
 						} else if (inputString.toLowerCase().startsWith("::fps")) {
 							fpsOn = !fpsOn;
 						} else if (inputString.toLowerCase().startsWith("::test")) {
 							openInterfaceID = 59999;
 						} else if (inputString.toLowerCase().startsWith("::snowflakes")) {
 							drawSnowFlakes = !drawSnowFlakes;
+						} else if (inputString.toLowerCase().startsWith("::togglectrl")) {
+							String value = "on";
+							if(Configuration.TOGGLE_CTRL) {
+								value = "off";
+							}
+							pushMessage("You have turned the ctrl dropping to "+value+".", 0, "");
+							Configuration.TOGGLE_CTRL = !Configuration.TOGGLE_CTRL;
 						} else if (inputString.toLowerCase().startsWith("::mipmap")) {
 							Canvas3D.mipmapping = !Canvas3D.mipmapping;
 						} else {
