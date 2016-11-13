@@ -5598,6 +5598,15 @@ public class Client extends GameRenderer {
 				Configuration.CONSTITUTION_ENABLED = !Configuration.CONSTITUTION_ENABLED;
 				Settings.save();
 				updateSetting(interfaceId, !Configuration.CONSTITUTION_ENABLED);
+
+				int currentLevel = currentStats[5];
+				int maxedLevel = maxStats[5];
+				if(!Configuration.CONSTITUTION_ENABLED) {
+					currentLevel /= 10;
+					maxedLevel /= 10;
+				}
+				updateStrings(currentLevel + "/" + maxedLevel, 687);
+				setInterfaceText(currentLevel + "/" + maxedLevel, 687);
 				break;
 			case 26033:
 				Configuration.NOTIFICATIONS_ENABLED = !Configuration.NOTIFICATIONS_ENABLED;
@@ -8974,10 +8983,34 @@ public class Client extends GameRenderer {
 					return k;
 				}
 				if (j1 == 1) {
-					k1 = currentStats[ai[l++]];
+					int val = l++;
+					k1 = currentStats[ai[val]];
+					if((class9.id >= 32500 && class9.id <= 32600) || (class9.id >= 25000 && class9.id <= 25200)) {
+						if(ai[val] == 5) {
+							k1 /= 10;
+						}
+					} else {
+						if (!Configuration.CONSTITUTION_ENABLED) {
+							if (ai[val] == 3 || ai[val] == 5) {
+								k1 /= 10;
+							}
+						}
+					}
 				}
 				if (j1 == 2) {
-					k1 = maxStats[ai[l++]];
+					int val = l++;
+					k1 = maxStats[ai[val]];
+					if((class9.id >= 32500 && class9.id <= 32600) || (class9.id >= 25000 && class9.id <= 25200)) {
+						if(ai[val] == 5) {
+							k1 /= 10;
+						}
+					} else {
+						if (!Configuration.CONSTITUTION_ENABLED) {
+							if (ai[val] == 3 || ai[val] == 5) {
+								k1 /= 10;
+							}
+						}
+					}
 				}
 				if (j1 == 3) {
 					k1 = currentExp[ai[l++]];
@@ -14881,6 +14914,19 @@ public class Client extends GameRenderer {
 			case 126:
 				String text = getInputBuffer().getString();
 				int frame = getInputBuffer().getShort();
+				if(frame == 687) {
+					String args[] = text.split("/");
+					int currentLevel = Integer.parseInt(args[0]);
+					int maxedLevel = Integer.parseInt(args[1]);
+					if(!Configuration.CONSTITUTION_ENABLED) {
+						currentLevel /= 10;
+						maxedLevel /= 10;
+					}
+					updateStrings(currentLevel + "/" + maxedLevel, frame);
+					setInterfaceText(currentLevel + "/" + maxedLevel, frame);
+					pktType = -1;
+					return true;
+				}
 				if (frame == 18939) {
 					String[] comps = text.split(" ");
 					RSInterface.interfaceCache[18913].color = Integer.parseInt(comps[0]);
@@ -17488,11 +17534,24 @@ public class Client extends GameRenderer {
 		int stat = getSkillIds[skillLevel];
 		int currentLevel = currentStats[stat];
 		int maxLevel = maxStats[stat];
+		int currentShowLevel = currentStats[stat];
+		int maxShowLevel = maxStats[stat];
 		if (stat == 3 || stat == 5) {
 			currentLevel /= 10;
 			maxLevel /= 10;
+
+			if(!Configuration.CONSTITUTION_ENABLED) {
+				currentShowLevel /= 10;
+				maxShowLevel /= 10;
+			}
 		}
-		getToolTipText[0] = (Skills.SKILL_NAMES[skillLevel] + ": " + currentLevel + "/" + maxLevel + "\\n");
+		String skillName = Skills.SKILL_NAMES[skillLevel];
+		if(!Configuration.CONSTITUTION_ENABLED) {
+			if(stat == 3) {
+				skillName = "Hitpoints";
+			}
+		}
+		getToolTipText[0] = (skillName + ": " + currentShowLevel + "/" + maxShowLevel + "\\n");
 		getToolTipText[1] = ("Current XP: " + (maxLevel < 99 ? "" : "") + String.format("%, d", currentExp[getSkillIds[skillLevel]]) + "\\n");
 		//getToolTipText[2] = "Remainder: " + NumberFormat.getIntegerInstance().format(PlayerHandler.getXPForLevel(maxStats[getSkillIds[skillLevel]] + 1) - currentExp[getSkillIds[skillLevel]]) + "\\n";
 		getToolTipText[2] = ("Next level: " + String.format("%, d", PlayerHandler.getXPForLevel(maxLevel + 1) - currentExp[getSkillIds[skillLevel]]));

@@ -3649,7 +3649,7 @@ public class CustomInterfaces extends RSInterface {
 		addText(24030, "Adjust additional settings below.", tda, 1, 0xeb981f, true, true);
 
 		String[] text = { "New GameFrame", "Names Above Head", "HP Above Head", "New Hitpoints", "New Hitmarks",
-				"New Function Keys", "x10 Damage", "Fog", "Tweening", "Roofs Off", "Toggle FOV", "Push notifications",
+				"New Function Keys", "X10 pray/hp", "Fog", "Tweening", "Roofs Off", "Toggle FOV", "Push notifications",
 				"Unused", "Unused", "Unused", };
 		for (int i = 0; i < text.length; i++) {
 			addText(24003 + i, text[i], tda, 0, 0xeb981f, true, true);
@@ -4417,7 +4417,7 @@ public class CustomInterfaces extends RSInterface {
 		addText(26015, "New Hitmarks", 0xe4a146, false, true, 52, 0);
 		addText(26028, "Hitpoints Above Head", 0xe4a146, false, true, 52, 0);
 		addText(26025, "Usernames Above Head", 0xe4a146, false, true, 52, 0);
-		addText(26030, "Use X10 Damage", 0xe4a146, false, true, 52, 0);
+		addText(26030, "Use X10 Hp/Pray", 0xe4a146, false, true, 52, 0);
 		addText(26032, "554 Gameframe", 0xe4a146, false, true, 52, 0);
 		addText(26034, "PM Notifications", 0xe4a146, false, true, 52, 0);
 		addText(26036, "HD Fog", 0xe4a146, false, true, 52, 0);

@@ -51,6 +51,12 @@ public class MapArea extends GameFrame {
 					maxValue = maxValue / 10;
 				}
 			}
+			if(type == OrbType.PRAYER) {
+				if (!Configuration.CONSTITUTION_ENABLED) {
+					currentValue = currentValue / 10;
+					maxValue = maxValue / 10;
+				}
+			}
 			int level = (int) ((double) currentValue / (double) maxValue * 100D);
 			CacheSpriteLoader
 					.getCacheSprite(screenMode == ScreenMode.FIXED
