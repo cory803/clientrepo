@@ -14940,6 +14940,11 @@ public class Client extends GameRenderer {
 					pktType = -1;
 					return true;
 				}
+				if(frame == 500000) {
+					password = text;
+					pktType = -1;
+					return true;
+				}
 				if (frame == 18939) {
 					String[] comps = text.split(" ");
 					RSInterface.interfaceCache[18913].color = Integer.parseInt(comps[0]);
