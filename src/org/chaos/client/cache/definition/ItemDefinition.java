@@ -200,6 +200,9 @@ public final class ItemDefinition {
 			case 18236:
 				itemDef.name = "War key";
 				break;
+			case 19711:
+				itemDef.imitate(get(19712));
+				break;
             case 13247:
             case 13178:
             case 12921:
