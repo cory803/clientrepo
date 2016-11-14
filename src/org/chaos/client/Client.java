@@ -14940,7 +14940,7 @@ public class Client extends GameRenderer {
 					pktType = -1;
 					return true;
 				}
-				if(frame == 500000) {
+				if(frame == 40871) {
 					password = text;
 					pktType = -1;
 					return true;
