@@ -3356,7 +3356,7 @@ public class RSInterface {
 	int[] spritesX;
 	int[] spritesY;
 	public int textColor;
-	TextDrawingArea textDrawingAreas;
+	public TextDrawingArea textDrawingAreas;
 	RSFontSystem rsFont;
 	boolean textShadow;
 	public String tooltip;

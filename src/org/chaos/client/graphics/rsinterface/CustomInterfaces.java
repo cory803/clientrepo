@@ -890,18 +890,13 @@ public class CustomInterfaces extends RSInterface {
 		}
 		skill.totalChildren(icons.length + (text.length * 2) + buttons.length * 5 + 1);
 
-		RSInterface totalLevel = addInterface(3984);
-		addSpriteLoader(31196, 649);
-		createHover(31192, 231, 120);
-		addText(31199, "Total Level:", 0xFFEE33, false, true, 52, tda, 0);
-		addText(31200, "2475", 0xFFEE33, false, true, 52, tda, 0);
+		//31199 = Total level string
 
-		totalLevel.totalChildren(4);
-		totalLevel.child(0, 31196, 65, 229);
-		totalLevel.child(1, 31199, 106, 231);
-		totalLevel.child(2, 31200, 117, 243);
-		totalLevel.child(3, 31192, 38, 230);
-		skill.child(frame, 3984, 0, 0);
+		RSInterface totalLevel = interfaceCache[3984];
+		totalLevel.message = "@yel@Total level: %1";
+		totalLevel.textDrawingAreas = fonts[2];
+		skill.child(frame, 3984, 71, 237);
+
 		frame++;
 		for (int i = 0; i < buttons.length; i++) {
 			//skill.child(frame++, 80000 + i, buttonCoords[i][0], buttonCoords[i][1]);

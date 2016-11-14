@@ -9044,7 +9044,13 @@ public class Client extends GameRenderer {
 				if (j1 == 9) {
 					for (int l1 = 0; l1 < Skills.SKILL_COUNT; l1++) {
 						if (Skills.SKILLS_ENABLED[l1]) {
-							k1 += maxStats[l1];
+							int val =  maxStats[l1];
+							if(class9.id == 3984) {
+								if (l1 == 3 || l1 == 5) {
+									val /= 10;
+								}
+							}
+							k1 += val;
 						}
 					}
 
@@ -13854,11 +13860,11 @@ public class Client extends GameRenderer {
 	}
 
 	public final String methodR(int i) {
-		if (i >= 0 && i < 1000) {
+		if (i >= 0 && i < 10000) {
 			return String.valueOf(i);
 		}
 
-		if (i >= 1000 && i < 10000000) {
+		if (i >= 10000 && i < 10000000) {
 			return i / 1000 + "K";
 		}
 
