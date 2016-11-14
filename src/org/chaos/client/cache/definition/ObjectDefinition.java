@@ -441,6 +441,10 @@ public final class ObjectDefinition {
                 definition.hasActions = false;
                 break;
 
+            case 41687:
+                definition.isUnwalkable = false;
+                break;
+
             case 1502:
                 definition.setDefaults();
                 definition.objectModelIDs = new int[]{782, 783, 784};
