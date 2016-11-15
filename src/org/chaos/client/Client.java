@@ -5256,8 +5256,8 @@ public class Client extends GameRenderer {
 			Player player = playerArray[nodeId];
 
 			if (player != null) {
-				doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 1, 0, player.smallY[0], myPlayer.smallX[0], false,
-						player.smallX[0]);
+				//doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 1, 0, player.smallY[0], myPlayer.smallX[0], false,
+						//player.smallX[0]);
 				crossX = super.saveClickX;
 				crossY = super.saveClickY;
 				crossType = 2;
