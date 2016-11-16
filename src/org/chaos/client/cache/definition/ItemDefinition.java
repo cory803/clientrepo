@@ -238,17 +238,31 @@ public final class ItemDefinition {
 				itemDef.name = "Bond of Chaos";
 				break;
 
-			case 11724:
-                System.out.println("------");
-                System.out.println("Name: "+itemDef.name);
-                System.out.println("Model ID: "+itemDef.modelID);
-                System.out.println("Male wear: "+itemDef.maleWearId);
-              	System.out.println("Female wear: "+itemDef.femaleWearId);
-				for (int i = 0; i < itemDef.originalModelColors.length; i++) {
-					System.out.println("originalModelColors: "+itemDef.originalModelColors[i]);
-					System.out.println("modifiedModelColors: "+itemDef.modifiedModelColors[i]);
-				}
-                break;
+//			case 21472:
+//			case 21473:
+//			case 21474:
+//			case 21475:
+//			case 21476:
+//                System.out.println("------");
+//                System.out.println("Name: "+itemDef.name);
+//                System.out.println("Model ID: "+itemDef.modelID);
+//                System.out.println("Male wear: "+itemDef.maleWearId);
+//              	System.out.println("Female wear: "+itemDef.femaleWearId);
+//				for (int i = 0; i < itemDef.originalModelColors.length; i++) {
+//					System.out.println("originalModelColors: "+itemDef.originalModelColors[i]);
+//					System.out.println("modifiedModelColors: "+itemDef.modifiedModelColors[i]);
+//				}
+//                break;
+
+			case 21472:
+			case 21473:
+			case 21474:
+			case 21475:
+			case 21476:
+				itemDef.actions = new String[5];
+				itemDef.actions[1] = "Wear";
+				itemDef.actions[4] = "Drop";
+				break;
 			case 20789:
 				itemDef.maleWearId = 75000;
 				itemDef.femaleWearId = 75001;
