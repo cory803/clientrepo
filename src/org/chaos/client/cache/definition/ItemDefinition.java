@@ -4748,7 +4748,6 @@ public final class ItemDefinition {
 				break;
 			case 14022:
 				itemDef.imitate(get(20769));
-				System.out.println("Female: "+itemDef.femaleWearId);
 				break;
 			case 9666:
 			case 11814:

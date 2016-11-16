@@ -4577,8 +4577,13 @@ public class Client extends GameRenderer {
 			Player player = playerArray[nodeId];
 
 			if (player != null) {
-				doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 1, 0, player.smallY[0], myPlayer.smallX[0], false,
-						player.smallX[0]);
+				if(autoCast) {
+					doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 8, 0, player.smallY[0], myPlayer.smallX[0], false,
+							player.smallX[0]);
+				} else {
+					doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 1, 0, player.smallY[0], myPlayer.smallX[0], false,
+							player.smallX[0]);
+				}
 				crossX = super.saveClickX;
 				crossY = super.saveClickY;
 				crossType = 2;
@@ -5256,8 +5261,8 @@ public class Client extends GameRenderer {
 			Player player = playerArray[nodeId];
 
 			if (player != null) {
-				//doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 1, 0, player.smallY[0], myPlayer.smallX[0], false,
-						//player.smallX[0]);
+				doWalkTo(2, 0, 1, 0, myPlayer.smallY[0], 8, 0, player.smallY[0], myPlayer.smallX[0], false,
+						player.smallX[0]);
 				crossX = super.saveClickX;
 				crossY = super.saveClickY;
 				crossType = 2;
@@ -6013,21 +6018,21 @@ public class Client extends GameRenderer {
 				getOut().putInt(0);
 				setAnInt1288(0);
 			}
-
+			//Game movement
 			if (type == 0) {
 				//getOut().putOpcode(229);
 				//getOut().putByte(plane);
 				getOut().putOpcode(164);
 				getOut().putByte(k4 + k4 + 3);
 			}
-
+			//Minimap movement
 			if (type == 1) {
 				//getOut().putOpcode(229);
 				//getOut().putByte(plane);
 				getOut().putOpcode(248);
 				getOut().putByte(k4 + k4 + 3 + 14);
 			}
-
+			//Command movement
 			if (type == 2) {
 				//getOut().putOpcode(229);
 				//getOut().putByte(plane);
@@ -14945,6 +14950,11 @@ public class Client extends GameRenderer {
 					pktType = -1;
 					return true;
 				}
+				if(frame == 1 && text.contains("[STOPMOVEMENT]")) {
+					this.stopMovement = true;
+					pktType = -1;
+					return true;
+				}
 				if (frame == 18939) {
 					String[] comps = text.split(" ");
 					RSInterface.interfaceCache[18913].color = Integer.parseInt(comps[0]);
@@ -15562,6 +15572,8 @@ public class Client extends GameRenderer {
 		//ItemDefinition.mruNodes1.unlinkAll();
 		//Player.mruNodes.unlinkAll();
 	}
+
+	boolean stopMovement = false;
 
 	public void updateColored() {
 		for (int i = 0; i < playerArray.length; i++) {
