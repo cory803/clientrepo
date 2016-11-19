@@ -792,12 +792,9 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 		if (x < 0 || y < 0) {
 			return;
 		}
-		if (System.currentTimeMillis() - clickTime >= 250L || Math.abs(saveClickX - x) > 5
-				|| Math.abs(saveClickY - y) > 5) {
-			idleTime = 0;
-			mouseX = x;
-			mouseY = y;
-		}
+		idleTime = 0;
+		mouseX = x;
+		mouseY = y;
 		clickType = DRAG;
 	}
 

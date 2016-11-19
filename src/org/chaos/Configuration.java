@@ -14,6 +14,7 @@ public class Configuration {
 
 	public static boolean MAC = false;
 
+
 	public final static String[][] WORLDS = {
 			{"Economy", LOCAL ? "127.0.0.1" : "74.63.248.118"}, //World 1
 			{"Beta", LOCAL ? "127.0.0.1" : "gameserver.chaosps.com"} //World 2
@@ -30,7 +31,7 @@ public class Configuration {
 	public static final boolean DROPBOX_MODE = false;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.16";
+	public static final String CLIENT_VERSION = "1.18";
 	public final static String CLIENT_NAME = "Chaos Beta " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos"; // Cache
 																	// folder

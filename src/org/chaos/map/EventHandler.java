@@ -207,8 +207,8 @@ public class EventHandler extends Applet implements Runnable, MouseListener,
 			y -= 22;
 		}
 		
-		System.out.println("Mouse X: " + x);
-		System.out.println("Mouse Y: " + y);
+		//System.out.println("Mouse X: " + x);
+		//System.out.println("Mouse Y: " + y);
 		
 		idleTime = 0;
 		localMouseX = x;

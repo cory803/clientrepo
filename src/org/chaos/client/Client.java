@@ -1563,6 +1563,39 @@ public class Client extends GameRenderer {
 		case "data":
 			dataOn = !dataOn;
 			break;
+			case "switch":
+				getOut().putOpcode(41);
+				getOut().putShort(11724);
+				getOut().writeUnsignedWordA(20);
+				getOut().writeUnsignedWordA(3214);
+
+				getOut().putOpcode(41);
+				getOut().putShort(4151);
+				getOut().writeUnsignedWordA(21);
+				getOut().writeUnsignedWordA(3214);
+
+				getOut().putOpcode(41);
+				getOut().putShort(11732);
+				getOut().writeUnsignedWordA(22);
+				getOut().writeUnsignedWordA(3214);
+
+				getOut().putOpcode(41);
+				getOut().putShort(11726);
+				getOut().writeUnsignedWordA(24);
+				getOut().writeUnsignedWordA(3214);
+
+				getOut().putOpcode(41);
+				getOut().putShort(20072);
+				getOut().writeUnsignedWordA(25);
+				getOut().writeUnsignedWordA(3214);
+
+				getOut().putOpcode(41);
+				getOut().putShort(21472);
+				getOut().writeUnsignedWordA(26);
+				getOut().writeUnsignedWordA(3214);
+
+				System.out.println("Done");
+				break;
 		case "fps":
 			fpsOn = !fpsOn;
 			break;
@@ -2690,6 +2723,8 @@ public class Client extends GameRenderer {
 		for (int index = 0; index < totalChildren; index++) {
 			int xSpritePos = rsInterface.childX[index] + xPadding;
 			int ySpritePos = rsInterface.childY[index] + yPadding - scrollPoint;
+			//if(index != 0)
+			//System.out.println("index: "+index+"");
 			RSInterface children = RSInterface.interfaceCache[rsInterface.children[index]];
 			if (children == null)
 				continue;
@@ -2897,7 +2932,7 @@ public class Client extends GameRenderer {
 							int j3 = xSpritePos + i3 * (32 + children.invSpritePadX);
 							int k3 = ySpritePos + l2 * (32 + children.invSpritePadY);
 
-							if (k2 < children.spritesX.length) {
+							if (k2 < 20) {
 								j3 += children.spritesX[k2];
 								k3 += children.spritesY[k2];
 							}
@@ -2942,7 +2977,7 @@ public class Client extends GameRenderer {
 											menuActionCmd3[menuActionRow] = children.id;
 											menuActionRow++;
 										}
-									} else {
+									} else if(!isDragging) {
 										if (children.isInventoryInterface) {
 											if (openInterfaceID != 24700 && openInterfaceID != 2700) {
 												for (int l3 = 4; l3 >= 3; l3--) {
@@ -3059,6 +3094,7 @@ public class Client extends GameRenderer {
 												}
 											}
 										}
+										isDragging = false;
 										boolean ignoreExamine = children.parentID == 3822 && openInterfaceID == 3824
 												|| openInterfaceID == 2700 || openInterfaceID == 24700
 												|| openInterfaceID == 24600 && children.parentID == 3323
@@ -3134,6 +3170,8 @@ public class Client extends GameRenderer {
 											menuActionCmd1[menuActionRow] = definition.id;
 											menuActionRow++;
 										}
+									} else {
+										//Hes dragging lul
 									}
 								}
 							}
@@ -4085,7 +4123,7 @@ public class Client extends GameRenderer {
 		}
 
 		bankItemDragSprite = null;
-
+		isDragging = false;
 		int nodeId = menuActionCmd1[actionId];
 		int slot = menuActionCmd2[actionId];
 		int interfaceId = menuActionCmd3[actionId];
@@ -4143,7 +4181,7 @@ public class Client extends GameRenderer {
 		if (action >= 2000) {
 			action -= 2000;
 		}
-		System.out.println(""+action);
+
 		if (slot >= 18703 && slot <= 18706 || slot >= 18771 && slot <= 18773) {
 			clickCompCapeColorBoxes(slot, interfaceId);
 		}
@@ -5429,6 +5467,9 @@ public class Client extends GameRenderer {
 			getOut().putShort(nodeId);
 			getOut().writeUnsignedWordA(slot);
 			getOut().writeUnsignedWordA(interfaceId);
+			System.out.println("slot: "+slot);
+			System.out.println("interfaceId: "+interfaceId);
+			System.out.println("Switch item");
 			atInventoryLoopCycle = 0;
 			atInventoryInterface = interfaceId;
 			atInventoryIndex = slot;
@@ -7118,7 +7159,7 @@ public class Client extends GameRenderer {
 												k6 = 0;
 												j7 = 0;
 											}
-
+											isDragging = true;
 											selectedItem.drawSprite1(k5 + k6, j6 + j7);
 											int yy = GameFrame.getScreenMode() == ScreenMode.FIXED ? 40
 													: 40 + (clientHeight / 2) - 167;
@@ -9772,6 +9813,8 @@ public class Client extends GameRenderer {
 		tabAreaAltered = true;
 	}
 
+	boolean isDragging = false;
+
 	private void mainGameProcessor() {
 		RandomColor.process();
 		if (openInterfaceID == 24600 && !getGrandExchange().searching && interfaceButtonAction != 1558
@@ -9886,7 +9929,6 @@ public class Client extends GameRenderer {
 				}
 
 				activeInterfaceType = 0;
-
 				if (aBoolean1242 && anInt989 >= 10) {
 					bankItemDragSprite = null;
 					lastActiveInvInterface = -1;
@@ -10038,6 +10080,7 @@ public class Client extends GameRenderer {
 						getOut().writeSignedBigEndian(anInt1085);
 						getOut().writeUnsignedWordBigEndian(mouseInvInterfaceIndex);
 					}
+					this.isDragging = false;
 				} else if ((anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2) {
 					determineMenuSize();
 				} else if (menuActionRow > 0) {
@@ -16673,9 +16716,9 @@ public class Client extends GameRenderer {
 				int actionIndex = -1;
 
 				for (int index = 0; index < menuActionRow; index++) {
-					int row = yOffset + 29 + (menuActionRow - 1 - index) * 15;
+					int row = yOffset + 31 + (menuActionRow - 1 - index) * 15;
 
-					if (clickX > xOffset && clickX < xOffset + width && clickY > row - 11 && clickY < row + 5) {
+					if (clickX > xOffset && clickX < xOffset + width && clickY > row - 13 && clickY < row + 3) {
 						actionIndex = index;
 					}
 				}
