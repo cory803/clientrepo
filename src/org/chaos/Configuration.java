@@ -8,7 +8,7 @@ package org.chaos;
 public class Configuration {
 
 	/** CONNECTION **/
-	public final static boolean LOCAL = true;
+	public final static boolean LOCAL = false;
 	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "74.63.248.118"; // 158.69.125.71
 	public final static int SERVER_PORT = 59018;
 
@@ -49,7 +49,7 @@ public class Configuration {
 	public static boolean TWEENING_ENABLED = true;
 
 	public static boolean NEW_HITMARKS = true;
-	public static boolean PARTICLES = true;
+	public static boolean PARTICLES = false;
 	public static boolean CONSTITUTION_ENABLED = true;
 	public static boolean NEW_HEALTH_BARS = true;
 

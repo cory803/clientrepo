@@ -11776,7 +11776,7 @@ public class Client extends GameRenderer {
 			}*/
 			fog.render(2250, 3000);
 		}
-		//if(Configuration.PARTICLES) {
+		if(Configuration.PARTICLES) {
 			Iterator<ParticleDisplay> iterator;
 			ParticleDisplay display;
 			if (displayParticles) {
@@ -11873,7 +11873,7 @@ public class Client extends GameRenderer {
 			}
 			displayedParticles.removeAll(particlesToBeRemoved);
 			particlesToBeRemoved.clear();
-		//}
+		}
 		updateEntities();
 		drawHeadIcon();
 		method37(k2);
