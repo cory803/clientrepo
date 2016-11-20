@@ -231,7 +231,7 @@ public final class Player extends Entity {
 		/**
 		 * Cause of fps bug
 		 */
-		if(!Client.instance.compColor.elapsed(10000)) {
+		if(Client.instance.compColor.elapsed(10000)) {
 			for (int l2 = 0; l2 < 12; l2++) {
 				int i3 = equipment[l2];
 				if (i3 >= 512 && recolorableItem(i3 - 512)) {
