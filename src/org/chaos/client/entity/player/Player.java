@@ -53,6 +53,7 @@ public final class Player extends Entity {
 	public int[] defaultColors = {65214, 65200, 65186, 62995, 64639, 961, 954, 5706, 5683, 5708};
 	public boolean colorNeedsUpdate = false;
 	public SourceStopWatch compColorTimer = new SourceStopWatch();
+	public Model compCape;
 
 	/**
 	 * The color of the loyalty title, 255 by default = blue
@@ -233,12 +234,14 @@ public final class Player extends Entity {
 		/**
 		 * Cause of fps bug
 		 */
-		if(compColorTimer.elapsed(10000)) {
-			for (int l2 = 0; l2 < 12; l2++) {
-				int i3 = equipment[l2];
-				if (i3 >= 512 && recolorableItem(i3 - 512)) {
-					model_1 = null;
-					compColorTimer.reset();
+		int compCapeItem = equipment[1];
+		if (compCapeItem >= 512 && recolorableItem(compCapeItem - 512)) {
+			if(compColorTimer.elapsed(1000)) {
+				model_1 = null;
+				compColorTimer.reset();
+			} else {
+				if(compCape != null) {
+					model_1 = compCape;
 				}
 			}
 		}
@@ -303,6 +306,9 @@ public final class Player extends Entity {
 			}
 
 			model_1 = new Model(j2, aclass30_sub2_sub4_sub6s);
+			if (compCapeItem >= 512 && recolorableItem(compCapeItem - 512)) {
+				compCape = model_1;
+			}
 			for(int j3 = 0; j3 < 5; j3++)
 				if(anIntArray1700[j3] != 0) {
 					model_1.method476(Client.anIntArrayArray1003[j3][0], Client.anIntArrayArray1003[j3][anIntArray1700[j3]]);
@@ -332,6 +338,9 @@ public final class Player extends Entity {
 		model_2.anIntArrayArray1658 = null;
 		model_2.anIntArrayArray1657 = null;
 		colorNeedsUpdate = false;
+		//if (compCapeItem >= 512 && recolorableItem(compCapeItem - 512)) {
+			//compCape = model_2;
+		//}
 		return model_2;
 	}
 
