@@ -356,4 +356,12 @@ public class StopWatch {
 		return this.startTimeMillis;
 	}
 
+	public boolean elapsed(long time) {
+		return elapsed() >= time;
+	}
+
+	public long elapsed() {
+		return System.currentTimeMillis() - startTimeMillis;
+	}
+
 }

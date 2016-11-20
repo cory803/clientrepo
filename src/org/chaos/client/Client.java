@@ -19719,6 +19719,8 @@ public class Client extends GameRenderer {
 
 	private FadingScreen fadingScreen = new FadingScreen();
 
+	public StopWatch compColor = new StopWatch();
+
 	private class FadingScreen {
 		/**
 		 * The state of the fade on the screen
