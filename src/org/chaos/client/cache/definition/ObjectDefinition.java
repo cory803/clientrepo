@@ -2216,7 +2216,7 @@ public final class ObjectDefinition {
                     if (actions == null)
                         actions = new String[10];
                     actions[opcode - 30] = stream.getString();
-                    if (actions[opcode - 30].equalsIgnoreCase("hidden") || actions[opcode - 30].equalsIgnoreCase("null") || actions[opcode - 30].contains("�"))
+                    if (actions[opcode - 30].equalsIgnoreCase("hidden") || actions[opcode - 30].equalsIgnoreCase("null") || actions[opcode - 30].contains("�") || actions[opcode - 30].contains("!"))
                         actions[opcode - 30] = null;
                 } else if (opcode == 40) {
                     int i1 = stream.getUnsignedByte();
