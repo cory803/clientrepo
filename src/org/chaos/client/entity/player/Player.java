@@ -236,7 +236,7 @@ public final class Player extends Entity {
 		 */
 		int compCapeItem = equipment[1];
 		if (compCapeItem >= 512 && recolorableItem(compCapeItem - 512)) {
-			if(compColorTimer.elapsed(1000)) {
+			if(compColorTimer.elapsed(100)) {
 				model_1 = null;
 				compColorTimer.reset();
 			} else {
@@ -297,7 +297,7 @@ public final class Player extends Entity {
 					}*/
 					if(model_4 != null) {
 						if (def != null && recolorableItem(i3 - 512)) {
-							System.out.println("Get color model...");
+							//System.out.println("Get color model...");
 							model_4 = getColorableItemModel(model_4, myGender, i3 - 512);
 						}
 						aclass30_sub2_sub4_sub6s[j2++] = model_4;
