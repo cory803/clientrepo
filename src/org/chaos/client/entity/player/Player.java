@@ -52,7 +52,7 @@ public final class Player extends Entity {
 	public int[] compColor = new int[] {65214, 65200, 65186, 62995, 64639, 961, 5683};
 	public int[] defaultColors = {65214, 65200, 65186, 62995, 64639, 961, 954, 5706, 5683, 5708};
 	public boolean colorNeedsUpdate = false;
-	public SourceStopWatch compColor = new SourceStopWatch();
+	public SourceStopWatch compColorTimer = new SourceStopWatch();
 
 	/**
 	 * The color of the loyalty title, 255 by default = blue
@@ -233,12 +233,12 @@ public final class Player extends Entity {
 		/**
 		 * Cause of fps bug
 		 */
-		if(compColor.elapsed(10000)) {
+		if(compColorTimer.elapsed(10000)) {
 			for (int l2 = 0; l2 < 12; l2++) {
 				int i3 = equipment[l2];
 				if (i3 >= 512 && recolorableItem(i3 - 512)) {
 					model_1 = null;
-					compColor.reset();
+					compColorTimer.reset();
 				}
 			}
 		}
