@@ -12,6 +12,7 @@ import org.chaos.client.cache.definition.SpotAnimDefinition;
 import org.chaos.client.graphics.fonts.TextClass;
 import org.chaos.client.io.ByteBuffer;
 import org.chaos.client.renderable.Entity;
+import org.chaos.client.util.SourceStopWatch;
 import org.chaos.client.world.Model;
 
 public final class Player extends Entity {
@@ -51,6 +52,7 @@ public final class Player extends Entity {
 	public int[] compColor = new int[] {65214, 65200, 65186, 62995, 64639, 961, 5683};
 	public int[] defaultColors = {65214, 65200, 65186, 62995, 64639, 961, 954, 5706, 5683, 5708};
 	public boolean colorNeedsUpdate = false;
+	public SourceStopWatch compColor = new SourceStopWatch();
 
 	/**
 	 * The color of the loyalty title, 255 by default = blue
@@ -231,12 +233,12 @@ public final class Player extends Entity {
 		/**
 		 * Cause of fps bug
 		 */
-		if(Client.instance.compColor.elapsed(10000)) {
+		if(compColor.elapsed(10000)) {
 			for (int l2 = 0; l2 < 12; l2++) {
 				int i3 = equipment[l2];
 				if (i3 >= 512 && recolorableItem(i3 - 512)) {
 					model_1 = null;
-					Client.instance.compColor.reset();
+					compColor.reset();
 				}
 			}
 		}
