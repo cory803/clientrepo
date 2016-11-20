@@ -19719,7 +19719,7 @@ public class Client extends GameRenderer {
 
 	private FadingScreen fadingScreen = new FadingScreen();
 
-	public StopWatch compColor = new StopWatch();
+	public SourceStopWatch compColor = new SourceStopWatch();
 
 	private class FadingScreen {
 		/**
