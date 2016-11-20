@@ -285,10 +285,10 @@ public final class Player extends Entity {
 							model_4.method476(def.modifiedModelColors[i11], modifiedColors[l2][i11]);
 					}*/
 					if(model_4 != null) {
-						if (def != null && recolorableItem(i3 - 512)) {
+						//if (def != null && recolorableItem(i3 - 512)) {
 							//System.out.println("Get color model...");
-							model_4 = getColorableItemModel(model_4, myGender, i3 - 512);
-						}
+							//model_4 = getColorableItemModel(model_4, myGender, i3 - 512);
+						//}
 						aclass30_sub2_sub4_sub6s[j2++] = model_4;
 					}
 				}
