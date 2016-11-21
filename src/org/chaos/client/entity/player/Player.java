@@ -51,7 +51,6 @@ public final class Player extends Entity {
 	public int loyaltyRank;
 	public int[] compColor = new int[] {65214, 65200, 65186, 62995, 64639, 961, 5683};
 	public int[] defaultColors = {65214, 65200, 65186, 62995, 64639, 961, 954, 5706, 5683, 5708};
-	public boolean colorNeedsUpdate = false;
 	public SourceStopWatch compColorTimer = new SourceStopWatch();
 	public Model compCape;
 
@@ -337,10 +336,6 @@ public final class Player extends Entity {
 		model_2.method466();
 		model_2.anIntArrayArray1658 = null;
 		model_2.anIntArrayArray1657 = null;
-		colorNeedsUpdate = false;
-		//if (compCapeItem >= 512 && recolorableItem(compCapeItem - 512)) {
-			//compCape = model_2;
-		//}
 		return model_2;
 	}
 
@@ -538,8 +533,6 @@ public final class Player extends Entity {
 
 		aLong1718 <<= 1;
 		aLong1718 += myGender;
-
-		Client.getClient().updateColored();
 	}
 
 	public int getRights() {

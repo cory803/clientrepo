@@ -443,60 +443,99 @@ public class CustomInterfaces extends RSInterface {
 		quickPrayersInterface();
 	}
 
-	public static void posSearch() {
+	public static void posSearch()
+	{
 		RSInterface rsi = addInterface(41409);
 		constructRegularInterface(41410, "Player Owner Shops");
-		setChildren(11, rsi);
+
+		setChildren(53, rsi);
 		int BASEX = 22;
-		int BASEY = 37 - 110;
+		int BASEY = 37;
+		addText(41419, "Featured Shops", fonts, 2, 16750623, true, true);
+
+		addRectangle(41420, 0, 16777215, false, 391, 65);
+
 		setBounds(41410, 0, 0, 0, rsi);
+		setBounds(41419, BASEX + 196 + 23, BASEY + 7, 1, rsi);
+		setBounds(41420, BASEX + 23, BASEY + 27, 2, rsi);
+
 		int j = 41421;
-		int j1 = 1;
+		int j1 = 3;
 		int x = BASEX + 27 - 4;
 		int y = BASEY - 2;
+		for (int i = 0; i < 10; i++)
+		{
+			addRectangleClickable(j, 0, 16777215, false, 79, 33);
+			setBounds(j++, x, y + 29, j1++, rsi);
+			addText(j, "Shop Owner", fonts, 1, 16750623, true);
+			setBounds(j++, x + 35 + 4, y + 28 + 2, j1++, rsi);
 
+			addText(j, "Lasts:", fonts, 0, 16750623, false);
+			setBounds(j++, x + 3, y + 28 + 18 + 2, j1++, rsi);
+
+			addRectangle(j, 255, 16777215, true, 77, 31);
+			interfaceCache[j].hovers = true;
+			interfaceCache[j].enabledOpacity = 150;
+			interfaceCache[j].hoverType = j;
+			interfaceCache[j].anInt219 = 16777215;
+			setBounds(j++, x + 1, y + 30, j1++, rsi);
+
+			x += 78;
+			if (i == 4)
+			{
+				y += 32;
+				x = BASEX + 27 - 4;
+			}
+		}
 		addText(j, "Search Shops", fonts, 2, 16750623, true, true);
 		setBounds(j++, BASEX + 196 + 23, BASEY + 123, j1++, rsi);
-		addClickableText(j, "Search by Name", "Search by name", fonts, 1, 16750623,
-				fonts[1].getTextWidth("search by Name"), 25);
+		addClickableText(j, "Search by Name", "Search by name", fonts, 1, 16750623, fonts[1].getTextWidth("search by Name"), 25);
 		setBounds(j++, BASEX + 110, BASEY + 143, j1++, rsi);
-		addClickableText(j, "Search by Item", "Search by item", fonts, 1, 16750623,
-				fonts[1].getTextWidth("search by Item"), 25);
+		addClickableText(j, "Search by Item", "Search by item", fonts, 1, 16750623, fonts[1].getTextWidth("search by Item"), 25);
 		setBounds(j++, BASEX + 240, BASEY + 143, j1++, rsi);
-		addRectangle(j, 0, 16777215, false, 392, 197);
+
+		addRectangle(j, 0, 16777215, false, 392, 107);
 		setBounds(j++, BASEX + 23, BASEY + 163, j1++, rsi);
-		addRectangle(j, 0, 4603186, true, 390, 195);
+
+		addRectangle(j, 0, 4603186, true, 390, 105);
 		setBounds(j++, BASEX + 24, BASEY + 164, j1++, rsi);
+
 		addRectangle(j, 0, 16777215, false, 392, 25);
 		setBounds(j++, BASEX + 23, BASEY + 163, j1++, rsi);
-		addRectangle(j, 0, 16777215, false, 100, 197);
+
+		addRectangle(j, 0, 16777215, false, 100, 107);
 		setBounds(j++, BASEX + 23, BASEY + 163, j1++, rsi);
+
 		addText(j, "Store Owner", fonts, 2, 16750623);
 		setBounds(j++, BASEX + 31, BASEY + 168, j1++, rsi);
-		addText(j, "Store Results", fonts, 2, 16750623);
+		addText(j, "Store Caption", fonts, 2, 16750623);
 		setBounds(j++, BASEX + 220, BASEY + 168, j1++, rsi);
+
 		setBounds(j++, BASEX + 25, BASEY + 164 + 24, j1++, rsi);
+
+
 		RSInterface inner = addInterface(j - 1);
-		inner.scrollMax = 2400;
-		inner.height = 171;
+		inner.scrollMax = 2500;
+		inner.height = 81;
 		inner.width = 373;
 		y = 0;
 		j1 = 0;
 		setChildren(400, inner);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 100; i++)
+		{
 			addRectangle(j, 0, 16777215, false, 393, 25);
 			setBounds(j++, -2, y, j1++, inner);
-			addText(j, "", fonts, 1, 16750623);
+			addText(j, "store owner", fonts, 1, 16750623);
 			setBounds(j++, 2, y + 5, j1++, inner);
-			addText(j, "", fonts, 1, 16750623);
+			addText(j, "store caption", fonts, 1, 16750623);
 			setBounds(j++, 102, y + 5, j1++, inner);
-			addRectangleClickable(j, 255, 16777215, false, 392, 24);
+
+			addRectangleClickable(j, 255, 16777215, true, 392, 24);
 			interfaceCache[j].hovers = true;
-			interfaceCache[j].enabledOpacity = (byte) 150;
+			interfaceCache[j].enabledOpacity = 150;
 			interfaceCache[j].hoverType = j;
 			interfaceCache[j].anInt219 = 16777215;
 			setBounds(j++, -1, y + 1, j1++, inner);
-
 			y += 24;
 		}
 	}

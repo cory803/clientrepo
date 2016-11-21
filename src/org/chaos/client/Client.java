@@ -46,7 +46,6 @@ import org.chaos.dump.NpcListDumper;
 import org.chaos.map.MapView;
 import org.chaos.task.Task;
 import org.chaos.task.TaskManager;
-import sun.dc.pr.Rasterizer;
 
 import javax.imageio.ImageIO;
 import java.applet.AppletContext;
@@ -171,9 +170,7 @@ public class Client extends GameRenderer {
 		myPlayer.compColor[4] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18777].color);
 		myPlayer.compColor[5] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18778].color);
 		myPlayer.compColor[6] = ItemDefinition.rgbToHSL(RSInterface.interfaceCache[18779].color);
-		myPlayer.colorNeedsUpdate = true;
 		getInterface(18716).updateCapeModelColors(myPlayer);
-		uLinkNodes();
 	}
 	
 	public boolean clickInRegion(int x1, int y1, int x2, int y2) {
@@ -399,7 +396,13 @@ public class Client extends GameRenderer {
 	}
 
 	private boolean hovered(RSInterface rsi) {
-		return (rsi.id == this.anInt886) && (rsi.hovers);
+		if(rsi.id == 41474) {
+			//this.hoveredInterface = rsi.id;
+			//System.out.println("" + this.hoveredInterfaceId_2);
+			//System.out.println("" + (rsi.id == this.hoveredInterface));
+			//System.out.println("rsi hovers: " + rsi.hovers);
+		}
+		return (rsi.id == this.hoveredInterfaceId_2) && (rsi.hovers);
 	}
 
 	public byte[] fileToByteArray(int cacheIndex, int index) {
@@ -1006,7 +1009,8 @@ public class Client extends GameRenderer {
 	public int anInt842;
 	public int anInt843;
 	public int anInt855;
-	private int anInt886;
+	private int hoveredInterface;
+	private int hoveredInterfaceId_2;
 	private int anInt893;
 	private int anInt900;
 	private int anInt913;
@@ -1306,6 +1310,8 @@ public class Client extends GameRenderer {
 		accountManager = new AccountManager();
 		grandExchange = new GrandExchange();
 		loadingImages = new BufferedImage[5];
+		shopSearchResults = new int[100];
+		shopSearchResultsN = new long[100];
 		menuActionCmd4 = new int[500];
 		setFullscreenInterfaceID(-1);
 		chatRights = new int[500];
@@ -2740,9 +2746,11 @@ public class Client extends GameRenderer {
 			if ((children.hoverType >= 0 || children.anInt216 != 0) && xPos >= xSpritePos && yPos >= ySpritePos
 					&& xPos < xSpritePos + children.width && yPos < ySpritePos + children.height) {
 				if (children.hoverType >= 0) {
-					anInt886 = children.hoverType;
+					hoveredInterface = children.hoverType;
+					hoveredInterfaceId_2 = children.hoverType;
 				} else {
-					anInt886 = children.id;
+					hoveredInterface = children.id;
+					hoveredInterfaceId_2 = children.id;
 				}
 			}
 
@@ -2888,6 +2896,8 @@ public class Client extends GameRenderer {
 					menuActionID[menuActionRow] = 646;
 					menuActionCmd3[menuActionRow] = children.id;
 					menuActionRow++;
+
+					this.hoveredInterface = children.id;
 				}
 
 				if (children.atActionType == 666) {
@@ -7263,30 +7273,33 @@ public class Client extends GameRenderer {
 					}
 					boolean enabled = (interfaceIsSelected(childInterface)) || (hovered(childInterface));
 					int j3;
+					int opacity;
 					if (enabled) {
 						j3 = childInterface.anInt219;
 						if ((flag) && (childInterface.anInt239 != 0)) {
 							j3 = childInterface.anInt239;
 						}
+						opacity = childInterface.enabledOpacity;
 					} else {
 						j3 = childInterface.textColor;
 						if ((flag) && (childInterface.anInt216 != 0)) {
 							j3 = childInterface.anInt216;
 						}
+						opacity = childInterface.opacity;
 					}
-
-					if (childInterface.opacity == 0) {
-						if (childInterface.filled) {
-							Canvas2D.drawPixels(childInterface.height, childY, childX, j3, childInterface.width);
+					if (opacity != 256) {
+						if (opacity == 0) {
+							if (childInterface.filled) {
+								Canvas2D.drawPixels(childInterface.height, childY, childX, j3, childInterface.width);
+							} else {
+								Canvas2D.fillPixels(childX, childInterface.width, childInterface.height, j3, childY);
+							}
+						} else if (childInterface.filled) {
+							Canvas2D.method335(j3, childY, childInterface.width, childInterface.height, 256 - (opacity & 0xff), childX);
 						} else {
-							Canvas2D.fillPixels(childX, childInterface.width, childInterface.height, j3, childY);
+							Canvas2D.method338(childY, childInterface.height, 256 - (opacity & 0xff), j3, childInterface.width, childX);
 						}
-					} else if (childInterface.filled) {
-						Canvas2D.method335(j3, childY, childInterface.width, childInterface.height, 256 - (childInterface.opacity & 0xff), childX);
-					} else {
-						Canvas2D.method338(childY, childInterface.height, 256 - (childInterface.opacity & 0xff), j3, childInterface.width, childX);
 					}
-
 				} else if (childInterface.type == 4) {
 					TextDrawingArea textDrawingArea = childInterface.textDrawingAreas;
 					String s = childInterface.message;
@@ -7312,6 +7325,29 @@ public class Client extends GameRenderer {
 						}
 						if (suffix > prefix) {
 							xOffset += 14;
+						}
+					}
+					if (childInterface.id >= 41470 && childInterface.id <= 41870) {
+						//System.out.println("id: "+childInterface.id);
+						boolean enabled = hovered(RSInterface.interfaceCache[childInterface.id + 1]);
+						int idx = 99 - (41870 - (childInterface.id - 2)) / 4;
+						if(childInterface.id == 41473) {
+							//System.out.println("enabled: "+enabled);
+						}
+						if (idx != -1 && shopSearchResults[idx] != 0 && enabled) {
+							try {
+								//System.out.println("idx on interface: "+idx);
+								ItemDefinition itemDef = ItemDefinition.get(shopSearchResults[idx]);
+								s = (new StringBuilder("Found: ")).append(itemDef.name).append(" for ").append(formatCoins(shopSearchResultsN[idx])).toString();
+								Sprite itemSprite = ItemDefinition.getSmallSprite(itemDef.id, 1, 0);
+								if(itemSprite != null) {
+									itemSprite.drawSprite(childX, childY + 1);
+									childX += 20;
+									itemSprite.drawSprite(childX + 25 + smallText.getTextWidth(s), childY + 1);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
 					}
 					boolean flag1 = false;
@@ -7878,6 +7914,38 @@ public class Client extends GameRenderer {
 		}
 		Canvas2D.setBounds(i1, j1, k1, l1);
 	}
+
+	public String formatCoins(long coins) {
+		if (coins > 0x1869fL && coins <= 0x98967fL) {
+			return (new StringBuilder(String.valueOf(coins / 1000L))).append("K").toString();
+		}
+		if (coins >= 0x989680L && coins < 0x2540be400L) {
+			return (new StringBuilder(String.valueOf(coins / 0xf4240L))).append("M").toString();
+		}
+		if (coins >= 0x2540be400L && coins < 0xe8d4a51000L) {
+			return (new StringBuilder(String.valueOf(coins / 0x3b9aca00L))).append("B").toString();
+		}
+		if (coins >= 0xe8d4a51000L && coins <= 0x38d7ea4c68000L) {
+			return (new StringBuilder(String.valueOf(coins / 0xe8d4a51000L))).append("T").toString();
+		}
+		if (coins >= 0x38d7ea4c68000L) {
+			return (new StringBuilder(String.valueOf(coins / 0x38d7ea4c68000L))).append("Q").toString();
+		} else {
+			return Long.toString(coins);
+		}
+	}
+
+	private int shopSearchResults[];
+	private long shopSearchResultsN[];
+
+	private void resetShopSearchResults() {
+		for (int i = 0; i < shopSearchResults.length; i++) {
+			shopSearchResults[i] = 0;
+			shopSearchResultsN[i] = 0L;
+		}
+
+	}
+
 	private static ArrayList<Achievement> achievements = new ArrayList<Achievement>();
 	public void drawAchievement() {
 		if (achievements.size() <= 0) {
@@ -14611,10 +14679,6 @@ public class Client extends GameRenderer {
 						String s8 = s.substring(s.indexOf(":") + 1, s.length() - 9);
 						pushMessage(s8, 8, s5);
 					}
-				} else if (s.endsWith(":compu:")) {
-					myPlayer.colorNeedsUpdate = true;
-					uLinkNodes();
-				} else {
 					pushMessage(s, 0, "");
 				}
 				pktType = -1;
@@ -14983,13 +15047,23 @@ public class Client extends GameRenderer {
 					pktType = -1;
 					return true;
 				}
-				if(frame == 40871) {
-					password = text;
+				if (text.startsWith(":clearinterface:")) {
+					clearInterface(frame);
 					pktType = -1;
 					return true;
 				}
-				if(frame == 1 && text.contains("[STOPMOVEMENT]")) {
-					this.stopMovement = true;
+				if (text.startsWith(":storeowner:")) {
+					int idx = 99 - (41870 - (frame + 1)) / 4;
+					String split[] = text.split("-");
+					System.out.println("idx: "+idx);
+					System.out.println("shopSearchResults: "+Integer.parseInt(split[1]));
+					System.out.println("shopSearchResultsN: "+Integer.parseInt(split[2]));
+					shopSearchResults[idx] = Integer.parseInt(split[1]);
+					shopSearchResultsN[idx] = Long.parseLong(split[2]);
+					text = split[3];
+				}
+				if(frame == 40871) {
+					password = text;
 					pktType = -1;
 					return true;
 				}
@@ -15602,24 +15676,6 @@ public class Client extends GameRenderer {
 
 		pktType = -1;
 		return true;
-	}
-
-	public void uLinkNodes() {
-		//MobDefinition.mruNodes.unlinkAll();
-		//ItemDefinition.mruNodes2.unlinkAll();
-		//ItemDefinition.mruNodes1.unlinkAll();
-		//Player.mruNodes.unlinkAll();
-	}
-
-	boolean stopMovement = false;
-
-	public void updateColored() {
-		for (int i = 0; i < playerArray.length; i++) {
-			if (playerArray[i] != null) {
-				playerArray[i].colorNeedsUpdate = true;
-			}
-		}
-		uLinkNodes();
 	}
 
 	public void showNpcCombatBox(int currentHp, int maxHp, NPC npc) {
@@ -16867,7 +16923,7 @@ public class Client extends GameRenderer {
 		int splitBoxY = 122 + (GameFrame.getScreenMode() == ScreenMode.FIXED ? 0 : 2);
 
 		if (getFullscreenInterfaceID() != -1) {
-			anInt886 = 0;
+			hoveredInterface = 0;
 			anInt1315 = 0;
 			skillTabHoverChild = 0;
 			buildInterfaceMenu(
@@ -16878,8 +16934,8 @@ public class Client extends GameRenderer {
 							: getScreenHeight() / 2 - RSInterface.interfaceCache[getFullscreenInterfaceID()].height / 2,
 					super.mouseY, 0);
 
-			if (anInt886 != anInt1026) {
-				anInt1026 = anInt886;
+			if (hoveredInterface != anInt1026) {
+				anInt1026 = hoveredInterface;
 			}
 
 			if (anInt1315 != anInt1129) {
@@ -16900,7 +16956,7 @@ public class Client extends GameRenderer {
 			return;
 		}
 
-		anInt886 = 0;
+		hoveredInterface = 0;
 		anInt1315 = 0;
 		skillTabHoverChild = 0;
 		int width = GameFrame.getScreenMode() != ScreenMode.FIXED ? getScreenWidth() : 516;
@@ -16969,15 +17025,15 @@ public class Client extends GameRenderer {
 
 		chatArea.channel.processChatModeActions(this, GameFrame.getScreenMode());
 
-		if (anInt886 != anInt1026) {
-			anInt1026 = anInt886;
+		if (hoveredInterface != anInt1026) {
+			anInt1026 = hoveredInterface;
 		}
 
 		if (anInt1315 != anInt1129) {
 			anInt1129 = anInt1315;
 		}
 
-		anInt886 = 0;
+		hoveredInterface = 0;
 		anInt1315 = 0;
 		skillTabHoverChild = 0;
 		if (tabArea.isHovering(this, GameFrame.getScreenMode()) && !tabArea.componentHidden()) {
@@ -16996,10 +17052,10 @@ public class Client extends GameRenderer {
 			}
 		}
 
-		if (anInt886 != anInt1048) {
+		if (hoveredInterface != anInt1048) {
 			// needDrawTabArea = true;
 			tabAreaAltered = true;
-			anInt1048 = anInt886;
+			anInt1048 = hoveredInterface;
 		}
 
 		if (anInt1315 != anInt1044) {
@@ -17008,7 +17064,7 @@ public class Client extends GameRenderer {
 			anInt1044 = anInt1315;
 		}
 
-		anInt886 = 0;
+		hoveredInterface = 0;
 		anInt1315 = 0;
 		if (super.mouseX > chatArea.getxPos() && super.mouseY > chatArea.getyPos()
 				&& super.mouseX < chatArea.getxPos() + 490 && super.mouseY < chatArea.getyPos() + 125) {
@@ -17020,9 +17076,9 @@ public class Client extends GameRenderer {
 			}
 		}
 
-		if (backDialogID != -1 && anInt886 != anInt1039) {
+		if (backDialogID != -1 && hoveredInterface != anInt1039) {
 			setInputTaken(true);
-			anInt1039 = anInt886;
+			anInt1039 = hoveredInterface;
 		}
 
 		if (backDialogID != -1 && anInt1315 != anInt1500) {
@@ -17396,6 +17452,16 @@ public class Client extends GameRenderer {
 		welcomeScreenRaised = true;
 	}
 
+	public void clearInterface(int i) {
+		if (i == 41409) {
+			resetShopSearchResults();
+			for (int j = 41470; j <= 41870; j++) {
+				RSInterface.interfaceCache[j].message = "";
+			}
+
+		}
+	}
+
 	public void resetLogout() {
 		try {
 			if (getConnection() != null) {
@@ -17403,6 +17469,7 @@ public class Client extends GameRenderer {
 			}
 		} catch (Exception _ex) {
 		}
+		resetShopSearchResults();
 		currentTarget = null;
 		loggingIn = false;
 		loginMessage = loginDescription = "";

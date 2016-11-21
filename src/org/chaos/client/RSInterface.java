@@ -779,7 +779,7 @@ public class RSInterface {
 		tab.atActionType = 0;
 		tab.contentType = 0;
 		tab.opacity = (byte) opacity;
-		tab.enabledOpacity = (byte) opacity;
+		//tab.enabledOpacity = (byte) opacity;
 		tab.width = width;
 		tab.height = height;
 	}
@@ -3436,6 +3436,7 @@ public class RSInterface {
 
 	public static void addRectangleClickable(int id, int opacity, int color, boolean filled, int width, int height) {
 		RSInterface tab = interfaceCache[id] = new RSInterface();
+		System.out.println(""+id);
 		/* 6525:6377 */ tab.textColor = color;
 		/* 6526:6378 */ tab.filled = filled;
 		/* 6527:6379 */ tab.id = id;
