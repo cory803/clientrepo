@@ -14678,8 +14678,9 @@ public class Client extends GameRenderer {
 					if (!flag4 && anInt1251 == 0) {
 						String s8 = s.substring(s.indexOf(":") + 1, s.length() - 9);
 						pushMessage(s8, 8, s5);
-					}
-					pushMessage(s, 0, "");
+					} else {
+                        pushMessage(s, 0, "");
+                    }
 				}
 				pktType = -1;
 				return true;
