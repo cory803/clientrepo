@@ -91,6 +91,9 @@ public final class Canvas3D extends Canvas2D {
 		return t;
 	}
 
+	/**
+	 * Set default bounds
+	 */
     public static void method364() {
         lineOffsets = new int[Canvas2D.height];
         for (int j = 0; j < Canvas2D.height; j++) {

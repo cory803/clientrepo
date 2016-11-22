@@ -5418,73 +5418,33 @@ public final class ItemDefinition {
 		return sprite2;
 	}
 
-	public static Sprite getSmallSprite(int i, int j, int k) {
-		if (k == 0) {
-			Sprite sprite = (Sprite) mruNodes1.insertFromCache(i);
-
-			if (sprite != null && sprite.maxHeight != j && sprite.maxHeight != -1) {
-				sprite.unlink();
-				sprite = null;
-			}
-
-			if (sprite != null) {
-				return sprite;
-			}
-		}
-
-		if (i > ItemDefinition.totalItems) {
-			return null;
-		}
-		ItemDefinition definition = get(i);
-
-		if (definition.stackIDs == null) {
-			j = -1;
-		}
-
-		if (j > 1) {
-			int i1 = -1;
-
-			for (int j1 = 0; j1 < 10; j1++) {
-				if (j >= definition.stackAmounts[j1] && definition.stackAmounts[j1] != 0) {
-					i1 = definition.stackIDs[j1];
-				}
-			}
-
-			if (i1 != -1) {
-				definition = get(i1);
-			}
-		}
-
-		Model model = definition.getInventoryModel(1);
-
+	public static Sprite getSmallSprite(int itemId)
+	{
+		ItemDefinition itemDef = get(itemId);
+		Model model = itemDef.getInventoryModel(1);
 		if (model == null) {
 			return null;
 		}
-
 		Sprite sprite = null;
-
-		if (definition.certTemplateID != -1) {
-			sprite = getSprite(definition.certID, 10, -1);
-
+		if (itemDef.certTemplateID != -1)
+		{
+			sprite = getSprite(itemDef.certID, 10, -1);
 			if (sprite == null) {
 				return null;
 			}
 		}
-
-		if (definition.lendTemplateID != -1) {
-			sprite = getSprite(definition.lendID, 50, 0);
-
+		if (itemDef.lendTemplateID != -1)
+		{
+			sprite = getSprite(itemDef.lendID, 50, 0);
 			if (sprite == null) {
 				return null;
 			}
 		}
-
 		Sprite sprite2 = new Sprite(16, 16);
 		int k1 = Canvas3D.centerX;
 		int l1 = Canvas3D.centerY;
-		int ai[] = Canvas3D.lineOffsets;
-		int ai1[] = Canvas2D.pixels;
-		int depth[] = Canvas2D.depthBuffer;
+		int[] ai = Canvas3D.lineOffsets;
+		int[] ai1 = Canvas2D.pixels;
 		int i2 = Canvas2D.width;
 		int j2 = Canvas2D.height;
 		int k2 = Canvas2D.topX;
@@ -5495,66 +5455,35 @@ public final class ItemDefinition {
 		Canvas2D.initDrawingArea(16, 16, sprite2.myPixels, new int[16*16]);
 		Canvas2D.drawPixels(16, 0, 0, 0, 16);
 		Canvas3D.method364();
-		int k3 = definition.modelZoom;
-
-		if (k == -1) {
-			k3 = (int) (k3 * 1.5D);
-		}
-
-		if (k > 0) {
-			k3 = (int) (k3 * 1.04D);
-		}
-
-		int l3 = Canvas3D.SINE[definition.modelRotation1] * k3 >> 16;
-		int i4 = Canvas3D.COSINE[definition.modelRotation1] * k3 >> 16;
-		model.method482(definition.modelRotation2, definition.modelOffsetX, definition.modelRotation1,
-				definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffsetY,
-				i4 + definition.modelOffsetY);
-
+		int modifiedZoom = itemDef.modelZoom;
+		modifiedZoom = (int)(modifiedZoom * 1.5D);
+		int l3 = Canvas3D.SINE[itemDef.modelRotation1] * modifiedZoom >> 16;
+		int i4 = Canvas3D.COSINE[itemDef.modelRotation1] * modifiedZoom >> 16;
+		model.method482(itemDef.modelRotation2, itemDef.modelOffsetX, itemDef.modelRotation1, itemDef.modelOffset1, l3 + model.modelHeight / 2 + itemDef.modelOffsetY, i4 + itemDef.modelOffsetY);
 		for (int i5 = 15; i5 >= 0; i5--) {
 			for (int j4 = 15; j4 >= 0; j4--) {
-				if (sprite2.myPixels[i5 + j4 * 16] == 0) {
-					if (i5 > 0 && sprite2.myPixels[i5 - 1 + j4 * 16] > 1) {
-						sprite2.myPixels[i5 + j4 * 16] = 1;
-					} else if (j4 > 0 && sprite2.myPixels[i5 + (j4 - 1) * 16] > 1) {
-						sprite2.myPixels[i5 + j4 * 16] = 1;
-					} else if (i5 < 15 && sprite2.myPixels[i5 + 1 + j4 * 16] > 1) {
-						sprite2.myPixels[i5 + j4 * 16] = 1;
-					} else if (j4 < 15 && sprite2.myPixels[i5 + (j4 + 1) * 16] > 1) {
-						sprite2.myPixels[i5 + j4 * 16] = 1;
+				if (sprite2.myPixels[(i5 + j4 * 16)] == 0) {
+					if ((i5 > 0) && (sprite2.myPixels[(i5 - 1 + j4 * 16)] > 1)) {
+						sprite2.myPixels[(i5 + j4 * 16)] = 1;
+					} else if ((j4 > 0) && (sprite2.myPixels[(i5 + (j4 - 1) * 16)] > 1)) {
+						sprite2.myPixels[(i5 + j4 * 16)] = 1;
+					} else if ((i5 < 15) && (sprite2.myPixels[(i5 + 1 + j4 * 16)] > 1)) {
+						sprite2.myPixels[(i5 + j4 * 16)] = 1;
+					} else if ((j4 < 15) && (sprite2.myPixels[(i5 + (j4 + 1) * 16)] > 1)) {
+						sprite2.myPixels[(i5 + j4 * 16)] = 1;
 					}
 				}
 			}
 		}
-
-		if (k > 0) {
-			for (int j5 = 15; j5 >= 0; j5--) {
-				for (int k4 = 15; k4 >= 0; k4--) {
-					if (sprite2.myPixels[j5 + k4 * 16] == 0) {
-						if (j5 > 0 && sprite2.myPixels[j5 - 1 + k4 * 16] == 1) {
-							sprite2.myPixels[j5 + k4 * 16] = k;
-						} else if (k4 > 0 && sprite2.myPixels[j5 + (k4 - 1) * 16] == 1) {
-							sprite2.myPixels[j5 + k4 * 16] = k;
-						} else if (j5 < 15 && sprite2.myPixels[j5 + 1 + k4 * 16] == 1) {
-							sprite2.myPixels[j5 + k4 * 16] = k;
-						} else if (k4 < 15 && sprite2.myPixels[j5 + (k4 + 1) * 16] == 1) {
-							sprite2.myPixels[j5 + k4 * 16] = k;
-						}
-					}
-				}
-			}
-		} else if (k == 0) {
-			for (int k5 = 15; k5 >= 0; k5--) {
-				for (int l4 = 15; l4 >= 0; l4--) {
-					if (sprite2.myPixels[k5 + l4 * 16] == 0 && k5 > 0 && l4 > 0
-							&& sprite2.myPixels[k5 - 1 + (l4 - 1) * 16] > 0) {
-						sprite2.myPixels[k5 + l4 * 16] = 0x302020;
-					}
+		for (int k5 = 15; k5 >= 0; k5--) {
+			for (int l4 = 15; l4 >= 0; l4--) {
+				if ((sprite2.myPixels[(k5 + l4 * 16)] == 0) && (k5 > 0) && (l4 > 0) && (sprite2.myPixels[(k5 - 1 + (l4 - 1) * 16)] > 0)) {
+					sprite2.myPixels[(k5 + l4 * 16)] = 3153952;
 				}
 			}
 		}
-
-		if (definition.certTemplateID != -1) {
+		if (itemDef.certTemplateID != -1)
+		{
 			int l5 = sprite.maxWidth;
 			int j6 = sprite.maxHeight;
 			sprite.maxWidth = 16;
@@ -5564,7 +5493,8 @@ public final class ItemDefinition {
 			sprite.maxHeight = j6;
 		}
 
-		if (definition.lendTemplateID != -1) {
+		if (itemDef.lendTemplateID != -1)
+		{
 			int l5 = sprite.maxWidth;
 			int j6 = sprite.maxHeight;
 			sprite.maxWidth = 16;
@@ -5573,25 +5503,14 @@ public final class ItemDefinition {
 			sprite.maxWidth = l5;
 			sprite.maxHeight = j6;
 		}
-
-		if (k == 0) {
-			mruNodes1.removeFromCache(sprite2, i);
-		}
-
+		mruNodes1.insertIntoCache(sprite2, itemId);
 		Canvas2D.initDrawingArea(j2, i2, ai1, null);
-		Canvas2D.setBounds(k2, i3, l2, j3);
+		Canvas2D.setDrawingArea(j3, k2, l2, i3);
 		Canvas3D.centerX = k1;
 		Canvas3D.centerY = l1;
 		Canvas3D.lineOffsets = ai;
 		Canvas3D.notTextured = true;
-
-		if (definition.stackable) {
-			sprite2.maxWidth = 16;
-		} else {
-			sprite2.maxWidth = 16;
-		}
-
-		sprite2.maxHeight = j;
+		sprite2.maxWidth = 16;
 		return sprite2;
 	}
 

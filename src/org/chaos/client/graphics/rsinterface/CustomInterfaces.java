@@ -515,7 +515,7 @@ public class CustomInterfaces extends RSInterface {
 
 
 		RSInterface inner = addInterface(j - 1);
-		inner.scrollMax = 2500;
+		inner.scrollMax = 2400;
 		inner.height = 81;
 		inner.width = 373;
 		y = 0;

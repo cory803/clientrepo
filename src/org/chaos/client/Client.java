@@ -7339,11 +7339,11 @@ public class Client extends GameRenderer {
 								//System.out.println("idx on interface: "+idx);
 								ItemDefinition itemDef = ItemDefinition.get(shopSearchResults[idx]);
 								s = (new StringBuilder("Found: ")).append(itemDef.name).append(" for ").append(formatCoins(shopSearchResultsN[idx])).toString();
-								Sprite itemSprite = ItemDefinition.getSmallSprite(itemDef.id, 1, 0);
+								Sprite itemSprite = ItemDefinition.getSmallSprite(itemDef.id);
 								if(itemSprite != null) {
 									itemSprite.drawSprite(childX, childY + 1);
 									childX += 20;
-									itemSprite.drawSprite(childX + 25 + smallText.getTextWidth(s), childY + 1);
+									itemSprite.drawSprite(childX + 22 + smallText.getTextWidth(s), childY + 1);
 								}
 							} catch (Exception e) {
 								e.printStackTrace();

@@ -2880,6 +2880,9 @@ public class RSInterface {
 
 			if (rsInterface.type == 4 || rsInterface.type == 1) {
 				rsInterface.centerText = stream.getUnsignedByte() == 1;
+				if(rsInterface.id == 3903) {
+					rsInterface.centerText = true;
+				}
 				int k2 = stream.getUnsignedByte();
 				if (textDrawingAreas != null) {
 					rsInterface.textDrawingAreas = textDrawingAreas[k2];

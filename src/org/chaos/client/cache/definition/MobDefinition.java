@@ -287,9 +287,9 @@ public final class MobDefinition {
                 definition.npcSizeInSquares = 5;
                 break;
             case 2593:
-                definition.name = "Merchant trader";
+                definition.name = "Merchant";
                 definition.actions = new String[]{"Talk-To", null, "Search through stores", "Open your store", "Open someone's store"};
-               definition.standAnimation = 808;
+                definition.standAnimation = 808;
                 break;
             case 2001:
                 definition.npcModels = new int[1];
