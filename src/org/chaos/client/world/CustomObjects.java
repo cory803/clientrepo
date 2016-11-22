@@ -27,6 +27,11 @@ public class CustomObjects {
 			//compost bins
 			{ 7808, 2661, 3375, 0, 3},
 			{ 7818, 3610, 3522, 0, 1},
+
+			//Nex bank chests
+			{ 27663, 2902, 5207, 0, 2},
+			{ 27663, 2901, 5207, 0, 2},
+
 			//Dungeoneering exit portals
 			{ 2477, 3284, 9195, 0, 0 },
 			{ 2477, 3279, 9195, 0, 0 },

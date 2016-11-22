@@ -47,9 +47,6 @@ public final class ItemDefinition {
 		for (int i = 0; i < taunt.length; i++) {
 			equipmentActions[taunt[i]] = "Taunt";
 		}
-		for (int i = 0; i < operate.length; i++) {
-			equipmentActions[operate[i]] = "Operate";
-		}
 		for (int i = 0; i < charges.length; i++) {
 			equipmentActions[charges[i]] = "Check Charges";
 		}
