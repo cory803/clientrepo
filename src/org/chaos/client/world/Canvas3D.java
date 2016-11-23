@@ -32,7 +32,7 @@ public final class Canvas3D extends Canvas2D {
 	private static int[][][] anIntArrayArray1479 = new int[textureAmount][][];
 	public static int anIntArray1480[] = new int[textureAmount];
 	public static int anInt1481;
-	public static int anIntArray1482[] = new int[0x10000];
+	public static int anIntArray1482[] = new int[0x1000000];
 	private static int[][] anIntArrayArray1483 = new int[textureAmount][];
 
     static {

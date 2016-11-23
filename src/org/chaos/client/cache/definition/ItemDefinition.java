@@ -97,7 +97,7 @@ public final class ItemDefinition {
 		return (H6bit << 10) + (S3bit << 7) + (L7bit);
 	}
 
-	public static int[] osrsItems = {13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
+	public static int[] osrsItems = {13204, 3985, 3987, 3989, 3991, 13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
@@ -128,9 +128,9 @@ public final class ItemDefinition {
 		itemDef.id = id;
 		itemDef.setDefaults();
 		if(osrs) {
-			itemDef.readValues(bufferOsrs);
+			itemDef.readValues(bufferOsrs, true);
 		} else {
-			itemDef.readValues(buffer);
+			itemDef.readValues(buffer, false);
 		}
 		
 		if (itemDef.id >= 7454 && itemDef.id <= 7462) {
@@ -235,11 +235,9 @@ public final class ItemDefinition {
 				itemDef.name = "Bond of Chaos";
 				break;
 
-//			case 21472:
-//			case 21473:
-//			case 21474:
-//			case 21475:
-//			case 21476:
+			case 13204:
+				itemDef.description2 = "Use this on a bank to convert 1 token to 1,000 coins. (Chaos RSPS)";
+				break;
 //                System.out.println("------");
 //                System.out.println("Name: "+itemDef.name);
 //                System.out.println("Model ID: "+itemDef.modelID);
@@ -249,7 +247,10 @@ public final class ItemDefinition {
 //					System.out.println("originalModelColors: "+itemDef.originalModelColors[i]);
 //					System.out.println("modifiedModelColors: "+itemDef.modifiedModelColors[i]);
 //				}
-//                break;
+//				for (int i = 0; i < itemDef.stackIDs.length; i++) {
+//					System.out.println("stackIDs: "+itemDef.stackIDs[i]);
+//				}
+                //break;
 
 			case 21472:
 			case 21473:
@@ -6049,7 +6050,7 @@ public final class ItemDefinition {
 		anInt173 = other.anInt173;
 	}
 
-	private void readValues(ByteBuffer buffer) {
+	private void readValues(ByteBuffer buffer, boolean osrs) {
 		do {
 			int opcode = buffer.getUnsignedByte();
 
@@ -6119,8 +6120,13 @@ public final class ItemDefinition {
 				originalModelColors = new int[size];
 
 				for (int k = 0; k < size; k++) {
-					modifiedModelColors[k] = buffer.getUnsignedShort();
-					originalModelColors[k] = buffer.getUnsignedShort();
+					if(osrs) {
+						originalModelColors[k] = buffer.getUnsignedShort();
+						modifiedModelColors[k] = buffer.getUnsignedShort();
+					} else {
+						modifiedModelColors[k] = buffer.getUnsignedShort();
+						originalModelColors[k] = buffer.getUnsignedShort();
+					}
 				}
 			} else if (opcode == 78) {
 				maleWearId3 = buffer.getUnsignedShort();
