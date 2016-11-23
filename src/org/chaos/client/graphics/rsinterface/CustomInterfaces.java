@@ -467,11 +467,11 @@ public class CustomInterfaces extends RSInterface {
 		{
 			addRectangleClickable(j, 0, 16777215, false, 79, 33);
 			setBounds(j++, x, y + 29, j1++, rsi);
-			addText(j, "Shop Owner", fonts, 1, 16750623, true);
+			addText(j, "Rent Shop", fonts, 1, 16750623, true);
 			setBounds(j++, x + 35 + 4, y + 28 + 2, j1++, rsi);
 
-			addText(j, "Lasts:", fonts, 0, 16750623, false);
-			setBounds(j++, x + 3, y + 28 + 18 + 2, j1++, rsi);
+			addText(j, "10 million", fonts, 0, 16750623, true);
+			setBounds(j++, x + 35 + 4, y + 28 + 18 + 2, j1++, rsi);
 
 			addRectangle(j, 255, 16777215, true, 77, 31);
 			interfaceCache[j].hovers = true;

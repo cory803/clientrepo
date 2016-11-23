@@ -15056,9 +15056,6 @@ public class Client extends GameRenderer {
 				if (text.startsWith(":storeowner:")) {
 					int idx = 99 - (41870 - (frame + 1)) / 4;
 					String split[] = text.split("-");
-					System.out.println("idx: "+idx);
-					System.out.println("shopSearchResults: "+Integer.parseInt(split[1]));
-					System.out.println("shopSearchResultsN: "+Integer.parseInt(split[2]));
 					shopSearchResults[idx] = Integer.parseInt(split[1]);
 					shopSearchResultsN[idx] = Long.parseLong(split[2]);
 					text = split[3];
