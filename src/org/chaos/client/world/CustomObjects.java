@@ -32,6 +32,9 @@ public class CustomObjects {
 			{ 27663, 2902, 5207, 0, 2},
 			{ 27663, 2901, 5207, 0, 2},
 
+			//Ezone cooking range
+			{ 4172, 3343, 9623, 0, 0},
+
 			//Dungeoneering exit portals
 			{ 2477, 3284, 9195, 0, 0 },
 			{ 2477, 3279, 9195, 0, 0 },
