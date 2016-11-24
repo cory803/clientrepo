@@ -70,10 +70,6 @@ import java.util.zip.GZIPOutputStream;
 public class Client extends GameRenderer {
 	
 	private NotesTab notesTab = new NotesTab();
-	public final String[][] PLRCOMMANDS = new String[][] {
-			{ "Enter character", "hangman" },
-			{ "Enter house owner's name", "popE158" } };
-	public int playerCommand;
 
 	public static int[] compCapeDefaultColors = { -2805961, -5626324, -8643808,
 			-12249823, -66051, -449772, -5342402 };
@@ -11443,45 +11439,6 @@ public class Client extends GameRenderer {
 			return;
 		}
 
-		if (j == 152) {
-			int tileData = stream.method426();
-			int tileX = anInt1268 + (tileData >> 4 & 7);
-			int tileY = anInt1269 + (tileData & 7);
-			int objID = stream.getShortBigEndian();
-			int typeAndFaceBits = stream.method428();
-			int obType = typeAndFaceBits >> 2;
-			int obFace = typeAndFaceBits & 3;
-			int toPlane = stream.getByte();
-			int l17 = anIntArray1177[obType];
-			if (tileX >= 0 && tileY >= 0 && tileX < 104 && tileY < 104) {
-				method130(-1, objID, obFace, l17, tileY, obType, toPlane, tileX, 0);
-			}
-			return;
-		}
-
-		if (j == 153) {
-			int chunkX = stream.getUnsignedByte();
-			int chunkY = stream.getUnsignedByte();
-			int toPlane = stream.getByte();
-			if (toPlane == 10) {
-				method63();
-				return;
-			}
-			Class30_Sub1 request = (Class30_Sub1) getaClass19_1179()
-					.getTail();
-			for (; request != null; request = (Class30_Sub1) getaClass19_1179()
-					.getNext()) {
-				if (request.anInt1297 >= chunkX * 8
-						&& request.anInt1297 <= (chunkX * 8) + 7
-						&& request.anInt1298 >= chunkY * 8
-						&& request.anInt1298 <= (chunkY * 8) + 7
-						&& request.anInt1295 == toPlane)
-					request.unlink();
-			}
-
-			return;
-		}
-
 		if (j == 4) {
 			int j2 = stream.getUnsignedByte();
 			int i5 = anInt1268 + (j2 >> 4 & 7);
@@ -13411,34 +13368,6 @@ public class Client extends GameRenderer {
 					inputDialogState = 0;
 					inputTaken = true;
 				}
-			} else if (inputDialogState == 5) {
-				int max = 12;
-				if (playerCommand == 1)
-					max = 1;
-				if (key >= 32 && key <= 122 && amountOrNameInput.length() < max) {
-					amountOrNameInput += (char) key;
-					inputTaken = true;
-				}
-				if (key == 8 && amountOrNameInput.length() > 0) {
-					amountOrNameInput = amountOrNameInput.substring(0,
-							amountOrNameInput.length() - 1);
-					inputTaken = true;
-				}
-				if (key == 13 || key == 10) {
-					if (amountOrNameInput.length() > 0) {
-						if (playerCommand != 0) {
-							getOut().putOpcode(103);
-							getOut().putByte(amountOrNameInput
-									.length()
-									+ PLRCOMMANDS[playerCommand - 1][1]
-									.length() + 1);
-							getOut().putString(PLRCOMMANDS[playerCommand - 1][1]
-									+ amountOrNameInput);
-						}
-					}
-					inputDialogState = 0;
-					inputTaken = true;
-				}
 			} else if (inputDialogState == 3) {
 				if (key == 10) {
 					getGrandExchange().totalItemResults = 0;
@@ -14411,26 +14340,19 @@ public class Client extends GameRenderer {
 					aBoolean1159 = false;
 				}
 				if (pktType == 241) {
-					String t = getInputBuffer().getString();
-					if (t.equals("palette")) {
-						i11 = getInputBuffer().method435();
-						getInputBuffer().initBitAccess();
-						for (int j16 = 0; j16 < 4; j16++) {
-							for (int l20 = 0; l20 < 13; l20++) {
-								for (int j23 = 0; j23 < 13; j23++) {
-									int emptyFloor = getInputBuffer().getBits(1);
-									if (emptyFloor == 1) {
-										anIntArrayArrayArray1129[j16][l20][j23] = getInputBuffer().getBits(26);
-									} else {
-										anIntArrayArrayArray1129[j16][l20][j23] = -1;
-									}
+					i11 = getInputBuffer().method435();
+					getInputBuffer().initBitAccess();
+					for (int j16 = 0; j16 < 4; j16++) {
+						for (int l20 = 0; l20 < 13; l20++) {
+							for (int j23 = 0; j23 < 13; j23++) {
+								int emptyFloor = getInputBuffer().getBits(1);
+								if (emptyFloor == 1) {
+									anIntArrayArrayArray1129[j16][l20][j23] = getInputBuffer().getBits(26);
+								} else {
+									anIntArrayArrayArray1129[j16][l20][j23] = -1;
 								}
 							}
 						}
-					} else if (t.equals("null")) {
-						aBoolean1159 = false;
-						pktType = -1;
-						return true;
 					}
 					getInputBuffer().finishBitAccess();
 					l2 = getInputBuffer().getUnsignedShort();
@@ -15064,14 +14986,6 @@ public class Client extends GameRenderer {
 
 				pktType = -1;
 				return true;
-				case 28:
-					playerCommand = getInputBuffer().getUnsignedByte();
-					inputTaken = false;
-					inputDialogState = 5;
-					amountOrNameInput = "";
-					inputTaken = true;
-					pktType = -1;
-					return true;
 
 			case 246:
 				int i6 = getInputBuffer().getShortBigEndian();
@@ -15717,8 +15631,6 @@ public class Client extends GameRenderer {
 			case 117:
 			case 147:
 			case 151:
-			case 152:
-			case 153:
 			case 156:
 			case 160:
 			case 215:
