@@ -239,7 +239,18 @@ public class ChatArea extends GameFrame {
 				client.newBoldFont.drawCenteredString(client.amountOrNameInput + "*", 259 + getOffSetX(),
 						80 + getOffSetY(), 128, -1);
 			} else if (client.inputDialogState == 3) {
+				//TODO: Convert this item search to POS
 				client.getGrandExchange().displayItemSearch();
+			} else if (client.inputDialogState == 5) {
+				//cacheSprite[64].drawSprite(0 + getOffSetX(), 0 + getOffSetY());
+				String s = "";
+				if (client.playerCommand != 0) {
+					s = client.PLRCOMMANDS[client.playerCommand - 1][0];
+				}
+				client.newBoldFont.drawCenteredString(s, 259 + getOffSetX(), 60 + getOffSetY(), 0,
+						-1);
+				client.newBoldFont.drawCenteredString(client.amountOrNameInput + "*",
+						259 + getOffSetX(), 80 + getOffSetY(), 128, -1);
 			} else if (client.aString844 != null) {
 				client.newBoldFont.drawCenteredString(client.aString844, 259 + getOffSetX(), 60 + getOffSetY(), 0, -1);
 				client.newBoldFont.drawCenteredString("Click to continue", 259 + getOffSetX(), 80 + getOffSetY(), 128,
