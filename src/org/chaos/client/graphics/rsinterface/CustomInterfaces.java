@@ -446,7 +446,7 @@ public class CustomInterfaces extends RSInterface {
 	public static void posSearch()
 	{
 		RSInterface rsi = addInterface(41409);
-		constructRegularInterface(41410, "Player Owner Shops");
+		constructRegularInterface(41410, "Player Owned Shops");
 
 		setChildren(53, rsi);
 		int BASEX = 22;
