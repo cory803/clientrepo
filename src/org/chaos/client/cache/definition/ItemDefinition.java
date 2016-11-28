@@ -238,6 +238,15 @@ public final class ItemDefinition {
 			case 13204:
 				itemDef.description2 = "Use this on a bank to convert 1 token to 1,000 coins. (Chaos RSPS)";
 				break;
+			case 5733:
+				itemDef.actions = new String[] {"Heal", null, "Drop-Rate", "Prayer", "Drop"};
+				break;
+            case 10547:
+				itemDef.name = "Beta-Tester hat";
+				itemDef.description = "A hat that marks the day Chaos went out of beta [November 25th, 2016].".getBytes();
+				itemDef.originalModelColors = new int[] { 22189, 22170, 22047, 22181, 21176, 21175, 22074, 20657, 20780 };
+				itemDef.modifiedModelColors = new int[] { 7485, 3992, 5018, 10425, 6602, 7624, 7630, 14395, 14391 };
+            	break;
 //                System.out.println("------");
 //                System.out.println("Name: "+itemDef.name);
 //                System.out.println("Model ID: "+itemDef.modelID);
@@ -250,7 +259,7 @@ public final class ItemDefinition {
 //				for (int i = 0; i < itemDef.stackIDs.length; i++) {
 //					System.out.println("stackIDs: "+itemDef.stackIDs[i]);
 //				}
-                //break;
+//                break;
 
 			case 21472:
 			case 21473:
@@ -4885,7 +4894,7 @@ public final class ItemDefinition {
 				break;
 
 			case 11716:
-				itemDef.actions = new String[] { null, "Wield", "Make-Hasta", null, "Drop" };
+				itemDef.actions = new String[] { null, "Wield", null, null, "Drop" };
 				break;
 
 			case 21120:

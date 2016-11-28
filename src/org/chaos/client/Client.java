@@ -5574,8 +5574,7 @@ public class Client extends GameRenderer {
 					getOut().putShort(slot);
 					getOut().putShort(nodeId);
 				} else {
-					getOut().putOpcode(2); // examine item
-					getOut().putShort(definition.id);
+                    pushMessage(definition.description2, 0, "");
 				}
 			}
 		}

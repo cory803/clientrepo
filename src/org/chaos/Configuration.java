@@ -23,7 +23,7 @@ public class Configuration {
 	/** FILE SERVER **/
 	public final static boolean FILE_SERVER_ENABLED = true;
 	public final static boolean DEVELOPER_FILE_SERVER = false;
-	public final static String JAGCACHED_HOST = "74.63.248.118";// "127.0.0.1";
+	public final static String JAGCACHED_HOST = "127.0.0.1";// "127.0.0.1";
 	public final static int JAGGRAB_PORT = DEVELOPER_FILE_SERVER ? 43596 : 43595;
 	public final static int ONDEMAND_PORT = DEVELOPER_FILE_SERVER ? 43592 : 43593;
 
@@ -31,8 +31,8 @@ public class Configuration {
 	public static final boolean DROPBOX_MODE = false;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.19";
-	public final static String CLIENT_NAME = "Chaos Beta " + CLIENT_VERSION + "";
+	public static final String CLIENT_VERSION = "1.20";
+	public final static String CLIENT_NAME = "Chaos " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos"; // Cache
 																	// folder
 																	// name

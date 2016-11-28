@@ -1344,7 +1344,7 @@ public class CustomInterfaces extends RSInterface {
 		RSInterface scrollInterface = addTabInterface(57040);
 		scrollInterface.width = 300;
 		scrollInterface.height = 231;
-		scrollInterface.scrollMax = 1330;
+		scrollInterface.scrollMax = 650;
 		setChildren(100, scrollInterface);
 		/**
 		 * just need to remove that last line
