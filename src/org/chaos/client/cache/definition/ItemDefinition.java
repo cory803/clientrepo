@@ -168,6 +168,11 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+			case 5023:
+				itemDef.name = "15m Coin Ticket";
+				itemDef.actions = new String[] { "Open", null, null, null, null, "Drop" };
+				itemDef.description = "A ticket you can claim for 15 million coins.".getBytes();
+				break;
 			//Experience lamps
 			case 11137:
 				itemDef.name = "Lamp of 10K";
