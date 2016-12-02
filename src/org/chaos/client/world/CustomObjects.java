@@ -50,6 +50,9 @@ public class CustomObjects {
 			{ 2403, 3305, 9192, 0, 0 },
 			{ 2403, 3306, 9192, 0, 0 },
 
+			//Edgeville altar
+			{ 409, 3086, 3483, 0, 2 },
+
             //Treasure island chests
             { 10621, 3036, 2912, 0, 1 },
             { 18804, 3039, 2908, 0, 2 },
