@@ -168,7 +168,38 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
-			//Experience lamps
+
+            /**
+             * Treasure Island Keys
+             */
+            case 18689:
+                itemDef.name = "Necrolord key";
+                itemDef.actions = new String[5];
+                itemDef.actions[4] = "Drop";
+                itemDef.description = "I wonder what this does..?".getBytes();
+                break;
+            case 14678:
+                itemDef.name = "Riftsplitter key";
+                itemDef.actions = new String[5];
+                itemDef.actions[4] = "Drop";
+                itemDef.description = "I wonder what this does..?".getBytes();
+                break;
+            case 13158:
+                itemDef.name = "Sagittare key";
+                itemDef.actions = new String[5];
+                itemDef.actions[4] = "Drop";
+                itemDef.description = "I wonder what this does..?".getBytes();
+                break;
+            case 13758:
+                itemDef.name = "Unholy key";
+                itemDef.actions = new String[5];
+                itemDef.actions[4] = "Drop";
+                itemDef.description = "I wonder what this does..?".getBytes();
+                break;
+
+            /**
+             * Experience Lamps
+             */
 			case 11137:
 				itemDef.name = "Lamp of 10K";
 				break;
@@ -194,9 +225,11 @@ public final class ItemDefinition {
 				itemDef.imitate(get(2996));
 				itemDef.name = "Donator tickets";
 				break;
+
 			case 18236:
 				itemDef.name = "War key";
 				break;
+
 			case 19711:
 				itemDef.imitate(get(19712));
 				break;
@@ -5014,7 +5047,7 @@ public final class ItemDefinition {
 			case 21133:
 				itemDef.setDefaults();
 				itemDef.imitate(get(13101));
-				itemDef.name = "Premium top hat";
+				itemDef.name = "Red top hat";
 				itemDef.modifiedModelColors = new int[] { 0, 4, 8, 12, 16, 20, 24, 549, 553, 673, 668 };
 				itemDef.originalModelColors = new int[] { 933, 933 + 4, 933 + 8, 933 + 12, 933 + 16, 933 + 20, 933 + 24,
 						11200, 11204, 11324, 11324 - 5 };

@@ -193,7 +193,7 @@ public final class ObjectDefinition {
         boolean loadNew = (id == 32159 || id == 37682 || id == 32157 || id == 21792 || id == 36672
                 || id == 36675 || id == 36692 || id == 34138 || id >= 39260 && id <= 39271 || id == 39229 || id == 39230 || id == 849
                 || id == 39231 || id == 36676 || id == 36692 || id > 11915 && id <= 11929 || id >= 11426 && id <= 11444
-                || id == 35256 || id == 41807 || id == 42000 || id == 19123 || id == 33781 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715 || id == 8390 || id == 8389 || id == 8388 || id == 8550 || id == 8551 || id == 8552 || id == 8553 || id == 8554 || id == 8555 || id == 8556 || id == 8557 || id == 7847 || id == 7849 || id == 7850 || id == 7579 || id == 8337 || id == 8150 || id == 8151 || id == 8152 || id == 8153 || id == 7848);
+                || id == 29402 || id == 29401 || id == 29398 || id == 35256 || id == 41807 || id == 42000 || id == 19123 || id == 33781 || id >= 14835 && id <= 14845 || id >= 11391 && id <= 11397 || id >= 12713 && id <= 12715 || id == 8390 || id == 8389 || id == 8388 || id == 8550 || id == 8551 || id == 8552 || id == 8553 || id == 8554 || id == 8555 || id == 8556 || id == 8557 || id == 7847 || id == 7849 || id == 7850 || id == 7579 || id == 8337 || id == 8150 || id == 8151 || id == 8152 || id == 8153 || id == 7848);
         if (id < 0) {
             id = 0;
         }
@@ -245,7 +245,7 @@ public final class ObjectDefinition {
         }
 
 
-//        Dump objects for OSRS maps
+        //Dump objects for OSRS maps
 //        if (!OBJECT_MODELS.contains(id)) {
 //           System.out.println(id+",");
 //           OBJECT_MODELS.add(id);
@@ -362,6 +362,20 @@ public final class ObjectDefinition {
             }
         }
         switch (id) {
+            /**
+             * Treasure Chests
+             */
+            case 10621:
+            case 24204:
+                definition.name = "Treasure chest";
+                definition.actions = new String[]{"Search", null, null, null, null};
+                break;
+            case 29577:
+            case 18804:
+                definition.name = "Treasure chest";
+                definition.actions = new String[]{"Open", null, null, null, null};
+                break;
+
             case 7818:
                 definition.actions = new String[]{"Dump-weeds", null, null, null, null};
                 break;
