@@ -5574,7 +5574,13 @@ public class Client extends GameRenderer {
 					getOut().putShort(slot);
 					getOut().putShort(nodeId);
 				} else {
-                    pushMessage(definition.description2, 0, "");
+                    String examine;
+                    if (definition.description != null) {
+                        examine = new String(definition.description);
+                    } else {
+                        examine = "It's a " + definition.name + ".";
+                    }
+                    pushMessage(examine, 0, "");
 				}
 			}
 		}
