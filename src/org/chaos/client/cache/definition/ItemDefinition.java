@@ -168,8 +168,6 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
-<<<<<<< HEAD
-
             /**
              * Treasure Island Keys
              */
