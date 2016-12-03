@@ -247,7 +247,7 @@ public class CustomObjects {
 
 			/* Home Objects */
 			{ 409, 3085, 3509, 0, 1 },
-			{ 172, 3090, 3495, 0, 1 },
+			{ 172, 3094, 3488, 0, 0 },
 			/* End Home Objects */
 			//Rfd Chest & Portal
 			{ 2182, 3081, 3495, 0, 3 },
@@ -327,6 +327,10 @@ public class CustomObjects {
 			/**
 			 * Ezone Skilling Beings
 			 **/
+			//donor altars
+			{ 21764, 3381, 9633, 0, 1 },
+			{ 21764, 3368, 9621, 0, 1 },
+			{ 21764, 3086, 3488, 0, 1 },
 			// skilling anvil
 			{4306, 3375, 9660, 0, 4},
 			// furnace
