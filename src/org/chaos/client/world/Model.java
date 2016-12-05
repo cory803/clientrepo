@@ -545,7 +545,10 @@ public class Model extends Animable {
 				}
 			}
 		}*/
-		
+		if(anIntArray1638 != null) {
+			for(int j = 0; j < anIntArray1638.length; j++)
+				anIntArray1638[j] = 10;
+		}
 		int[] newBoots = new int[] {29249, 29254, 29250, 29255, 29252, 29253};
 		for(int i : newBoots) {
 			if (modelId == i)
