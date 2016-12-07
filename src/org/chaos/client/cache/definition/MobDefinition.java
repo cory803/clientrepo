@@ -117,6 +117,7 @@ public final class MobDefinition {
                 definition.dialogueModels[0] = 76500;
                 break;
             case 490:
+                definition.copy(get(401));
                 definition.name = "Nieve";
                 definition.walkAnimation = 1205;
                 definition.standAnimation = 813;
@@ -132,7 +133,7 @@ public final class MobDefinition {
                 definition.npcModels[7] = 9640; // Fire cape
                 definition.npcModels[9] = 40942; // Elysian spirit shield
                 definition.dialogueModels = new int[] {10031};
-                definition.actions = new String[] {"Talk-to", "Assignment", "Trade", "Rewards", null};
+                //definition.actions = new String[] {"Talk-to", "Assignment", "Trade", "Rewards", null};
                 definition.combatLevel = 0;
                 definition.npcSizeInSquares = 1;
                 definition.adjustVertextPointsXOrY = 128;
