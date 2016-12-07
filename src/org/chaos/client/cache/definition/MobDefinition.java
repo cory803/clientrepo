@@ -47,6 +47,9 @@ public final class MobDefinition {
             definition.readValues(buffer);
         }
         switch (id) {
+            case 3642:
+            definition.actions = new String[]{"Talk-to", null, null, null, null};
+            break;
             case 3368: //smaller size fishing spot
                 definition.copy(get(318));
                 definition.adjustVertextPointsXOrY = 105;
