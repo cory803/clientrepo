@@ -374,8 +374,9 @@ public final class TextDrawingArea extends Canvas2D {
 					}
 					i += rsb[c];
 				}
-			if (aBoolean1499)
-				Canvas2D.drawHorizontalLine(k + (int) ((double) anInt1497 * 0.69999999999999996D), 0x800000, i - l, l);
+			if (this.aBoolean1499) {
+				Canvas2D.drawLine(k + (int)(this.anInt1497 * 0.7D), 8388608, i - l, l);
+			}
 		} catch(Exception e) {
 			
 		}
@@ -450,7 +451,7 @@ public final class TextDrawingArea extends Canvas2D {
 		if (s.equals("bla"))
 			return 0;
 		if (s.equals("lre"))
-			return 0xff9040;
+			return 16748608;
 		if (s.equals("dre"))
 			return 0x800000;
 		if (s.equals("dbl"))

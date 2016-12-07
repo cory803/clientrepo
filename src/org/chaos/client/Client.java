@@ -3844,8 +3844,13 @@ public class Client extends GameRenderer {
 				middle = CacheSpriteLoader.getCacheSprite(792 + (type * 3) + 1);
 				end2 = CacheSpriteLoader.getCacheSprite(792 + (type * 3) + 2);
 				if (icon != 255 && icon != 8) {
-					CacheSpriteLoader.getCacheSprite(786 + icon).drawSprite3(spriteDrawX - 31 + x, drawPos - 9,
-							opacity);
+					if(icon == 4) {
+						CacheSpriteLoader.getCacheSprite(786 + icon).drawSprite3(spriteDrawX - 25 + x, drawPos - 13,
+								opacity);
+					} else {
+						CacheSpriteLoader.getCacheSprite(786 + icon).drawSprite3(spriteDrawX - 31 + x, drawPos - 10,
+								opacity);
+					}
 				}
 				end1.drawSprite3(spriteDrawX - 12 + x, drawPos - 12, opacity);
 				x += 4;
@@ -3947,130 +3952,120 @@ public class Client extends GameRenderer {
 	}
 
 	private void determineMenuSize() {
-		int width = (changeMenuText ? newBoldFont : newRegularFont).getTextWidth("Choose Option");
-		for (int index = 0; index < menuActionRow; index++) {
-			int menuWidth = (changeMenuText ? newBoldFont : newRegularFont).getTextWidth(menuActionName[index]);
-			if (menuPlayerName[index] != null) {
-				menuWidth += newBoldFont.getTextWidth(menuPlayerName[index]);
-			}
-			if (menuActionTitle[index] != null) {
-				menuWidth += (changeMenuText ? newBoldFont : newRegularFont).getTextWidth(menuActionTitle[index]);
-			}
-			if (menuWidth > width) {
-				width = menuWidth;
+		int i = boldText.getTextWidth("Choose Option");
+		for (int j = 0; j < menuActionRow; j++) {
+			int k = boldText.getTextWidth(menuActionName[j]);
+			if (k > i) {
+				i = k;
 			}
 		}
-		width += 8;
-		int menHeight = 15 * menuActionRow + 21;
+
+		i += 8;
+		int l = 15 * menuActionRow + 21;
 		if (GameFrame.getScreenMode() == ScreenMode.FIXED) {
 			if (super.saveClickX > 4 && super.saveClickY > 4 && super.saveClickX < 516 && super.saveClickY < 338) {
-				int offsetX = super.saveClickX - 4 - width / 2;
-				if (offsetX + width > 512) {
-					offsetX = 512 - width;
+				int i1 = super.saveClickX - 4 - i / 2;
+				if (i1 + i > 512) {
+					i1 = 512 - i;
 				}
-				if (offsetX < 0) {
-					offsetX = 0;
+				if (i1 < 0) {
+					i1 = 0;
 				}
-				int offsetY = super.saveClickY - 4;
-				if (offsetY + menHeight > 334) {
-					offsetY = 334 - menHeight;
+				int l1 = super.saveClickY - 4;
+				if (l1 + l > 334) {
+					l1 = 334 - l;
 				}
-				if (offsetY < 0) {
-					offsetY = 0;
+				if (l1 < 0) {
+					l1 = 0;
 				}
 				menuOpen = true;
 				menuScreenArea = 0;
-				menuOffsetX = offsetX;
-				menuOffsetY = offsetY;
-				menuWidth = width;
+				menuOffsetX = i1;
+				menuOffsetY = l1;
+				menuWidth = i;
 				menuHeight = 15 * menuActionRow + 22;
 			}
 			if (super.saveClickX > 519 && super.saveClickY > 168 && super.saveClickX < 765 && super.saveClickY < 503) {
-				int offsetX = super.saveClickX - 519 - width / 2;
-				if (offsetX < 0) {
-					offsetX = 0;
-				} else if (offsetX + width > 245) {
-					offsetX = 245 - width;
+				int j1 = super.saveClickX - 519 - i / 2;
+				if (j1 < 0) {
+					j1 = 0;
+				} else if (j1 + i > 245) {
+					j1 = 245 - i;
 				}
-				int offsetY = super.saveClickY - 168;
-				if (offsetY < 0) {
-					offsetY = 0;
-				} else if (offsetY + menHeight > 333) {
-					offsetY = 333 - menHeight;
+				int i2 = super.saveClickY - 168;
+				if (i2 < 0) {
+					i2 = 0;
+				} else if (i2 + l > 333) {
+					i2 = 333 - l;
 				}
 				menuOpen = true;
 				menuScreenArea = 1;
-				menuOffsetX = offsetX;
-				menuOffsetY = offsetY;
-				menuWidth = width;
+				menuOffsetX = j1;
+				menuOffsetY = i2;
+				menuWidth = i;
 				menuHeight = 15 * menuActionRow + 22;
 			}
 			if (super.saveClickX > 0 && super.saveClickY > 338 && super.saveClickX < 516 && super.saveClickY < 503) {
-				int offsetX = super.saveClickX - 0 - width / 2;
-				if (offsetX < 0) {
-					offsetX = 0;
-				} else if (offsetX + width > 516) {
-					offsetX = 516 - width;
+				int k1 = super.saveClickX - 0 - i / 2;
+				if (k1 < 0) {
+					k1 = 0;
+				} else if (k1 + i > 516) {
+					k1 = 516 - i;
 				}
-				int offsetY = super.saveClickY - 338;
-				if (offsetY < 0) {
-					offsetY = 0;
-				} else if (offsetY + menHeight > 165) {
-					offsetY = 165 - menHeight;
+				int j2 = super.saveClickY - 338;
+				if (j2 < 0) {
+					j2 = 0;
+				} else if (j2 + l > 165) {
+					j2 = 165 - l;
 				}
 				menuOpen = true;
 				menuScreenArea = 2;
-				menuOffsetX = offsetX;
-				menuOffsetY = offsetY;
-				menuWidth = width;
+				menuOffsetX = k1;
+				menuOffsetY = j2;
+				menuWidth = i;
 				menuHeight = 15 * menuActionRow + 22;
 			}
-			// if(super.saveClickX > 0 && super.saveClickY > 338 &&
-			// super.saveClickX < 516 && super.saveClickY < 503) {
 			if (super.saveClickX > 519 && super.saveClickY > 0 && super.saveClickX < 765 && super.saveClickY < 168) {
-				int offsetX = super.saveClickX - 519 - width / 2;
-				if (offsetX < 0) {
-					offsetX = 0;
-				} else if (offsetX + width > 245) {
-					offsetX = 245 - width;
+				int k1 = super.saveClickX - 519 - i / 2;
+				if (k1 < 0) {
+					k1 = 0;
+				} else if (k1 + i > 765) {
+					k1 = 765 - i;
 				}
-				int offsetY = super.saveClickY - 0;
-				if (offsetY < 0) {
-					offsetY = 0;
-				} else if (offsetY + menHeight > 168) {
-					offsetY = 168 - menHeight;
+				int j2 = super.saveClickY - 0;
+				if (j2 < 0) {
+					j2 = 0;
+				} else if (j2 + l > 168) {
+					j2 = 168 - l;
 				}
 				menuOpen = true;
 				menuScreenArea = 3;
-				menuOffsetX = offsetX;
-				menuOffsetY = offsetY;
-				menuWidth = width;
+				menuOffsetX = k1;
+				menuOffsetY = j2;
+				menuWidth = i;
 				menuHeight = 15 * menuActionRow + 22;
 			}
-		} else {
-			if (super.saveClickX > 0 && super.saveClickY > 0 && super.saveClickX < getScreenWidth()
-					&& super.saveClickY < getScreenHeight()) {
-				int offsetX = super.saveClickX - 0 - width / 2;
-				if (offsetX + width > getScreenWidth()) {
-					offsetX = getScreenWidth() - width;
-				}
-				if (offsetX < 0) {
-					offsetX = 0;
-				}
-				int offsetY = super.saveClickY - 0;
-				if (offsetY + menHeight > getScreenHeight()) {
-					offsetY = getScreenHeight() - menHeight;
-				}
-				if (offsetY < 0) {
-					offsetY = 0;
-				}
-				menuOpen = true;
-				menuScreenArea = 0;
-				menuOffsetX = offsetX;
-				menuOffsetY = offsetY;
-				menuWidth = width;
-				menuHeight = 15 * menuActionRow + 22;
+		} else if (super.saveClickX > 0 && super.saveClickY > 0 && super.saveClickX < clientWidth && super.saveClickY < clientHeight) {
+			int k1 = super.saveClickX - 0 - i / 2;
+			if (k1 + i > clientWidth) {
+				k1 = clientWidth - i;
 			}
+			if (k1 < 0) {
+				k1 = 0;
+			}
+			int j2 = super.saveClickY - 0;
+			if (j2 + l > clientHeight) {
+				j2 = clientHeight - l;
+			}
+			if (j2 < 0) {
+				j2 = 0;
+			}
+			menuOpen = true;
+			menuScreenArea = 0;
+			menuOffsetX = k1;
+			menuOffsetY = j2;
+			menuWidth = i;
+			menuHeight = 15 * menuActionRow + 22;
 		}
 	}
 
@@ -8705,100 +8700,64 @@ public class Client extends GameRenderer {
     }
 
 	public void drawMenu() {
-		try {
-			int i = menuOffsetX;
-			int j = menuOffsetY;
-			int k = menuWidth;
-			int j1 = super.mouseX;
-			int k1 = super.mouseY;
-			int l = menuHeight + 1;
-			int i1 = 0x5d5447;
-			if (menuScreenArea == 1 && (GameFrame.getScreenMode().ordinal() > 0)) {
-				i += 519;// +extraWidth;
-				j += 168;// +extraHeight;
+		int i = menuOffsetX;
+		int j = menuOffsetY;
+		int k = menuWidth;
+		int j1 = super.mouseX;
+		int k1 = super.mouseY;
+		int l = menuHeight + 1;
+		int i1 = 0xc4b695;
+		if (menuScreenArea == 0) {
+			j1 -= 4;
+			k1 -= 4;
+		}
+		if (menuScreenArea == 1) {
+			j1 -= 519;
+			k1 -= 168;
+		}
+		if (menuScreenArea == 2) {
+			j1 -= 17;
+			k1 -= 338;
+		}
+		if (menuScreenArea == 3) {
+			j1 -= 515;
+			k1 += 0;
+		}
+		Canvas2D.drawPixels(l - 4, j + 2, i, 0x706a5e, k);
+		Canvas2D.drawPixels(l - 2, j + 1, i + 1, 0x706a5e, k - 2);
+		Canvas2D.drawPixels(l, j, i + 2, 0x706a5e, k - 4);
+		Canvas2D.drawPixels(l - 2, j + 1, i + 3, 0x2d2822, k - 6);
+		Canvas2D.drawPixels(l - 4, j + 2, i + 2, 0x2d2822, k - 4);
+		Canvas2D.drawPixels(l - 6, j + 3, i + 1, 0x2d2822, k - 2);
+		Canvas2D.drawPixels(l - 22, j + 19, i + 2, 0x524a3d, k - 4);
+		Canvas2D.drawPixels(l - 22, j + 20, i + 3, 0x524a3d, k - 6);
+		Canvas2D.drawPixels(l - 23, j + 20, i + 3, 1123113, k - 6);
+		Canvas2D.fillRect(0x112329, j + 20, k - 6, l - 23, 240, i + 3);
+		Canvas2D.fillPixels(i + 3, k - 6, 1, 0x2a291b, j + 2);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x2a261b, j + 3);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x252116, j + 4);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x211e15, j + 5);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x1e1b12, j + 6);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x1a170e, j + 7);
+		Canvas2D.fillPixels(i + 2, k - 4, 2, 0x15120b, j + 8);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x100d08, j + 10);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x90a04, j + 11);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x80703, j + 12);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x90a04, j + 13);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x70802, j + 14);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x90a04, j + 15);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x70802, j + 16);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x90a04, j + 17);
+		Canvas2D.fillPixels(i + 2, k - 4, 1, 0x2a291b, j + 18);
+		Canvas2D.fillPixels(i + 3, k - 6, 1, 0x564943, j + 19);
+		boldText.method385(i1, "Choose Option", j + 14, i + 3);
+		for (int l1 = 0; l1 < menuActionRow; l1++) {
+			int i2 = j + 31 + (menuActionRow - 1 - l1) * 15;
+			if (j1 > i && j1 < i + k && k1 > i2 - 13 && k1 < i2 + 3) {
+				Canvas2D.drawPixels(15, i2 - 11, i + 3, 0x26566c, menuWidth - 6);
+				//detectCursor(l1);
 			}
-			if (menuScreenArea == 2 && (GameFrame.getScreenMode().ordinal() > 0)) {
-				j += 338;
-			}
-			if (menuScreenArea == 3 && (GameFrame.getScreenMode().ordinal() > 0)) {
-				i += 515;
-				j += 0;
-			}
-			if (menuScreenArea == 0) {
-				j1 -= 4;
-				k1 -= 4;
-			}
-			if (menuScreenArea == 1) {
-				if (!(GameFrame.getScreenMode().ordinal() > 0)) {
-					j1 -= 519;
-					k1 -= 168;
-				}
-			}
-			if (menuScreenArea == 2) {
-				if (!(GameFrame.getScreenMode().ordinal() > 0)) {
-					j1 -= 17;
-					k1 -= 338;
-				}
-			}
-			if (menuScreenArea == 3 && !(GameFrame.getScreenMode().ordinal() > 0)) {
-				j1 -= 515;
-				k1 -= 0;
-			}
-			if (menuToggle == false) {
-				Canvas2D.fillRectangle(i1, j, k, l, 150, i);
-				Canvas2D.fillRectangle(0, j + 1, k - 2, 16, 150, i + 1);
-				Canvas2D.fillPixels(i + 1, k - 2, l - 19, 0, j + 18);
-				Canvas2D.drawRectangle(j + 18, l - 19, 150, 0, k - 2, i + 1);
-				boldText.method385(0xc6b895, "Choose Option", j + 14, i + 3);
-				boldText.method385(0xc6b895, "Choose Option", j + 14, i + 3);
-				for (int l1 = 0; l1 < menuActionRow; l1++) {
-					int i2 = j + 31 + (menuActionRow - 1 - l1) * 15;
-					int j2 = 0xffffff;
-					if (j1 > i && j1 < i + k && k1 > i2 - 13 && k1 < i2 + 3)
-						j2 = 0xffff00;
-					boldText.drawRegularText(true, i + 3, j2, menuActionName[l1], i2);
-				}
-			} else if (menuToggle == true) {
-				Canvas2D.drawPixels(l - 4, j + 2, i, 0x706a5e, k);
-				Canvas2D.drawPixels(l - 2, j + 1, i + 1, 0x706a5e, k - 2);
-				Canvas2D.drawPixels(l, j, i + 2, 0x706a5e, k - 4);
-				Canvas2D.drawPixels(l - 2, j + 1, i + 3, 0x2d2822, k - 6);
-				Canvas2D.drawPixels(l - 4, j + 2, i + 2, 0x2d2822, k - 4);
-				Canvas2D.drawPixels(l - 6, j + 3, i + 1, 0x2d2822, k - 2);
-				Canvas2D.drawPixels(l - 22, j + 19, i + 2, 0x524a3d, k - 4);
-				Canvas2D.drawPixels(l - 22, j + 20, i + 3, 0x524a3d, k - 6);
-				Canvas2D.drawPixels(l - 23, j + 20, i + 3, 0x2b271c, k - 6);
-				Canvas2D.fillPixels(i + 3, k - 6, 1, 0x2a291b, j + 2);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x2a261b, j + 3);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x252116, j + 4);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x211e15, j + 5);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x1e1b12, j + 6);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x1a170e, j + 7);
-				Canvas2D.fillPixels(i + 2, k - 4, 2, 0x15120b, j + 8);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x100d08, j + 10);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x090a04, j + 11);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x080703, j + 12);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x090a04, j + 13);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x070802, j + 14);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x090a04, j + 15);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x070802, j + 16);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x090a04, j + 17);
-				Canvas2D.fillPixels(i + 2, k - 4, 1, 0x2a291b, j + 18);
-				Canvas2D.fillPixels(i + 3, k - 6, 1, 0x564943, j + 19);
-				(changeMenuText ? boldText : normalText).method385(0xc6b895, "Choose Option", j + 14, i + 3);
-				for (int l1 = 0; l1 < menuActionRow; l1++) {
-					int i2 = j + 31 + (menuActionRow - 1 - l1) * 15;
-					int j2 = 0xc6b895;
-					if (j1 > i && j1 < i + k && k1 > i2 - 13 && k1 < i2 + 3) {
-						Canvas2D.drawPixels(15, i2 - 11, i + 3, 0x6f695d, menuWidth - 6);
-						j2 = 0xeee5c6;
-						currentActionMenu = l1;
-					}
-					(changeMenuText ? boldText : normalText).drawRegularText(true, i + 4, j2, menuActionName[l1], i2 + 1);
-				}
-			}
-		} catch(Exception e) {
-
+			boldText.drawRegularText(true, i + 4, 0x968d74, menuActionName[l1], i2 + 1);
 		}
 
 	}
@@ -18767,15 +18726,11 @@ public class Client extends GameRenderer {
 
 						} else {
 
-							if (entity.moveTimer[j1] == 0) {
-								if (entity.hitmarkMove[j1] > -14)
-									entity.hitmarkMove[j1]--;
-								entity.moveTimer[j1] = 2;
-							} else {
-								entity.moveTimer[j1]--;
+							if (entity.hitmarkMove[j1] > -30) {
+								entity.hitmarkMove[j1]--;
 							}
-							if (entity.hitmarkMove[j1] <= -14)
-								entity.hitmarkTrans[j1] -= 10;
+							if (entity.hitmarkMove[j1] <= -26)
+								entity.hitmarkTrans[j1] -= 5;
 							hitmarkDrawNew(entity, String.valueOf(entity.hitArray[j1]).length(),
 									entity.hitMarkTypes[j1], entity.hitIcon[j1], entity.hitArray[j1],
 									entity.soakDamage[j1], entity.hitmarkMove[j1], entity.hitmarkTrans[j1], j1);

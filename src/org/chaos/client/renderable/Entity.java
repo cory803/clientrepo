@@ -1,6 +1,9 @@
 package org.chaos.client.renderable;
 
+import org.chaos.Configuration;
 import org.chaos.client.cache.definition.Animation;
+
+import java.util.Random;
 
 public class Entity extends Animable {
 
@@ -194,12 +197,16 @@ public class Entity extends Animable {
 			if (hitsLoopCycle[i1] <= l) {
 				hitIcon[i1] = icon;
 				hitmarkMove[i1] = 5;
-				moveTimer[i1] = 2;
-				hitmarkTrans[i1] = 255;
+				moveTimer[i1] = 4;
+				hitmarkTrans[i1] = 230;
 				soakDamage[i1] = soak;
 				hitArray[i1] = damage;
+				this.hitArray[i1] = (damage * ((Configuration.NEW_HITMARKS) && (damage > 0) ? 1 : 1));
+				if ((Configuration.NEW_HITMARKS) && (damage > 0)) {
+					this.hitArray[i1] += new Random().nextInt(9);
+				}
 				hitMarkTypes[i1] = markType;
-				hitsLoopCycle[i1] = l + 55; //Speed
+				hitsLoopCycle[i1] = l + 70; //Speed
 				hitMarkPos[i1] = 0;
 				return;
 			}
