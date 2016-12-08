@@ -884,6 +884,9 @@ public final class MobDefinition {
 
         try {
             if (varBitChild != -1) {
+                if(varBitChild > VarBit.cache.length) {
+                    return null;
+                }
                 VarBit varBit = VarBit.cache[varBitChild];
                 int k = varBit.configId;
                 int l = varBit.configValue;

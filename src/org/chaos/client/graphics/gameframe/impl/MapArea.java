@@ -309,7 +309,8 @@ public class MapArea extends GameFrame {
 		}
 		CacheSpriteLoader.getCacheSprite(1197).drawSprite((fixed ? 504 : Client.clientWidth - 217), (fixed ? 52 : 12));
 		client.newRegularFont.drawBasicString(str, x + (fixed ? 99 : 100) - width, (fixed ? 65 : 61) + y, 0xFFFFFF, 0);
-		
+
+
 		/*CacheSpriteLoader.getCacheSprite(346).drawSprite(x, fixed ? 50 : 48 + y);
 		client.normalText.drawRegularText(true, x + 3, 0xffffff, "XP:", (fixed ? 63 : 61) + y);
 		String str = df.format(PlayerHandler.totalXP);
@@ -320,51 +321,51 @@ public class MapArea extends GameFrame {
 			client.normalText.drawRegularText(true, x + 99 - client.normalText.getTextWidth("Lots!"), 0xFF0000, "Lots!", (fixed ? 63 : 61) + y);
 		}*/
 		
-		if (!PlayerHandler.gains.isEmpty()) {
-			Iterator<XPGain> it = PlayerHandler.gains.iterator();
-
-			while (it.hasNext()) {
-				XPGain gain = it.next();
-
-				if (gain.getY() < stop) {
-					if (gain.getY() <= 10) {
-						gain.increaseAlpha();
-					}
-
-					if (gain.getY() >= stop - 10) {
-						gain.decreaseAlpha();
-					}
-
-					gain.increaseY();
-				} else if (gain.getY() == stop) {
-					it.remove();
-				}
-
-				int spriteId = gain.getSkill() + 498;
-
-				if (gain.getSkill() == 23) {
-					spriteId = 393;
-				} else if (gain.getSkill() == 24) {
-					spriteId = 521;
-				}
-
-				Sprite sprite = CacheSpriteLoader.getCacheSprite(spriteId);
-
-				if (PlayerHandler.gains.size() > 1) {
-					offsetY = (fixed ? 0 : -20) + currentIndex * 28;
-				}
-
-				if (gain.getY() < stop) {
-					sprite.drawSprite(x + 15 - sprite.myWidth / 2, gain.getY() + offsetY + 66 - sprite.myHeight / 2,
-							gain.getAlpha());
-					client.newSmallFont.drawBasicString(
-							"<trans=" + gain.getAlpha() + ">+" + format.format(gain.getXP()) + "xp", x + 30,
-							gain.getY() + offsetY + 70, 0xCC6600, 0, false);
-				}
-
-				currentIndex++;
-			}
-		}
+//		if (!PlayerHandler.gains.isEmpty()) {
+//			Iterator<XPGain> it = PlayerHandler.gains.iterator();
+//
+//			while (it.hasNext()) {
+//				XPGain gain = it.next();
+//
+//				if (gain.getY() < stop) {
+//					if (gain.getY() <= 10) {
+//						gain.increaseAlpha();
+//					}
+//
+//					if (gain.getY() >= stop - 10) {
+//						gain.decreaseAlpha();
+//					}
+//
+//					gain.increaseY();
+//				} else if (gain.getY() == stop) {
+//					it.remove();
+//				}
+//
+//				int spriteId = gain.getSkill() + 498;
+//
+//				if (gain.getSkill() == 23) {
+//					spriteId = 393;
+//				} else if (gain.getSkill() == 24) {
+//					spriteId = 521;
+//				}
+//
+//				Sprite sprite = CacheSpriteLoader.getCacheSprite(spriteId);
+//
+//				if (PlayerHandler.gains.size() > 1) {
+//					offsetY = (fixed ? 0 : -20) + currentIndex * 28;
+//				}
+//
+//				if (gain.getY() < stop) {
+//					sprite.drawSprite(x + 15 - sprite.myWidth / 2, gain.getY() + offsetY + 66 - sprite.myHeight / 2,
+//							gain.getAlpha());
+//					client.newSmallFont.drawBasicString(
+//							"<trans=" + gain.getAlpha() + ">+" + format.format(gain.getXP()) + "xp", x + 30,
+//							gain.getY() + offsetY + 70, 0xCC6600, 0, false);
+//				}
+//
+//				currentIndex++;
+//			}
+//		}
 	}
 
 	@Override

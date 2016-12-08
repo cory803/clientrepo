@@ -494,9 +494,15 @@ public final class Player extends Entity {
 		if (super.anInt1557 == 65535) {
 			super.anInt1557 = -1;
 		}
+
 		super.runAnimation = stream.getUnsignedShort();
 		if (super.runAnimation == 65535) {
 			super.runAnimation = -1;
+		}
+		if(desc != null) {
+			super.runAnimation = desc.walkAnimation;
+			super.anInt1554 = desc.walkAnimation;
+			super.anInt1511 = desc.standAnimation;
 		}
 		name = TextClass.fixName(TextClass.nameForLong(stream.getLong()));
 		combatLevel = stream.getUnsignedByte();

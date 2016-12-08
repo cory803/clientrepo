@@ -44,6 +44,9 @@ public class CustomObjects {
 			{ 2477, 3303, 9195, 0, 0 },
 			{ 2477, 3308, 9195, 0, 0 },
 
+			//Random tree at home
+			{ -1, 3090, 3503, 0, 0 },
+
 			//Dungeoneering war chest
 			{ 2403, 3281, 9192, 0, 0 },
 			{ 2403, 3282, 9192, 0, 0 },
@@ -330,7 +333,7 @@ public class CustomObjects {
 			//donor altars
 			{ 21764, 3381, 9633, 0, 1 },
 			{ 21764, 3368, 9621, 0, 1 },
-			{ 21764, 3086, 3488, 0, 1 },
+			{ 2654, 3086, 3488, 0, 1 },
 			// skilling anvil
 			{4306, 3375, 9660, 0, 4},
 			// furnace

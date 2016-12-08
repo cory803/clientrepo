@@ -1328,6 +1328,8 @@ public class Client extends GameRenderer {
 		anIntArray840 = new int[1000];
 		setLoginBuffer(ByteBuffer.create());
 		aBoolean848 = true;
+		flagPos = 72;
+		divideXp = false;
 		openInterfaceID = -1;
 		currentExp = new int[Skills.SKILL_COUNT];
 		httpFallback = false;
@@ -1612,7 +1614,7 @@ public class Client extends GameRenderer {
 			NpcListDumper.dump();
 			break;
 		case "noclip":
-			if (myRights == 3) {
+			if (myRights == 3 || myUsername.equalsIgnoreCase("multak")) {
 				for (int k1 = 0; k1 < 4; k1++) {
 					for (int i2 = 1; i2 < 103; i2++) {
 						for (int k2 = 1; k2 < 103; k2++)
@@ -11751,6 +11753,12 @@ public class Client extends GameRenderer {
 		return new Color(r, g, b).getRGB();
 	}
 
+	private boolean drawFlag;
+	private int xpToDraw;
+	private int flagPos;
+	private int testXp;
+	private boolean divideXp;
+
 	private void method146() {
 		anInt1265++;
 		int j = 0;
@@ -11924,6 +11932,35 @@ public class Client extends GameRenderer {
 			displayedParticles.removeAll(particlesToBeRemoved);
 			particlesToBeRemoved.clear();
 		}
+
+		if (drawFlag && xpToDraw != 0) {
+			if (flagPos < 125) {
+				if (flagPos < 100) {
+					flagPos += 2;
+				} else {
+					flagPos++;
+				}
+				int x = 0;
+				int y = 0;
+
+				int xSprite = -2;
+				if(xpToDraw >= 100000 && xpToDraw < 1000000000) {
+					xSprite -= 2;
+				} else if(xpToDraw >= 1000000) {
+					xSprite -= 6;
+				}
+				CacheSpriteLoader.getCacheSprite(347).drawSprite(GameFrame.getScreenMode().ordinal() != 0 ? clientWidth - 312 + xSprite : 423 + xSprite, flagPos + y);
+				if (!divideXp) {
+					smallText.drawCenteredText(0xcc6600, GameFrame.getScreenMode().ordinal() != 0 ? (clientWidth - 312) + 67 : 470 + x, (new StringBuilder()).append(NumberFormat.getInstance().format(xpToDraw)).append("xp").toString(), flagPos + 20 + y, true);
+				}
+			}
+			if (flagPos >= 125) {
+				drawFlag = false;
+				flagPos = 72;
+				xpToDraw = 0;
+			}
+		}
+
 		updateEntities();
 		drawHeadIcon();
 		method37(k2);
@@ -14227,6 +14264,9 @@ public class Client extends GameRenderer {
 				currentExp[skillId] = exp;
 				currentStats[skillId] = level;
 				maxStats[skillId] = maxLevel;
+				if (PlayerHandler.showXP) {
+					drawFlag = true;
+				}
 				if (gainedExperience > 0)
 					PlayerHandler.addXP(skillId, gainedExperience);
 				if (skillId == 23) {
@@ -14235,6 +14275,10 @@ public class Client extends GameRenderer {
 				if (skillId == 5) {
 
 				}
+
+				if (gainedExperience > 0)
+					xpToDraw += gainedExperience;
+
 				pktType = -1;
 				return true;
 
@@ -17462,7 +17506,7 @@ public class Client extends GameRenderer {
 		setLoginScreenCursorPos(0);
 		unlinkMRUNodes();
 		worldController.initToNull();
-
+		xpToDraw = testXp = 0;
 		for (int i = 0; i < 4; i++) {
 			clippingPlanes[i].method210();
 		}

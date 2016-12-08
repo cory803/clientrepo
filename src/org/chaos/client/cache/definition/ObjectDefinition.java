@@ -26,7 +26,7 @@ public final class ObjectDefinition {
     private static final int[] showBlack = {3735, 26346, 26347, 26348, 26358, 26359, 26360, 26361, 26362, 26363,
             26364};
 
-    private static final int[] removeObjects = {26933, 614, 6644, 2111, 11726, 733, 5126, 10527, 10529, 12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
+    private static final int[] removeObjects = {1568, 26933, 614, 6644, 2111, 11726, 733, 5126, 10527, 10529, 12988, 12989, 12987, 15514, 15516, 12986, 28122, 23987, 4651, 4565, 52843, 23897, 23633, 307, 8985, 57264, 23983, 632, 4656,
             24265, 24271, 24272, 24274, 24273, 24275, 24266, 24267, 24268, 24269, 24270, 55349, 2309, 4879};
 
     private static final int[] osrsObjects = {
@@ -1116,6 +1116,11 @@ public final class ObjectDefinition {
                 definition.hasActions = false;
                 break;
 
+            case 2654:
+                definition.name = "Fountain";
+                definition.actions = new String[] {"Drink-from", null, null, null, null};
+                break;
+
             case 21767:
                 definition.setDefaults();
                 definition.objectModelIDs = new int[]{29276};
@@ -1435,7 +1440,7 @@ public final class ObjectDefinition {
             definition.modifiedModelColors = new int[]{74, 43117};
             definition.originalModelColors = new int[]{21543, 21547};
         }
-        if (id == 26945) {
+        if (id == 884) {
             definition.actions = new String[]{"Investigate", "Contribute", null, null, null};
             definition.name = "Well of Goodness";
         }
