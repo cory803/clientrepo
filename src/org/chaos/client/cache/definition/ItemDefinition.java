@@ -168,6 +168,10 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+			case 6808:
+				itemDef.name = "Trusted Dicer Scroll";
+				itemDef.description = "A scroll that can be claimed to prove you are trusted.".getBytes();
+				break;
             /**
              * Treasure Island Keys
              */
