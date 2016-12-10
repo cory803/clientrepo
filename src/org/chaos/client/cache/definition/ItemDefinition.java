@@ -168,6 +168,12 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+			case 7478:
+				itemDef.name = "Target Locator";
+				itemDef.stackable = true;
+				itemDef.description = "A token that will tell you where your target is.".getBytes();
+				itemDef.actions = new String[] { "Activate", null, null, null, null, "Drop" };
+				break;
 			case 6808:
 				itemDef.name = "Trusted Dicer Scroll";
 				itemDef.description = "A scroll that can be claimed to prove you are trusted.".getBytes();
