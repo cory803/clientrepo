@@ -948,9 +948,9 @@ public class GameRenderer extends Applet implements Runnable, MouseListener, Mou
 					return;
 				}
 				if (rotation == -1) {
-					if (Client.clientZoom > 200) {
+					//if (Client.clientZoom > 200) {
 						Client.clientZoom -= 15;
-					}
+					//}
 				} else {
 					if (Client.clientZoom < 900) {
 						Client.clientZoom += 15;

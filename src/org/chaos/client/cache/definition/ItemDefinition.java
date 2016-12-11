@@ -1901,16 +1901,16 @@ public final class ItemDefinition {
 			case 11613:
 				itemDef.setDefaults();
 				itemDef.name = "Dragon kiteshield";
-				itemDef.modelZoom = 1378;
-				itemDef.modelRotation1 = 264;
-				itemDef.modelRotation2 = 1913;
-				itemDef.modelOffset1 = 7;
-				itemDef.modelOffsetY = 58;
+				itemDef.modelZoom = 1560;
+				itemDef.modelRotation1 = 344;
+				itemDef.modelRotation2 = 1104;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffsetY = -16;
 				itemDef.groundActions = new String[] { null, null, "Take", null, null };
 				itemDef.actions = new String[] { null, "Wield", null, null, "Drop" };
-				itemDef.modelID = 70128;
-				itemDef.maleWearId = 70672;
-				itemDef.femaleWearId = 70672;
+				itemDef.modelID = 78503;
+				itemDef.maleWearId = 78502;
+				itemDef.femaleWearId = 78502;
 				break;
 			case 21134:
 				itemDef.setDefaults();
