@@ -6850,7 +6850,7 @@ public class Client extends GameRenderer {
 		}
 	}
 
-	private MapTheme mapTheme = MapTheme.DEFAULT;
+	private MapTheme mapTheme = MapTheme.CHRISTMAS;
 	private boolean queuedMapTheme;
 
 	private void drawGameScreen() {
