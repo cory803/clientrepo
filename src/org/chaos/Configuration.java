@@ -8,7 +8,7 @@ package org.chaos;
 public class Configuration {
 
 	/** CONNECTION **/
-	public final static boolean LOCAL = true;
+	public final static boolean LOCAL = false;
 	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "74.63.248.118"; // 158.69.125.71
 	public final static int SERVER_PORT = 59018;
 
@@ -23,7 +23,7 @@ public class Configuration {
 	/** FILE SERVER **/
 	public final static boolean FILE_SERVER_ENABLED = true;
 	public final static boolean DEVELOPER_FILE_SERVER = false;
-	public final static String JAGCACHED_HOST = "127.0.0.1";// "127.0.0.1";
+	public final static String JAGCACHED_HOST = "74.63.248.118";// "127.0.0.1";
 	public final static int JAGGRAB_PORT = DEVELOPER_FILE_SERVER ? 43596 : 43595;
 	public final static int ONDEMAND_PORT = DEVELOPER_FILE_SERVER ? 43592 : 43593;
 
@@ -31,7 +31,7 @@ public class Configuration {
 	public static final boolean DROPBOX_MODE = false;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.23";
+	public static final String CLIENT_VERSION = "1.24";
 	public final static String CLIENT_NAME = "Chaos " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos"; // Cache
 																	// folder
