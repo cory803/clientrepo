@@ -4983,7 +4983,7 @@ public class Client extends GameRenderer {
 			//org.chaos.map.MapView.main(args);
 			MapView mapview = new MapView();
 			mapview.aab();
-			pushMessage("The world map is still under development...", 0, "");
+			launchURL("http://rsmap.net/");
 		}
 
 		if (action == 1003) {
@@ -5640,9 +5640,14 @@ public class Client extends GameRenderer {
 				updateSetting(interfaceId, !Configuration.NEW_HITMARKS);
 				break;
 			case 26039:
-				changeMenuText = !changeMenuText;
+				Configuration.CHRISTMAS_THEME = !Configuration.CHRISTMAS_THEME;
 				Settings.save();
-				updateSetting(interfaceId, !changeMenuText);
+				updateSetting(interfaceId, !Configuration.CHRISTMAS_THEME);
+				if(!Configuration.CHRISTMAS_THEME) {
+					setMapTheme(MapTheme.DEFAULT);
+				} else {
+					setMapTheme(MapTheme.CHRISTMAS);
+				}
 				break;
 			case 26007:
 				Configuration.NEW_FUNCTION_KEYS = !Configuration.NEW_FUNCTION_KEYS;
@@ -13433,6 +13438,13 @@ public class Client extends GameRenderer {
 							}
 							pushMessage("You have turned the ctrl dropping to "+value+".", 0, "");
 							Configuration.TOGGLE_CTRL = !Configuration.TOGGLE_CTRL;
+						} else if (inputString.toLowerCase().startsWith("::toggleparticles")) {
+							String value = "on";
+							if(Configuration.PARTICLES) {
+								value = "off";
+							}
+							pushMessage("You have turned particles to "+value+".", 0, "");
+							Configuration.PARTICLES = !Configuration.PARTICLES;
 						} else if (inputString.toLowerCase().startsWith("::mipmap")) {
 							Canvas3D.mipmapping = !Canvas3D.mipmapping;
 						} else {

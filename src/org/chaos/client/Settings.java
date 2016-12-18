@@ -82,6 +82,9 @@ public final class Settings {
 				if (stream.available() >= 1) {
 					Configuration.TOGGLE_CTRL = stream.readBoolean();
 				}
+				if (stream.available() >= 1) {
+					Configuration.CHRISTMAS_THEME = stream.readBoolean();
+				}
 			} catch (IOException e) {
 				file.delete();
 				Configuration.SAVE_ACCOUNTS = true;
@@ -188,6 +191,7 @@ public final class Settings {
 				stream.writeBoolean(Configuration.FOG_ENABLED);
 				stream.writeBoolean(Configuration.TOGGLE_ROOF_OFF);
 				stream.writeBoolean(Configuration.TOGGLE_CTRL);
+				stream.writeBoolean(Configuration.CHRISTMAS_THEME);
 
 				stream.close();
 			}

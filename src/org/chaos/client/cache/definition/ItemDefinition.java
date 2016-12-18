@@ -290,10 +290,11 @@ public final class ItemDefinition {
 				itemDef.actions = new String[] {"Heal", null, "Drop-Rate", "Prayer", "Drop"};
 				break;
             case 10547:
-				itemDef.name = "Beta-Tester hat";
+				itemDef.name = "Beta hat";
 				itemDef.description = "A hat that marks the day Chaos went out of beta [November 25th, 2016].".getBytes();
-				itemDef.originalModelColors = new int[] { 22189, 22170, 22047, 22181, 21176, 21175, 22074, 20657, 20780 };
-				itemDef.modifiedModelColors = new int[] { 7485, 3992, 5018, 10425, 6602, 7624, 7630, 14395, 14391 };
+				itemDef.originalModelColors = new int[] { 22189, 22170, 22047, 22181, 21176, 21175, 22074, 20657, 20780, 22189, 22170, 22047, 22181, 21176, 21175, 22074, 20657, 20780 };
+				itemDef.modifiedModelColors = new int[] { 7485, 3992, 5018, 10425, 6602, 7624, 7630, 14395, 14391, 8507, 3990, 5016, 10423, 6600, 7624, 7630, 10297, 10295 };
+				System.out.println("Female wear: "+itemDef.femaleWearId);
             	break;
 //                System.out.println("------");
 //                System.out.println("Name: "+itemDef.name);
