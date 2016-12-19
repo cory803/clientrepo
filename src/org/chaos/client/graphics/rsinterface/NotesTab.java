@@ -181,7 +181,7 @@ public class NotesTab {
 	public void addNote(Client client, String text, int colour, boolean save) {
 		if(countNotes() == maxNotes) {
 			//Not enough space.
-			client.pushMessage("Your notes tab is full.", 0, "");
+			client.pushMessage("Your notes tab is full.", 0, "", client.myPlayer.title);
 			return;
 		}
 		String[] lines = wrapString(text, " ", NOTE_LENGTH);
@@ -194,7 +194,7 @@ public class NotesTab {
 		}
 		if(lines.length > spaces || freeSpace == 0) {
 			//Not enough space.
-			client.pushMessage("Your notes tab is full, make more room by deleting a note.", 0, "");
+			client.pushMessage("Your notes tab is full, make more room by deleting a note.", 0, "", client.myPlayer.title);
 			return;
 		}
 		if(lines.length > 1) {

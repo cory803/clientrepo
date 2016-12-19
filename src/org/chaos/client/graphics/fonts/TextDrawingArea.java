@@ -416,6 +416,12 @@ public final class TextDrawingArea extends Canvas2D {
 			return 0x31A4FF;// hex code
 		if (s.equals("glb"))
 			return 0x4AA02C;
+		if (s.equals("ter"))
+			return 0x8A5A45;
+		if (s.equals("god"))
+			return 0xFFFFFF;
+		if (s.equals("lum"))
+			return 0x008B00;
 		if (s.equals("mon"))
 			return 0x00ff80;
 		if (s.equals("cmm"))
@@ -444,6 +450,8 @@ public final class TextDrawingArea extends Canvas2D {
 			return 0xffff00;
 		if (s.equals("cya"))
 			return 65535;
+		if (s.equals("fro"))
+			return 0x419EE4;
 		if (s.equals("mag"))
 			return 0xff00ff;
 		if (s.equals("whi"))

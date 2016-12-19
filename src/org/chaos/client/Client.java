@@ -68,6 +68,8 @@ import java.util.zip.CRC32;
 import java.util.zip.GZIPOutputStream;
 
 public class Client extends GameRenderer {
+
+	public String title = "null";
 	
 	private NotesTab notesTab = new NotesTab();
 
@@ -97,7 +99,7 @@ public class Client extends GameRenderer {
 			if (copiedColor != -1) {
 				color.color = copiedColor;
 			} else {
-				pushMessage("You don't have a color copied.", 0, "");
+				pushMessage("You don't have a color copied.", 0, "", myPlayer.title);
 			}
 		} else if (action == 4) {// random color
 			randomColor(color);
@@ -1725,12 +1727,12 @@ public class Client extends GameRenderer {
 			}
 
 			if (friendCount >= 100 && anInt1046 != 1) {
-				pushMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", 0, "");
+				pushMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", 0, "", myPlayer.title);
 				return;
 			}
 
 			if (friendCount >= 200) {
-				pushMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", 0, "");
+				pushMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", 0, "", myPlayer.title);
 				return;
 			}
 
@@ -1745,14 +1747,14 @@ public class Client extends GameRenderer {
 
 			for (int i = 0; i < friendCount; i++) {
 				if (friendsListAsLongs[i] == nameAsLong) {
-					pushMessage(s + " is already on your friend list", 0, "");
+					pushMessage(s + " is already on your friend list", 0, "", myPlayer.title);
 					return;
 				}
 			}
 
 			for (int i = 0; i < ignoreCount; i++) {
 				if (ignoreListAsLongs[i] == nameAsLong) {
-					pushMessage("Please remove " + s + " from your ignore list first", 0, "");
+					pushMessage("Please remove " + s + " from your ignore list first", 0, "", myPlayer.title);
 					return;
 				}
 			}
@@ -1783,7 +1785,7 @@ public class Client extends GameRenderer {
 			}
 
 			if (ignoreCount >= 100) {
-				pushMessage("Your ignore list is full. Max of 100 hit", 0, "");
+				pushMessage("Your ignore list is full. Max of 100 hit", 0, "", myPlayer.title);
 				return;
 			}
 
@@ -1798,14 +1800,14 @@ public class Client extends GameRenderer {
 
 			for (int i = 0; i < ignoreCount; i++) {
 				if (ignoreListAsLongs[i] == nameAsLong) {
-					pushMessage(name + " is already on your ignore list", 0, "");
+					pushMessage(name + " is already on your ignore list", 0, "", myPlayer.title);
 					return;
 				}
 			}
 
 			for (int i = 0; i < friendCount; i++) {
 				if (friendsListAsLongs[i] == nameAsLong) {
-					pushMessage("Please remove " + name + " from your friend list first", 0, "");
+					pushMessage("Please remove " + name + " from your friend list first", 0, "", myPlayer.title);
 					return;
 				}
 			}
@@ -2326,7 +2328,7 @@ public class Client extends GameRenderer {
 
 		String menuTooltip = "";
 		String title = "";
-		if (player.loyaltyRank == 0) {
+		if (player.title.equals("null")) {
 			if (player.combatLevel == 0) {
 				menuTooltip = title + player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
 						+ " (level: " + player.combatLevel + ")";
@@ -2338,7 +2340,7 @@ public class Client extends GameRenderer {
 						+ " (level: " + player.combatLevel + ")";
 			}
 		} else {
-			String rank = loyaltyRank(player.loyaltyRank);
+			String rank = player.title;
 			if (player.combatLevel == 0) {
 				menuTooltip = title + "@or2@" + rank + "@whi@" + (rank.length() > 0 ? " " : "") + player.name
 						+ combatDiffColor(myPlayer.combatLevel, player.combatLevel) + " (level: " + player.combatLevel
@@ -4159,12 +4161,12 @@ public class Client extends GameRenderer {
 		int id = nodeId > 0x7fff ? fourthMenuAction : nodeId >> 14 & 0x7fff;
 		if (action == 1045) {// Toggle quick prayers / curses
 			if (openInterfaceID != -1)
-				pushMessage("Please close the open interface first.", 0, "");
+				pushMessage("Please close the open interface first.", 0, "", myPlayer.title);
 			else {
 				if ((currentStats[5] / 10) > 0)
 					handleQuickAidsActive();
 				else
-					pushMessage("You need to recharge your Prayer points at an altar.", 0, "");
+					pushMessage("You need to recharge your Prayer points at an altar.", 0, "", myPlayer.title);
 				return;
 			}
 			return;
@@ -4181,7 +4183,7 @@ public class Client extends GameRenderer {
 			selectDrop = !selectDrop;
 			pushMessage(
 					selectDrop == true ? "Select multiple items in your inventory to drop."
-							: "Multiple item dropping disabled", 0, "");
+							: "Multiple item dropping disabled", 0, "", myPlayer.title);
 			if (!selectDrop) {
 				resetSelectDrops();
 			}
@@ -4296,7 +4298,7 @@ public class Client extends GameRenderer {
 			Configuration.MONEY_POUCH_ENABLED = !Configuration.MONEY_POUCH_ENABLED;
 		} else if (action == 713) {
 			if (openInterfaceID > 0 && openInterfaceID != 3323 && openInterfaceID != 6575) {
-				pushMessage("Please close the interface you have open before opening another one.", 0, "");
+				pushMessage("Please close the interface you have open before opening another one.", 0, "", myPlayer.title);
 				return;
 			}
 			inputTitle = "Enter amount of coins to withdraw:";
@@ -4309,7 +4311,7 @@ public class Client extends GameRenderer {
 		} else if (action == 715) {
 			String cash = getMoneyInPouch();
 			pushMessage("Your money pouch currently contains " + cash + " ("
-					+ Long.parseLong(RSInterface.interfaceCache[8135].message) + ") coins.", 0, "");
+					+ Long.parseLong(RSInterface.interfaceCache[8135].message) + ") coins.", 0, "", myPlayer.title);
 		} else {
 			withdrawingMoneyFromPouch = false;
 		}
@@ -4809,7 +4811,7 @@ public class Client extends GameRenderer {
 				}
 
 				if (!flag9) {
-					pushMessage("Unable to find " + s7, 0, "");
+					pushMessage("Unable to find " + s7, 0, "", myPlayer.title);
 				}
 			}
 		}
@@ -5577,7 +5579,7 @@ public class Client extends GameRenderer {
                     } else {
                         examine = "It's a " + definition.name + ".";
                     }
-                    pushMessage(examine, 0, "");
+                    pushMessage(examine, 0, "", myPlayer.title);
 				}
 			}
 		}
@@ -5741,7 +5743,7 @@ public class Client extends GameRenderer {
 				examine = "It's a " + definition.name + ".";
 			}
 
-			pushMessage(examine, 0, "");
+			pushMessage(examine, 0, "", myPlayer.title);
 		}
 
 		if (action == 244) {
@@ -5772,7 +5774,7 @@ public class Client extends GameRenderer {
 				examine = "It's a " + definition.name + ".";
 			}
 
-			pushMessage(examine, 0, "");
+			pushMessage(examine, 0, "", myPlayer.title);
 		}
 
 		itemSelected = 0; // RIGHT HERE
@@ -10614,9 +10616,9 @@ public class Client extends GameRenderer {
 
 			if (player.textSpoken.charAt(0) == '~') {
 				player.textSpoken = player.textSpoken.substring(1);
-				pushMessage(player.textSpoken, 2, player.name);
+				pushMessage(player.textSpoken, 2, player.name, player.title);
 			} else if (player == myPlayer) {
-				pushMessage(player.textSpoken, 2, player.name);
+				pushMessage(player.textSpoken, 2, player.name, player.title);
 			}
 
 			player.anInt1513 = 0;
@@ -10660,7 +10662,7 @@ public class Client extends GameRenderer {
 						if (rights == 0 && ironman > 0) {
 							rights = 11 + ironman;
 						}
-						pushMessage(s, 2, getPrefix(rights) + player.name);
+						pushMessage(s, 2, getPrefix(rights) + player.name, player.title);
 					} catch (Exception exception) {
 						Signlink.reportError("cde2");
 					}
@@ -13228,7 +13230,7 @@ public class Client extends GameRenderer {
 						getOut().putVariableSizeByte(getOut().position - k);
 						promptInput = TextInput.processText(promptInput);
 						// promptInput = Censor.doCensor(promptInput);
-						pushMessage(promptInput, 6, TextClass.fixName(TextClass.nameForLong(aLong953)));
+						pushMessage(promptInput, 6, TextClass.fixName(TextClass.nameForLong(aLong953)), myPlayer.title);
 						if (privateChatMode == 2) {
 							privateChatMode = 1;
 							getOut().putOpcode(95);
@@ -13436,14 +13438,14 @@ public class Client extends GameRenderer {
 							if(Configuration.TOGGLE_CTRL) {
 								value = "off";
 							}
-							pushMessage("You have turned the ctrl dropping to "+value+".", 0, "");
+							pushMessage("You have turned the ctrl dropping to "+value+".", 0, "", myPlayer.title);
 							Configuration.TOGGLE_CTRL = !Configuration.TOGGLE_CTRL;
 						} else if (inputString.toLowerCase().startsWith("::toggleparticles")) {
 							String value = "on";
 							if(Configuration.PARTICLES) {
 								value = "off";
 							}
-							pushMessage("You have turned particles to "+value+".", 0, "");
+							pushMessage("You have turned particles to "+value+".", 0, "", myPlayer.title);
 							Configuration.PARTICLES = !Configuration.PARTICLES;
 						} else if (inputString.toLowerCase().startsWith("::mipmap")) {
 							Canvas3D.mipmapping = !Canvas3D.mipmapping;
@@ -13529,7 +13531,7 @@ public class Client extends GameRenderer {
 						if (prefixRights == 0 && ironman > 0) {
 							prefixRights = 11 + ironman;
 						}
-						pushMessage(myPlayer.textSpoken, 2, getPrefix(prefixRights) + myPlayer.name);
+						pushMessage(myPlayer.textSpoken, 2, getPrefix(prefixRights) + myPlayer.name, myPlayer.title);
 
 						if (publicChatMode == 2) {
 							publicChatMode = 3;
@@ -14210,7 +14212,7 @@ public class Client extends GameRenderer {
 					String tag = name.replaceAll("null", "");
 					message = TextInput.processText(message);
 					// message = Censor.doCensor(message);
-					pushMessage(message, 16, tag);
+					pushMessage(message, 16, tag, myPlayer.title);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -14682,13 +14684,13 @@ public class Client extends GameRenderer {
 
 					}
 					if (!flag2 && anInt1251 == 0) {
-						pushMessage("wishes to trade with you.", 4, s3);
+						pushMessage("wishes to trade with you.", 4, s3, myPlayer.title);
 					}
 				} else if (s.startsWith(":clan:")) {
-					pushMessage(s.substring(6, s.length()), 16, "");
+					pushMessage(s.substring(6, s.length()), 16, "", myPlayer.title);
 				} else if (s.endsWith("#url#")) {
 					String link = s.substring(0, s.indexOf("#"));
-					pushMessage("Join us at: ", 9, link);
+					pushMessage("Join us at: ", 9, link, myPlayer.title);
 				} else if (s.endsWith(":duelreq:")) {
 					String s4 = s.substring(0, s.indexOf(":"));
 					long l18 = TextClass.longForName(s4);
@@ -14700,7 +14702,7 @@ public class Client extends GameRenderer {
 							flag3 = true;
 					}
 					if (!flag3 && anInt1251 == 0) {
-						pushMessage("wishes to duel with you.", 8, s4);
+						pushMessage("wishes to duel with you.", 8, s4, myPlayer.title);
 					}
 				} else if (s.endsWith(":chalreq:")) {
 					String s5 = s.substring(0, s.indexOf(":"));
@@ -14715,10 +14717,10 @@ public class Client extends GameRenderer {
 					}
 					if (!flag4 && anInt1251 == 0) {
                         String s8 = s.substring(s.indexOf(":") + 1, s.length() - 9);
-                        pushMessage(s8, 8, s5);
+                        pushMessage(s8, 8, s5, myPlayer.title);
                     }
 				} else {
-                    pushMessage(s, 0, "");
+                    pushMessage(s, 0, "", myPlayer.title);
                 }
 				pktType = -1;
 				return true;
@@ -14750,11 +14752,11 @@ public class Client extends GameRenderer {
 						friendsNodeIDs[k24] = i18;
 						if (i18 >= 2) {
 							if (send_message == 0)
-								pushMessage(s7 + " has logged in.", 5, "");
+								pushMessage(s7 + " has logged in.", 5, "", myPlayer.title);
 						}
 						if (i18 <= 1) {
 							if (send_message == 0)
-								pushMessage(s7 + " has logged out.", 5, "");
+								pushMessage(s7 + " has logged out.", 5, "", myPlayer.title);
 						}
 					}
 					s7 = null;
@@ -14936,9 +14938,9 @@ public class Client extends GameRenderer {
 									}).build());
 						}
 						if (playerRights != 0) {
-							pushMessage(message, 7, getPrefix(playerRights) + name);
+							pushMessage(message, 7, getPrefix(playerRights) + name, myPlayer.title);
 						} else {
-							pushMessage(message, 3, name);
+							pushMessage(message, 3, name, myPlayer.title);
 						}
 					} catch (Exception exception1) {
 						exception1.printStackTrace();
@@ -17389,7 +17391,7 @@ public class Client extends GameRenderer {
 		chatPosition[0] = position;
 	}
 
-	public void pushMessage(String chatMessage, int chatType, String chatName) {
+	public void pushMessage(String chatMessage, int chatType, String chatName, String title) {
 		if (chatType == 0 && dialogID != -1) {
 			aString844 = chatMessage;
 			super.clickMode3 = 0;
@@ -17413,7 +17415,7 @@ public class Client extends GameRenderer {
 		chatNames[0] = chatName;
 		chatMessages[0] = chatMessage.trim();
 		chatRights[0] = rights;
-		chatTitles[0] = "";
+		chatTitles[0] = title;
 		chatColor[0] = 0;
 		chatPosition[0] = 0;
 	}
@@ -18223,54 +18225,6 @@ public class Client extends GameRenderer {
 
 	}
 
-	public final String loyaltyRank(int i) {
-		switch (i) {
-		case 1:
-			return "Knight";
-		case 2:
-			return "Realism";
-		case 3:
-			return "Ironman";
-		case 4:
-			return "@or3@Donator";
-		case 5:
-			return "@369@Super";
-		case 6:
-			return "@gre@Extreme";
-		case 7:
-			return "@mag@Legendary";
-		case 8:
-			return "@mds@Moderator";
-		case 9:
-			return "@yel@Administrator";
-		case 10:
-			return "@red@Owner";
-		case 11:
-			return "@spt@Support";
-		case 12:
-			return "@dbl@Developer";
-		case 13:
-			return "@yel@Uber";
-		case 14:
-			return "@glb@Global Mod";
-		case 15:
-			return "@wke@Wiki Editor";
-		case 16:
-			return "@325@Wiki Manager";
-		case 17:
-			return "@red@Manager";
-		case 18:
-			return "@hbd@Hybrid";
-		case 19:
-			return "@smm@Staff Manager";
-        case 20:
-            return "@red@YouTuber";
-        case 21:
-            return "@fmd@Forum Mod";
-		}
-		return "";
-	}
-
 	public void dumpArchive(int archive) {
 		int[] ids = new int[] {};
 		for (int i : ids) {
@@ -18337,7 +18291,7 @@ public class Client extends GameRenderer {
 		}
 
 		if (name == null) {
-			pushMessage("You haven't received any messages to which you can reply.", 0, "");
+			pushMessage("You haven't received any messages to which you can reply.", 0, "", myPlayer.title);
 			return;
 		}
 
@@ -19079,8 +19033,8 @@ public class Client extends GameRenderer {
 				if (mapArea.prayer.getOrbState()) {
 					turnOffPrayers();
 				} else {
-					pushMessage("You don't have any quick prayers selected.", 0, "");
-					pushMessage("Right-click the Prayer button next to the minimap to select some.", 0, "");
+					pushMessage("You don't have any quick prayers selected.", 0, "", myPlayer.title);
+					pushMessage("Right-click the Prayer button next to the minimap to select some.", 0, "", myPlayer.title);
 				}
 				mapArea.prayer.setOrbState(false);
 			}
@@ -19110,8 +19064,8 @@ public class Client extends GameRenderer {
 					turnOffCurses();
 					mapArea.prayer.setOrbState(false);
 				} else {
-					pushMessage("You don't have any quick curses selected.", 0, "");
-					pushMessage("Right-click the Curses button next to the minimap to select some.", 0, "");
+					pushMessage("You don't have any quick curses selected.", 0, "", myPlayer.title);
+					pushMessage("Right-click the Curses button next to the minimap to select some.", 0, "", myPlayer.title);
 				}
 			}
 		}
@@ -19223,7 +19177,7 @@ public class Client extends GameRenderer {
 				}
 			} else {
 				pushMessage("You need a Prayer level of atleast " + prayerLevelRequirements[index] + " to use "
-						+ prayerName[index] + ".", 0, "");
+						+ prayerName[index] + ".", 0, "", myPlayer.title);
 			}
 		} else if (prayerInterfaceType == 32500) {
 			if ((maxStats[5] / 10) >= curseLevelRequirements[index]) {
@@ -19246,7 +19200,7 @@ public class Client extends GameRenderer {
 					inputTaken = true;
 			} else {
 				pushMessage("You need a Prayer level of atleast " + curseLevelRequirements[index] + " to use "
-						+ curseName[index] + ".", 0, "");
+						+ curseName[index] + ".", 0, "", myPlayer.title);
 			}
 		}
 	}

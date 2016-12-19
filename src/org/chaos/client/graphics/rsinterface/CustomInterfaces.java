@@ -5,6 +5,7 @@ import org.chaos.client.Client;
 import org.chaos.client.RSInterface;
 import org.chaos.client.Skills;
 import org.chaos.client.cache.definition.ItemDefinition;
+import org.chaos.client.cache.definition.interfaces.Titles;
 import org.chaos.client.graphics.CacheSpriteLoader;
 import org.chaos.client.graphics.fonts.TextDrawingArea;
 
@@ -377,6 +378,7 @@ public class CustomInterfaces extends RSInterface {
 		editClan();
 		capeColor(tda);
         dropGenerator(tda);
+        titleInterface(tda);
 		dungeonInfo();
 		formParty();
 		addToShop();
@@ -646,6 +648,66 @@ public class CustomInterfaces extends RSInterface {
         }
 
 
+
+	}
+
+	public static void titleInterface(TextDrawingArea[] tda) {
+		RSInterface rsi = addInterface(45400);
+		RSInterface scroll = addTabInterface(45405);
+
+		addSpriteLoader2(45401, 89);
+
+		addCloseButton(45402, 45403, 17001);
+
+		addText(45404, "Titles", tda, 2, 0xff9b00, true, true);
+
+		/**
+		 * Titles in a loop
+		 */
+		int value = 0;
+		for(Titles title : Titles.values()) {
+			addText(45406 + value, title.getName(), tda, 3, 0xff9b00, true, true);
+			addRectangle(45407 + value, 0, 0x121210, false, 490, -1);
+			addText(45408 + value, title.getDescription(), tda, 1, 0xff9b00, true, true);
+			addText(45409 + value, "(0/"+title.getAmount()+")", tda, 0, 0xff9b00, false, true);
+			addHoverButtonWSpriteLoader(45410 + value, 694, 72, 32, "Activate", 0, 45411 + value, 1);
+			addHoveredImageWSpriteLoader(45411 + value, 695, 72, 32, 45412 + value);
+			addText(45413 + value, "Activate", tda, 0, 0xff9933, true, true);
+			addItemOnInterface(45414 + value, 3323, new String[]{});
+			value += 9;
+		}
+
+		scroll.width = 459;
+		scroll.height = 262;
+		scroll.scrollMax = 2000;
+
+		setChildren(Titles.values().length * 8, scroll);
+
+		value = 0;
+		int value2 = 0;
+		int current = 0;
+		for(Titles title : Titles.values()) {
+			setBounds(45406 + value, 458 / 2 - 4, 5 + (57 * current), 0 + value2, scroll);
+			setBounds(45407 + value, 0, 55 + (57 * current), 1 + value2, scroll);
+			setBounds(45408 + value, 458 / 2 - 4, 30 + (57 * current), 2 + value2, scroll);
+			setBounds(45409 + value, 5, 5 + (57 * current), 3 + value2, scroll);
+			setBounds(45410 + value, 345, 10 + (57 * current), 4 + value2, scroll);
+			setBounds(45411 + value, 345, 10 + (57 * current), 5 + value2, scroll);
+			setBounds(45413 + value, 380, 20 + (57 * current), 6 + value2, scroll);
+			setBounds(45414 + value, 75, 11 + (57 * current), 7 + value2, scroll);
+			value += 9;
+			value2 += 8;
+			current++;
+		}
+
+		setChildren(5, rsi);
+
+		setBounds(45401, 12, 15, 0, rsi);
+		setBounds(45402, 472, 21, 1, rsi);
+		setBounds(45403, 472, 21, 2, rsi);
+
+		setBounds(45404, 520 / 2 - 16, 24, 3, rsi);
+		setBounds(45405, 17, 51, 4, rsi);
 
 	}
 

@@ -1,5 +1,6 @@
 package org.chaos.client.graphics.gameframe.impl;
 
+import org.chaos.Configuration;
 import org.chaos.client.Client;
 import org.chaos.client.RSInterface;
 import org.chaos.client.Settings;
@@ -380,14 +381,17 @@ public class ChatArea extends GameFrame {
 									title = title.trim();
 									int position = 0;
 									if (!title.isEmpty()) {
-										xPos += 2;
+										xPos += 0;
 										position = client.chatPosition[i];
 									}
 									if (position == 0) {
-										textDrawingArea.drawBasicString(title, xPos + getOffSetX(),
-												positionY + getOffSetY(), client.chatColor[i], -1, true);
-										xPos += textDrawingArea.getTextWidth(title) + 3;
-										textDrawingArea.drawBasicString(name + ":", xPos + getOffSetX(),
+										textDrawingArea.drawBasicString(" @or3@"+title, xPos + getOffSetX(),
+												positionY + getOffSetY() - 1, client.chatColor[i], -1, true);
+										if(title.contains("@")) {
+											title = title.split("@")[2];
+										}
+										xPos += textDrawingArea.getTextWidth(" "+title) + 2;
+										textDrawingArea.drawBasicString("</shad>"+name + ":", xPos + getOffSetX(),
 												positionY + getOffSetY(), screenMode == ScreenMode.FIXED ? 0 : 0xffffff,
 												screenMode == ScreenMode.FIXED ? -1 : 0x000000, true);
 										xPos += textDrawingArea.getTextWidth(name + ":") + 2;
@@ -396,7 +400,7 @@ public class ChatArea extends GameFrame {
 												screenMode == ScreenMode.FIXED ? 255 : 0x7FA9FF,
 												screenMode == ScreenMode.FIXED ? -1 : 0x000000, true);
 									} else {
-										textDrawingArea.drawBasicString(name, xPos + getOffSetX(),
+										textDrawingArea.drawBasicString("</shad>"+name, xPos + getOffSetX(),
 												positionY + getOffSetY(), screenMode == ScreenMode.FIXED ? 0 : 0xffffff,
 												screenMode == ScreenMode.FIXED ? -1 : 0x000000, true);
 										xPos += textDrawingArea.getTextWidth(name) + 2;
@@ -461,7 +465,7 @@ public class ChatArea extends GameFrame {
 									if (playerRights == 4) {
 										xPos += 2;
 									}
-									textDrawingArea.drawBasicString(name + ":", xPos + getOffSetX(),
+									textDrawingArea.drawBasicString("</shad>"+name + ":", xPos + getOffSetX(),
 											positionY + getOffSetY(), screenMode == ScreenMode.FIXED ? 0 : 0xffffff,
 											screenMode == ScreenMode.FIXED ? -1 : 0, true);
 									xPos += textDrawingArea.getTextWidth(name) + 8;
@@ -613,9 +617,9 @@ public class ChatArea extends GameFrame {
 					}
 					Canvas2D.setDrawingArea(140 + getOffSetY(), 8, 509, 120 + getOffSetY());
 					drawOffsetX += 2;
-					textDrawingArea.drawBasicString(Client.myPlayer.name + ":", drawOffsetX, drawOffsetY,
+					textDrawingArea.drawBasicString(Client.myPlayer.title +" @bla@</shad>"+Client.myPlayer.name + ":", drawOffsetX, drawOffsetY,
 							screenMode == ScreenMode.FIXED ? 0 : 0xffffff, screenMode == ScreenMode.FIXED ? -1 : 0, true);
-					drawOffsetX += textDrawingArea.getTextWidth(Client.myPlayer.name) + 2;
+					drawOffsetX += textDrawingArea.getTextWidth(Client.myPlayer.title + " "+Client.myPlayer.name) + 2;
 					textDrawingArea.drawBasicString(" " + RSFontSystem.handleOldSyntax(client.inputString) + "*",
 							drawOffsetX, drawOffsetY, getScreenMode() == ScreenMode.FIXED ? 255 : 0x7fa9ff, screenMode == ScreenMode.FIXED ? -1 : 0, false);
 					Canvas2D.defaultDrawingAreaSize();
@@ -664,7 +668,7 @@ public class ChatArea extends GameFrame {
 			client.splitChatColor = client.splitChatColor + 1 == SPLIT_CHAT_COLORS.length ? 0
 					: client.splitChatColor + 1;
 			Settings.save();
-			client.pushMessage("You've changed your private split-chat color.", 0, "");
+			//client.pushMessage("You've changed your private split-chat color.", 0, "", myPlayer.title);
 			return true;
 		}
 		return false;

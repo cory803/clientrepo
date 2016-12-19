@@ -27,9 +27,6 @@ public class Configuration {
 	public final static int JAGGRAB_PORT = DEVELOPER_FILE_SERVER ? 43596 : 43595;
 	public final static int ONDEMAND_PORT = DEVELOPER_FILE_SERVER ? 43592 : 43593;
 
-	/** LOADS CACHE FROM ./ IF TRUE, OTHERWISE USER.HOME FOLDER **/
-	public static final boolean DROPBOX_MODE = false;
-
 	/** MAIN CONSTANTS **/
 	public static final String CLIENT_VERSION = "1.24";
 	public final static String CLIENT_NAME = "Chaos " + CLIENT_VERSION + "";

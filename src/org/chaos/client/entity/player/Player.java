@@ -48,7 +48,7 @@ public final class Player extends Entity {
 	public int hintIcon;
 	public boolean skulled;
 	public int playerRights;
-	public int loyaltyRank;
+	public String title;
 	public int[] compColor = new int[] {65214, 65200, 65186, 62995, 64639, 961, 5683};
 	public int[] defaultColors = {65214, 65200, 65186, 62995, 64639, 961, 954, 5706, 5683, 5708};
 	public SourceStopWatch compColorTimer = new SourceStopWatch();
@@ -516,7 +516,7 @@ public final class Player extends Entity {
 			Client.instance.saved_total_levels[2] = ""+totalLevel;
 		}
 		playerRights = stream.getUnsignedShort();
-		loyaltyRank = stream.getUnsignedShort();
+		title = stream.getString();
 		visible = true;
 		aLong1718 = 0L;
 		for (int k1 = 0; k1 < 12; k1++) {

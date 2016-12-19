@@ -61,9 +61,6 @@ public final class Signlink implements Runnable {
 
 	public static String getCacheDirectory() {
 		String cacheLoc = System.getProperty("user.home") + File.separator;
-		if (Configuration.DROPBOX_MODE) {
-			cacheLoc = "./";
-		}
 		cacheLoc += Configuration.CACHE_DIRECTORY_NAME + File.separator;
 		File cacheDir = new File(cacheLoc);
 		if (!cacheDir.exists()) {
@@ -74,9 +71,6 @@ public final class Signlink implements Runnable {
 
 	public static String getOldCacheDirectory() {
 		String cacheLoc = System.getProperty("user.home") + File.separator;
-		if (Configuration.DROPBOX_MODE) {
-			cacheLoc = "./";
-		}
 		return cacheLoc += "ikov_cache2" + File.separator;
 	}
 
