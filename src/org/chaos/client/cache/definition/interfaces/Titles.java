@@ -11,7 +11,11 @@ public enum Titles {
     CHEF("Cook 500 Manta Ray", 500),
     TERMINATOR("Defeat 500 Boss Monsters", 500),
     FISHERMAN("Fish 2000 Rocktails", 1500),
-    LUMBERJACK("Chop 2500 Magic Logs", 2500);
+    LUMBERJACK("Chop 2500 Magic Logs", 2500),
+    DESTROYER("Deal 500K Melee Damage", 500000),
+    PROPKER("Hit 700 with Special Attack", 1),
+    ALCHEMIST("High Alch 1000 Items", 1000),
+    WIZARD("Deal 500K Magic Damage", 500000);
 
     Titles(String description, int amount) {
         this.description = description;

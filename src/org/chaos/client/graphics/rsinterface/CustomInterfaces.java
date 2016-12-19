@@ -669,7 +669,7 @@ public class CustomInterfaces extends RSInterface {
 			addText(45406 + value, title.getName(), tda, 3, 0xff9b00, true, true);
 			addRectangle(45407 + value, 0, 0x121210, false, 490, -1);
 			addText(45408 + value, title.getDescription(), tda, 1, 0xff9b00, true, true);
-			addText(45409 + value, "(0/"+title.getAmount()+")", tda, 0, 0xff9b00, false, true);
+			addText(45409 + value, "(0/"+Client.formatAmountStatic(title.getAmount())+")", tda, 0, 0xff9b00, false, true);
 			addHoverButtonWSpriteLoader(45410 + value, 694, 72, 32, "Activate", 0, 45411 + value, 1);
 			addHoveredImageWSpriteLoader(45411 + value, 695, 72, 32, 45412 + value);
 			addText(45413 + value, "Activate", tda, 0, 0xff9933, true, true);

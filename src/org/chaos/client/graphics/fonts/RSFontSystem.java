@@ -201,6 +201,7 @@ public class RSFontSystem extends Canvas2D {
 		text = text.replaceAll("@god@", "<col=FFFFFF><shad=0>");
 		text = text.replaceAll("@whi@", "<col=ffffff>");
 		text = text.replaceAll("@lum@", "<col=008B00>");
+		text = text.replaceAll("@alc@", "<shad=0><col=E19F00>");
 		text = text.replaceAll("@ter@", "<col=8A5A45>");
 		text = text.replaceAll("@lre@", "<col=ff9040>");
 		text = text.replaceAll("@dre@", "<col=800000>");
