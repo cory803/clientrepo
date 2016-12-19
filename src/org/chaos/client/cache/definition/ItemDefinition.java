@@ -168,6 +168,12 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+            case 11262:
+				itemDef.imitate(get(11250));
+                itemDef.name = "Grenwall Imping Jar";
+                itemDef.description = "Grenwall impling in a jar.".getBytes();
+                itemDef.actions = new String[] { "Loot", null, null, null, null, "Drop" };
+                break;
 			case 7478:
 				itemDef.name = "Target Locator";
 				itemDef.stackable = true;

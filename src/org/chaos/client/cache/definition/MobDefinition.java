@@ -167,11 +167,9 @@ public final class MobDefinition {
                 definition.description = "The wilderness rocktail fishing spot.".getBytes();
                 definition.actions = new String[]{"Fish", null, null, null, null};
                 break;
-            case 6065:
-                definition.copy(get(6061));
+            case 1030:
                 definition.name = "Grenwall Imping";
-                definition.description = "An impling who has an important ingredient.".getBytes();
-                definition.actions = new String[]{"Catch", null, null, null, null};
+                definition.description = "A grenwall impling. Right on, maaan.".getBytes();
                 break;
             case 322:
                 definition.copy(get(635));
