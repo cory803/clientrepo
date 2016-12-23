@@ -522,7 +522,7 @@ public final class MobDefinition {
                 definition.npcModels[0] = ItemDefinition.get(1057).maleWearId; // Hat
                 definition.npcModels[1] = ItemDefinition.get(15040).maleWearId; // Platebody
                 definition.npcModels[2] = ItemDefinition.get(15042).maleWearId; // Platelegs
-                definition.npcModels[3] = ItemDefinition.get(14022).maleWearId; // Cape
+                definition.npcModels[3] = ItemDefinition.get(14019).maleWearId; // Cape
                 definition.npcModels[4] = ItemDefinition.get(15044).maleWearId; // Gloves
                 definition.npcModels[5] = ItemDefinition.get(15043).maleWearId; // Boots
                 definition.npcModels[6] = ItemDefinition.get(19335).maleWearId; // Amulet
@@ -888,9 +888,9 @@ public final class MobDefinition {
 
         try {
             if (varBitChild != -1) {
-                if(varBitChild > VarBit.cache.length) {
-                    return null;
-                }
+               // if(varBitChild > VarBit.cache.length) {
+                    //return null;
+                //}
                 VarBit varBit = VarBit.cache[varBitChild];
                 int k = varBit.configId;
                 int l = varBit.configValue;

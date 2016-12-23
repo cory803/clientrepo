@@ -1609,6 +1609,10 @@ public class Client extends GameRenderer {
 		case "fps":
 			fpsOn = !fpsOn;
 			break;
+			case "reload":
+				unlinkMRUNodes();
+				System.out.println("reloaded");
+				break;
 		case "dumplistitems":
 			ItemListDumper.dump();
 			break;
@@ -2328,33 +2332,23 @@ public class Client extends GameRenderer {
 
 		String menuTooltip = "";
 		String title = "";
-		if (player.title.equals("null")) {
-			if (player.combatLevel == 0) {
-				menuTooltip = title + player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
-						+ " (level: " + player.combatLevel + ")";
-			} else if (player.summoningAdd > 0) {
-				menuTooltip += title + player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
-						+ " (level: " + player.combatLevel + "+" + player.summoningAdd + ")";
-			} else {
-				menuTooltip += title + player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
-						+ " (level: " + player.combatLevel + ")";
-			}
-		} else {
-			String rank = player.title;
-			if (player.combatLevel == 0) {
-				menuTooltip = title + "@or2@" + rank + "@whi@" + (rank.length() > 0 ? " " : "") + player.name
-						+ combatDiffColor(myPlayer.combatLevel, player.combatLevel) + " (level: " + player.combatLevel
-						+ ")";
-			} else if (player.summoningAdd > 0) {
-				menuTooltip += title + "@or2@" + rank + "@whi@" + (rank.length() > 0 ? " " : "") + player.name
-						+ combatDiffColor(myPlayer.combatLevel, player.combatLevel) + " (level: " + player.combatLevel
-						+ "+" + player.summoningAdd + ")";
-			} else {
-				menuTooltip += title + "@or2@" + rank + "@whi@" + (rank.length() > 0 ? " " : "") + player.name
-						+ combatDiffColor(myPlayer.combatLevel, player.combatLevel) + " (level: " + player.combatLevel
-						+ ")";
+		if(player.title != null) {
+			if(!player.title.equals("null")) {
+				title = player.title + " ";
 			}
 		}
+
+		if (player.combatLevel == 0) {
+			menuTooltip = title + "@whi@" +player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
+					+ " (level: " + player.combatLevel + ")";
+		} else if (player.summoningAdd > 0) {
+			menuTooltip += title + "@whi@" +player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
+					+ " (level: " + player.combatLevel + "+" + player.summoningAdd + ")";
+		} else {
+			menuTooltip += title + "@whi@" +player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel)
+					+ " (level: " + player.combatLevel + ")";
+		}
+
 
 		if (itemSelected == 1) {
 			menuActionName[menuActionRow] = "Use " + selectedItemName + " with @whi@" + menuTooltip;
@@ -6247,6 +6241,10 @@ public class Client extends GameRenderer {
 		method70();
 		if (loggedIn && Configuration.MONEY_POUCH_ENABLED) {
 			mapArea.displayMoneyPouch(this);
+		}
+
+		if(loggedIn) {
+
 		}
 
 		if (PlayerHandler.showXP && loggedIn) {

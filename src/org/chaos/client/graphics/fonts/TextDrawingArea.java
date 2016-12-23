@@ -454,6 +454,8 @@ public final class TextDrawingArea extends Canvas2D {
 			return 0xffff00;
 		if (s.equals("cya"))
 			return 65535;
+		if (s.equals("fmd"))
+			return 0x8624FF;
 		if (s.equals("fro"))
 			return 0x419EE4;
 		if (s.equals("mag"))

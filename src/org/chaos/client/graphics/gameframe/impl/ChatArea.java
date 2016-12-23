@@ -386,7 +386,7 @@ public class ChatArea extends GameFrame {
 									}
 									if (title != null) {
 										textDrawingArea.drawBasicString(" @or3@"+title, xPos + getOffSetX(),
-												positionY + getOffSetY() - 1, client.chatColor[i], -1, true);
+												positionY + getOffSetY(), client.chatColor[i], -1, true);
 										if(title.contains("@")) {
 											title = title.split("@")[2];
 										}

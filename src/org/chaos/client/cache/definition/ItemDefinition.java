@@ -97,7 +97,7 @@ public final class ItemDefinition {
 		return (H6bit << 10) + (S3bit << 7) + (L7bit);
 	}
 
-	public static int[] osrsItems = {13204, 3985, 3987, 3989, 3991, 13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
+	public static int[] osrsItems = {11863, 13204, 3985, 3987, 3989, 3991, 13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
@@ -302,20 +302,46 @@ public final class ItemDefinition {
 				itemDef.modifiedModelColors = new int[] { 7485, 3992, 5018, 10425, 6602, 7624, 7630, 14395, 14391, 8507, 3990, 5016, 10423, 6600, 7624, 7630, 10297, 10295 };
 				System.out.println("Female wear: "+itemDef.femaleWearId);
             	break;
-//                System.out.println("------");
-//                System.out.println("Name: "+itemDef.name);
-//                System.out.println("Model ID: "+itemDef.modelID);
-//                System.out.println("Male wear: "+itemDef.maleWearId);
-//              	System.out.println("Female wear: "+itemDef.femaleWearId);
-//				for (int i = 0; i < itemDef.originalModelColors.length; i++) {
-//					System.out.println("originalModelColors: "+itemDef.originalModelColors[i]);
-//					System.out.println("modifiedModelColors: "+itemDef.modifiedModelColors[i]);
-//				}
-//				for (int i = 0; i < itemDef.stackIDs.length; i++) {
-//					System.out.println("stackIDs: "+itemDef.stackIDs[i]);
-//				}
-//                break;
-
+			//case 11863:
+                //System.out.println("------");
+                //System.out.println("Name: "+itemDef.name);
+                //System.out.println("Model ID: "+itemDef.modelID);
+                //System.out.println("Male wear: "+itemDef.maleWearId);
+              	//System.out.println("Female wear: "+itemDef.femaleWearId);
+				//for (int i = 0; i < itemDef.originalModelColors.length; i++) {
+				//	System.out.println("originalModelColors: "+itemDef.originalModelColors[i]);
+				//	System.out.println("modifiedModelColors: "+itemDef.modifiedModelColors[i]);
+				//}
+				//for (int i = 0; i < itemDef.stackIDs.length; i++) {
+				//	System.out.println("stackIDs: "+itemDef.stackIDs[i]);
+				//}
+                //break;
+			case 11863:
+				System.out.println("Rainbow partyhat");
+				System.out.println(""+itemDef.femaleWieldY);
+				itemDef.femaleWieldY = -8; // char up/down
+				itemDef.femaleWieldZ = 6; // char up/down
+				//itemDef.maleWieldX = 55; //char north/south
+				//itemDef.maleWieldY = 0; // char to left/right
+				//itemDef.maleWieldZ = 26; // char up/down
+				//itemDef.femaleWieldX = 55; //char north/south
+				//itemDef.femaleWieldY = 0; // char to left/right
+				//itemDef.femaleWieldZ = 26; // char up/down
+				//itemDef.modelRotation1 = 76;
+				//itemDef.modelRotation2 = 1852;
+				break;
+			case 1040:
+				System.out.println("Yellow partyhat");
+				System.out.println(""+itemDef.maleWieldZ);
+				//itemDef.maleWieldX = 55; //char north/south
+				//itemDef.maleWieldY = 0; // char to left/right
+				//itemDef.maleWieldZ = 26; // char up/down
+				//itemDef.femaleWieldX = 55; //char north/south
+				//itemDef.femaleWieldY = 0; // char to left/right
+				//itemDef.femaleWieldZ = 26; // char up/down
+				//itemDef.modelRotation1 = 76;
+				//itemDef.modelRotation2 = 1852;
+				break;
 			case 21472:
 			case 21473:
 			case 21474:
