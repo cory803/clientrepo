@@ -54,13 +54,6 @@ public final class Player extends Entity {
 	public SourceStopWatch compColorTimer = new SourceStopWatch();
 	public Model compCape;
 
-	/**
-	 * The color of the loyalty title, 255 by default = blue
-	 */
-	public int loyaltyColor = 11158698;
-
-	public int loyaltyPosition = 0;
-
 	public Player() {
 		aLong1697 = -1L;
 		aBoolean1699 = false;
@@ -517,6 +510,9 @@ public final class Player extends Entity {
 		}
 		playerRights = stream.getUnsignedShort();
 		title = stream.getString();
+		if(title.equals("null")) {
+			title = null;
+		}
 		visible = true;
 		aLong1718 = 0L;
 		for (int k1 = 0; k1 < 12; k1++) {

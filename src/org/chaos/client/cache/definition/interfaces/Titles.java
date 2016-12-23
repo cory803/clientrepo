@@ -1,5 +1,7 @@
 package org.chaos.client.cache.definition.interfaces;
 
+import org.chaos.client.entity.player.Player;
+
 /**
  * Stores all the data for titles
  * @Author Jonny
@@ -15,7 +17,18 @@ public enum Titles {
     DESTROYER("Deal 500K Melee Damage", 500000),
     PROPKER("Hit 700 with Special Attack", 1),
     ALCHEMIST("High Alch 1000 Items", 1000),
-    WIZARD("Deal 500K Magic Damage", 500000);
+    WIZARD("Deal 500K Magic Damage", 500000),
+    BLACKSMITH("Smelt 1000 Rune Bars", 1000),
+    THE_REAL("Create A Clan Chat", 1),
+    TZTOK("Defeat Jad", 1),
+    PREMIUM("Become a Premium Donator", 1),
+    EXTREME("Become a Extreme Donator", 1),
+    LEGENDARY("Become a Legendary Donator", 1),
+    UBER("Become a Uber Donator", 1),
+    PLATINUM("Become a Platinum Donator", 1),
+    KNIGHT("Become a Knight (Game Mode)", 1),
+    IRONMAN("Become a Ironman (Game Mode)", 1),
+    REALISM("Become a Realism (Game Mode)", 1);
 
     Titles(String description, int amount) {
         this.description = description;
@@ -38,6 +51,9 @@ public enum Titles {
      * @return
      */
     public String getName() {
+        if(this == Titles.TZTOK) {
+            return "TzTok";
+        }
         return formatText(this.toString().toLowerCase().replace("_", " "));
     }
 

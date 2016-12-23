@@ -182,12 +182,16 @@ public class RSFontSystem extends Canvas2D {
 		text = text.replaceAll("@cya@", "<col=65535>");
 		text = text.replaceAll("@mag@", "<col=ff00ff>");
 		text = text.replaceAll("@whi@", "<col=ffffff>");
+		text = text.replaceAll("@smt@", "<col=000000><shad=000000>");
 		text = text.replaceAll("@lre@", "<col=B0754B>");
 		text = text.replaceAll("@dre@", "<col=800000>");
 		text = text.replaceAll("@bla@", "<col=0>");
 		text = text.replaceAll("@or1@", "<col=ffb000>");
 		text = text.replaceAll("@or2@", "<col=ff7000>");
+		text = text.replaceAll("@pla@", "<col=060000><shad=FFFFF9>");
+		text = text.replaceAll("@or4@", "<col=ff5000>");
 		text = text.replaceAll("@or3@", "<col=ff3000>");
+		text = text.replaceAll("@iro@", "<col=555555><shad=000000>");
 		text = text.replaceAll("@gr1@", "<col=c0ff00>");
 		text = text.replaceAll("@gr2@", "<col=80ff00>");
 		text = text.replaceAll("@gr3@", "<col=40ff00>");
@@ -198,7 +202,8 @@ public class RSFontSystem extends Canvas2D {
 		text = text.replaceAll("@cya@", "<col=65535>");
 		text = text.replaceAll("@fro@", "<col=419EE4>");
 		text = text.replaceAll("@mag@", "<col=ff00ff>");
-		text = text.replaceAll("@god@", "<col=FFFFFF><shad=0>");
+		text = text.replaceAll("@god@", "<col=CAD8B9><shad=0>");
+		text = text.replaceAll("@rea@", "<col=2F3B06>");
 		text = text.replaceAll("@whi@", "<col=ffffff>");
 		text = text.replaceAll("@lum@", "<col=008B00>");
 		text = text.replaceAll("@alc@", "<shad=0><col=E19F00>");

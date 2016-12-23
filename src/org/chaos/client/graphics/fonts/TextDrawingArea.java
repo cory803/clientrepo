@@ -419,7 +419,9 @@ public final class TextDrawingArea extends Canvas2D {
 		if (s.equals("ter"))
 			return 0x8A5A45;
 		if (s.equals("god"))
-			return 0xFFFFFF;
+			return 0xCAD8B9;
+		if (s.equals("rea"))
+			return 0x2F3B06;
 		if (s.equals("lum"))
 			return 0x008B00;
 		if (s.equals("alc"))
@@ -460,6 +462,8 @@ public final class TextDrawingArea extends Canvas2D {
 			return 0xffffff;
 		if (s.equals("bla"))
 			return 0;
+		if (s.equals("smt"))
+			return 0x000000;
 		if (s.equals("lre"))
 			return 16748608;
 		if (s.equals("dre"))
@@ -470,6 +474,12 @@ public final class TextDrawingArea extends Canvas2D {
 			return 0xffb000;
 		if (s.equals("or2"))
 			return 0xff7000;
+		if (s.equals("or4"))
+			return 0xff5000;
+		if (s.equals("iro"))
+			return 0x555555;
+		if (s.equals("pla"))
+			return 0x060000;
 		if (s.equals("or3"))
 			return 0xff3000;
 		if (s.equals("gr1"))
