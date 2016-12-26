@@ -1337,6 +1337,14 @@ public final class ObjectDefinition {
                 definition.hasActions = false;
                 break;
 
+            case 47758:
+            case 47760:
+            case 47762:
+                definition.hasActions = true;
+                definition.actions = new String[5];
+                definition.actions[0] = "Pick-up";
+                break;
+
             case 23109:
                 definition.setDefaults();
                 definition.objectModelIDs = new int[]{29331};

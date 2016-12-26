@@ -27,7 +27,7 @@ public class Configuration {
 	public final static int ONDEMAND_PORT = DEVELOPER_FILE_SERVER ? 43592 : 43593;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.25";
+	public static final String CLIENT_VERSION = "1.26";
 	public final static String CLIENT_NAME = "Chaos " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos"; // Cache
 																	// folder

@@ -2028,6 +2028,10 @@ public final class ItemDefinition {
 				itemDef.maleWearId = 70670;
 				itemDef.femaleWearId = 70699;
 				break;
+			case 15420:
+			case 6542:
+				itemDef.actions = new String[] { "Open", null, null, null, "Destroy" };
+				break;
 			case 11616:
 				itemDef.setDefaults();
 				itemDef.name = "Dragonbone coif";
