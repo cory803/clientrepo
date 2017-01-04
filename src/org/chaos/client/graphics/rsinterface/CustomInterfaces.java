@@ -3296,11 +3296,11 @@ public class CustomInterfaces extends RSInterface {
 				addClickableText(i, "", "Select", tda, 0, 0xFF8900, false, true, 180);
 		}
 
-		addText(30777, "Tier 1", tda, 2, 0xFF9900, false, true);
+		addText(30777, "Easy", tda, 2, 0xFF9900, false, true);
 		scroll.child(k, 30777, 10, 8);
-		addText(37037, "Tier 2", tda, 2, 0xFF9900, false, true);
-		addText(37070, "Tier 3", tda, 2, 0xFF9900, false, true);
-		addText(37097, "Tier 4", tda, 2, 0xFF9900, false, true);
+		addText(37037, "Medium", tda, 2, 0xFF9900, false, true);
+		addText(37070, "Hard", tda, 2, 0xFF9900, false, true);
+		addText(37097, "Elite", tda, 2, 0xFF9900, false, true);
 	}
 
 	private void loyaltyShop() {
@@ -4518,7 +4518,7 @@ public class CustomInterfaces extends RSInterface {
 		addText(26034, "PM Notifications", 0xe4a146, false, true, 52, 0);
 		addText(26036, "HD Fog", 0xe4a146, false, true, 52, 0);
 		addText(26038, "Show Roofs", 0xe4a146, false, true, 52, 0);
-		addText(26040, "Christmas", 0xe4a146, false, true, 52, 0);
+		addText(26040, "Particles", 0xe4a146, false, true, 52, 0);
 		addButton(26007, 4, -1, 484, 485, 15, 15, "Toggle function keys", 650, 1);
 		addButton(26008, 4, -1, 484, 485, 15, 15, "Toggle health bars", 651, 1);
 		addButton(26010, 4, -1, 484, 485, 15, 15, "Toggle cursors", 652, 1);
@@ -4530,7 +4530,7 @@ public class CustomInterfaces extends RSInterface {
 		addButton(26033, 4, -1, 484, 485, 15, 15, "Toggle pm notifications", 659, 1);
 		addButton(26035, 4, -1, 484, 485, 15, 15, "Toggle fog", 660, 1);
 		addButton(26037, 4, -1, 484, 485, 15, 15, "Toggle roofs", 661, 1);
-		addButton(26039, 4, -1, 484, 485, 15, 15, "Toggle christmas theme", 662, 1);
+		addButton(26039, 4, -1, 484, 485, 15, 15, "Toggle particles", 662, 1);
 
 		addCheckmarkHover(26054, 4, 26055, 576, 577, 57, 35, SETTING_CONFIGS[15], 1, "Low Detail", 26056, 577, 577,
 				26057, "", "", 12, 20);

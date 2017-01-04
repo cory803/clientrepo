@@ -85,6 +85,12 @@ public final class Settings {
 				if (stream.available() >= 1) {
 					Configuration.CHRISTMAS_THEME = stream.readBoolean();
 				}
+				if (stream.available() >= 1) {
+					Configuration.PARTICLES = stream.readBoolean();
+				}
+				if (stream.available() >= 1) {
+					Configuration.COMPLETED_ACHIEVEMENTS = stream.readBoolean();
+				}
 			} catch (IOException e) {
 				file.delete();
 				Configuration.SAVE_ACCOUNTS = true;
@@ -192,6 +198,8 @@ public final class Settings {
 				stream.writeBoolean(Configuration.TOGGLE_ROOF_OFF);
 				stream.writeBoolean(Configuration.TOGGLE_CTRL);
 				stream.writeBoolean(Configuration.CHRISTMAS_THEME);
+				stream.writeBoolean(Configuration.PARTICLES);
+				stream.writeBoolean(Configuration.COMPLETED_ACHIEVEMENTS);
 
 				stream.close();
 			}

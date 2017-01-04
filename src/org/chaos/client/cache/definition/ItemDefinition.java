@@ -4654,6 +4654,16 @@ public final class ItemDefinition {
 				itemDef.actions = new String[5];
 				itemDef.actions[4] = "Drop";
 				itemDef.actions[0] = "Open";
+				itemDef.anInt184 = -50;
+				itemDef.anInt196 = -50;
+				break;
+			case 13664:
+				itemDef.setDefaults();
+				itemDef.imitate(get(13663));
+				itemDef.name = "$50 Lottery Ticket";
+				itemDef.actions = new String[5];
+				itemDef.actions[4] = "Drop";
+				itemDef.actions[0] = "Open";
 				break;
 			case 13653:
 				itemDef.name = "Energy fragment";

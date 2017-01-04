@@ -395,6 +395,7 @@ public class Client extends GameRenderer {
 		updateSetting(26035, Configuration.FOG_ENABLED);
 		updateSetting(26037, Configuration.TOGGLE_ROOF_OFF);
 		updateSetting(26039, Configuration.PARTICLES);
+		//updateSetting(30779, Configuration.COMPLETED_ACHIEVEMENTS);
 	}
 
 	private boolean hovered(RSInterface rsi) {
@@ -5630,20 +5631,21 @@ public class Client extends GameRenderer {
 				updateSetting(interfaceId, !Configuration.TOGGLE_ROOF_OFF);
 				loadRegion();
 				break;
+			case 30779:
+				Configuration.COMPLETED_ACHIEVEMENTS = !Configuration.COMPLETED_ACHIEVEMENTS;
+				Settings.save();
+				updateSetting(interfaceId, !Configuration.COMPLETED_ACHIEVEMENTS);
+				performCommand("::togglecompletedachievements-" + Configuration.COMPLETED_ACHIEVEMENTS);
+				break;
 			case 26014:
 				Configuration.NEW_HITMARKS = !Configuration.NEW_HITMARKS;
 				Settings.save();
 				updateSetting(interfaceId, !Configuration.NEW_HITMARKS);
 				break;
 			case 26039:
-				Configuration.CHRISTMAS_THEME = !Configuration.CHRISTMAS_THEME;
+				Configuration.PARTICLES = !Configuration.PARTICLES;
 				Settings.save();
-				updateSetting(interfaceId, !Configuration.CHRISTMAS_THEME);
-				if(!Configuration.CHRISTMAS_THEME) {
-					setMapTheme(MapTheme.DEFAULT);
-				} else {
-					setMapTheme(MapTheme.CHRISTMAS);
-				}
+				updateSetting(interfaceId, !Configuration.PARTICLES);
 				break;
 			case 26007:
 				Configuration.NEW_FUNCTION_KEYS = !Configuration.NEW_FUNCTION_KEYS;
@@ -6855,7 +6857,7 @@ public class Client extends GameRenderer {
 		}
 	}
 
-	private MapTheme mapTheme = MapTheme.CHRISTMAS;
+	private MapTheme mapTheme = MapTheme.DEFAULT;
 	private boolean queuedMapTheme;
 
 	private void drawGameScreen() {
@@ -17728,7 +17730,7 @@ public class Client extends GameRenderer {
 		getToolTipText[2] = ("Next level: " + String.format("%, d", PlayerHandler.getXPForLevel(maxLevel + 1) - currentExp[getSkillIds[skillLevel]]));
 		toolTiptext = getToolTipText[0] + getToolTipText[1];
 		boolean onNewLine = false;
-		if (maxLevel < 99) {
+		if (maxLevel < 99 || (stat == 24 && maxLevel < 120)) {
 			toolTiptext += getToolTipText[2];
 			onNewLine = true;
 		}

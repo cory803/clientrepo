@@ -154,6 +154,7 @@ public final class MobDefinition {
             case 5866:
                 definition.actions = new String[5];
                 definition.actions[1] = "Attack";
+                System.out.println("Cerberus size: "+definition.npcSizeInSquares);
             break;
             case 247:
                 definition.actions = new String[]{"Talk-to", null, null, null, null};
