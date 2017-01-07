@@ -149,6 +149,14 @@ public class ChatArea extends GameFrame {
 					client.menuActionRow++;
 				}
 
+				if(GameFrame.getScreenMode() == ScreenMode.FIXED) {
+					if (client.mouseInRegion(495, 508, 458, 470)) {
+						client.menuActionName[client.menuActionRow] = "Teleports";
+						client.menuActionID[client.menuActionRow] = 10399;
+						client.menuActionRow++;
+					}
+				}
+
 
 				for (int i = 0; i < chatMenuText.length; i++) {
 					if (client.inSprite(false, CacheSpriteLoader.getCacheSprite(0), getxPos() + channelXCoords[i],
@@ -214,6 +222,7 @@ public class ChatArea extends GameFrame {
 
 			if (screenMode == ScreenMode.FIXED) {
 				CacheSpriteLoader.getCacheSprite(3).drawSprite(getOffSetX(), getOffSetY());
+				CacheSpriteLoader.getCacheSprite(708).getResizedSprite(CacheSpriteLoader.getCacheSprite(708), 16, 16).drawSprite(getOffSetX() + 495, getOffSetY() + 120);
 			} else {
 				if (!componentHidden()) {
 					if (!client.messagePromptRaised && client.aString844 == null && client.backDialogID == -1

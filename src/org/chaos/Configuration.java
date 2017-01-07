@@ -28,7 +28,7 @@ public class Configuration {
 	public final static int ONDEMAND_PORT = DEVELOPER_FILE_SERVER ? 43592 : 43593;
 
 	/** MAIN CONSTANTS **/
-	public static final String CLIENT_VERSION = "1.27";
+	public static final String CLIENT_VERSION = "1.28";
 	public final static String CLIENT_NAME = "Chaos " + CLIENT_VERSION + "";
 	public final static String CACHE_DIRECTORY_NAME = "chaos";
 	public final static int USELESS_VERSION = 3;
@@ -56,6 +56,7 @@ public class Configuration {
 	public static boolean NEW_FUNCTION_KEYS = true;
 
 	public static boolean TOGGLE_CTRL = false;
+	public static boolean QUICK_SPECIAL = true;
 
 	public static boolean FOG_ENABLED = true;
 	/**

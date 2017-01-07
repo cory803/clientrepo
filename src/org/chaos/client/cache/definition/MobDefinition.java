@@ -7,6 +7,8 @@ import org.chaos.client.List;
 import org.chaos.client.cache.Archive;
 import org.chaos.client.io.ByteBuffer;
 import org.chaos.client.world.Model;
+import org.chaos.dump.OsrsItemListDumper;
+import org.chaos.dump.OsrsNpcListDumper;
 
 public final class MobDefinition {
 
@@ -19,7 +21,19 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {637, 635, 401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
+    public static int[] osrsNpcs = {7286, 637, 635, 401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
+
+    public static void dumpNpcsList() {
+        System.out.println("dumped "+totalNpcsOsrs+" osrs npcs");
+        for (int i = 1; i < totalNpcsOsrs; i++) {
+            cacheIndex = (cacheIndex + 1) % 20;
+            MobDefinition definition = cache[cacheIndex] = new MobDefinition();
+            osrsBuffer.position = osrsStreamIndices[i];
+            definition.id = i;
+            definition.readValues(osrsBuffer);
+            OsrsNpcListDumper.dump(definition);
+        }
+    }
 
     public static MobDefinition get(int id) {
         for (int i = 0; i < 20; i++) {
@@ -54,6 +68,9 @@ public final class MobDefinition {
                 definition.copy(get(318));
                 definition.adjustVertextPointsXOrY = 105;
                 definition.drawYellowDotOnMap = false;
+                break;
+            case 7286:
+                System.out.println("Skotizo size: "+definition.npcSizeInSquares);
                 break;
             case 1304:
                 definition.actions = new String[] {"Talk-to", null, "Travel-with", null, null};
@@ -753,6 +770,7 @@ public final class MobDefinition {
     }
 
     public static int totalNpcs = 0;
+    public static int totalNpcsOsrs = 0;
 
     public static void load(Archive archive) {
         buffer = new ByteBuffer(archive.get("npc.dat"));
@@ -762,6 +780,7 @@ public final class MobDefinition {
         int totalNPCs = stream2.getUnsignedShort();
         int osrsTotalNPCs = osrsStream2.getUnsignedShort();
         totalNpcs = totalNPCs;
+        totalNpcsOsrs = osrsTotalNPCs;
         streamIndices = new int[totalNPCs];
         osrsStreamIndices = new int[osrsTotalNPCs];
 

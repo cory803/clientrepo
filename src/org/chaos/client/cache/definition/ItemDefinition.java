@@ -14,6 +14,7 @@ import org.chaos.client.graphics.Sprite;
 import org.chaos.client.io.ByteBuffer;
 import org.chaos.client.world.Canvas3D;
 import org.chaos.client.world.Model;
+import org.chaos.dump.OsrsItemListDumper;
 
 public final class ItemDefinition {
 
@@ -97,13 +98,38 @@ public final class ItemDefinition {
 		return (H6bit << 10) + (S3bit << 7) + (L7bit);
 	}
 
-	public static int[] osrsItems = {11863, 13204, 3985, 3987, 3989, 3991, 13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
+	public static int[] osrsItems = {
+			//21028, //Dragon harpoon
+			//21024, //Ancestral robe bottom
+			21021, //Ancestral robe top
+			21018, //Ancestral hat
+			21015, //Dinh's bulwark
+			21012, //Dragon hunter crossbow
+			21009, //Dragon sword
+			21006, //Kodai wand
+			21003, //Elder maul
+			21000, //Twisted buckler
+			20997, //Twisted bow
+
+		13265, 13271, 20053, 19918, 20832, 11863, 13204, 3985, 3987, 3989, 3991, 13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
 	private static final String[] GLOVE_NAME = {
 		"Bronze", "Iron", "Steel", "Black",
 		"Mithril", "Adamant", "Rune", "Dragon",
 		"Barrows"
 	};
+
+	public static void dumpItemsList() {
+		for (int i = 1; i < totalItemsOsrs; i++) {
+			cacheIndex = (cacheIndex + 1) % 10;
+			ItemDefinition itemDef = cache[cacheIndex];
+			bufferOsrs.position = streamIndicesOsrs[i];
+			itemDef.id = i;
+			itemDef.setDefaults();
+			itemDef.readValues(bufferOsrs, true);
+			OsrsItemListDumper.dump(itemDef);
+		}
+	}
 
 		public static ItemDefinition get(int id) {
 		for (int i = 0; i < 10; i++) {
@@ -183,6 +209,26 @@ public final class ItemDefinition {
 			case 6808:
 				itemDef.name = "Trusted Dicer Scroll";
 				itemDef.description = "A scroll that can be claimed to prove you are trusted.".getBytes();
+				break;
+			case 20832:
+				System.out.println("the name: "+itemDef.name);
+				break;
+			case 21003:
+				//itemDef.femaleWieldZ = 14; // char up/down
+				itemDef.maleWieldY = 2; // char up/down
+				itemDef.femaleWieldY = 2; // char up/down
+				break;
+			case 21015:
+				itemDef.femaleWieldX = 9; //Closer to character
+				itemDef.femaleWieldZ = 4;
+				itemDef.femaleWieldY = -5;
+				break;
+			case 21006:
+				itemDef.femaleWieldY = 4; //Closer to character
+				itemDef.maleWieldY = 4; //Closer to character
+				break;
+			case 20997:
+				itemDef.femaleWieldY = 4; //Closer to character
 				break;
             /**
              * Treasure Island Keys
@@ -315,10 +361,12 @@ public final class ItemDefinition {
 				//for (int i = 0; i < itemDef.stackIDs.length; i++) {
 				//	System.out.println("stackIDs: "+itemDef.stackIDs[i]);
 				//}
-                //break;
+               // break;
 			case 11863:
 				System.out.println("Rainbow partyhat");
 				System.out.println(""+itemDef.femaleWieldY);
+				itemDef.maleWieldY = -8; // char up/down
+				itemDef.maleWieldZ = 6; // char up/down
 				itemDef.femaleWieldY = -8; // char up/down
 				itemDef.femaleWieldZ = 6; // char up/down
 				//itemDef.maleWieldX = 55; //char north/south
@@ -331,8 +379,6 @@ public final class ItemDefinition {
 				//itemDef.modelRotation2 = 1852;
 				break;
 			case 1040:
-				System.out.println("Yellow partyhat");
-				System.out.println(""+itemDef.maleWieldZ);
 				//itemDef.maleWieldX = 55; //char north/south
 				//itemDef.maleWieldY = 0; // char to left/right
 				//itemDef.maleWieldZ = 26; // char up/down

@@ -855,6 +855,24 @@ public class RSInterface {
 		tab.tooltip = text;
 	}
 
+	public static void addHoverButtonWSpriteLoader3(int i, int spriteId, int width, int height, String text,
+			int contentType, int hoverOver, int aT) {// hoverable
+		// button
+		RSInterface tab = addTabInterface(i);
+		tab.id = i;
+		tab.parentID = i;
+		tab.type = 5;
+		tab.atActionType = aT;
+		tab.contentType = contentType;
+		tab.opacity = 0;
+		tab.hoverType = hoverOver;
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(spriteId);
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(spriteId);
+		tab.width = width;
+		tab.height = height;
+		tab.tooltip = text;
+	}
+
 	public static void addHoverButtonWSpriteLoader2(int i, int spriteId, int width, int height, String text,
 			int contentType, int hoverOver, int aT) {// hoverable
 		// button
@@ -2381,6 +2399,24 @@ public class RSInterface {
 		tab.child(0, imgInterface, 0, 0);
 	}
 
+	public static void addHoveredImageWSpriteLoader3(int i, int spriteId, int w, int h, int imgInterface) {
+		RSInterface tab = addTabInterface(i);
+		tab.id = i;
+		tab.parentID = i;
+		tab.type = 0;
+		tab.atActionType = 0;
+		tab.contentType = 0;
+		tab.opacity = 0;
+		tab.hoverType = -1;
+		tab.scrollMax = 0;
+		tab.interfaceShown = true;
+		tab.width = w;
+		tab.height = h;
+		addHoverImageWSpriteLoader3(imgInterface, spriteId);
+		tab.totalChildren(1);
+		tab.child(0, imgInterface, 0, 0);
+	}
+
 	public static void addHoveredImageOpacityWSpriteLoader(int i, int spriteId, int w, int h, int imgInterface) {
 		RSInterface tab = addTabInterface(i);
 		tab.id = i;
@@ -2446,6 +2482,21 @@ public class RSInterface {
 		tab.hoverType = 52;
 		tab.sprite2 = CacheSpriteLoader.getCacheSprite(spriteId);
 		tab.sprite1 = CacheSpriteLoader.getCacheSprite(spriteId);
+	}
+
+	public static void addHoverImageWSpriteLoader3(int i, int spriteId) {
+		RSInterface tab = addTabInterface(i);
+		tab.id = i;
+		tab.parentID = i;
+		tab.type = 5;
+		tab.atActionType = 0;
+		tab.contentType = 0;
+		tab.width = 512;
+		tab.height = 334;
+		tab.opacity = 0;
+		tab.hoverType = 52;
+		tab.sprite2 = CacheSpriteLoader.getCacheSprite3(spriteId);
+		tab.sprite1 = CacheSpriteLoader.getCacheSprite3(spriteId);
 	}
 
 	public static void addHoverSpriteLoaderButton(int i, int spriteId, int width, int height, String text,

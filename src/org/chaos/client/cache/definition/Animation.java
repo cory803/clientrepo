@@ -3,10 +3,12 @@ package org.chaos.client.cache.definition;
 import org.chaos.client.FrameReader;
 import org.chaos.client.cache.Archive;
 import org.chaos.client.io.ByteBuffer;
+import org.chaos.dump.OsrsAnimationListDumper;
+import org.chaos.dump.OsrsItemListDumper;
 
 public final class Animation {
 
-    public static int[] osrsAnimations = {5070, 5805, 1829, 1828, 1688, 2417};
+    public static int[] osrsAnimations = {7507, 7508, 7509, 5070, 5805, 1829, 1828, 1688, 2417};
     public static int[] grabFileId = {};
 
     public static void dumpFileId(int frame) {
@@ -17,6 +19,12 @@ public final class Animation {
         file = Integer.parseInt(s.substring(0, s.length() - 4), 16);
         k = Integer.parseInt(s.substring(s.length() - 4), 16);
         System.out.println("Frame: "+frame+" - File: "+file);
+    }
+
+    public static void dumpAnimationsList() {
+        for (int i = 1; i < cacheOsrs.length; i++) {
+            OsrsAnimationListDumper.dump(i, cacheOsrs[i]);
+        }
     }
 
     public static void unpackConfig(Archive streamLoader) {
@@ -38,12 +46,21 @@ public final class Animation {
                 if(j == grabFileId[s])
                     dumpFileId(cacheOsrs[j].frameIDs[0]);
             }
+            cacheOsrs[j].id = j;
         }
+
         for (int j = 0; j < length; j++) {
             if (cache[j] == null)
                 cache[j] = new Animation();
 
                 cache[j].readValues(stream);
+
+            /**
+             * Raid animations
+             */
+
+            cache[j].id = j;
+
             /*
 			 * Zulrah
 			 */
@@ -51,6 +68,11 @@ public final class Animation {
 
             }
             switch (j) {
+                case 7518:
+                    cache[j].delays = new int[] {12,12,12,12,12,12,12,12,12,};
+                    cache[j].frameIDs = new int[]{123011106,123011101,123011100,123011085,123011094,123011131,123011091,123011111,123011103,};
+                    cache[j].frameCount = 9;
+                    break;
                 case 4550:
                     cache[j] = new Animation();
                     // cache[j].id = 15448;
@@ -842,6 +864,7 @@ public final class Animation {
         delayType = 2;
     }
 
+    public int id;
     public static Animation cache[];
     public static Animation cacheOsrs[];
     public int frameCount;

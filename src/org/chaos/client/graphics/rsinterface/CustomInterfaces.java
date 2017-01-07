@@ -42,6 +42,594 @@ public class CustomInterfaces extends RSInterface {
 		tab.child(7, 18738, 103, 162);
 	}
 
+	public static void bossTeleports(TextDrawingArea[] tda)
+	{
+		RSInterface rsInterface = addInterface(60600);
+		addSpriteLoader3(60601, 36);
+
+		addText(60706, "Boss Teleports", tda, 2, 0xff9b00, true, true);
+		addText(60707, "There are 7 other bosses in the wilderness", tda, 1, 0xff9b00, true, true);
+
+		addHoverButtonWSpriteLoader3(60602, 39, 114, 35, "Select", 0, 60603, 1);
+		addHoveredImageWSpriteLoader3(60603, 40, 114, 35, 60604);
+		addHoverButtonWSpriteLoader3(60605, 39, 114, 35, "Select", 0, 60606, 1);
+		addHoveredImageWSpriteLoader3(60606, 40, 114, 35, 60607);
+		addHoverButtonWSpriteLoader3(60608, 39, 114, 35, "Select", 0, 60609, 1);
+		addHoveredImageWSpriteLoader3(60609, 40, 114, 35, 60610);
+		addHoverButtonWSpriteLoader3(60611, 39, 114, 35, "Select", 0, 60612, 1);
+		addHoveredImageWSpriteLoader3(60612, 40, 114, 35, 60613);
+		addHoverButtonWSpriteLoader3(60614, 39, 114, 35, "Select", 0, 60615, 1);
+		addHoveredImageWSpriteLoader3(60615, 40, 114, 35, 60616);
+		addHoverButtonWSpriteLoader3(60617, 39, 114, 35, "Select", 0, 60618, 1);
+		addHoveredImageWSpriteLoader3(60618, 40, 114, 35, 60619);
+
+
+		addHoverButtonWSpriteLoader3(60622, 41, 90, 32, "Select", 0, 60623, 1);
+		addHoveredImageWSpriteLoader3(60623, 42, 90, 32, 60624);
+		addHoverButtonWSpriteLoader3(60625, 41, 90, 32, "Select", 0, 60626, 1);
+		addHoveredImageWSpriteLoader3(60626, 42, 90, 32, 60627);
+		addHoverButtonWSpriteLoader3(60628, 41, 90, 32, "Select", 0, 60629, 1);
+		addHoveredImageWSpriteLoader3(60629, 42, 90, 32, 60630);
+		addHoverButtonWSpriteLoader3(60631, 41, 90, 32, "Select", 0, 60632, 1);
+		addHoveredImageWSpriteLoader3(60632, 42, 90, 32, 60633);
+		addHoverButtonWSpriteLoader3(60634, 41, 90, 32, "Select", 0, 60635, 1);
+		addHoveredImageWSpriteLoader3(60635, 42, 90, 32, 60636);
+		addHoverButtonWSpriteLoader3(60637, 41, 4190, 32, "Select", 0, 60638, 1);
+		addHoveredImageWSpriteLoader3(60638, 42, 90, 32, 60639);
+		addHoverButtonWSpriteLoader3(60640, 41, 90, 32, "Select", 0, 60641, 1);
+		addHoveredImageWSpriteLoader3(60641, 42, 90, 32, 60642);
+		addHoverButtonWSpriteLoader3(60643, 41, 90, 32, "Select", 0, 60644, 1);
+		addHoveredImageWSpriteLoader3(60644, 42, 90, 32, 60645);
+		addHoverButtonWSpriteLoader3(60646, 41, 90, 32, "Select", 0, 60647, 1);
+		addHoveredImageWSpriteLoader3(60647, 42, 90, 32, 60648);
+
+
+		addHoverButtonWSpriteLoader3(60691, 41, 90, 32, "Select", 0, 60692, 1);
+		addHoveredImageWSpriteLoader3(60692, 42, 90, 32, 60693);
+		addHoverButtonWSpriteLoader3(60694, 41, 90, 32, "Select", 0, 60695, 1);
+		addHoveredImageWSpriteLoader3(60695, 42, 90, 32, 60696);
+		addHoverButtonWSpriteLoader3(60697, 41, 90, 32, "Select", 0, 60698, 1);
+		addHoveredImageWSpriteLoader3(60698, 42, 90, 32, 60699);
+
+		addHoverButtonWSpriteLoader3(60652, 43, 16, 16, "Select", 0, 60653, 1);
+		addHoveredImageWSpriteLoader3(60653, 44, 16, 16, 60654);
+
+
+		addText(60656, "Cities", tda, 1, 16252462, true, true);
+		addText(60657, "Skilling", tda, 1, 16252462, true, true);
+		addText(60658, "Minigames", tda, 1, 16252462, true, true);
+		addText(60659, "Monsters", tda, 1, 16252462, true, true);
+		addText(60660, "Dungeons", tda, 1, 16252462, true, true);
+		addText(60661, "Bosses", tda, 1, 16252462, true, true);
+
+		addText(60662, "", tda, 1, 16750623, true, true);
+		addText(60663, "", tda, 1, 16750623, true, true);
+		addText(60664, "", tda, 1, 16750623, true, true);
+		addText(60665, "", tda, 1, 16750623, true, true);
+		addText(60666, "", tda, 1, 16750623, true, true);
+		addText(60667, "", tda, 1, 16750623, true, true);
+		addText(60668, "", tda, 1, 16750623, true, true);
+		addText(60669, "", tda, 1, 16750623, true, true);
+		addText(60670, "", tda, 1, 16750623, true, true);
+		addText(60671, "", tda, 1, 16750623, true, true);
+		addText(60672, "", tda, 1, 16750623, true, true);
+		addText(60673, "", tda, 1, 16750623, true, true);
+		addText(60674, "", tda, 1, 16750623, true, true);
+		addText(60675, "", tda, 1, 16750623, true, true);
+		addText(60676, "", tda, 1, 16750623, true, true);
+		addText(60677, "", tda, 1, 16750623, true, true);
+		addText(60678, "", tda, 1, 16750623, true, true);
+		addText(60679, "", tda, 1, 16750623, true, true);
+
+		addText(18374, "", tda, 1, 16750623, true, true);
+		addText(60701, "", tda, 1, 16750623, true, true);
+		addText(60702, "", tda, 1, 16750623, true, true);
+		addText(60703, "", tda, 1, 16750623, true, true);
+		addText(60704, "", tda, 1, 16750623, true, true);
+		addText(60705, "", tda, 1, 16750623, true, true);
+
+
+
+		addText(60690, " ", tda, 2, 16750623, true, true);
+		setChildren(72, rsInterface);
+		rsInterface.child(0, 60601, 6, 14);
+		rsInterface.child(1, 60602, 19, 41);
+		rsInterface.child(2, 60603, 19, 41);
+		rsInterface.child(3, 60605, 19, 76);
+		rsInterface.child(4, 60606, 19, 76);
+		rsInterface.child(5, 60608, 19, 111);
+		rsInterface.child(6, 60609, 19, 111);
+		rsInterface.child(7, 60611, 19, 146);
+		rsInterface.child(8, 60612, 19, 146);
+		rsInterface.child(9, 60614, 19, 181);
+		rsInterface.child(10, 60615, 19, 181);
+		rsInterface.child(11, 60617, 19, 216);
+		rsInterface.child(12, 60618, 19, 216);
+		rsInterface.child(13, 60622, 153, 60);
+		rsInterface.child(14, 60623, 153, 60);
+		rsInterface.child(15, 60625, 267, 60);
+		rsInterface.child(16, 60626, 267, 60);
+		rsInterface.child(17, 60628, 383, 60);
+		rsInterface.child(18, 60629, 383, 60);
+		rsInterface.child(19, 60631, 153, 108);
+		rsInterface.child(20, 60632, 153, 108);
+		rsInterface.child(21, 60634, 267, 108);
+		rsInterface.child(22, 60635, 267, 108);
+		rsInterface.child(23, 60637, 383, 108);
+		rsInterface.child(24, 60638, 383, 108);
+		rsInterface.child(25, 60640, 153, 156);
+		rsInterface.child(26, 60641, 153, 156);
+		rsInterface.child(27, 60643, 267, 156);
+		rsInterface.child(28, 60644, 267, 156);
+		rsInterface.child(29, 60646, 383, 156);
+		rsInterface.child(30, 60647, 383, 156);
+
+		rsInterface.child(31, 60652, 484, 17);
+		rsInterface.child(32, 60653, 484, 17);
+
+		rsInterface.child(33, 60656, 75, 50);
+		rsInterface.child(34, 60657, 75, 85);
+		rsInterface.child(35, 60658, 75, 120);
+		rsInterface.child(36, 60659, 75, 155);
+		rsInterface.child(37, 60660, 75, 190);
+		rsInterface.child(38, 60661, 75, 225);
+		rsInterface.child(39, 60662, 198, 61 + 7);
+		rsInterface.child(40, 60663, 198, 75);
+		rsInterface.child(41, 60664, 313, 61);
+		rsInterface.child(42, 60665, 313, 75);
+		rsInterface.child(43, 60666, 429, 61);
+		rsInterface.child(44, 60667, 429, 75);
+		rsInterface.child(45, 60668, 198, 109);
+		rsInterface.child(46, 60669, 198, 122);
+		rsInterface.child(47, 60670, 313, 109 + 7);
+		rsInterface.child(48, 60671, 313, 123);
+		rsInterface.child(49, 60672, 429, 109 + 7);
+		rsInterface.child(50, 60673, 429, 123);
+		rsInterface.child(51, 60674, 198, 157 + 7);
+		rsInterface.child(52, 60675, 198, 171);
+		rsInterface.child(53, 60676, 313, 157 + 7);
+		rsInterface.child(54, 60677, 313, 171);
+		rsInterface.child(55, 60678, 429, 157);
+		rsInterface.child(56, 60679, 429, 171);
+
+
+		rsInterface.child(57, 60690, 258, 18);
+		rsInterface.child(58, 60691, 153, 204);
+		rsInterface.child(59, 60692, 153, 204);
+		rsInterface.child(60, 60694, 267, 204);
+		rsInterface.child(61, 60695, 267, 204);
+		rsInterface.child(62, 60697, 383, 204);
+		rsInterface.child(63, 60698, 383, 204);
+		rsInterface.child(64, 18374, 198, 205 + 7);
+		rsInterface.child(65, 60701, 198, 219);
+		rsInterface.child(66, 60702, 313, 205);
+		rsInterface.child(67, 60703, 313, 219);
+		rsInterface.child(68, 60704, 429, 205 + 7);
+		rsInterface.child(69, 60705, 429, 219);
+		rsInterface.child(70, 60706, 263, 17);
+		rsInterface.child(71, 60707, 316, 250);
+	}
+
+	public static void cityTeleports(TextDrawingArea[] tda)
+	{
+		RSInterface rsInterface = addInterface(60700);
+
+		addText(60706, "City Teleports", tda, 2, 0xff9b00, true, true);
+
+		setChildren(71, rsInterface);
+		rsInterface.child(0, 60601, 6, 14);
+		rsInterface.child(1, 60602, 19, 41);
+		rsInterface.child(2, 60603, 19, 41);
+		rsInterface.child(3, 60605, 19, 76);
+		rsInterface.child(4, 60606, 19, 76);
+		rsInterface.child(5, 60608, 19, 111);
+		rsInterface.child(6, 60609, 19, 111);
+		rsInterface.child(7, 60611, 19, 146);
+		rsInterface.child(8, 60612, 19, 146);
+		rsInterface.child(9, 60614, 19, 181);
+		rsInterface.child(10, 60615, 19, 181);
+		rsInterface.child(11, 60617, 19, 216);
+		rsInterface.child(12, 60618, 19, 216);
+		rsInterface.child(13, 60622, 153, 60);
+		rsInterface.child(14, 60623, 153, 60);
+		rsInterface.child(15, 60625, 267, 60);
+		rsInterface.child(16, 60626, 267, 60);
+		rsInterface.child(17, 60628, 383, 60);
+		rsInterface.child(18, 60629, 383, 60);
+		rsInterface.child(19, 60631, 153, 108);
+		rsInterface.child(20, 60632, 153, 108);
+		rsInterface.child(21, 60634, 267, 108);
+		rsInterface.child(22, 60635, 267, 108);
+		rsInterface.child(23, 60637, 383, 108);
+		rsInterface.child(24, 60638, 383, 108);
+		rsInterface.child(25, 60640, 153, 156);
+		rsInterface.child(26, 60641, 153, 156);
+		rsInterface.child(27, 60643, 267, 156);
+		rsInterface.child(28, 60644, 267, 156);
+		rsInterface.child(29, 60646, 383, 156);
+		rsInterface.child(30, 60647, 383, 156);
+
+		rsInterface.child(31, 60652, 484, 17);
+		rsInterface.child(32, 60653, 484, 17);
+
+		rsInterface.child(33, 60656, 75, 50);
+		rsInterface.child(34, 60657, 75, 85);
+		rsInterface.child(35, 60658, 75, 120);
+		rsInterface.child(36, 60659, 75, 155);
+		rsInterface.child(37, 60660, 75, 190);
+		rsInterface.child(38, 60661, 75, 225);
+		rsInterface.child(39, 60662, 198, 68);
+		rsInterface.child(40, 60663, 198, 75);
+		rsInterface.child(41, 60664, 313, 61 + 7);
+		rsInterface.child(42, 60665, 313, 75);
+		rsInterface.child(43, 60666, 429, 61 + 7);
+		rsInterface.child(44, 60667, 429, 75);
+		rsInterface.child(45, 60668, 198, 109 + 7);
+		rsInterface.child(46, 60669, 198, 122);
+		rsInterface.child(47, 60670, 313, 109 + 7);
+		rsInterface.child(48, 60671, 313, 123);
+		rsInterface.child(49, 60672, 429, 109 + 7);
+		rsInterface.child(50, 60673, 429, 123);
+		rsInterface.child(51, 60674, 198, 157 + 7);
+		rsInterface.child(52, 60675, 198, 171);
+		rsInterface.child(53, 60676, 313, 157 + 7);
+		rsInterface.child(54, 60677, 313, 171);
+		rsInterface.child(55, 60678, 429, 157 + 7);
+		rsInterface.child(56, 60679, 429, 171);
+
+
+		rsInterface.child(57, 60690, 258, 18);
+		rsInterface.child(58, 60691, 153, 204);
+		rsInterface.child(59, 60692, 153, 204);
+		rsInterface.child(60, 60694, 267, 204);
+		rsInterface.child(61, 60695, 267, 204);
+		rsInterface.child(62, 60697, 383, 204);
+		rsInterface.child(63, 60698, 383, 204);
+		rsInterface.child(64, 18374, 198, 204 + 7);
+		rsInterface.child(65, 60701, 198, 219);
+		rsInterface.child(66, 60702, 313, 205 + 7);
+		rsInterface.child(67, 60703, 313, 219);
+		rsInterface.child(68, 60704, 429, 205 + 7);
+		rsInterface.child(69, 60705, 429, 219);
+		rsInterface.child(70, 60706, 263, 17);
+	}
+
+	public static void skillingTeleports(TextDrawingArea[] tda)
+	{
+		RSInterface rsInterface = addInterface(60800);
+
+		addText(60706, "Skilling Teleports", tda, 2, 0xff9b00, true, true);
+
+		setChildren(71, rsInterface);
+		rsInterface.child(0, 60601, 6, 14);
+		rsInterface.child(1, 60602, 19, 41);
+		rsInterface.child(2, 60603, 19, 41);
+		rsInterface.child(3, 60605, 19, 76);
+		rsInterface.child(4, 60606, 19, 76);
+		rsInterface.child(5, 60608, 19, 111);
+		rsInterface.child(6, 60609, 19, 111);
+		rsInterface.child(7, 60611, 19, 146);
+		rsInterface.child(8, 60612, 19, 146);
+		rsInterface.child(9, 60614, 19, 181);
+		rsInterface.child(10, 60615, 19, 181);
+		rsInterface.child(11, 60617, 19, 216);
+		rsInterface.child(12, 60618, 19, 216);
+		rsInterface.child(13, 60622, 153, 60);
+		rsInterface.child(14, 60623, 153, 60);
+		rsInterface.child(15, 60625, 267, 60);
+		rsInterface.child(16, 60626, 267, 60);
+		rsInterface.child(17, 60628, 383, 60);
+		rsInterface.child(18, 60629, 383, 60);
+		rsInterface.child(19, 60631, 153, 108);
+		rsInterface.child(20, 60632, 153, 108);
+		rsInterface.child(21, 60634, 267, 108);
+		rsInterface.child(22, 60635, 267, 108);
+		rsInterface.child(23, 60637, 383, 108);
+		rsInterface.child(24, 60638, 383, 108);
+		rsInterface.child(25, 60640, 153, 156);
+		rsInterface.child(26, 60641, 153, 156);
+		rsInterface.child(27, 60643, 267, 156);
+		rsInterface.child(28, 60644, 267, 156);
+		rsInterface.child(29, 60646, 383, 156);
+		rsInterface.child(30, 60647, 383, 156);
+
+		rsInterface.child(31, 60652, 484, 17);
+		rsInterface.child(32, 60653, 484, 17);
+
+		rsInterface.child(33, 60656, 75, 50);
+		rsInterface.child(34, 60657, 75, 85);
+		rsInterface.child(35, 60658, 75, 120);
+		rsInterface.child(36, 60659, 75, 155);
+		rsInterface.child(37, 60660, 75, 190);
+		rsInterface.child(38, 60661, 75, 225);
+		rsInterface.child(39, 60662, 198, 61 + 7);
+		rsInterface.child(40, 60663, 198, 75);
+		rsInterface.child(41, 60664, 313, 61);
+		rsInterface.child(42, 60665, 313, 75);
+		rsInterface.child(43, 60666, 429, 61);
+		rsInterface.child(44, 60667, 429, 75);
+		rsInterface.child(45, 60668, 198, 109);
+		rsInterface.child(46, 60669, 198, 122);
+		rsInterface.child(47, 60670, 313, 109);
+		rsInterface.child(48, 60671, 313, 123);
+		rsInterface.child(49, 60672, 429, 109);
+		rsInterface.child(50, 60673, 429, 123);
+		rsInterface.child(51, 60674, 198, 157);
+		rsInterface.child(52, 60675, 198, 171);
+		rsInterface.child(53, 60676, 313, 157);
+		rsInterface.child(54, 60677, 313, 171);
+		rsInterface.child(55, 60678, 429, 157);
+		rsInterface.child(56, 60679, 429, 171);
+
+
+		rsInterface.child(57, 60690, 258, 18);
+		rsInterface.child(58, 60691, 153, 204);
+		rsInterface.child(59, 60692, 153, 204);
+		rsInterface.child(60, 60694, 267, 204);
+		rsInterface.child(61, 60695, 267, 204);
+		rsInterface.child(62, 60697, 383, 204);
+		rsInterface.child(63, 60698, 383, 204);
+		rsInterface.child(64, 18374, 198, 205);
+		rsInterface.child(65, 60701, 198, 219);
+		rsInterface.child(66, 60702, 313, 205);
+		rsInterface.child(67, 60703, 313, 219);
+		rsInterface.child(68, 60704, 429, 205);
+		rsInterface.child(69, 60705, 429, 219);
+		rsInterface.child(70, 60706, 263, 17);
+	}
+
+	public static void minigameTeleports(TextDrawingArea[] tda)
+	{
+		RSInterface rsInterface = addInterface(60900);
+
+		addText(60706, "Minigame Teleports", tda, 2, 0xff9b00, true, true);
+
+		setChildren(71, rsInterface);
+		rsInterface.child(0, 60601, 6, 14);
+		rsInterface.child(1, 60602, 19, 41);
+		rsInterface.child(2, 60603, 19, 41);
+		rsInterface.child(3, 60605, 19, 76);
+		rsInterface.child(4, 60606, 19, 76);
+		rsInterface.child(5, 60608, 19, 111);
+		rsInterface.child(6, 60609, 19, 111);
+		rsInterface.child(7, 60611, 19, 146);
+		rsInterface.child(8, 60612, 19, 146);
+		rsInterface.child(9, 60614, 19, 181);
+		rsInterface.child(10, 60615, 19, 181);
+		rsInterface.child(11, 60617, 19, 216);
+		rsInterface.child(12, 60618, 19, 216);
+		rsInterface.child(13, 60622, 153, 60);
+		rsInterface.child(14, 60623, 153, 60);
+		rsInterface.child(15, 60625, 267, 60);
+		rsInterface.child(16, 60626, 267, 60);
+		rsInterface.child(17, 60628, 383, 60);
+		rsInterface.child(18, 60629, 383, 60);
+		rsInterface.child(19, 60631, 153, 108);
+		rsInterface.child(20, 60632, 153, 108);
+		rsInterface.child(21, 60634, 267, 108);
+		rsInterface.child(22, 60635, 267, 108);
+		rsInterface.child(23, 60637, 383, 108);
+		rsInterface.child(24, 60638, 383, 108);
+		rsInterface.child(25, 60640, 153, 156);
+		rsInterface.child(26, 60641, 153, 156);
+		rsInterface.child(27, 60643, 267, 156);
+		rsInterface.child(28, 60644, 267, 156);
+		rsInterface.child(29, 60646, 383, 156);
+		rsInterface.child(30, 60647, 383, 156);
+
+		rsInterface.child(31, 60652, 484, 17);
+		rsInterface.child(32, 60653, 484, 17);
+
+		rsInterface.child(33, 60656, 75, 50);
+		rsInterface.child(34, 60657, 75, 85);
+		rsInterface.child(35, 60658, 75, 120);
+		rsInterface.child(36, 60659, 75, 155);
+		rsInterface.child(37, 60660, 75, 190);
+		rsInterface.child(38, 60661, 75, 225);
+		rsInterface.child(39, 60662, 198, 61);
+		rsInterface.child(40, 60663, 198, 75);
+		rsInterface.child(41, 60664, 313, 61);
+		rsInterface.child(42, 60665, 313, 75);
+		rsInterface.child(43, 60666, 429, 61);
+		rsInterface.child(44, 60667, 429, 75);
+		rsInterface.child(45, 60668, 198, 109 + 7);
+		rsInterface.child(46, 60669, 198, 122);
+		rsInterface.child(47, 60670, 313, 109);
+		rsInterface.child(48, 60671, 313, 123);
+		rsInterface.child(49, 60672, 429, 109);
+		rsInterface.child(50, 60673, 429, 123);
+		rsInterface.child(51, 60674, 198, 157);
+		rsInterface.child(52, 60675, 198, 171);
+		rsInterface.child(53, 60676, 313, 157);
+		rsInterface.child(54, 60677, 313, 171);
+		rsInterface.child(55, 60678, 429, 157);
+		rsInterface.child(56, 60679, 429, 171);
+
+
+		rsInterface.child(57, 60690, 258, 18);
+		rsInterface.child(58, 60691, 153, 204);
+		rsInterface.child(59, 60692, 153, 204);
+		rsInterface.child(60, 60694, 267, 204);
+		rsInterface.child(61, 60695, 267, 204);
+		rsInterface.child(62, 60697, 383, 204);
+		rsInterface.child(63, 60698, 383, 204);
+		rsInterface.child(64, 18374, 198, 205);
+		rsInterface.child(65, 60701, 198, 219);
+		rsInterface.child(66, 60702, 313, 205);
+		rsInterface.child(67, 60703, 313, 219);
+		rsInterface.child(68, 60704, 429, 205);
+		rsInterface.child(69, 60705, 429, 219);
+		rsInterface.child(70, 60706, 263, 17);
+	}
+
+	public static void monsterTeleports(TextDrawingArea[] tda)
+	{
+		RSInterface rsInterface = addInterface(61000);
+
+		addText(60706, "Monster Teleports", tda, 2, 0xff9b00, true, true);
+
+		setChildren(71, rsInterface);
+		rsInterface.child(0, 60601, 6, 14);
+		rsInterface.child(1, 60602, 19, 41);
+		rsInterface.child(2, 60603, 19, 41);
+		rsInterface.child(3, 60605, 19, 76);
+		rsInterface.child(4, 60606, 19, 76);
+		rsInterface.child(5, 60608, 19, 111);
+		rsInterface.child(6, 60609, 19, 111);
+		rsInterface.child(7, 60611, 19, 146);
+		rsInterface.child(8, 60612, 19, 146);
+		rsInterface.child(9, 60614, 19, 181);
+		rsInterface.child(10, 60615, 19, 181);
+		rsInterface.child(11, 60617, 19, 216);
+		rsInterface.child(12, 60618, 19, 216);
+		rsInterface.child(13, 60622, 153, 60);
+		rsInterface.child(14, 60623, 153, 60);
+		rsInterface.child(15, 60625, 267, 60);
+		rsInterface.child(16, 60626, 267, 60);
+		rsInterface.child(17, 60628, 383, 60);
+		rsInterface.child(18, 60629, 383, 60);
+		rsInterface.child(19, 60631, 153, 108);
+		rsInterface.child(20, 60632, 153, 108);
+		rsInterface.child(21, 60634, 267, 108);
+		rsInterface.child(22, 60635, 267, 108);
+		rsInterface.child(23, 60637, 383, 108);
+		rsInterface.child(24, 60638, 383, 108);
+		rsInterface.child(25, 60640, 153, 156);
+		rsInterface.child(26, 60641, 153, 156);
+		rsInterface.child(27, 60643, 267, 156);
+		rsInterface.child(28, 60644, 267, 156);
+		rsInterface.child(29, 60646, 383, 156);
+		rsInterface.child(30, 60647, 383, 156);
+
+		rsInterface.child(31, 60652, 484, 17);
+		rsInterface.child(32, 60653, 484, 17);
+
+		rsInterface.child(33, 60656, 75, 50);
+		rsInterface.child(34, 60657, 75, 85);
+		rsInterface.child(35, 60658, 75, 120);
+		rsInterface.child(36, 60659, 75, 155);
+		rsInterface.child(37, 60660, 75, 190);
+		rsInterface.child(38, 60661, 75, 225);
+		rsInterface.child(39, 60662, 198, 61 + 7);
+		rsInterface.child(40, 60663, 198, 75);
+		rsInterface.child(41, 60664, 313, 61 + 7);
+		rsInterface.child(42, 60665, 313, 75);
+		rsInterface.child(43, 60666, 429, 61 + 7);
+		rsInterface.child(44, 60667, 429, 75);
+		rsInterface.child(45, 60668, 198, 109 + 7);
+		rsInterface.child(46, 60669, 198, 122);
+		rsInterface.child(47, 60670, 313, 109 + 7);
+		rsInterface.child(48, 60671, 313, 123);
+		rsInterface.child(49, 60672, 429, 109 + 7);
+		rsInterface.child(50, 60673, 429, 123);
+		rsInterface.child(51, 60674, 198, 157);
+		rsInterface.child(52, 60675, 198, 171);
+		rsInterface.child(53, 60676, 313, 157);
+		rsInterface.child(54, 60677, 313, 171);
+		rsInterface.child(55, 60678, 429, 157);
+		rsInterface.child(56, 60679, 429, 171);
+
+
+		rsInterface.child(57, 60690, 258, 18);
+		rsInterface.child(58, 60691, 153, 204);
+		rsInterface.child(59, 60692, 153, 204);
+		rsInterface.child(60, 60694, 267, 204);
+		rsInterface.child(61, 60695, 267, 204);
+		rsInterface.child(62, 60697, 383, 204);
+		rsInterface.child(63, 60698, 383, 204);
+		rsInterface.child(64, 18374, 198, 205);
+		rsInterface.child(65, 60701, 198, 219);
+		rsInterface.child(66, 60702, 313, 205);
+		rsInterface.child(67, 60703, 313, 219);
+		rsInterface.child(68, 60704, 429, 205);
+		rsInterface.child(69, 60705, 429, 219);
+		rsInterface.child(70, 60706, 263, 17);
+	}
+
+	public static void dungeonTeleports(TextDrawingArea[] tda)
+	{
+		RSInterface rsInterface = addInterface(61100);
+
+		addText(60706, "Dungeon Teleports", tda, 2, 0xff9b00, true, true);
+
+		setChildren(71, rsInterface);
+		rsInterface.child(0, 60601, 6, 14);
+		rsInterface.child(1, 60602, 19, 41);
+		rsInterface.child(2, 60603, 19, 41);
+		rsInterface.child(3, 60605, 19, 76);
+		rsInterface.child(4, 60606, 19, 76);
+		rsInterface.child(5, 60608, 19, 111);
+		rsInterface.child(6, 60609, 19, 111);
+		rsInterface.child(7, 60611, 19, 146);
+		rsInterface.child(8, 60612, 19, 146);
+		rsInterface.child(9, 60614, 19, 181);
+		rsInterface.child(10, 60615, 19, 181);
+		rsInterface.child(11, 60617, 19, 216);
+		rsInterface.child(12, 60618, 19, 216);
+		rsInterface.child(13, 60622, 153, 60);
+		rsInterface.child(14, 60623, 153, 60);
+		rsInterface.child(15, 60625, 267, 60);
+		rsInterface.child(16, 60626, 267, 60);
+		rsInterface.child(17, 60628, 383, 60);
+		rsInterface.child(18, 60629, 383, 60);
+		rsInterface.child(19, 60631, 153, 108);
+		rsInterface.child(20, 60632, 153, 108);
+		rsInterface.child(21, 60634, 267, 108);
+		rsInterface.child(22, 60635, 267, 108);
+		rsInterface.child(23, 60637, 383, 108);
+		rsInterface.child(24, 60638, 383, 108);
+		rsInterface.child(25, 60640, 153, 156);
+		rsInterface.child(26, 60641, 153, 156);
+		rsInterface.child(27, 60643, 267, 156);
+		rsInterface.child(28, 60644, 267, 156);
+		rsInterface.child(29, 60646, 383, 156);
+		rsInterface.child(30, 60647, 383, 156);
+
+		rsInterface.child(31, 60652, 484, 17);
+		rsInterface.child(32, 60653, 484, 17);
+
+		rsInterface.child(33, 60656, 75, 50);
+		rsInterface.child(34, 60657, 75, 85);
+		rsInterface.child(35, 60658, 75, 120);
+		rsInterface.child(36, 60659, 75, 155);
+		rsInterface.child(37, 60660, 75, 190);
+		rsInterface.child(38, 60661, 75, 225);
+		rsInterface.child(39, 60662, 198, 61);
+		rsInterface.child(40, 60663, 198, 75);
+		rsInterface.child(41, 60664, 313, 61);
+		rsInterface.child(42, 60665, 313, 75);
+		rsInterface.child(43, 60666, 429, 61);
+		rsInterface.child(44, 60667, 429, 75);
+		rsInterface.child(45, 60668, 198, 109);
+		rsInterface.child(46, 60669, 198, 122);
+		rsInterface.child(47, 60670, 313, 109);
+		rsInterface.child(48, 60671, 313, 123);
+		rsInterface.child(49, 60672, 429, 109);
+		rsInterface.child(50, 60673, 429, 123);
+		rsInterface.child(51, 60674, 198, 157);
+		rsInterface.child(52, 60675, 198, 171);
+		rsInterface.child(53, 60676, 313, 157);
+		rsInterface.child(54, 60677, 313, 171);
+		rsInterface.child(55, 60678, 429, 157);
+		rsInterface.child(56, 60679, 429, 171);
+
+
+		rsInterface.child(57, 60690, 258, 18);
+		rsInterface.child(58, 60691, 153, 204);
+		rsInterface.child(59, 60692, 153, 204);
+		rsInterface.child(60, 60694, 267, 204);
+		rsInterface.child(61, 60695, 267, 204);
+		rsInterface.child(62, 60697, 383, 204);
+		rsInterface.child(63, 60698, 383, 204);
+		rsInterface.child(64, 18374, 198, 205);
+		rsInterface.child(65, 60701, 198, 219);
+		rsInterface.child(66, 60702, 313, 205);
+		rsInterface.child(67, 60703, 313, 219);
+		rsInterface.child(68, 60704, 429, 205);
+		rsInterface.child(69, 60705, 429, 219);
+		rsInterface.child(70, 60706, 263, 17);
+	}
+
 	public static void colorChangerParents() {
 		//phatAndWeenCustomizer(fonts);
 		RSInterface fog = addInterface(18802);
@@ -425,6 +1013,17 @@ public class CustomInterfaces extends RSInterface {
 		optionTab();
 		compCape(tda);
 		colorChanger(tda);
+
+		/**
+		 * Teleporting interface
+		 */
+		bossTeleports(tda);
+		cityTeleports(tda);
+		skillingTeleports(tda);
+		minigameTeleports(tda);
+		monsterTeleports(tda);
+		dungeonTeleports(tda);
+
 		colorChangerParents();
 		// settingsInterface();
 		wildernessInterface();

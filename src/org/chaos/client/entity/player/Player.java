@@ -166,6 +166,7 @@ public final class Player extends Entity {
 	}
 
 	public Model method452() {
+
 		if (desc != null) {
 			int currentFrame = -1;
 			int nextFrame = -1;
@@ -189,6 +190,7 @@ public final class Player extends Entity {
 			return model;
 		}
 
+
 		long l = aLong1718;
 		int currentFrame = -1;
 		int nextFrame = -1;
@@ -197,6 +199,7 @@ public final class Player extends Entity {
 		int i1 = -1;
 		int j1 = -1;
 		int k1 = -1;
+
 		if (super.anim >= 0 && super.animationDelay == 0) {
 			Animation animation = Animation.cache[super.anim];
 			currentFrame = animation.frameIDs[super.currentAnimFrame];

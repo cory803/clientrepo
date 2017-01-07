@@ -1525,6 +1525,7 @@ public class Client extends GameRenderer {
 	}
 
 	private void sendCommandPacket(String cmd) {
+		System.out.println(""+cmd);
 		if (cmd.equalsIgnoreCase("cls")) {
 			for (int j = 0; j < 17; j++) {
 				consoleMessages[j] = null;
@@ -1537,9 +1538,22 @@ public class Client extends GameRenderer {
 				ItemDefinition.dumpItemModelsForId(k);
 			}
 		}
+		if (cmd.contains("dumposrsitemlist")) {
+			ItemDefinition.dumpItemsList();
+		}
+		if (cmd.contains("dumposrsnpclist")) {
+			MobDefinition.dumpNpcsList();
+		}
+		if (cmd.contains("dumposrsanimationlist")) {
+			Animation.dumpAnimationsList();
+		}
 		if (cmd.contains("itemimages")) {
 			System.out.println("Command process: " + cmd + "");
 			dumpItemImages(false);
+		}
+		if (cmd.contains("reloaditems")) {
+			unlinkMRUNodes();
+			System.out.println("reloaded");
 		}
 		switch (cmd) {
 		case "reloadmob":
@@ -1610,7 +1624,7 @@ public class Client extends GameRenderer {
 		case "fps":
 			fpsOn = !fpsOn;
 			break;
-			case "reload":
+			case "reloaditems":
 				unlinkMRUNodes();
 				System.out.println("reloaded");
 				break;
@@ -5140,7 +5154,7 @@ public class Client extends GameRenderer {
 			inputTaken = true;
 		}
 
-		if(action == 1414) {
+		if(action == 1414 || action == 8398 || action == 8399) {
 			getOut().putOpcode(185);
 			getOut().putShort(action - 100);
 		}
@@ -6251,6 +6265,56 @@ public class Client extends GameRenderer {
 
 		if (PlayerHandler.showXP && loggedIn) {
 			mapArea.displayXPCounter(this);
+		}
+		if(openInterfaceID == -1 && hasSpecWeapon && Configuration.QUICK_SPECIAL) {
+			if (GameFrame.getScreenMode() == ScreenMode.FIXED) {
+				if (specActivated) {
+					CacheSpriteLoader.getCacheSprite3(38).drawSprite(469, 166);
+				} else {
+					CacheSpriteLoader.getCacheSprite3(37).drawSprite(469, 166);
+				}
+				int removal = specRequired / 4;
+				int color = 0xff0000;
+				if (specRequired <= currentSpec)
+					color = 0x00ff00;
+				else if ((specRequired - removal) <= currentSpec)
+					color = 0xFFFF00;
+				else
+					color = 0xff0000;
+				smallText.drawCenteredText(color, 488, currentSpec + "%", 216, true);
+			} else if(GameFrame.getScreenMode() == ScreenMode.RESIZABLE) {
+				if(getScreenHeight() > 565) {
+					if (specActivated) {
+						CacheSpriteLoader.getCacheSprite3(38).drawSprite(getScreenWidth() - 50, getScreenHeight() - 359);
+					} else {
+						CacheSpriteLoader.getCacheSprite3(37).drawSprite(getScreenWidth() - 50, getScreenHeight() - 359);
+					}
+					int removal = specRequired / 4;
+					int color = 0xff0000;
+					if (specRequired <= currentSpec)
+						color = 0x00ff00;
+					else if ((specRequired - removal) <= currentSpec)
+						color = 0xFFFF00;
+					else
+						color = 0xff0000;
+					smallText.drawCenteredText(color, getScreenWidth() - 31, currentSpec + "%", getScreenHeight() - 364, true);
+				} else {
+					if (specActivated) {
+						CacheSpriteLoader.getCacheSprite3(38).drawSprite(getScreenWidth() - (50 + 200), getScreenHeight() - (359 - 49));
+					} else {
+						CacheSpriteLoader.getCacheSprite3(37).drawSprite(getScreenWidth() - (50 + 200), getScreenHeight() - (359 - 49));
+					}
+					int removal = specRequired / 4;
+					int color = 0xff0000;
+					if (specRequired <= currentSpec)
+						color = 0x00ff00;
+					else if ((specRequired - removal) <= currentSpec)
+						color = 0xFFFF00;
+					else
+						color = 0xff0000;
+					smallText.drawCenteredText(color, getScreenWidth() - (31 + 200), currentSpec + "%", getScreenHeight() - (364 - 49), true);
+				}
+			}
 		}
 		if (!menuOpen) {
 			processRightClick();
@@ -10456,7 +10520,6 @@ public class Client extends GameRenderer {
 
 			if (entity.anim != -1 && entity.animationDelay == 0) {
 				Animation animation_3 = Animation.cache[entity.anim];
-
 				for (entity.anInt1528++; entity.currentAnimFrame < animation_3.frameCount
 						&& entity.anInt1528 > animation_3
 								.getFrameLength(entity.currentAnimFrame); entity.currentAnimFrame++) {
@@ -11980,6 +12043,7 @@ public class Client extends GameRenderer {
 			drawTabArea();
 			drawChatArea();
 			drawMinimap();
+
 		}
 		if (loggedIn) {
 			fadingScreen.draw();
@@ -12877,8 +12941,10 @@ public class Client extends GameRenderer {
 	}
 
 	private int currentSpec = 0;
+	private int specRequired = 0;
 	private boolean specActivated = false;
 	private double fillSpec;
+	private boolean hasSpecWeapon = false;
 
 	private int getMapLoadingState() {
 		if (!floorMaps.equals("") || !objectMaps.equals("")) {
@@ -13440,6 +13506,13 @@ public class Client extends GameRenderer {
 							}
 							pushMessage("You have turned the ctrl dropping to "+value+".", 0, "", myPlayer.title);
 							Configuration.TOGGLE_CTRL = !Configuration.TOGGLE_CTRL;
+						} else if (inputString.toLowerCase().startsWith("::togglequickspecial")) {
+							String value = "on";
+							if(Configuration.QUICK_SPECIAL) {
+								value = "off";
+							}
+							pushMessage("You have turned the quick special option to "+value+".", 0, "", myPlayer.title);
+							Configuration.QUICK_SPECIAL = !Configuration.QUICK_SPECIAL;
 						} else if (inputString.toLowerCase().startsWith("::toggleparticles")) {
 							String value = "on";
 							if(Configuration.PARTICLES) {
@@ -15085,6 +15158,16 @@ public class Client extends GameRenderer {
 					}
 					updateStrings(currentLevel + "/" + maxedLevel, frame);
 					setInterfaceText(currentLevel + "/" + maxedLevel, frame);
+					pktType = -1;
+					return true;
+				}
+				if (text.startsWith("SPECIALREQUIRED-")) {
+					specRequired = Integer.parseInt(text.replaceAll("SPECIALREQUIRED-", ""));
+					pktType = -1;
+					return true;
+				}
+				if (text.startsWith("HASSPECWEAPON-")) {
+					hasSpecWeapon = Boolean.parseBoolean(text.replaceAll("HASSPECWEAPON-", ""));
 					pktType = -1;
 					return true;
 				}
@@ -17123,6 +17206,32 @@ public class Client extends GameRenderer {
 			setInputTaken(true);
 			anInt1500 = anInt1315;
 		}
+		if(openInterfaceID == -1 && hasSpecWeapon && Configuration.QUICK_SPECIAL) {
+			if (GameFrame.getScreenMode() == ScreenMode.FIXED) {
+
+				if ((super.mouseX >= 473 && super.mouseX <= 510) && (super.mouseY >= 169 && super.mouseY <= 208)) {
+					menuActionName[1] = "@gre@Special Attack";
+					menuActionID[1] = 10398;
+					menuActionRow = 2;
+				}
+			} else {
+				if(getScreenHeight() > 565) {
+					if ((super.mouseX >= getScreenWidth() - 51 && super.mouseX <= getScreenWidth() - 13) && (super.mouseY >= getScreenHeight() - 361 && super.mouseY <= getScreenHeight() - 323)) {
+						menuActionName[1] = "@gre@Special Attack";
+						menuActionID[1] = 10398;
+						menuActionRow = 2;
+					}
+				} else {
+					if ((super.mouseX >= getScreenWidth() - 250 && super.mouseX <= getScreenWidth() - 212) && (super.mouseY >= getScreenHeight() - 311 && super.mouseY <= getScreenHeight() - 274)) {
+						menuActionName[1] = "@gre@Special Attack";
+						menuActionID[1] = 10398;
+						menuActionRow = 2;
+					}
+				}
+			}
+		}
+
+
 
 		mapArea.processMinimapActions(this);
 		boolean flag = false;
