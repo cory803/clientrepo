@@ -194,6 +194,9 @@ public final class ItemDefinition {
 		}
 		ItemDefinition itemDef2;
 		switch (customId) {
+			case 2379:
+				itemDef.actions = new String[] { "Eat", null, null, null, null, "Drop" };
+				break;
             case 11262:
 				itemDef.imitate(get(11250));
                 itemDef.name = "Grenwall Imping Jar";
