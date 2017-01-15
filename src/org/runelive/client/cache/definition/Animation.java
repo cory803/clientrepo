@@ -7,7 +7,7 @@ import org.runelive.dump.OsrsAnimationListDumper;
 
 public final class Animation {
 
-    public static int[] osrsAnimations = {7507, 7508, 7509, 5070, 5805, 1829, 1828, 1688, 2417};
+    public static int[] osrsAnimations = {3297, 7123, 7124, 7125, 7126, 7127, 7128, 7129, 7130, 7126, 5366, 5367, 5368, 5369, 5751, 5755, 7095, 7096, 7097, 7098, 7099, 7100, 4527, 4528, 4529, 4530, 4531, 4532, 4533, 4534, 7507, 7508, 7509, 5070, 5805, 1829, 1828, 1688, 2417};
     public static int[] grabFileId = {};
 
     public static void dumpFileId(int frame) {

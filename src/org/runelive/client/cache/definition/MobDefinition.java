@@ -20,7 +20,7 @@ public final class MobDefinition {
     private static int[] streamIndices;
     private static int[] osrsStreamIndices;
 
-    public static int[] osrsNpcs = {7286, 637, 635, 401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
+    public static int[] osrsNpcs = {5883, 7286, 637, 635, 401, 402, 403, 404, 405, 6618, 6619, 6620, 5779, 6618, 5535, 491, 492, 493, 496, 6611, 2054, 5866, 5886, 388, 2042, 6593, 497, 6609, 964, 5547, 6656, 2127, 2129, 2128, 6626, 6627, 6641, 6643, 6644, 6646, 6647, 6652, 5907, 6653, 6655, 5536, 495, 5892, 6717, 6715, 6716};
 
     public static void dumpNpcsList() {
         System.out.println("dumped "+totalNpcsOsrs+" osrs npcs");
@@ -115,7 +115,7 @@ public final class MobDefinition {
             case 405:
                 definition.dialogueModels = new int[] {78500, 78501};
                 break;
-            case 1545151:
+            case 5883:
                 System.out.println("----");
                 System.out.println("name: "+definition.name);
                 //for (int i = 0; i < definition.npcModels.length; i++) {

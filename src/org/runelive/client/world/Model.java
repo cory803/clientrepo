@@ -501,6 +501,7 @@ public class Model extends Animable {
 			case 70:
 			case 14337:
 			case 83:
+			case 29632:
 			case 10419:
 			case 28855:
 			case 28856:
@@ -1283,6 +1284,7 @@ public class Model extends Animable {
             case 43:
             case 2925:
 			case 70:
+			case 29632:
 			case 14337:
             case 10031:
 			case 76500:

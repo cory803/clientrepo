@@ -110,6 +110,7 @@ public final class ItemDefinition {
 			21003, //Elder maul
 			21000, //Twisted buckler
 			20997, //Twisted bow
+			13262, //Abyssal Orphan
 
 		13265, 13271, 20053, 19918, 20832, 11863, 13204, 3985, 3987, 3989, 3991, 13190, 11849, 4587, 4588, 12004, 12005, 12006, 12899, 12900, 11905, 11906, 11908, 11909, 12954, 11908, 11909, 12816, 11943, 13178, 13247, 12921, 12940, 12939, 12643, 12644, 12645, 12649, 12650, 12651, 12652, 12653, 11995, 12654, 12655, 13181, 13178, 13179, 13177, 13225, 12648, 13322, 13320, 13321, 13247};
 
@@ -261,6 +262,24 @@ public final class ItemDefinition {
                 itemDef.description = "I wonder what this does..?".getBytes();
                 break;
 
+			/**
+			 * Abyssal Bludgeon
+			 * Done manually because original ID replaces slayer helmet
+			 */
+			case 3271:
+				itemDef.setDefaults();
+				itemDef.name = "Abyssal bludgeon";
+				itemDef.modelID = 29597;
+				itemDef.maleWearId = 29424;
+				itemDef.femaleWearId = 29424;
+				itemDef.modelZoom = 2611;
+				itemDef.modelRotation1 = 1508;
+				itemDef.modelRotation2 = 552;
+				itemDef.modelOffset1 = -17;
+				itemDef.modelOffsetY = 3;
+				itemDef.actions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+
 			case 5023:
 				itemDef.name = "15m Coin Ticket";
 				itemDef.actions = new String[] { "Open", null, null, null, null, "Drop" };
@@ -328,6 +347,7 @@ public final class ItemDefinition {
             case 13322:
             case 13320:
             case 13321:
+            case 13262:
                 itemDef.actions = new String[] { null, null, "Summon", null, "Drop" };
                 break;
 			case 4587:
@@ -834,7 +854,7 @@ public final class ItemDefinition {
 				break;
 			case 10034:
 			case 10033:
-				itemDef.actions = new String[] { null, "Weild", null, null, "Drop" };
+				itemDef.actions = new String[] { null, "Wield", null, null, "Drop" };
 				break;
 			case 13727:
 				itemDef.actions = new String[] { null, null, null, null, "Drop" };
