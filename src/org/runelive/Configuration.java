@@ -12,7 +12,7 @@ public class Configuration {
 	public static String SERVER_HOST = LOCAL ? "127.0.0.1" : "74.63.248.118"; // 158.69.125.71
 	public final static int SERVER_PORT = 59018;
 
-	public static boolean MAC = true;
+	public static boolean MAC = false;
 
 	public final static String[][] WORLDS = {
 			{"Economy", LOCAL ? "127.0.0.1" : "74.63.248.118"}, //World 1
@@ -30,7 +30,7 @@ public class Configuration {
 	/** MAIN CONSTANTS **/
 	public static final String CLIENT_VERSION = "1.28";
 	public final static String CLIENT_NAME = "RuneLive " + CLIENT_VERSION + "";
-	public final static String CACHE_DIRECTORY_NAME = "runelive";
+	public final static String CACHE_DIRECTORY_NAME = "chaos";
 	public final static int USELESS_VERSION = 3;
 
 	/** UPDATING **/

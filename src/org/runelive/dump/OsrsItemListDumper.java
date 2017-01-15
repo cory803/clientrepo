@@ -38,6 +38,16 @@ public class OsrsItemListDumper {
 			bw.newLine();
 			bw.write("female model: "+definition.femaleWearId);
 			bw.newLine();
+			bw.write("modelZoom: "+definition.modelZoom);
+			bw.newLine();
+			bw.write("modelRotation1: "+definition.modelRotation1);
+			bw.newLine();
+			bw.write("modelRotation2: "+definition.modelRotation2);
+			bw.newLine();
+			bw.write("modelOffsetX: "+definition.modelOffset1);
+			bw.newLine();
+			bw.write("modelOffsetY: "+definition.modelOffsetY);
+			bw.newLine();
 			bw.newLine();
 
 			bw.close();

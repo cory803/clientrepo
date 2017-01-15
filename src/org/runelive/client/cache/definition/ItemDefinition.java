@@ -5932,8 +5932,8 @@ public final class ItemDefinition {
 	public byte maleWieldZ;
 	public boolean membersObject;
 	public int modelID;
-	int modelOffset1;
-	int modelOffsetY;
+	public int modelOffset1;
+	public int modelOffsetY;
 	public int modelRotation1;
 	public int modelRotation2;
 	public int modelZoom;
